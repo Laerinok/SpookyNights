@@ -1,0 +1,14 @@
+{
+  "type": "content",
+  "modid": "spookynightevent",
+  "name": "Spooky Night Event",
+  "author": "Laerinok",
+  "version": "0.1.0",
+  "description": "A terrifying overhaul mod for a special Halloween night. Enjoy the frights!",
+  "side": "Universal",
+  "dependencies": 
+    {
+      "game": "1.21.0",
+      "survival": "1.21.0"
+    }
+}
