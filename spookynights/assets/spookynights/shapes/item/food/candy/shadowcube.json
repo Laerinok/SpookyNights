@@ -1,0 +1,47 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+		"shadowcube": [64,64]
+	},
+	"textures": {
+		"shadowcube": "item/food/candy/shadowcube"
+	},
+	"elements": [
+		{
+			"name": "Origin",
+			"from": [ 0.0, 0.0, 0.0 ],
+			"to": [ 0.0, 0.0, 0.0 ],
+			"renderPass": 3,
+			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
+			"faces": {
+				"north": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"east": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"south": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"west": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"up": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"down": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 0.5, 0.5 ] }
+			},
+			"children": [
+				{
+					"name": "Cube",
+					"from": [ 5.0, 0.0, 5.0 ],
+					"to": [ 11.0, 6.0, 11.0 ],
+					"renderPass": 3,
+					"rotationOrigin": [ 8.0, 3.0, 8.0 ],
+					"faces": {
+						"north": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 64.0, 64.0 ], "autoUv": false },
+						"east": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 64.0, 64.0 ], "autoUv": false },
+						"south": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 64.0, 64.0 ], "autoUv": false },
+						"west": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 64.0, 64.0 ], "autoUv": false },
+						"up": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 64.0, 64.0 ], "autoUv": false },
+						"down": { "texture": "#shadowcube", "uv": [ 0.0, 0.0, 64.0, 64.0 ], "autoUv": false }
+					}
+				}
+			]
+		}
+	]}

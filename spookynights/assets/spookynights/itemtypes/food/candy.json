@@ -1,0 +1,310 @@
+{
+  "code": "candy",
+  "class": "Item",
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [
+        "ghostcaramel",
+        "mummy",
+        "shadowcube",
+        "spidergummy", 
+        "vampireteeth"
+      ]
+    }
+  ],
+  "shapeByType": {
+    "*-ghostcaramel": { "base": "spookynights:item/food/candy/ghostcaramel" },
+    "*-mummy": { "base": "spookynights:item/food/candy/mummy" },
+    "*-shadowcube": { "base": "spookynights:item/food/candy/shadowcube" },
+    "*-spidergummy": { "base": "spookynights:shapes/item/food/candy/spidergummy" },
+    "*-vampireteeth": { "base": "spookynights:shapes/item/food/candy/vampireteeth" }
+  },
+  "texturesByType": {
+    "*-ghostcaramel": {
+      "ghostcaramel": { "base": "spookynights:item/food/candy/ghostcaramel" }
+    },
+    "*-mummy": {
+      "mummy_wrap": { "base": "spookynights:item/food/candy/mummy_wrap" },
+      "mummy_face": { "base": "spookynights:item/food/candy/mummy_face" }
+    },
+    "*-shadowcube": {
+      "shadowcube": { "base": "spookynights:item/food/candy/shadowcube" }
+    },
+    "*-spidergummy": {
+      "spidergummy": { "base": "spookynights:item/food/candy/spidergummy" }
+    },
+    "*-vampireteeth": {
+      "vampireteeth": { "base": "spookynights:item/food/candy/vampireteeth" }
+    }
+  },
+  "creativeinventory": {
+    "spookynights": [ "*" ],
+    "general": [ "*" ]
+  },
+  "maxstacksize": 64,
+  "materialDensity": 200,
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.125,
+          "z2": 1
+        }
+      }
+    }
+  ],
+  "attributes": {
+    "groundable": true,
+    "shelvable": true
+  },
+  "nutritionPropsByType": {
+    "*-mummy": {
+      "satiety": 40,
+      "foodcategory": "Dairy"
+    },
+    "*-spidergummy": {
+      "satiety": 60,
+      "foodcategory": "Fruit"
+    },
+    "*-ghostcaramel": {
+      "satiety": 40,
+      "foodcategory": "Fruit",
+      "health": 0.5
+    },
+    "*-vampireteeth": {
+      "satiety": 40,
+      "foodcategory": "Protein",
+      "health": 1
+    },
+    "*-shadowcube": {
+      "satiety": 80,
+      "foodcategory": "Protein",
+      "health": 2
+    }
+  },
+  "attributesByType": {
+    "*-ghostcaramel": {
+      "onshelfTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": -1.55,
+          "z": 0.5
+        },
+        "scale": 0.8
+      },
+      "groundStorageTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": -1.55,
+          "z": 0.5
+        },
+        "scale": 0.8
+      }
+    },
+    "*-mummy": {
+      "onshelfTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 0.5
+      },
+      "groundStorageTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 0.55
+      }
+    },
+    "*-shadowcube": {
+      "groundStorageTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 0.5
+      },
+      "onshelfTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 0.5
+      }
+    },
+    "*-spidergummy": {
+      "onshelfTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 0.5
+      },
+      "groundStorageTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 0.5
+      }
+    },
+    "*-vampireteeth": {
+      "onshelfTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 0.5
+      },
+      "groundStorageTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 0.5
+      }
+    }
+  },
+  "guiTransformByType": {
+    "*-ghostcaramel": {
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": -35,
+        "y": 36,
+        "z": -180
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "scale": 3.22
+    },
+    "*-mummy": {
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": -35,
+        "y": 35,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.65,
+        "y": 0.25,
+        "z": 0.15
+      },
+      "scale": 2.00
+    },
+    "*-shadowcube": {
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": -17,
+        "y": 20,
+        "z": 10
+      },
+      "origin": {
+        "x": 0.7,
+        "y": 0.3,
+        "z": 0
+      },
+      "scale": 3
+    },
+    "*-spidergummy": {
+      "translation": { 
+        "x": 0, 
+        "y": 0, 
+        "z": 0 },
+      "rotation": {
+        "x": 29, 
+        "y": 9, 
+        "z": 180 
+      },
+      "origin": { 
+        "x": 0.5, 
+        "y": 0.4, 
+        "z": 0 
+      },
+      "scale": 2.5
+    },
+    "*-vampireteeth": { 
+      "translation": {
+         "x": 0, 
+         "y": 0, 
+         "z": 0 },
+      "rotation": { 
+        "x": 64, 
+        "y": -100, 
+        "z": 0 },
+      "origin": { 
+        "x": 0.6, 
+        "y": 0.5, 
+        "z": 0.5 },
+      "scale": 2
+    }
+  },
+  "tpHandTransformByType": {
+    "*-ghostcaramel": {
+      "translation": {
+        "x": -0.9,
+        "y": -0.5,
+        "z": -0.8
+      },
+      "rotation": {
+        "x": -13,
+        "y": -1,
+        "z": -26
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.1,
+        "z": 0.5
+      },
+      "scale": 0.5
+    },
+    "*-mummy": {
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": -13,
+        "y": -1,
+        "z": -26
+      },
+      "origin": {
+        "x": 0,
+        "y": 0,
+        "z": 0.15
+      },
+      "scale": 0.5
+    }
+  }
+}

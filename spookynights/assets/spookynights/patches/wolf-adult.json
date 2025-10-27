@@ -1,0 +1,58 @@
+[
+	{
+		"op": "replace",
+		"path": "/client/texture",
+		"value": {
+			"base": "spookynights:entity/animal/mammal/wolf/eurasian-adult1",
+      "alternates": [ 
+				{ "base": "spookynights:entity/animal/mammal/wolf/eurasian-adult2" }, 
+				{ "base": "spookynights:entity/animal/mammal/wolf/eurasian-adult3" }, 
+				{ "base": "spookynights:entity/animal/mammal/wolf/eurasian-adult4" }, 
+				{ "base": "spookynights:entity/animal/mammal/wolf/eurasian-adult5" }, 
+				{ "base": "spookynights:entity/animal/mammal/wolf/eurasian-adult6" },
+				{ "base": "spookynights:entity/animal/mammal/wolf/eurasian-adult7" }, 
+				{ "base": "spookynights:entity/animal/mammal/wolf/eurasian-adult8" }, 
+				{ "base": "spookynights:entity/animal/mammal/wolf/eurasian-adult9" }, 
+				{ "base": "spookynights:entity/animal/mammal/wolf/eurasian-adult10" }
+			]
+		},
+		"file": "game:entities/animal/mammal/wolf-adult"
+	},
+	{
+		"op": "addmerge",
+		"path": "/client",
+		"value": {
+			"renderFlags": [ "alphatransparent" ],
+			"glowLevel": 200,
+			"glowColorByType": {
+				"*-male": "#FF3333",
+				"*-female": "#0066FF"
+			}
+		},
+		"file": "game:entities/animal/mammal/wolf-adult"
+	},
+	{
+		"op": "addmerge",
+		"path": "/server/behaviors/10/aitasks/-",
+		"value": {
+			"code": "idle",
+			"priority": 1.25,
+			"priorityForCancel": 1.35,
+			"minduration": 4667,
+			"maxduration": 4667,
+			"mincooldown": 30000,
+			"maxcooldown": 60000,
+			"animation": "Howl",
+			"animationSpeed": 0.7,
+			"sound": "spookynights:creature/wolf/howl4",
+			"soundRange": 140,
+			"duringDayTimeFrames": [
+				{
+					"fromHour": 23,
+					"toHour": 6
+				}
+			]
+		},
+		"file": "game:entities/animal/mammal/wolf-adult"
+	}
+]

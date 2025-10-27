@@ -1,0 +1,355 @@
+[
+  {
+    "op": "replace",
+    "path": "/client/texturesByType",
+    "value": {
+      "*-surface": {
+        "skin": {
+          "base": "spookynights:entity/lore/bowtorn/surface1",
+          "alternates": [
+            { "base": "spookynights:entity/lore/bowtorn/surface2" },
+            { "base": "spookynights:entity/lore/bowtorn/surface3" },
+            { "base": "spookynights:entity/lore/bowtorn/surface4" }
+          ]
+        }
+      },
+      "*-deep": {
+        "skin": {
+          "base": "spookynights:entity/lore/bowtorn/deep1",
+          "alternates": [
+            { "base": "spookynights:entity/lore/bowtorn/deep2" }
+          ]
+        }
+      },
+      "*-tainted": {
+        "skin": {
+          "base": "spookynights:entity/lore/bowtorn/tainted1",
+          "alternates": [
+            { "base": "spookynights:entity/lore/bowtorn/tainted2" }
+          ]
+        }
+      },
+      "*-corrupt": {
+        "skin": {
+          "base": "spookynights:entity/lore/bowtorn/corrupt1",
+          "alternates": [
+            { "base": "spookynights:entity/lore/bowtorn/corrupt2" }
+          ]
+        }
+      },
+      "*-nightmare": {
+        "skin": {
+          "base": "spookynights:entity/lore/bowtorn/nightmare1",
+          "alternates": [
+            { "base": "spookynights:entity/lore/bowtorn/nightmare2" }
+          ]
+        }
+      },
+      "*-gearfoot": {
+        "skin": {
+          "base": "spookynights:entity/lore/bowtorn/gearfoot"
+        }
+      }
+    },
+    "file": "game:entities/lore/bowtorn"
+  },
+  {
+    "op": "addmerge",
+    "path": "/client",
+    "value": {
+      "renderFlags": [ "alphatransparent" ],
+      "glowLevel": 180,
+      "glowColorByType": {
+        "*-surface": "#BFEFFF",
+        "*-deep": "#66FFFF",
+        "*-tainted": "#99CC00",
+        "*-corrupt": "#4B0082",
+        "*-nightmare": "#9B30FF",
+        "*-gearfoot": "#E6FFFF"
+      }
+    },
+    "file": "game:entities/lore/bowtorn"
+  },
+  {
+    "op": "addmerge",
+    "path": "/server/behaviors/9/dropsByType/*-surface",
+    "value": [
+      {
+        "type": "item",
+        "code": "spookynights:candybag-ghostcaramel",
+        "quantity": {
+          "avg": 0.15,
+          "var": 0
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-mummy",
+        "quantity": {
+          "avg": 0.8,
+          "var": 0.2
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-shadowcube",
+        "quantity": {
+          "avg": 0.05,
+          "var": 0
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-spidergummy",
+        "quantity": {
+          "avg": 0.2,
+          "var": 0
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-vampireteeth",
+        "quantity": {
+          "avg": 0.08,
+          "var": 0
+        }
+      }
+    ],
+    "file": "game:entities/lore/bowtorn"
+  },
+  {
+    "op": "addmerge",
+    "path": "/server/behaviors/9/dropsByType/*-deep",
+    "value": [
+      {
+        "type": "item",
+        "code": "spookynights:candybag-ghostcaramel",
+        "quantity": {
+          "avg": 0.3,
+          "var": 0.5
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-mummy",
+        "quantity": {
+          "avg": 1.5,
+          "var": 0.5
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-shadowcube",
+        "quantity": {
+          "avg": 0.1,
+          "var": 0
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-spidergummy",
+        "quantity": {
+          "avg": 0.5,
+          "var": 0.5
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-vampireteeth",
+        "quantity": {
+          "avg": 0.15,
+          "var": 0
+        }
+      }
+    ],
+    "file": "game:entities/lore/bowtorn"
+  },
+  {
+    "op": "addmerge",
+    "path": "/server/behaviors/9/dropsByType/*-tainted",
+    "value": [
+      {
+        "type": "item",
+        "code": "spookynights:candybag-ghostcaramel",
+        "quantity": {
+          "avg": 0.3,
+          "var": 0.5
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-mummy",
+        "quantity": {
+          "avg": 1.5,
+          "var": 0.5
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-shadowcube",
+        "quantity": {
+          "avg": 0.1,
+          "var": 0
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-spidergummy",
+        "quantity": {
+          "avg": 0.5,
+          "var": 0.5
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-vampireteeth",
+        "quantity": {
+          "avg": 0.15,
+          "var": 0
+        }
+      }
+    ],
+    "file": "game:entities/lore/bowtorn"
+  },
+  {
+    "op": "addmerge",
+    "path": "/server/behaviors/9/dropsByType/*-corrupt",
+    "value": [
+      {
+        "type": "item",
+        "code": "spookynights:candybag-ghostcaramel",
+        "quantity": {
+          "avg": 0.6,
+          "var": 0.2
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-mummy",
+        "quantity": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-shadowcube",
+        "quantity": {
+          "avg": 0.3,
+          "var": 0
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-spidergummy",
+        "quantity": {
+          "avg": 0.8,
+          "var": 0.2
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-vampireteeth",
+        "quantity": {
+          "avg": 0.25,
+          "var": 0
+        }
+      }
+    ],
+    "file": "game:entities/lore/bowtorn"
+  },
+  {
+    "op": "addmerge",
+    "path": "/server/behaviors/9/dropsByType/*-nightmare",
+    "value": [
+      {
+        "type": "item",
+        "code": "spookynights:candybag-ghostcaramel",
+        "quantity": {
+          "avg": 0.6,
+          "var": 0.2
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-mummy",
+        "quantity": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-shadowcube",
+        "quantity": {
+          "avg": 0.3,
+          "var": 0
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-spidergummy",
+        "quantity": {
+          "avg": 0.8,
+          "var": 0.2
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-vampireteeth",
+        "quantity": {
+          "avg": 0.25,
+          "var": 0
+        }
+      }
+    ],
+    "file": "game:entities/lore/bowtorn"
+  },
+  {
+    "op": "addmerge",
+    "path": "/server/behaviors/9/dropsByType/*-gearfoot",
+    "value": [
+      {
+        "type": "item",
+        "code": "spookynights:candybag-ghostcaramel",
+        "quantity": {
+          "avg": 0.75,
+          "var": 0.25
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-mummy",
+        "quantity": {
+          "avg": 3,
+          "var": 0.5
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-shadowcube",
+        "quantity": {
+          "avg": 0.4,
+          "var": 0
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-spidergummy",
+        "quantity": {
+          "avg": 2,
+          "var": 0
+        }
+      },
+      {
+        "type": "item",
+        "code": "spookynights:candybag-vampireteeth",
+        "quantity": {
+          "avg": 0.5,
+          "var": 0.5
+        }
+      }
+    ],
+    "file": "game:entities/lore/bowtorn"
+  }
+]
