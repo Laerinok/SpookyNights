@@ -60,7 +60,7 @@
 
   <!-- Project item includes -->
   <ItemGroup>
-    <Folder Include="spookynights\assets\spookynights" />
+    <Folder Include="spookynights\assets\spookynights\sounds\item\" />
   </ItemGroup>
 
   <!-- Formatting JSON files -->

@@ -1,0 +1,20 @@
+{
+  "ingredientPattern": "F_F,_T_,F_F",
+  "ingredients": {
+    "F": {
+      "type": "item",
+      "code": "game:flaxfibers"
+    },
+    "T":{
+      "type": "item",
+      "code": "game:flaxtwine"
+    }
+  },
+  "width": 3,
+  "height": 3,
+  "output": {
+    "type": "block",
+    "code": "game:spiderweb",
+    "quantity": 1
+  }
+}

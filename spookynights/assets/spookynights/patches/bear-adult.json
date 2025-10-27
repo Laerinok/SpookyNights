@@ -1,0 +1,36 @@
+[
+  {
+    "op": "replace",
+    "path": "/client/textureByType",
+    "value": {
+      "bear-black-*": { "base": "spookynights:entity/animal/mammal/bear/black-adult1" },
+      "bear-brown-*": {
+        "base": "spookynights:entity/animal/mammal/bear/brown-adult1",
+        "alternates": [
+          { "base": "spookynights:entity/animal/mammal/bear/brown-adult2" },
+          { "base": "spookynights:entity/animal/mammal/bear/brown-adult3" }
+        ]
+      },
+      "bear-sun-*": { "base": "spookynights:entity/animal/mammal/bear/sun-adult1" },
+      "bear-panda-*": { "base": "spookynights:entity/animal/mammal/bear/panda-adult1" },
+      "bear-polar-*": { "base": "spookynights:entity/animal/mammal/bear/polar-adult1" }
+    },
+    "file": "game:entities/animal/mammal/bear-adult"
+  },
+  {
+    "op": "addmerge",
+    "path": "/client",
+    "value": {
+      "renderFlags": [ "alphatransparent" ],
+      "glowLevel": 180,
+      "glowColorByType": {
+        "bear-black-*": "#BFEFFF",
+        "bear-brown-*": "#66FFFF",
+        "bear-sun-*": "#99CC00",
+        "bear-panda-*": "#4B0082",
+        "bear-polar-*": "#9B30FF"
+      }
+    },
+    "file": "game:entities/animal/mammal/bear-adult"
+  }
+]

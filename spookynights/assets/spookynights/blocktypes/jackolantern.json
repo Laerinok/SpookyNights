@@ -1,0 +1,143 @@
+{
+  "code": "jackolantern",
+  "class": "Block",
+  "name": "Jackolantern",
+  "variantgroups": [
+    {
+      "code": "side",
+      "loadFromProperties": "abstract/horizontalorientation"
+    }
+  ],
+  "maxstacksize": 8,
+  "blockmaterial": "Wood",
+  "creativeinventory": {
+    "general": [
+      "jackolantern-north"
+    ],
+    "spookynights": [
+      "jackolantern-north"
+    ]
+  },
+  "behaviors": [
+    { "name": "HorizontalOrientable" },
+    { "name": "Lockable" },
+    { "name": "RightClickPickup" }
+  ],
+  "heldRightTpIdleAnimation": "holdinglanternrighthand",
+  "heldLeftTpIdleAnimation": "holdinglanternlefthand",
+  "lightAbsorption": 0,
+  "lightHsv": [ 4, 7, 20 ],
+  "sidesolid": {
+    "all": true
+  },
+  "sideopaque": {
+    "all": false
+  },
+  "replaceable": 500,
+  "resistance": 1,
+  "collisionbox": {
+    "x1": 0.125,
+    "y1": 0,
+    "z1": 0.125,
+    "x2": 0.875,
+    "y2": 1,
+    "z2": 0.875
+  },
+  "selectionbox": {
+    "x1": 0.125,
+    "y1": 0,
+    "z1": 0.125,
+    "x2": 0.875,
+    "y2": 1,
+    "z2": 0.875
+  },
+  "shapebytype": {
+    "*-north": {
+      "base": "spookynights:block/jackolantern/jackolantern",
+      "rotateY": 180
+    },
+    "*-east": {
+      "base": "spookynights:block/jackolantern/jackolantern",
+      "rotateY": 90
+    },
+    "*-south": {
+      "base": "spookynights:block/jackolantern/jackolantern"
+    },
+    "*-west": {
+      "base": "spookynights:block/jackolantern/jackolantern",
+      "rotateY": 270
+    },
+    "shape": {
+      "base": "spookynights:block/jackolantern/jackolantern"
+    }
+  },
+  "textures": {
+    "jackolantern_corpse": { "base": "block/jackolantern/jackolantern_corpse" },
+    "jackolantern_face": { "base": "block/jackolantern/jackolantern_face" },
+    "jackolantern_stem": { "base": "block/jackolantern/jackolantern_stem" },
+    "jackolantern_top": { "base": "block/jackolantern/jackolantern_top" }
+  },
+  "sounds": {
+    "place": "spookynights:block/halloween-ghost-whisper",
+    "break": "spookynights:block/halloween-howl",
+    "hit": "spookynights:block/halloween-scream",
+    "ambient": "spookynights:block/halloween-scary-ambience"
+  },
+  "guiTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": -22.5,
+      "y": -180,
+      "z": 0
+    },
+    "scale": 1.46
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": -22.5,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 1.5
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": -10,
+      "y": -90,
+      "z": 0
+    },
+    "origin": {
+      "x": -0.1,
+      "y": -1,
+      "z": 0.45
+    },
+    "scale": 0.5
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 3
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "ingredientPattern": "PK,O_",
+  "ingredients": {
+    "P": {
+      "type": "block",
+      "code": "game:pumpkin-fruit-4"
+    },
+    "K": {
+      "type": "item",
+      "code": "game:knife-*",
+      "istool": "true",
+      "ToolDurabilityCost": 10
+
+    },
+    "O": {
+      "type": "block",
+      "code": "game:oillamp-*"
+    }
+  },
+  "width": 2,
+  "height": 2,
+  "output": {
+    "type": "block",
+    "code": "spookynights:jackolantern-north",
+    "quantity": 1
+  }
+}
