@@ -7,8 +7,8 @@ namespace Spookynights
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
-
-            api.Logger.Notification("🌟 Mon premier mod de code C# est chargé !");
+            api.RegisterItemClass("ItemCandyBag", typeof(ItemCandyBag));
+            api.Logger.Notification("🌟 Spooky Nights is loaded!");
         }
     }
 }

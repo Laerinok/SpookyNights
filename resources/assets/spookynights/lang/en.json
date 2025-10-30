@@ -1,0 +1,26 @@
+{
+  "game:tabname-spookynights": "Spooky Nights",
+
+  "spookynights:block-jackolantern-*": "Jack O' Lantern",
+  "spookynights:blockdesc-jackolantern-*": "A hollowed-out pumpkin with a carved face, lit from within. A classic symbol of the spooky season.",
+
+  "spookynights:item-spookycandy-ghostcaramel": "Ghostly Caramel",
+  "spookynights:itemdesc-spookycandy-ghostcaramel": "A sweet caramel with a ghostly appearance. Is it a treat, or a trick?",
+
+  "spookynights:item-spookycandy-mummy": "Mummy",
+  "spookynights:itemdesc-spookycandy-mummy": "A nougat block tightly wrapped in old, spooky bandages. Slightly dusty.",
+
+  "spookynights:item-spookycandy-shadowcube": "Shadow Cube",
+  "spookynights:itemdesc-spookycandy-shadowcube": "Dark as midnight and almost impossible to see, this cube promises intense, shadowy flavor.",
+
+  "spookynights:item-spookycandy-spidergummy": "Spider Gummy",
+  "spookynights:itemdesc-spookycandy-spidergummy": "A chewy, semi-transparent treat shaped like a cubical arachnid. Don't worry, the venom is fake!",
+
+  "spookynights:item-spookycandy-vampireteeth": "Vampire Fangs",
+  "spookynights:itemdesc-spookycandy-vampireteeth": "Sharp, sugary fangs that may make you feel a sudden, tiny craving for blood... or more sugar.",
+
+  "spookynights:item-candybag": "Candy Bag",
+  "spookynights:itemdesc-candybag": "A small paper bag filled with treats.",
+
+  "heldhelp-openbag": "Open Bag (Hold)"
+}

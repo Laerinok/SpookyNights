@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ModName>spookynights</ModName>
     <ModType>code</ModType>
-    <ModVersion>0.0.0</ModVersion>
+    <ModVersion>0.1.0</ModVersion>
     <ModId>spookynights</ModId>
     <Description></Description>
     <Side>universal</Side>
@@ -14,7 +14,7 @@
 
   <!-- Authors -->
   <ItemGroup>
-    <ModInfoAuthors Include="Author" />
+    <ModInfoAuthors Include="Laerinok" />
   </ItemGroup>
 
   <!-- Dependencies -->

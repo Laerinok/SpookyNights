@@ -1,5 +1,5 @@
 {
-  "code": "candy",
+  "code": "spookycandy",
   "class": "Item",
   "variantgroups": [
     {
@@ -8,7 +8,7 @@
         "ghostcaramel",
         "mummy",
         "shadowcube",
-        "spidergummy", 
+        "spidergummy",
         "vampireteeth"
       ]
     }
@@ -84,9 +84,7 @@
       "health": 1
     },
     "*-shadowcube": {
-      "satiety": 80,
-      "foodcategory": "Protein",
-      "health": 2
+
     }
   },
   "attributesByType": {
@@ -237,35 +235,39 @@
       "scale": 3
     },
     "*-spidergummy": {
-      "translation": { 
-        "x": 0, 
-        "y": 0, 
-        "z": 0 },
-      "rotation": {
-        "x": 29, 
-        "y": 9, 
-        "z": 180 
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
       },
-      "origin": { 
-        "x": 0.5, 
-        "y": 0.4, 
-        "z": 0 
+      "rotation": {
+        "x": 29,
+        "y": 9,
+        "z": 180
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.4,
+        "z": 0
       },
       "scale": 2.5
     },
-    "*-vampireteeth": { 
+    "*-vampireteeth": {
       "translation": {
-         "x": 0, 
-         "y": 0, 
-         "z": 0 },
-      "rotation": { 
-        "x": 64, 
-        "y": -100, 
-        "z": 0 },
-      "origin": { 
-        "x": 0.6, 
-        "y": 0.5, 
-        "z": 0.5 },
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 64,
+        "y": -100,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.6,
+        "y": 0.5,
+        "z": 0.5
+      },
       "scale": 2
     }
   },
