@@ -1,0 +1,141 @@
+spookynights/
+├─ assets/
+│  └─ spookynights/
+│     ├─ blocktypes/
+│     │  └─ jackolantern.json
+│     ├─ itemtypes/
+│     │  ├─ food/
+│     │  │  └─ candy.json
+│     │  └─ candybag.json
+│     ├─ lang/
+│     │  ├─ en.json
+│     │  └─ fr.json
+│     ├─ patches/
+│     │  ├─ bear-adult.json
+│     │  ├─ bowtorn.json
+│     │  ├─ drifter.json
+│     │  ├─ shiver.json
+│     │  ├─ wolf-adult.json
+│     │  └─ wolf-baby.json
+│     ├─ recipes/
+│     │  └─ grid/
+│     │     ├─ candybag-ghostcaramel.json
+│     │     ├─ candybag-mummy.json
+│     │     ├─ candybag-shadowcube.json
+│     │     ├─ candybag-spidergummy.json
+│     │     ├─ candybag-vampireteeth.json
+│     │     ├─ jackolantern.json
+│     │     └─ spiderweb.json
+│     ├─ shapes/
+│     │  ├─ block/
+│     │  │  └─ jackolantern/
+│     │  │     └─ jackolantern.json
+│     │  └─ item/
+│     │     ├─ food/
+│     │     │  └─ candy/
+│     │     │     ├─ ghostcaramel.json
+│     │     │     ├─ mummy.json
+│     │     │     ├─ shadowcube.json
+│     │     │     ├─ spidergummy.json
+│     │     │     └─ vampireteeth.json
+│     │     └─ candybag.json
+│     ├─ sounds/
+│     │  ├─ block/
+│     │  │  ├─ halloween-ghost-whisper.ogg
+│     │  │  ├─ halloween-howl.ogg
+│     │  │  ├─ halloween-scary-ambience.ogg
+│     │  │  └─ halloween-scream.ogg
+│     │  └─ creature/
+│     │     └─ wolf/
+│     │        └─ howl4.ogg
+│     └─ textures/
+│        ├─ block/
+│        │  └─ jackolantern/
+│        │     ├─ jackolantern_corpse.png
+│        │     ├─ jackolantern_face_on.png
+│        │     ├─ jackolantern_face.png
+│        │     ├─ jackolantern_stem.png
+│        │     └─ jackolantern_top.png
+│        ├─ entity/
+│        │  ├─ animal/
+│        │  │  └─ mammal/
+│        │  │     ├─ bear/
+│        │  │     │  ├─ black-adult1.png
+│        │  │     │  ├─ brown-adult1.png
+│        │  │     │  ├─ brown-adult2.png
+│        │  │     │  ├─ brown-adult3.png
+│        │  │     │  ├─ panda-adult1.png
+│        │  │     │  ├─ polar-adult1.png
+│        │  │     │  └─ sun-adult1.png
+│        │  │     └─ wolf/
+│        │  │        ├─ eurasian-adult1.png
+│        │  │        ├─ eurasian-adult10.png
+│        │  │        ├─ eurasian-adult2.png
+│        │  │        ├─ eurasian-adult3.png
+│        │  │        ├─ eurasian-adult4.png
+│        │  │        ├─ eurasian-adult5.png
+│        │  │        ├─ eurasian-adult6.png
+│        │  │        ├─ eurasian-adult7.png
+│        │  │        ├─ eurasian-adult8.png
+│        │  │        ├─ eurasian-adult9.png
+│        │  │        ├─ eurasian-baby1.png
+│        │  │        └─ eurasian-baby2.png
+│        │  └─ lore/
+│        │     ├─ bowtorn/
+│        │     │  ├─ corrupt1.png
+│        │     │  ├─ corrupt2.png
+│        │     │  ├─ deep1.png
+│        │     │  ├─ deep2.png
+│        │     │  ├─ gearfoot.png
+│        │     │  ├─ nightmare1.png
+│        │     │  ├─ nightmare2.png
+│        │     │  ├─ surface1.png
+│        │     │  ├─ surface2.png
+│        │     │  ├─ surface3.png
+│        │     │  ├─ surface4.png
+│        │     │  ├─ tainted1.png
+│        │     │  └─ tainted2.png
+│        │     ├─ drifter/
+│        │     │  ├─ crouched1.png
+│        │     │  ├─ crouched2.png
+│        │     │  ├─ crouched3.png
+│        │     │  ├─ crouched4.png
+│        │     │  ├─ deep1.png
+│        │     │  ├─ deep2.png
+│        │     │  ├─ deerhorn.png
+│        │     │  ├─ double.png
+│        │     │  ├─ knife.png
+│        │     │  ├─ spiked1.png
+│        │     │  ├─ spiked2.png
+│        │     │  ├─ surface1.png
+│        │     │  ├─ surface2.png
+│        │     │  └─ surface3.png
+│        │     └─ shiver/
+│        │        ├─ bellhead.png
+│        │        ├─ corrupt1.png
+│        │        ├─ corrupt2.png
+│        │        ├─ deep1.png
+│        │        ├─ deep2.png
+│        │        ├─ deepsplit.png
+│        │        ├─ nightmare1.png
+│        │        ├─ nightmare2.png
+│        │        ├─ stilt.png
+│        │        ├─ surface1.png
+│        │        ├─ surface2.png
+│        │        ├─ surface3.png
+│        │        ├─ surface4.png
+│        │        ├─ tainted1.png
+│        │        └─ tainted2.png
+│        └─ item/
+│           ├─ food/
+│           │  └─ candy/
+│           │     ├─ ghostcaramel.png
+│           │     ├─ mummy_face.png
+│           │     ├─ mummy_wrap.png
+│           │     ├─ shadowcube.png
+│           │     ├─ spidergummy.png
+│           │     └─ vampireteeth.png
+│           ├─ candybag.png
+│           └─ string.png
+├─ modicon.png
+└─ modinfo.json

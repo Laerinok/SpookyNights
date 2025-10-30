@@ -9,6 +9,7 @@
     <Side>universal</Side>
     <RequiredOnClient>true</RequiredOnClient>
     <RequiredOnServer>true</RequiredOnServer>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <!-- Authors -->
@@ -80,6 +81,9 @@
   <ItemGroup>
     <!-- ImGui for debug tools (requires ImGui mod installed if you call ImGui methods) -->
     <PackageReference Include="VSImGui" Version="0.0.6" />
+    <Reference Include="Vintagestory">
+      <HintPath>C:\Jeux\Vintage Story\v1.21\Vintagestory.dll</HintPath>
+    </Reference>
     <!-- Vintage Story libraries -->
     <Reference Include="VintagestoryLib" HintPath="$(GameDirectory)/VintagestoryLib.dll" Private="false" />
     <Reference Include="VintagestoryAPI" HintPath="$(GameDirectory)/VintagestoryAPI.dll" Private="false" />

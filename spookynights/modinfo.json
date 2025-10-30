@@ -1,13 +1,10 @@
 {
-  "type": "content",
+  "type": "code",
   "modid": "spookynights",
   "name": "Spooky Nights",
-  "author": "Laerinok",
+  "authors": ["Laerinok"],
   "version": "0.1.0",
   "description": "A small overhaul mod for a special Halloween night. Enjoy the frights!",
   "side": "Universal",
-  "dependencies": 
-    {
-      "game": "1.21.0"
-    }
+  "dependencies": {}
 }
