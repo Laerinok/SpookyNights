@@ -1,0 +1,26 @@
+{
+  "game:tabname-spookynights": "Nuits Effrayantes",
+
+  "spookynights:block-jackolantern-*": "Citrouille-Lanterne",
+  "spookynights:blockdesc-jackolantern-*": "Une citrouille évidée avec un visage sculpté, illuminée de l'intérieur. Un symbole classique de la saison effrayante.",
+
+  "spookynights:item-spookycandy-ghostcaramel": "Caramel Fantomatique",
+  "spookynights:itemdesc-spookycandy-ghostcaramel": "Un caramel sucré à l'apparence spectrale. Est-ce une friandise ou un mauvais tour ?",
+
+  "spookynights:item-spookycandy-mummy": "Momie",
+  "spookynights:itemdesc-spookycandy-mummy": "Un bloc de nougat étroitement enveloppé dans de vieux bandages effrayants. Légèrement poussiéreux.",
+
+  "spookynights:item-spookycandy-shadowcube": "Cube d'Ombre",
+  "spookynights:itemdesc-spookycandy-shadowcube": "Sombre comme la nuit et presque impossible à voir, ce cube promet une saveur intense et ténébreuse.",
+
+  "spookynights:item-spookycandy-spidergummy": "Gomme Araignée",
+  "spookynights:itemdesc-spookycandy-spidergummy": "Une friandise à mâcher semi-transparente en forme d'arachnide cubique. Ne vous inquiétez pas, le venin est faux !",
+
+  "spookynights:item-spookycandy-vampireteeth": "Dents de Vampire",
+  "spookynights:itemdesc-spookycandy-vampireteeth": "Des crocs pointus et sucrés qui pourraient vous donner une soudaine petite envie de sang... ou de plus de sucre.",
+
+  "spookynights:item-candybag": "Sachet de bonbons",
+  "spookynights:itemdesc-candybag": "Un petit sachet en papier rempli de friandises.",
+
+  "spookynights:heldhelp-openbag": "Ouvrir le sac  (Maintenir)"
+}

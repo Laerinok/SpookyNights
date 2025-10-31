@@ -1,0 +1,44 @@
+{
+  "code": "candybag",
+  "class": "ItemCandyBag",
+  "maxstacksize": 64,
+  "creativeinventory": {
+    "spookynights": [ "*" ],
+    "general": [ "*" ]
+  },
+  "textures": {
+    "bag": { "base": "spookynights:item/candybag" },
+    "string": { "base": "spookynights:item/string" }
+  },
+  "shape": { "base": "spookynights:shapes/item/candybag" },
+  "attributes": {
+    "useDelay": 0.5,
+    "shelvable": true,
+    "onshelfTransform": {
+      "origin": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.5
+      },
+      "scale": 0.4
+    }
+  },
+  "guiTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": -20,
+      "y": -15,
+      "z": -180
+    },
+    "origin": {
+      "x": 0.55,
+      "y": 0.4,
+      "z": 0.5
+    },
+    "scale": 1.85
+  }
+}

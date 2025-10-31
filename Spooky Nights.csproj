@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <!-- Mod info -->
   <PropertyGroup>
-    <ModName>spookynights</ModName>
+    <ModName>Spooky Nights</ModName>
     <ModType>code</ModType>
-    <ModVersion>0.0.0</ModVersion>
+    <ModVersion>0.2.0-dev1</ModVersion>
     <ModId>spookynights</ModId>
-    <Description></Description>
+    <Description>A small overhaul mod for a special Halloween night. Enjoy the frights!</Description>
     <Side>universal</Side>
     <RequiredOnClient>true</RequiredOnClient>
     <RequiredOnServer>true</RequiredOnServer>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <!-- Authors -->
   <ItemGroup>
-    <ModInfoAuthors Include="Author" />
+    <ModInfoAuthors Include="Laerinok" />
   </ItemGroup>
 
   <!-- Dependencies -->
@@ -60,6 +61,7 @@
 
   <!-- Project item includes -->
   <ItemGroup>
+    <Folder Include="resources\assets\spookynights\entities\animal\mammal\" />
     <Folder Include="spookynights\assets\spookynights\sounds\item\" />
   </ItemGroup>
 
@@ -80,6 +82,9 @@
   <ItemGroup>
     <!-- ImGui for debug tools (requires ImGui mod installed if you call ImGui methods) -->
     <PackageReference Include="VSImGui" Version="0.0.6" />
+    <Reference Include="Vintagestory">
+      <HintPath>C:\Jeux\Vintage Story\v1.21\Vintagestory.dll</HintPath>
+    </Reference>
     <!-- Vintage Story libraries -->
     <Reference Include="VintagestoryLib" HintPath="$(GameDirectory)/VintagestoryLib.dll" Private="false" />
     <Reference Include="VintagestoryAPI" HintPath="$(GameDirectory)/VintagestoryAPI.dll" Private="false" />

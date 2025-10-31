@@ -1,0 +1,4 @@
+- ajout son pour ouverture bonbon
+- à l'ouverture on pourrait avoir plusieurs type de bonbons et pas juste un seul
+- ajout :  les spectre ne lootent des bonbons qu'à une certaine période (1 jour par moi, etc...)
+- prevoir un handbook -guide por lister les effets et conteu du mod

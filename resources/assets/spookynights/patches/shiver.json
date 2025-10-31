@@ -1,0 +1,132 @@
+[
+  {
+    "op": "replace",
+    "path": "/client/texturesByType",
+    "value": {
+      "*-surface": {
+        "skin": {
+          "base": "spookynights:entity/lore/shiver/surface1",
+          "alternates": [
+            { "base": "spookynights:entity/lore/shiver/surface2" },
+            { "base": "spookynights:entity/lore/shiver/surface3" },
+            { "base": "spookynights:entity/lore/shiver/surface4" }
+          ]
+        }
+      },
+      "*-deep": {
+        "skin": {
+          "base": "spookynights:entity/lore/shiver/deep1",
+          "alternates": [ { "base": "spookynights:entity/lore/shiver/deep2" } ]
+        }
+      },
+      "*-tainted": {
+        "skin": {
+          "base": "spookynights:entity/lore/shiver/tainted1",
+          "alternates": [ { "base": "spookynights:entity/lore/shiver/tainted2" } ]
+        }
+      },
+      "*-corrupt": {
+        "skin": {
+          "base": "spookynights:entity/lore/shiver/corrupt1",
+          "alternates": [ { "base": "spookynights:entity/lore/shiver/corrupt2" } ]
+        }
+      },
+      "*-nightmare": {
+        "skin": {
+          "base": "spookynights:entity/lore/shiver/nightmare1",
+          "alternates": [ { "base": "spookynights:entity/lore/shiver/nightmare2" } ]
+        }
+      },
+      "*-stilt": { "skin": { "base": "spookynights:entity/lore/shiver/stilt" } },
+      "*-bellhead": { "skin": { "base": "spookynights:entity/lore/shiver/bellhead" } },
+      "*-deepsplit": { "skin": { "base": "spookynights:entity/lore/shiver/deepsplit" } }
+    },
+    "file": "game:entities/lore/shiver"
+  },
+  {
+    "op": "addmerge",
+    "path": "/client",
+    "value": {
+      "renderFlags": [ "alphatransparent" ],
+      "glowLevel": 180,
+      "glowColorByType": {
+        "*-surface": "#BFEFFF",
+        "*-deep": "#66FFFF",
+        "*-tainted": "#99CC00",
+        "*-corrupt": "#4B0082",
+        "*-nightmare": "#9B30FF",
+        "*-stilt": "#E6FFFF",
+        "*-bellhead": "#E6FFFF",
+        "*-deepsplit": "#E6FFFF"
+      }
+    },
+    "file": "game:entities/lore/shiver"
+  },
+  {
+    "op": "addmerge",
+    "path": "/server/behaviors/9/dropsByType",
+    "value": {
+      "*-surface": [
+        {
+          "type": "item",
+          "code": "spookynights:candybag",
+          "quantity": {
+            "avg": 0.20,
+            "var": 0
+          }
+        }
+      ],
+      "*-deep": [
+        {
+          "type": "item",
+          "code": "spookynights:candybag",
+          "quantity": {
+            "avg": 0.40,
+            "var": 0
+          }
+        }
+      ],
+      "*-tainted": [
+        {
+          "type": "item",
+          "code": "spookynights:candybag",
+          "quantity": {
+            "avg": 0.40,
+            "var": 0
+          }
+        }
+      ],
+      "*-corrupt": [
+        {
+          "type": "item",
+          "code": "spookynights:candybag",
+          "quantity": {
+            "avg": 0.60,
+            "var": 0
+          }
+        }
+      ],
+      "*-nightmare": [
+        {
+          "type": "item",
+          "code": "spookynights:candybag",
+          "quantity": {
+            "avg": 0.60,
+            "var": 0
+          }
+        }
+      ],
+      "*": [
+        {
+          "type": "item",
+          "code": "spookynights:candybag",
+          "quantity": {
+            "avg": 0.90,
+            "var": 0
+          }
+        }
+      ]
+    },
+    "file": "game:entities/lore/shiver"
+  }
+]
