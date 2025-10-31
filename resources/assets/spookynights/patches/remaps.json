@@ -1,0 +1,21 @@
+[
+  {
+    "op": "add",
+    "file": "game:config/remaps.json",
+    "path": "/spookynights:v0.2.0",
+    "value": [
+      "/iir remap spookynights:spookycandy-ghostcaramel spookynights:candy-ghostcaramel force",
+      "/iir remap spookynights:spookycandy-shadowcube spookynights:candy-shadowcube force",
+      "/iir remap spookynights:spookycandy-mummy spookynights:candy-mummy force",
+      "/iir remap spookynights:spookycandy-spidergummy spookynights:candy-spidergummy force",
+      "/iir remap spookynights:spookycandy-vampireteeth spookynights:candy-vampireteeth force",
+
+      "/iir remap spookynights:candybag spookynights:candybag-ghostcaramel force",
+      "/iir remap spookynights:candybag spookynights:candybag-shadowcube force",
+      "/iir remap spookynights:candybag spookynights:candybag-mummy force",
+      "/iir remap spookynights:candybag spookynights:candybag-spidergummy force",
+      "/iir remap spookynights:candybag spookynights:candybag-vampireteeth force"
+
+    ]
+  }
+]

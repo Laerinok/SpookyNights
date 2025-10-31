@@ -61,6 +61,7 @@
 
   <!-- Project item includes -->
   <ItemGroup>
+    <Folder Include="resources\assets\spookynights\entities\animal\mammal\" />
     <Folder Include="spookynights\assets\spookynights\sounds\item\" />
   </ItemGroup>
 

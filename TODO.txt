@@ -1,0 +1,4 @@
+- ajout son pour ouverture bonbon
+- à l'ouverture on pourrait avoir plusieurs type de bonbons et pas juste un seul
+- mettre en place le bonbon mystere.
+- OpenBagBehavior.cs : vérifier sq'il est utilisé... 

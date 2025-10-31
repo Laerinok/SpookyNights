@@ -3,7 +3,7 @@
   "modid": "spookynights",
   "name": "Spooky Nights",
   "authors": ["Laerinok"],
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A small overhaul mod for a special Halloween night. Enjoy the frights!",
   "side": "Universal",
   "dependencies": {}
