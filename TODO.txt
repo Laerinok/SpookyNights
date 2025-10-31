@@ -1,4 +1,4 @@
 - ajout son pour ouverture bonbon
 - à l'ouverture on pourrait avoir plusieurs type de bonbons et pas juste un seul
-- mettre en place le bonbon mystere.
-- OpenBagBehavior.cs : vérifier sq'il est utilisé... 
+- ajout :  les spectre ne lootent des bonbons qu'à une certaine période (1 jour par moi, etc...)
+- prevoir un handbook -guide por lister les effets et conteu du mod

@@ -1,8 +1,11 @@
-spookynights/
+resources/
 ├─ assets/
 │  └─ spookynights/
 │     ├─ blocktypes/
 │     │  └─ jackolantern.json
+│     ├─ entities/
+│     │  └─ animal/
+│     │     └─ mammal/
 │     ├─ itemtypes/
 │     │  ├─ food/
 │     │  │  └─ candy.json
@@ -14,22 +17,24 @@ spookynights/
 │     │  ├─ bear-adult.json
 │     │  ├─ bowtorn.json
 │     │  ├─ drifter.json
+│     │  ├─ remaps.json
 │     │  ├─ shiver.json
 │     │  ├─ wolf-adult.json
 │     │  └─ wolf-baby.json
 │     ├─ recipes/
 │     │  └─ grid/
-│     │     ├─ candybag-ghostcaramel.json
-│     │     ├─ candybag-mummy.json
-│     │     ├─ candybag-shadowcube.json
-│     │     ├─ candybag-spidergummy.json
-│     │     ├─ candybag-vampireteeth.json
 │     │     ├─ jackolantern.json
 │     │     └─ spiderweb.json
 │     ├─ shapes/
 │     │  ├─ block/
 │     │  │  └─ jackolantern/
 │     │  │     └─ jackolantern.json
+│     │  ├─ entity/
+│     │  │  └─ animal/
+│     │  │     └─ mammal/
+│     │  │        └─ wolf/
+│     │  │           ├─ eurasian-adult.json
+│     │  │           └─ eurasian-baby.json
 │     │  └─ item/
 │     │     ├─ food/
 │     │     │  └─ candy/

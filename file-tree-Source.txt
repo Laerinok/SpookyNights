@@ -1,3 +1,5 @@
 source/
-├─ CandyBagBehavior.cs
-└─ SpookyNightsModSystemModSystems.cs
+├─ ItemCandyBag.cs
+├─ ModConfig.cs
+├─ OpenBagBehavior.cs
+└─ SpookyNightsModSystems.cs

@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <!-- Mod info -->
   <PropertyGroup>
-    <ModName>spookynights</ModName>
+    <ModName>Spooky Nights</ModName>
     <ModType>code</ModType>
-    <ModVersion>0.1.0</ModVersion>
+    <ModVersion>0.2.0-dev1</ModVersion>
     <ModId>spookynights</ModId>
-    <Description></Description>
+    <Description>A small overhaul mod for a special Halloween night. Enjoy the frights!</Description>
     <Side>universal</Side>
     <RequiredOnClient>true</RequiredOnClient>
     <RequiredOnServer>true</RequiredOnServer>
