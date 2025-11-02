@@ -2,6 +2,9 @@ namespace SpookyNights
 {
     public class ModConfig
     {
+        // Configuration version. Used to apply updates.
+        public string Version { get; set; } = "1.0.0";
+
         // --- Loot Config ---
         public bool EnableCandyLoot { get; set; } = true;
 

@@ -1,7 +1,0 @@
-**v0.2-dev1 2025-10-31
-- added: New Candy Bag Interaction: You now hold the right mouse button to open a candy bag.
-- added: Patch for remapping candy and candybag items. All old candybags cannot be remmapped to new candybag, so you SHOULD OPEN THEM before if you don't want to lose them.
-- changed: Candy Bag Rework: All previous candy bag variants have been merged into a single, generic candybag item. Each bag now drops a random amount (1-3) of a random candy type upon being opened.
---------------------------------------------
-Technical Notes
-- The consumable, variant-based candy bag system has been replaced by a single item using a custom OpenBagBehavior C# class to handle the held-interaction.
