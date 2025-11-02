@@ -22,6 +22,7 @@
 	"attributes": {
 		"allowInDevastationArea": true,
 		"killedByInfoText": "deadcreature-vile",
+		"hostile": true,
 		"glitchAffected": true,
 		"glitchFlicker": true,
 		"reckless": true,
@@ -229,10 +230,6 @@
 				}
 			},
 			{
-				"code": "deaddecay",
-				"hoursToDecay": 3
-			},
-			{
 				"code": "floatupwhenstuck",
 				"onlyWhenDead": true
 			},
@@ -431,9 +428,7 @@
 				]
 			},
 			{
-				"code": "harvestable",
-				"duration": 2,
-				"fixedweight": true,
+				"code": "loot",
 				"dropsByType": {
 					"*-normal": [
 						{

@@ -28,6 +28,7 @@
 	"eyeHeight": 0.9,
 	"drops": [],
 	"attributes": {
+		"hostile": true,
 		"creatureDiet": {
 			"weightedFoodTags": [
 				{
@@ -40,16 +41,6 @@
 				}
 			]
 		},
-		"trappable": {
-			"small": {
-				"trapChance": 0.0,
-				"trapDestroyChance": 0.7
-			},
-			"large": {
-				"trapChance": 0.0,
-				"trapDestroyChance": 0.05
-			}
-		},
 		"killedByInfoText": "deadcreature-eaten-large",
 		"handbook": { "groupcode": "creaturegroup-wolf" }
 	},
@@ -61,6 +52,7 @@
 			"*-male": "#FF3333",
 			"*-female": "#0066FF"
 		},
+		"skipRenderUntil": "alive",
 		"shape": { "base": "entity/spectral/animal/wolf" },
 		"sizeByType": {
 			"*-male": 1.4,
@@ -169,49 +161,14 @@
 			{
 				"code": "health",
 				"maxhealthByType": {
-					"*-male": 15,
-					"*": 14
+					"*-male": 25,
+					"*": 20
 				}
-			},
-			{
-				"code": "deaddecay",
-				"hoursToDecay": 96,
-				"decayedBlock": "carcass-medium"
 			},
 			{
 				"code": "floatupwhenstuck",
 				"onlyWhenDead": true
 			},
-			{
-				"code": "harvestable",
-				"drops": [
-					{
-						"type": "item",
-						"code": "bushmeat-raw",
-						"quantity": {
-							"avg": 7,
-							"var": 1
-						}
-					},
-					{
-						"type": "item",
-						"code": "hide-raw-medium",
-						"quantity": {
-							"avg": 1.5,
-							"var": 0
-						}
-					},
-					{
-						"type": "item",
-						"code": "fat",
-						"quantity": {
-							"avg": 1.25,
-							"var": 0
-						}
-					}
-				]
-			},
-			{ "code": "breathe" },
 			{
 				"code": "emotionstates",
 				"states": [

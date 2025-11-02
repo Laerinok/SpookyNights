@@ -14,14 +14,11 @@
 		"x": 1.2,
 		"y": 1
 	},
-	"deadHitboxSize": {
-		"x": 0.7,
-		"y": 0.7
-	},
 	"eyeHeight": 1.3,
 	"attributes": {
 		"allowInDevastationArea": true,
 		"killedByInfoText": "deadcreature-vile",
+		"hostile": true,
 		"glitchAffected": true,
 		"glitchFlicker": true,
 		"reckless": true,
@@ -118,11 +115,7 @@
 				"code": "floatupwhenstuck",
 				"onlyWhenDead": true
 			},
-			{ "code": "interpolateposition" },
-			{
-				"code": "harvestable",
-				"duration": 2
-			}
+			{ "code": "interpolateposition" }
 		],
 		"animations": [
 			{
@@ -253,10 +246,6 @@
 					"*-bellhead": 66,
 					"*-deepsplit": 60
 				}
-			},
-			{
-				"code": "deaddecay",
-				"hoursToDecay": 3
 			},
 			{
 				"code": "floatupwhenstuck",
@@ -463,9 +452,7 @@
 				]
 			},
 			{
-				"code": "harvestable",
-				"duration": 2,
-				"fixedweight": true,
+				"code": "loot",
 				"dropsByType": {
 					"*-surface": [
 						{
@@ -639,7 +626,6 @@
 					]
 				}
 			},
-			{ "code": "ripharvestable" },
 			{ "code": "entitystatetags" }
 		],
 		"spawnconditions": {

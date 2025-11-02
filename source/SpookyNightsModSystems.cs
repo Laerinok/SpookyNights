@@ -1,6 +1,8 @@
 ﻿// In source/SpookyNightsModSystems.cs
 
 using SpookyNights;
+using System;
+using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
@@ -10,7 +12,6 @@ namespace Spookynights
     public sealed class SpookyNights : ModSystem
     {
         public static ModConfig LoadedConfig { get; private set; } = default!;
-
         private ICoreServerAPI sapi = default!;
 
         public override void Start(ICoreAPI api)
@@ -23,48 +24,67 @@ namespace Spookynights
         public override void StartServerSide(ICoreServerAPI api)
         {
             sapi = api;
-
             LoadAndMigrateConfig(api);
-
-            // --- DEBUG LOG ---
-            // Let's print the value we have in memory right after loading.
-            api.Logger.Notification("[SpookyNights DEBUG] Final config value for EnableCandyLoot: {0}", LoadedConfig.EnableCandyLoot);
-
-            // We register the event listener regardless of the config.
-            // The check will happen inside the function itself.
             api.Event.OnEntityDeath += OnEntityDeath;
         }
 
         private void LoadAndMigrateConfig(ICoreAPI api)
         {
-            // Note: You probably have more properties in your ModConfig now.
-            // Make sure they are all present in your ModConfig.cs file.
             ModConfig defaultConfig = new ModConfig();
+            defaultConfig.EnableCandyLoot = true;
 
+            // Our new, simplified default config
+            defaultConfig.CandyLootTable = new Dictionary<string, string>()
+            {
+                // Spectral Drifters
+                { "spookynights:spectraldrifter-normal", "0.2@1" },
+                { "spookynights:spectraldrifter-deep", "0.3@1-2" },
+                { "spookynights:spectraldrifter-tainted", "0.35@1-2" },
+                { "spookynights:spectraldrifter-corrupt", "0.4@2-3" },
+                { "spookynights:spectraldrifter-nightmare", "0.6@3-5" },
+                { "spookynights:spectraldrifter-double-headed", "0.7@4-6" },
+
+                // Spectral Shivers
+                { "spookynights:spectralshiver-surface", "0.2@1" },
+                { "spookynights:spectralshiver-deep", "0.3@1-2" },
+                { "spookynights:spectralshiver-tainted", "0.35@1-2" },
+                { "spookynights:spectralshiver-corrupt", "0.4@2-3" },
+                { "spookynights:spectralshiver-nightmare", "0.6@3-5" },
+                { "spookynights:spectralshiver-stilt", "0.7@4-6" },
+                { "spookynights:spectralshiver-bellhead", "0.7@4-6" },
+                { "spookynights:spectralshiver-deepsplit", "0.7@4-6" },
+                
+                // Spectral Bowtorn
+                { "spookynights:spectralbowtorn-surface", "0.25@1" },
+                { "spookynights:spectralbowtorn-deep", "0.35@1-2" },
+                { "spookynights:spectralbowtorn-tainted", "0.4@2-3" },
+                { "spookynights:spectralbowtorn-corrupt", "0.45@2-4" },
+                { "spookynights:spectralbowtorn-nightmare", "0.65@3-5" },
+                { "spookynights:spectralbowtorn-gearfoot", "0.75@4-6" },
+
+                // Spectral Animals (using wildcard *)
+                { "spookynights:spectralbear-brown-adult-*", "0.5@2-4" },
+                { "spookynights:spectralwolf-eurasian-adult-*", "0.3@1-2" }
+            };
+
+            // The rest of the load logic is similar
             try
             {
                 LoadedConfig = api.LoadModConfig<ModConfig>("spookynightsconfig.json");
 
                 if (LoadedConfig == null)
                 {
-                    api.Logger.Notification("[SpookyNights] No config file found. Creating a new one.");
                     LoadedConfig = defaultConfig;
                     api.StoreModConfig(LoadedConfig, "spookynightsconfig.json");
                 }
                 else if (LoadedConfig.Version != defaultConfig.Version)
                 {
-                    api.Logger.Notification("[SpookyNights] Config file is outdated. Updating...");
-
-                    // IMPORTANT: When you add new config options, you must preserve them here.
-                    // Let's assume you added EnableSeasonalSpawning to your ModConfig.cs
                     defaultConfig.EnableCandyLoot = LoadedConfig.EnableCandyLoot;
-                    // defaultConfig.EnableSeasonalSpawning = LoadedConfig.EnableSeasonalSpawning; // etc. for all old properties
-
                     LoadedConfig = defaultConfig;
                     api.StoreModConfig(LoadedConfig, "spookynightsconfig.json");
                 }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 api.Logger.Error("[SpookyNights] Failed to load or create config file, using defaults: " + e.Message);
                 LoadedConfig = new ModConfig();
@@ -73,24 +93,44 @@ namespace Spookynights
 
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
-            // --- THIS IS THE INFALLIBLE ON/OFF SWITCH ---
-            // This is the VERY FIRST thing the method does.
-            // If the config value is false, the function stops immediately.
             if (!LoadedConfig.EnableCandyLoot) return;
-
-            // The rest of the logic is unchanged.
             if (damageSource.SourceEntity is not EntityPlayer) return;
-            if (entity.Properties.Attributes?["hostile"].AsBool() != true) return;
 
-            if (sapi.World.Rand.NextDouble() < 0.05)
+            string entityCode = entity.Code.ToString();
+
+            // Your correction is here, and it's perfect.
+            if (LoadedConfig.CandyLootTable.TryGetValue(entityCode, out string? lootConfigString))
             {
-                AssetLocation candyBagCode = new AssetLocation("spookynights", "candybag");
-                Item candyBagItem = sapi.World.GetItem(candyBagCode);
+                // Because of the 'if', we know lootConfigString cannot be null here.
+                // However, it's good practice to add a check for safety.
+                if (string.IsNullOrEmpty(lootConfigString)) return;
 
-                if (candyBagItem != null)
+                try
                 {
-                    ItemStack stack = new ItemStack(candyBagItem);
-                    sapi.World.SpawnItemEntity(stack, entity.ServerPos.XYZ);
+                    string[] parts = lootConfigString.Split('@');
+                    float chance = float.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture);
+
+                    if (sapi.World.Rand.NextDouble() >= chance) return;
+
+                    string[] quantityParts = parts[1].Split('-');
+                    int min = int.Parse(quantityParts[0]);
+                    int max = (quantityParts.Length > 1) ? int.Parse(quantityParts[1]) : min;
+
+                    int amount = sapi.World.Rand.Next(min, max + 1);
+                    if (amount <= 0) return;
+
+                    AssetLocation candyBagCode = new AssetLocation("spookynights", "candybag");
+                    Item? candyBagItem = sapi.World.GetItem(candyBagCode);
+
+                    if (candyBagItem != null)
+                    {
+                        ItemStack stack = new ItemStack(candyBagItem, amount);
+                        sapi.World.SpawnItemEntity(stack, entity.ServerPos.XYZ);
+                    }
+                }
+                catch (Exception e)
+                {
+                    sapi.Logger.Warning("[SpookyNights] Could not parse loot config string for '{0}'. Expected format 'Chance@Min-Max'. String was: '{1}'. Error: {2}", entityCode, lootConfigString, e.Message);
                 }
             }
         }
