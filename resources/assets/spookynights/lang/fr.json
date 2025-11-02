@@ -22,5 +22,34 @@
   "spookynights:item-candybag": "Sachet de bonbons",
   "spookynights:itemdesc-candybag": "Un petit sachet en papier rempli de friandises.",
 
-  "spookynights:heldhelp-openbag": "Ouvrir le sac  (Maintenir)"
+  "spookynights:heldhelp-openbag": "Ouvrir le sac (Maintenir)",
+
+  "spookynights:item-creature-spectraldrifter-normal": "Rôdeur de surface spectral",
+  "spookynights:item-creature-spectraldrifter-deep": "Rôdeur des profondeurs spectral",
+  "spookynights:item-creature-spectraldrifter-tainted": "Rôdeur infecté spectral",
+  "spookynights:item-creature-spectraldrifter-corrupt": "Rôdeur corrompu spectral",
+  "spookynights:item-creature-spectraldrifter-nightmare": "Rôdeur cauchemardesque spectral",
+  "spookynights:item-creature-spectraldrifter-double-headed": "Rôdeur à deux têtes spectral",
+
+  "spookynights:item-creature-spectralbowtorn-corrupt": "Arcracheur corrompu spectral",
+  "spookynights:item-creature-spectralbowtorn-deep": "Arcracheur des profondeurs spectral",
+  "spookynights:item-creature-spectralbowtorn-gearfoot": "Arcracheur piedenté spectral",
+  "spookynights:item-creature-spectralbowtorn-nightmare": "Arcracheur cauchemardesque spectral",
+  "spookynights:item-creature-spectralbowtorn-surface": "Arcracheur de surface spectral",
+  "spookynights:item-creature-spectralbowtorn-tainted": "Arcracheur infecté spectral",
+
+  "spookynights:item-creature-spectralshiver-bellhead": "Frissonneur à tête de cloche spectral",
+  "spookynights:item-creature-spectralshiver-corrupt": "Frissonneur corrompu spectral",
+  "spookynights:item-creature-spectralshiver-deep": "Frissonneur des profondeurs spectral",
+  "spookynights:item-creature-spectralshiver-deepsplit": "Frissonneur des failles profondes spectral",
+  "spookynights:item-creature-spectralshiver-nightmare": "Frissonneur cauchemardesque spectral",
+  "spookynights:item-creature-spectralshiver-stilt": "Frissonneur à échasses spectral",
+  "spookynights:item-creature-spectralshiver-surface": "Frissonneur de surface spectral",
+  "spookynights:item-creature-spectralshiver-tainted": "Frissonneur infecté spectral",
+
+  "spookynights:item-creature-spectralwolf-eurasian-adult-female": "Loup spectral (Femelle)",
+  "spookynights:item-creature-spectralwolf-eurasian-adult-male": "Loup spectral (Mâle)",
+
+  "spookynights:item-creature-spectralbear-brown-adult-female": "Ours spectral brun (Femelle)",
+  "spookynights:item-creature-spectralbear-brown-adult-male": "Ours spectral brun (Mâle)"
 }

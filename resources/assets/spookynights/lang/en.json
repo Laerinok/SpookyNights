@@ -22,5 +22,34 @@
   "spookynights:item-candybag": "Candy Bag",
   "spookynights:itemdesc-candybag": "A small paper bag filled with treats.",
 
-  "heldhelp-openbag": "Open Bag (Hold)"
+  "heldhelp-openbag": "Open Bag (Hold)",
+
+  "spookynights:item-creature-spectraldrifter-normal": "Spectral Drifter",
+  "spookynights:item-creature-spectraldrifter-deep": "Deep Spectral Drifter",
+  "spookynights:item-creature-spectraldrifter-tainted": "Tainted Spectral Drifter",
+  "spookynights:item-creature-spectraldrifter-corrupt": "Corrupt Spectral Drifter",
+  "spookynights:item-creature-spectraldrifter-nightmare": "Nightmare Spectral Drifter",
+  "spookynights:item-creature-spectraldrifter-double-headed": "Double-headed Spectral Drifter",
+
+  "spookynights:item-creature-spectralbowtorn-corrupt": "Corrupt Spectral Bowtorn",
+  "spookynights:item-creature-spectralbowtorn-deep": "Deep Spectral Bowtorn",
+  "spookynights:item-creature-spectralbowtorn-gearfoot": "Gearfoot Spectral Bowtorn",
+  "spookynights:item-creature-spectralbowtorn-nightmare": "Nightmare Spectral Bowtorn",
+  "spookynights:item-creature-spectralbowtorn-surface": "Spectral Bowtorn",
+  "spookynights:item-creature-spectralbowtorn-tainted": "Tainted Spectral Bowtorn",
+
+  "spookynights:item-creature-spectralshiver-bellhead": "Bellhead Spectral Shiver",
+  "spookynights:item-creature-spectralshiver-corrupt": "Corrupt Spectral Shiver",
+  "spookynights:item-creature-spectralshiver-deep": "Deep Spectral Shiver",
+  "spookynights:item-creature-spectralshiver-deepsplit": "Deepsplit Spectral Shiver",
+  "spookynights:item-creature-spectralshiver-nightmare": "Nightmare Spectral Shiver",
+  "spookynights:item-creature-spectralshiver-stilt": "Stilt Spectral Shiver",
+  "spookynights:item-creature-spectralshiver-surface": "Spectral Shiver",
+  "spookynights:item-creature-spectralshiver-tainted": "Tainted Spectral Shiver",
+
+  "spookynights:item-creature-spectralwolf-eurasian-adult-female": "Spectral Wolf (Female)",
+  "spookynights:item-creature-spectralwolf-eurasian-adult-male": "Spectral Wolf (Male)",
+
+  "spookynights:item-creature-spectralbear-brown-adult-female": "Brown Spectral Bear (Female)",
+  "spookynights:item-creature-spectralbear-brown-adult-male": "Brown Spectral Bear (Male)"
 }

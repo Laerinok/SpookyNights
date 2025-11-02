@@ -60,10 +60,6 @@
   </PropertyGroup>
 
   <!-- Project item includes -->
-  <ItemGroup>
-    <Folder Include="resources\assets\spookynights\entities\animal\mammal\" />
-    <Folder Include="spookynights\assets\spookynights\sounds\item\" />
-  </ItemGroup>
 
   <!-- Formatting JSON files -->
   <PropertyGroup>
@@ -102,6 +98,14 @@
     <Reference Include="$(GameDirectory)/Lib/OpenTK*.dll" Private="false" />
     <!-- External libraries -->
     <Reference Include="$(ExternalLibDir)/**/*.dll" Private="false" Condition="'$(ExternalLibDir)' != ''" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="resources\assets\spookynights\entities\animal\**" />
+    <Compile Remove="spookynights\**" />
+    <EmbeddedResource Remove="resources\assets\spookynights\entities\animal\**" />
+    <EmbeddedResource Remove="spookynights\**" />
+    <None Remove="resources\assets\spookynights\entities\animal\**" />
+    <None Remove="spookynights\**" />
   </ItemGroup>
 
   <!-- Creating local settings file -->

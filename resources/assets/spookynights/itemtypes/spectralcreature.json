@@ -1,0 +1,135 @@
+{
+  "code": "creature",
+  "class": "ItemCreature",
+  "creativeinventory": {
+    "spookynights": [ "*" ],
+    "general": [ "*" ],
+    "creatures": [ "*" ]
+  },
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [
+        "spectraldrifter-normal",
+        "spectraldrifter-deep",
+        "spectraldrifter-tainted",
+        "spectraldrifter-corrupt",
+        "spectraldrifter-nightmare",
+        "spectraldrifter-double-headed",
+        "spectralshiver-surface",
+        "spectralshiver-deep",
+        "spectralshiver-tainted",
+        "spectralshiver-corrupt",
+        "spectralshiver-nightmare",
+        "spectralshiver-stilt",
+        "spectralshiver-bellhead",
+        "spectralshiver-deepsplit",
+        "spectralbowtorn-surface",
+        "spectralbowtorn-deep",
+        "spectralbowtorn-tainted",
+        "spectralbowtorn-corrupt",
+        "spectralbowtorn-nightmare",
+        "spectralbowtorn-gearfoot",
+        "spectralbear-brown-adult-male",
+        "spectralbear-brown-adult-female",
+        "spectralwolf-eurasian-adult-male",
+        "spectralwolf-eurasian-adult-female"
+      ]
+    }
+  ],
+  "attributes": {
+    "handbook": { "exclude": true }
+  },
+  "shapeByType": {
+    "*-spectraldrifter-*": { "base": "entity/spectral/drifter/surface" },
+    "*-spectralshiver-*": { "base": "entity/spectral/shiver/surface" },
+    "*-spectralbowtorn-*": { "base": "entity/spectral/bowtorn/surface" },
+    "*-spectralbear-brown-adult-*": { "base": "entity/spectral/animal/bear" },
+    "*-spectralwolf-eurasian-adult-*": { "base": "entity/spectral/animal/wolf" }
+  },
+  "guiTransformByType": {
+    "creature-spectraldrifter-*": {
+      "rotate": true,
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": -62,
+        "z": -180
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.66,
+        "z": 0.5
+      },
+      "scale": 1.17
+    },
+    "creature-spectralshiver-*": {
+      "rotate": true,
+      "rotation": {
+        "x": 180,
+        "y": -40,
+        "z": 14
+      },
+      "origin": {
+        "x": 0.6,
+        "y": 0.8,
+        "z": 0.4
+      }
+    },
+    "creature-spectralbowtorn-*": {
+      "rotate": true,
+      "rotation": {
+        "x": 0,
+        "y": -128,
+        "z": 180
+      },
+      "origin": {
+        "x": 0.6,
+        "y": 1.9,
+        "z": 0.4
+      }
+    },
+    "creature-spectralbear-*": {
+      "rotate": true,
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 180,
+        "y": -115,
+        "z": 6
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.74,
+        "z": 0.5
+      },
+      "scale": 0.8
+    },
+    "creature-spectralwolf-*": {
+      "rotate": true,
+      "translation": {
+        "x": 2,
+        "y": 1,
+        "z": 0
+      },
+      "rotation": {
+        "x": 4,
+        "y": -59,
+        "z": -180
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "scale": 1.16
+    }
+  }
+}
