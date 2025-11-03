@@ -10,10 +10,10 @@ namespace SpookyNights
 
         public bool EnableCandyLoot { get; set; } = true;
 
-        // The dictionary is now much simpler!
         public Dictionary<string, string> CandyLootTable { get; set; } = new Dictionary<string, string>();
 
         // --- Spawning Config ---
+        public Dictionary<string, float> SpawnMultipliers { get; set; } = new Dictionary<string, float>();
 
         // --- Block Config ---
         public bool EnableJackOLanternParticles { get; set; } = true;

@@ -39,7 +39,16 @@
 		"renderer": "Shape",
 		"pitchStep": false,
 		"renderFlags": [ "alphatransparent" ],
-		"glowLevel": 180,
+		"glowLevelByType": {
+			"*-surface": 80,
+			"*-deep": 60,
+			"*-tainted": 110,
+			"*-corrupt": 100,
+			"*-nightmare": 80,
+			"*-stilt": 100,
+			"*-bellhead": 90,
+			"*-deepsplit": 80
+		},
 		"glowColorByType": {
 			"*-surface": "#BFEFFF",
 			"*-deep": "#66FFFF",
@@ -667,7 +676,7 @@
 						"var": 0
 					}
 				},
-				"insideBlockCodes": [ "air", "tallgrass-*", "loosestones-*" ],
+				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:loosestones-*" ],
 				"minYByType": {
 					"*-surface": 0.85,
 					"*-deep": 0.22,

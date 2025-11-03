@@ -47,10 +47,13 @@
 	"client": {
 		"renderer": "Shape",
 		"renderFlags": [ "alphatransparent" ],
-		"glowLevel": 200,
+		"glowLevelByType": {
+			"spectralwolf-eurasian-adult-male": 110,
+			"spectralwolf-eurasian-adult-female": 160
+		},
 		"glowColorByType": {
-			"*-male": "#FF3333",
-			"*-female": "#0066FF"
+			"spectralwolf-eurasian-adult-male": "#FF3333",
+			"spectralwolf-eurasian-adult-female": "#0066FF"
 		},
 		"skipRenderUntil": "alive",
 		"shape": { "base": "entity/spectral/animal/wolf" },
@@ -464,22 +467,21 @@
 		"spawnconditions": {
 			"runtime": {
 				"group": "hostile",
-				"MinDistanceToPlayer": 24,
+				"MinDistanceToPlayer": 0,
 				"tryOnlySurface": true,
-				"chance": 0.0002,
-				"maxQuantity": 5,
-				"maxLightLevel": 7,
-				"lightLevelType": "onlyBlockLight",
+				"chance": 0.05,
+				"maxQuantity": 2,
+				"maxLightLevel": 5,
 				"groupSize": {
-					"dist": "verynarrowgaussian",
+					"dist": "uniform",
 					"avg": 3,
-					"var": 2
+					"var": 1
 				},
-				"insideBlockCodes": [ "air", "tallgrass-*" ],
+				"insideBlockCodes": [ "game:air", "game:tallgrass-*" ],
 				"minTemp": -15,
 				"maxTemp": 15,
 				"minRain": 0.25,
-				"minForest": 0.5,
+				"minForest": 0.4,
 				"companions": [ "spectralwolf-eurasian-adult-female" ]
 			}
 		}

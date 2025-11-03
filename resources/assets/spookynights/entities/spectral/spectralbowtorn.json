@@ -36,6 +36,23 @@
 	"client": {
 		"renderer": "Shape",
 		"pitchStep": false,
+		"renderFlags": [ "alphatransparent" ],
+		"glowLevelByType": {
+			"spectralbowtorn-surface": 80,
+			"spectralbowtorn-deep": 60,
+			"spectralbowtorn-tainted": 110,
+			"spectralbowtorn-corrupt": 100,
+			"spectralbowtorn-nightmare": 80,
+			"spectralbowtorn-gearfoot": 80
+		},
+		"glowColorByType": {
+			"spectralbowtorn-surface": "#BFEFFF",
+			"spectralbowtorn-deep": "#66FFFF",
+			"spectralbowtorn-tainted": "#99CC00",
+			"spectralbowtorn-corrupt": "#4B0082",
+			"spectralbowtorn-nightmare": "#9B30FF",
+			"spectralbowtorn-gearfoot": "#E6FFFF"
+		},
 		"shapeByType": {
 			"*-surface": { "base": "entity/spectral/bowtorn/surface" },
 			"*-deep": { "base": "entity/spectral/bowtorn/deep" },
@@ -613,7 +630,7 @@
 						"var": 0.5
 					}
 				},
-				"insideBlockCodes": [ "air", "tallgrass-*", "loosestones-*" ],
+				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:loosestones-*" ],
 				"minYByType": {
 					"*-surface": 0.85,
 					"*-deep": 0.22,
