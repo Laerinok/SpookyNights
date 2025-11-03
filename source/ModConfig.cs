@@ -14,8 +14,8 @@ namespace SpookyNights
         public Dictionary<string, string> CandyLootTable { get; set; } = new Dictionary<string, string>();
 
         // --- Spawning Config ---
-        public bool EnableSeasonalSpawning { get; set; } = true;
-        public string RequiredSeason { get; set; } = "autumn";
-        public string SpawningTimeOfDay { get; set; } = "night";
+
+        // --- Block Config ---
+        public bool EnableJackOLanternParticles { get; set; } = true;
     }
 }

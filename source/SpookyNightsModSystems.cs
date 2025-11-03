@@ -12,7 +12,35 @@ namespace Spookynights
     public sealed class SpookyNights : ModSystem
     {
         public static ModConfig LoadedConfig { get; private set; } = default!;
+        private ICoreAPI api = default!;
         private ICoreServerAPI sapi = default!;
+
+        public override void StartPre(ICoreAPI api)
+        {
+            this.api = api;
+            LoadAndMigrateConfig(api);
+        }
+
+        public override void AssetsFinalize(ICoreAPI api)
+        {
+            if (LoadedConfig.EnableJackOLanternParticles) return;
+
+            string[] variants = { "north", "east", "south", "west" };
+
+            foreach (string variant in variants)
+            {
+                AssetLocation blockCode = new AssetLocation("spookynights", "jackolantern-" + variant);
+                Block block = api.World.GetBlock(blockCode);
+
+                if (block != null)
+                {
+                    block.ParticleProperties = null;
+                }
+            }
+
+            api.Logger.Debug("[SpookyNights] Particles for jack-o'-lanterns have been disabled via config.");
+        }
+
 
         public override void Start(ICoreAPI api)
         {
@@ -23,8 +51,7 @@ namespace Spookynights
 
         public override void StartServerSide(ICoreServerAPI api)
         {
-            sapi = api;
-            LoadAndMigrateConfig(api);
+            this.sapi = api;
             api.Event.OnEntityDeath += OnEntityDeath;
         }
 
@@ -32,19 +59,16 @@ namespace Spookynights
         {
             ModConfig defaultConfig = new ModConfig();
             defaultConfig.EnableCandyLoot = true;
+            defaultConfig.EnableJackOLanternParticles = true;
 
-            // Our new, simplified default config
             defaultConfig.CandyLootTable = new Dictionary<string, string>()
             {
-                // Spectral Drifters
                 { "spookynights:spectraldrifter-normal", "0.2@1" },
                 { "spookynights:spectraldrifter-deep", "0.3@1-2" },
                 { "spookynights:spectraldrifter-tainted", "0.35@1-2" },
                 { "spookynights:spectraldrifter-corrupt", "0.4@2-3" },
                 { "spookynights:spectraldrifter-nightmare", "0.6@3-5" },
                 { "spookynights:spectraldrifter-double-headed", "0.7@4-6" },
-
-                // Spectral Shivers
                 { "spookynights:spectralshiver-surface", "0.2@1" },
                 { "spookynights:spectralshiver-deep", "0.3@1-2" },
                 { "spookynights:spectralshiver-tainted", "0.35@1-2" },
@@ -53,21 +77,16 @@ namespace Spookynights
                 { "spookynights:spectralshiver-stilt", "0.7@4-6" },
                 { "spookynights:spectralshiver-bellhead", "0.7@4-6" },
                 { "spookynights:spectralshiver-deepsplit", "0.7@4-6" },
-                
-                // Spectral Bowtorn
                 { "spookynights:spectralbowtorn-surface", "0.25@1" },
                 { "spookynights:spectralbowtorn-deep", "0.35@1-2" },
                 { "spookynights:spectralbowtorn-tainted", "0.4@2-3" },
                 { "spookynights:spectralbowtorn-corrupt", "0.45@2-4" },
                 { "spookynights:spectralbowtorn-nightmare", "0.65@3-5" },
                 { "spookynights:spectralbowtorn-gearfoot", "0.75@4-6" },
-
-                // Spectral Animals (using wildcard *)
                 { "spookynights:spectralbear-brown-adult-*", "0.5@2-4" },
                 { "spookynights:spectralwolf-eurasian-adult-*", "0.3@1-2" }
             };
 
-            // The rest of the load logic is similar
             try
             {
                 LoadedConfig = api.LoadModConfig<ModConfig>("spookynightsconfig.json");
@@ -80,6 +99,7 @@ namespace Spookynights
                 else if (LoadedConfig.Version != defaultConfig.Version)
                 {
                     defaultConfig.EnableCandyLoot = LoadedConfig.EnableCandyLoot;
+                    defaultConfig.EnableJackOLanternParticles = LoadedConfig.EnableJackOLanternParticles;
                     LoadedConfig = defaultConfig;
                     api.StoreModConfig(LoadedConfig, "spookynightsconfig.json");
                 }
@@ -93,16 +113,13 @@ namespace Spookynights
 
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
-            if (!LoadedConfig.EnableCandyLoot) return;
+            if (sapi == null || !LoadedConfig.EnableCandyLoot) return;
             if (damageSource.SourceEntity is not EntityPlayer) return;
 
             string entityCode = entity.Code.ToString();
 
-            // Your correction is here, and it's perfect.
             if (LoadedConfig.CandyLootTable.TryGetValue(entityCode, out string? lootConfigString))
             {
-                // Because of the 'if', we know lootConfigString cannot be null here.
-                // However, it's good practice to add a check for safety.
                 if (string.IsNullOrEmpty(lootConfigString)) return;
 
                 try
