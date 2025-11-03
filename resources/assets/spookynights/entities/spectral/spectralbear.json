@@ -52,12 +52,12 @@
 		"renderer": "Shape",
 		"renderFlags": [ "alphatransparent" ],
 		"glowLevelByType": {
-			"spectralbear-brown-adult-male": 110,
-			"spectralbear-brown-adult-female": 160
+			"*-male": 110,
+			"*-female": 160
 		},
 		"glowColorByType": {
-			"spectralbear-brown-adult-male": "#FF3333",
-			"spectralbear-brown-adult--female": "#0066FF"
+			"*-male": "#FF3333",
+			"*-female": "#0066FF"
 		},
 		"skipRenderUntil": "alive",
 		"shape": { "base": "entity/spectral/animal/bear" },

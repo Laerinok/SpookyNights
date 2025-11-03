@@ -48,12 +48,12 @@
 		"renderer": "Shape",
 		"renderFlags": [ "alphatransparent" ],
 		"glowLevelByType": {
-			"spectralwolf-eurasian-adult-male": 110,
-			"spectralwolf-eurasian-adult-female": 160
+			"*-male": 110,
+			"*-female": 160
 		},
 		"glowColorByType": {
-			"spectralwolf-eurasian-adult-male": "#FF3333",
-			"spectralwolf-eurasian-adult-female": "#0066FF"
+			"*-male": "#FF3333",
+			"*-female": "#0066FF"
 		},
 		"skipRenderUntil": "alive",
 		"shape": { "base": "entity/spectral/animal/wolf" },

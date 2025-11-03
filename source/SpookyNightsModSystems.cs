@@ -24,26 +24,55 @@ namespace Spookynights
             LoadAndMigrateConfig(api);
         }
 
+        // ... (The LoadAndMigrateConfig method from the last correct version)
+        private void LoadAndMigrateConfig(ICoreAPI api)
+        {
+            try
+            {
+                LoadedConfig = api.LoadModConfig<ModConfig>("spookynightsconfig.json");
+                if (LoadedConfig == null)
+                {
+                    LoadedConfig = new ModConfig();
+                    api.StoreModConfig(LoadedConfig, "spookynightsconfig.json");
+                }
+                else
+                {
+                    bool configUpdated = false;
+                    ModConfig defaultConfig = new ModConfig();
+                    foreach (var pair in defaultConfig.SpawnMultipliers)
+                    {
+                        if (!LoadedConfig.SpawnMultipliers.ContainsKey(pair.Key))
+                        {
+                            LoadedConfig.SpawnMultipliers[pair.Key] = pair.Value;
+                            configUpdated = true;
+                        }
+                    }
+                    if (LoadedConfig.Version != defaultConfig.Version || configUpdated)
+                    {
+                        LoadedConfig.Version = defaultConfig.Version;
+                        api.StoreModConfig(LoadedConfig, "spookynightsconfig.json");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                api.Logger.Error("[SpookyNights] Failed to load or create config file, using defaults: " + e.Message);
+                LoadedConfig = new ModConfig();
+            }
+        }
+
         public override void AssetsFinalize(ICoreAPI api)
         {
             if (LoadedConfig.EnableJackOLanternParticles) return;
-
             string[] variants = { "north", "east", "south", "west" };
-
             foreach (string variant in variants)
             {
                 AssetLocation blockCode = new AssetLocation("spookynights", "jackolantern-" + variant);
                 Block block = api.World.GetBlock(blockCode);
-
-                if (block != null)
-                {
-                    block.ParticleProperties = null;
-                }
+                if (block != null) { block.ParticleProperties = null; }
             }
-
             api.Logger.Debug("[SpookyNights] Particles for jack-o'-lanterns have been disabled via config.");
         }
-
 
         public override void Start(ICoreAPI api)
         {
@@ -59,137 +88,12 @@ namespace Spookynights
             api.Event.OnTrySpawnEntity += OnTrySpawnEntity;
         }
 
-        private void LoadAndMigrateConfig(ICoreAPI api)
-        {
-            ModConfig defaultConfig = new ModConfig();
-            defaultConfig.EnableCandyLoot = true;
-            defaultConfig.EnableJackOLanternParticles = true;
-
-            defaultConfig.CandyLootTable = new Dictionary<string, string>()
-            {
-                { "spookynights:spectraldrifter-normal", "0.2@1" },
-                { "spookynights:spectraldrifter-deep", "0.3@1-2" },
-                { "spookynights:spectraldrifter-tainted", "0.35@1-2" },
-                { "spookynights:spectraldrifter-corrupt", "0.4@2-3" },
-                { "spookynights:spectraldrifter-nightmare", "0.6@3-5" },
-                { "spookynights:spectraldrifter-double-headed", "0.7@4-6" },
-                { "spookynights:spectralshiver-surface", "0.2@1" },
-                { "spookynights:spectralshiver-deep", "0.3@1-2" },
-                { "spookynights:spectralshiver-tainted", "0.35@1-2" },
-                { "spookynights:spectralshiver-corrupt", "0.4@2-3" },
-                { "spookynights:spectralshiver-nightmare", "0.6@3-5" },
-                { "spookynights:spectralshiver-stilt", "0.7@4-6" },
-                { "spookynights:spectralshiver-bellhead", "0.7@4-6" },
-                { "spookynights:spectralshiver-deepsplit", "0.7@4-6" },
-                { "spookynights:spectralbowtorn-surface", "0.25@1" },
-                { "spookynights:spectralbowtorn-deep", "0.35@1-2" },
-                { "spookynights:spectralbowtorn-tainted", "0.4@2-3" },
-                { "spookynights:spectralbowtorn-corrupt", "0.45@2-4" },
-                { "spookynights:spectralbowtorn-nightmare", "0.65@3-5" },
-                { "spookynights:spectralbowtorn-gearfoot", "0.75@4-6" },
-                { "spookynights:spectralbear-brown-adult-*", "0.5@2-4" },
-                { "spookynights:spectralwolf-eurasian-adult-*", "0.3@1-2" }
-            };
-
-            defaultConfig.SpawnMultipliers = new Dictionary<string, float>()
-            {
-                { "spookynights:spectralwolf-*", 1.0f },
-                { "spookynights:spectralbear-*", 1.0f },
-                { "spookynights:spectraldrifter-*", 1.0f },
-                { "spookynights:spectralshiver-*", 1.0f },
-                { "spookynights:spectralbowtorn-*", 1.0f }
-            };
-
-            try
-            {
-                LoadedConfig = api.LoadModConfig<ModConfig>("spookynightsconfig.json");
-
-                if (LoadedConfig == null)
-                {
-                    LoadedConfig = defaultConfig;
-                    api.StoreModConfig(LoadedConfig, "spookynightsconfig.json");
-                }
-                else
-                {
-                    bool configUpdated = false;
-                    foreach (var pair in defaultConfig.SpawnMultipliers)
-                    {
-                        if (!LoadedConfig.SpawnMultipliers.ContainsKey(pair.Key))
-                        {
-                            LoadedConfig.SpawnMultipliers[pair.Key] = pair.Value;
-                            configUpdated = true;
-                        }
-                    }
-
-                    if (LoadedConfig.Version != defaultConfig.Version || configUpdated)
-                    {
-                        LoadedConfig.Version = defaultConfig.Version;
-                        LoadedConfig.CandyLootTable = defaultConfig.CandyLootTable;
-                        api.StoreModConfig(LoadedConfig, "spookynightsconfig.json");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                api.Logger.Error("[SpookyNights] Failed to load or create config file, using defaults: " + e.Message);
-                LoadedConfig = new ModConfig();
-            }
-        }
-
-        private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
-        {
-            float multiplier = 1.0f;
-            bool foundMatch = false;
-
-            foreach (var pair in LoadedConfig.SpawnMultipliers)
-            {
-                if (WildcardUtil.Match(new AssetLocation(pair.Key), properties.Code))
-                {
-                    multiplier = pair.Value;
-                    foundMatch = true;
-                    // Log that we found a match!
-                    sapi.Logger.Debug($"[SpookyNights] Found spawn multiplier '{multiplier}' for entity '{properties.Code}'.");
-                    break;
-                }
-            }
-
-            if (!foundMatch)
-            {
-                return true;
-            }
-
-            if (multiplier <= 0)
-            {
-                // Log the cancellation
-                sapi.Logger.Notification($"[SpookyNights] Spawn CANCELLED for '{properties.Code}' (multiplier is 0).");
-                return false;
-            }
-
-            if (multiplier >= 1)
-            {
-                return true;
-            }
-
-            if (sapi.World.Rand.NextDouble() > multiplier)
-            {
-                // Log the cancellation by chance
-                sapi.Logger.Notification($"[SpookyNights] Spawn CANCELLED by chance for '{properties.Code}' (multiplier {multiplier}).");
-                return false;
-            }
-
-            // Log the success
-            sapi.Logger.Debug($"[SpookyNights] Spawn ALLOWED for '{properties.Code}' (multiplier {multiplier}).");
-            return true;
-        }
-
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
+            // ... (The OnEntityDeath method remains unchanged)
             if (sapi == null || !LoadedConfig.EnableCandyLoot) return;
             if (damageSource.SourceEntity is not EntityPlayer) return;
-
-            string entityCode = entity.Code.ToString();
             string? matchedKey = null;
-
             foreach (var key in LoadedConfig.CandyLootTable.Keys)
             {
                 if (WildcardUtil.Match(new AssetLocation(key), entity.Code))
@@ -198,30 +102,22 @@ namespace Spookynights
                     break;
                 }
             }
-
             if (matchedKey == null) return;
-
             if (LoadedConfig.CandyLootTable.TryGetValue(matchedKey, out string? lootConfigString))
             {
                 if (string.IsNullOrEmpty(lootConfigString)) return;
-
                 try
                 {
                     string[] parts = lootConfigString.Split('@');
                     float chance = float.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture);
-
                     if (sapi.World.Rand.NextDouble() >= chance) return;
-
                     string[] quantityParts = parts[1].Split('-');
                     int min = int.Parse(quantityParts[0]);
                     int max = (quantityParts.Length > 1) ? int.Parse(quantityParts[1]) : min;
-
                     int amount = sapi.World.Rand.Next(min, max + 1);
                     if (amount <= 0) return;
-
                     AssetLocation candyBagCode = new AssetLocation("spookynights", "candybag");
                     Item? candyBagItem = sapi.World.GetItem(candyBagCode);
-
                     if (candyBagItem != null)
                     {
                         ItemStack stack = new ItemStack(candyBagItem, amount);
@@ -230,9 +126,117 @@ namespace Spookynights
                 }
                 catch (Exception e)
                 {
-                    sapi.Logger.Warning("[SpookyNights] Could not parse loot config string for '{0}'. Expected format 'Chance@Min-Max'. String was: '{1}'. Error: {2}", entityCode, lootConfigString, e.Message);
+                    sapi.Logger.Warning("[SpookyNights] Could not parse loot config string for '{0}'. Error: {1}", entity.Code, e.Message);
                 }
             }
         }
-    }
-}
+
+        // THIS METHOD IS NOW CORRECTLY PLACED AT THE CLASS LEVEL
+        // AND USES .Debug() FOR LOGGING
+        private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
+        {
+            if (properties.Code.Domain != "spookynights")
+            {
+                return true;
+            }
+
+            sapi.Logger.Debug("[SpookyNights] Game wants to spawn '{0}'. Checking our custom rules...", properties.Code);
+
+            if (LoadedConfig.UseTimeBasedSpawning)
+            {
+                if (WildcardUtil.Match(new AssetLocation("spookynights:spectralbear-*"), properties.Code))
+                {
+                    if (LoadedConfig.BearSpawnConfig.Enabled)
+                    {
+                        string currentMoonPhase = sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant();
+                        if (!LoadedConfig.BearSpawnConfig.AllowedMoonPhases.Contains(currentMoonPhase))
+                        {
+                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': incorrect moon phase ('{1}').", properties.Code, currentMoonPhase);
+                            return false;
+                        }
+                    }
+                }
+                if (LoadedConfig.SpawnOnlyAtNight)
+                {
+                    float hour = sapi.World.Calendar.HourOfDay;
+                    if (hour > 6 && hour < 20)
+                    {
+                        sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': it's daytime.", properties.Code);
+                        return false;
+                    }
+                }
+                if (LoadedConfig.AllowedSpawnMonths != null && LoadedConfig.AllowedSpawnMonths.Count > 0)
+                {
+                    int currentMonth = sapi.World.Calendar.Month;
+                    if (!LoadedConfig.AllowedSpawnMonths.Contains(currentMonth))
+                    {
+                        sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': incorrect month ('{1}').", properties.Code, currentMonth);
+                        return false;
+                    }
+                }
+                if (LoadedConfig.SpawnOnlyOnLastDayOfMonth)
+                {
+                    int currentDay = (int)(sapi.World.Calendar.TotalDays % sapi.World.Calendar.DaysPerMonth) + 1;
+                    int daysInMonth = sapi.World.Calendar.DaysPerMonth;
+                    if (currentDay != daysInMonth)
+                    {
+                        sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not the last day of the month.", properties.Code);
+                        return false;
+                    }
+                }
+                if (LoadedConfig.SpawnOnlyOnLastDayOfWeek)
+                {
+                    const int daysInWeek = 7;
+                    int currentDayOfWeek = (int)sapi.World.Calendar.TotalDays % daysInWeek;
+                    if (currentDayOfWeek != daysInWeek - 1)
+                    {
+                        sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not the last day of the week.", properties.Code);
+                        return false;
+                    }
+                }
+            }
+
+            sapi.Logger.Debug("[SpookyNights] Time checks PASSED for '{0}'. Now checking multiplier...", properties.Code);
+
+            float multiplier = 1.0f;
+            bool foundMatch = false;
+            foreach (var pair in LoadedConfig.SpawnMultipliers)
+            {
+                if (WildcardUtil.Match(new AssetLocation(pair.Key), properties.Code))
+                {
+                    multiplier = pair.Value;
+                    foundMatch = true;
+                    break;
+                }
+            }
+
+            if (!foundMatch)
+            {
+                sapi.Logger.Debug("[SpookyNights] ALLOWING spawn for '{0}': no multiplier found, defaulting to allow.", properties.Code);
+                return true;
+            }
+
+            if (multiplier <= 0)
+            {
+                sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': multiplier is {1}.", properties.Code, multiplier);
+                return false;
+            }
+
+            if (multiplier >= 1)
+            {
+                sapi.Logger.Debug("[SpookyNights] ALLOWING spawn for '{0}': multiplier is {1}.", properties.Code, multiplier);
+                return true;
+            }
+
+            if (sapi.World.Rand.NextDouble() > multiplier)
+            {
+                sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': failed chance roll with multiplier {1}.", properties.Code, multiplier);
+                return false;
+            }
+
+            sapi.Logger.Debug("[SpookyNights] ALLOWING spawn for '{0}': passed chance roll with multiplier {1}.", properties.Code, multiplier);
+            return true;
+        }
+
+    } 
+} 

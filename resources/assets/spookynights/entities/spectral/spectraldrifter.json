@@ -61,7 +61,7 @@
 		"pitchStep": false,
 		"renderFlags": [ "alphatransparent" ],
 		"glowLevelByType": {
-			"*-surface": 80,
+			"*-normal": 80,
 			"*-deep": 60,
 			"*-tainted": 110,
 			"*-corrupt": 100,
