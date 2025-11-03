@@ -11,12 +11,8 @@
   "maxstacksize": 8,
   "blockmaterial": "Wood",
   "creativeinventory": {
-    "general": [
-      "jackolantern-north"
-    ],
-    "spookynights": [
-      "jackolantern-north"
-    ]
+    "general": [ "jackolantern-north" ],
+    "spookynights": [ "jackolantern-north" ]
   },
   "behaviors": [
     { "name": "HorizontalOrientable" },
@@ -27,12 +23,8 @@
   "heldLeftTpIdleAnimation": "holdinglanternlefthand",
   "lightAbsorption": 0,
   "lightHsv": [ 4, 7, 20 ],
-  "sidesolid": {
-    "all": true
-  },
-  "sideopaque": {
-    "all": false
-  },
+  "sidesolid": { "all": true },
+  "sideopaque": { "all": false },
   "replaceable": 500,
   "resistance": 1,
   "collisionbox": {
@@ -60,15 +52,10 @@
       "base": "spookynights:block/jackolantern/jackolantern",
       "rotateY": 90
     },
-    "*-south": {
-      "base": "spookynights:block/jackolantern/jackolantern"
-    },
+    "*-south": { "base": "spookynights:block/jackolantern/jackolantern" },
     "*-west": {
       "base": "spookynights:block/jackolantern/jackolantern",
       "rotateY": 270
-    },
-    "shape": {
-      "base": "spookynights:block/jackolantern/jackolantern"
     }
   },
   "textures": {
@@ -77,6 +64,86 @@
     "jackolantern_stem": { "base": "block/jackolantern/jackolantern_stem" },
     "jackolantern_top": { "base": "block/jackolantern/jackolantern_top" }
   },
+
+  "particlePropertiesByType": {
+    "*": [
+      {
+        "particleModel": "Quad",
+
+        // TRANSPARENCE AUGMENTÉE ICI
+        "hsvaColor": [
+          {
+            "avg": 15,
+            "var": 15
+          },
+          {
+            "avg": 255,
+            "var": 10
+          },
+          {
+            "avg": 255,
+            "var": 0
+          },
+          {
+            "avg": 50,
+            "var": 20
+          }
+        ],
+
+        "opacityEvolve": {
+          "transform": "linear",
+          "factor": -15
+        }, // Fade out un peu plus lent pour compenser
+        "size": {
+          "avg": 0.8,
+          "var": 0.2
+        },
+        "sizeEvolve": {
+          "transform": "linear",
+          "factor": 0.5
+        },
+        "quantity": { "avg": 0.6 },
+        "gravityEffect": {
+          "avg": -0.001,
+          "var": 0
+        },
+        "velocity": [
+          {
+            "avg": 0,
+            "var": 0.03
+          },
+          {
+            "avg": 0.005,
+            "var": 0.01
+          },
+          {
+            "avg": 0,
+            "var": 0.03
+          }
+        ],
+        "lifeLength": {
+          "avg": 7,
+          "var": 2
+        },
+        "windAffectednes": 0,
+        "posOffset": [
+          {
+            "avg": 0,
+            "var": 0.35
+          },
+          {
+            "avg": -0.3125,
+            "var": 0
+          },
+          {
+            "avg": 0,
+            "var": 0.35
+          }
+        ]
+      }
+    ]
+  },
+
   "sounds": {
     "place": "spookynights:block/halloween-ghost-whisper",
     "break": "spookynights:block/halloween-howl",

@@ -16,16 +16,21 @@
 		"jackolantern_corpse": "block/jackolantern/jackolantern_corpse",
 		"jackolantern_face": "block/jackolantern/jackolantern_face",
 		"jackolantern_stem": "block/jackolantern/jackolantern_stem",
-		"jackolantern_top": "block/jackolantern/jackolantern_top" 
+		"jackolantern_top": "block/jackolantern/jackolantern_top"
 	},
 	"elements": [
 		{
 			"name": "Origin",
 			"from": [ 0.0, 0.0, 0.0 ],
 			"to": [ 0.0, 0.0, 0.0 ],
-			"renderPass": 3,
 			"rotationOrigin": [ 8.0, 6.0, 8.0 ],
 			"faces": {
+				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },
+				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },
+				"south": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },
+				"west": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },
+				"up": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false },
+				"down": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ], "enabled": false }
 			},
 			"children": [
 				{
@@ -45,7 +50,7 @@
 							"name": "base_bottom2",
 							"from": [ -1.0, 1.0, -1.0 ],
 							"to": [ 13.0, 3.0, 13.0 ],
-							"rotationOrigin": [ -3.0, 1.0, -3.0 ],
+							"rotationOrigin": [ 0.0, 1.0, 0.0 ],
 							"faces": {
 								"north": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.0 ], "autoUv": false },
 								"east": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.5 ], "autoUv": false },
@@ -59,7 +64,7 @@
 							"name": "equator_main",
 							"from": [ -1.5, 3.0, -1.5 ],
 							"to": [ 13.5, 11.0, 13.5 ],
-							"rotationOrigin": [ -1.5, -1.0, -1.5 ],
+							"rotationOrigin": [ 6.0, 6.0, 6.0 ],
 							"faces": {
 								"north": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.0 ], "autoUv": false },
 								"east": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.0 ], "autoUv": false },
@@ -73,7 +78,7 @@
 							"name": "base_top2",
 							"from": [ 0.0, 13.0, 0.0 ],
 							"to": [ 12.0, 14.0, 12.0 ],
-							"rotationOrigin": [ -2.0, 1.0, -2.0 ],
+							"rotationOrigin": [ 6.0, 13.0, 6.0 ],
 							"faces": {
 								"north": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.0 ], "autoUv": false },
 								"east": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.0 ], "autoUv": false },
@@ -87,7 +92,7 @@
 							"name": "base_top",
 							"from": [ -1.0, 11.0, -1.0 ],
 							"to": [ 13.0, 13.0, 13.0 ],
-							"rotationOrigin": [ -3.0, 11.0, -3.0 ],
+							"rotationOrigin": [ 6.0, 12.0, 6.0 ],
 							"faces": {
 								"north": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.0 ], "autoUv": false },
 								"east": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.0 ], "autoUv": false },
@@ -116,20 +121,42 @@
 							"from": [ -0.5, 4.0, -2.0 ],
 							"to": [ 12.5, 10.0, -1.5 ],
 							"rotationOrigin": [ -0.5, 4.0, -2.0 ],
+							"vertexFlags": 128,
 							"faces": {
-								"north": { "texture": "#jackolantern_face", "uv": [ 16.0, 16.0, 0.0, 0.0 ], "rotation": 180, "autoUv": false },
-								"east": { "texture": "#jackolantern_corpse", "uv": [ 0.0, 0.0, 0.5, 6.0 ] },
-								"south": { "texture": "#jackolantern_corpse", "uv": [ 0.0, 0.0, 13.0, 6.0 ] },
-								"west": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.0 ], "autoUv": false },
-								"up": { "texture": "#jackolantern_corpse", "uv": [ 0.0, 0.0, 13.0, 0.5 ] },
-								"down": { "texture": "#jackolantern_corpse", "uv": [ 0.0, 0.0, 13.0, 0.5 ] }
+								"north": {
+									"texture": "#jackolantern_face",
+									"uv": [ 16.0, 16.0, 0.0, 0.0 ],
+									"rotation": 180,
+									"autoUv": false
+								},
+								"east": {
+									"texture": "#jackolantern_corpse",
+									"uv": [ 0.0, 0.0, 0.5, 6.0 ]
+								},
+								"south": {
+									"texture": "#jackolantern_corpse",
+									"uv": [ 0.0, 0.0, 13.0, 6.0 ]
+								},
+								"west": {
+									"texture": "#jackolantern_corpse",
+									"uv": [ 3.0, 3.0, 29.0, 29.0 ],
+									"autoUv": false
+								},
+								"up": {
+									"texture": "#jackolantern_corpse",
+									"uv": [ 0.0, 0.0, 13.0, 0.5 ]
+								},
+								"down": {
+									"texture": "#jackolantern_corpse",
+									"uv": [ 0.0, 0.0, 13.0, 0.5 ]
+								}
 							}
 						},
 						{
 							"name": "face_W",
 							"from": [ -2.0, 4.0, -0.5 ],
 							"to": [ -1.5, 10.0, 12.5 ],
-							"rotationOrigin": [ -2.0, 4.0, -2.5 ],
+							"rotationOrigin": [ 0.0, 4.0, 0.0 ],
 							"faces": {
 								"north": { "texture": "#jackolantern_corpse", "uv": [ 0.0, 0.0, 0.5, 6.0 ] },
 								"east": { "texture": "#jackolantern_corpse", "uv": [ 0.0, 0.0, 13.0, 6.0 ] },
@@ -143,7 +170,7 @@
 							"name": "face_E",
 							"from": [ 13.5, 4.0, -0.5 ],
 							"to": [ 14.0, 10.0, 12.5 ],
-							"rotationOrigin": [ 13.5, 4.0, -2.5 ],
+							"rotationOrigin": [ 13.5, 4.0, 0.0 ],
 							"faces": {
 								"north": { "texture": "#jackolantern_corpse", "uv": [ 0.0, 0.0, 0.5, 6.0 ] },
 								"east": { "texture": "#jackolantern_corpse", "uv": [ 3.0, 3.0, 29.0, 29.0 ], "autoUv": false },
@@ -159,7 +186,7 @@
 					"name": "stem_base",
 					"from": [ 6.0, 14.0, 6.0 ],
 					"to": [ 10.0, 16.0, 10.0 ],
-					"rotationOrigin": [ 0.0, -2.0, 0.0 ],
+					"rotationOrigin": [ 8.0, 15.0, 8.0 ],
 					"faces": {
 						"north": { "texture": "#jackolantern_stem", "uv": [ 10.0, 10.0, 20.0, 30.0 ], "autoUv": false },
 						"east": { "texture": "#jackolantern_stem", "uv": [ 10.0, 10.0, 20.0, 30.0 ], "autoUv": false },
@@ -173,7 +200,7 @@
 							"name": "stem_tip",
 							"from": [ 1.0, 2.0, 1.0 ],
 							"to": [ 3.0, 5.0, 3.0 ],
-							"rotationOrigin": [ -6.0, -16.0, -6.0 ],
+							"rotationOrigin": [ 2.0, 2.0, 2.0 ],
 							"faces": {
 								"north": { "texture": "#jackolantern_stem", "uv": [ 10.0, 10.0, 20.0, 30.0 ], "autoUv": false },
 								"east": { "texture": "#jackolantern_stem", "uv": [ 10.0, 10.0, 20.0, 30.0 ], "autoUv": false },
