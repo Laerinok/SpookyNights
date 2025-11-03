@@ -1,7 +1,8 @@
 v0.2 
-- fumée citrouille (ON/OFF)
 - fichier config
+- fumée citrouille (ON/OFF)
 - candyloot ON/OFF
+- loot-overhaul
 
 v0.2-dev1 2025-10-31
 - added: New Candy Bag Interaction: You now hold the right mouse button to open a candy bag.

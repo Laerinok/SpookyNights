@@ -33,7 +33,6 @@
 			"bowtorn-gearfoot": 0.35
 		}
 	},
-	"drops": [],
 	"client": {
 		"renderer": "Shape",
 		"pitchStep": false,
@@ -94,7 +93,11 @@
 				"code": "floatupwhenstuck",
 				"onlyWhenDead": true
 			},
-			{ "code": "interpolateposition" }
+			{ "code": "interpolateposition" },
+			{
+				"code": "harvestable",
+				"duration": 0.5
+			}
 		],
 		"animations": [
 			{
@@ -185,6 +188,10 @@
 					"*-nightmare": 32,
 					"*-gearfoot": 50
 				}
+			},
+			{
+				"code": "deaddecay",
+				"hoursToDecay": 3
 			},
 			{
 				"code": "floatupwhenstuck",
@@ -361,6 +368,9 @@
 				]
 			},
 			{
+				"code": "harvestable",
+				"duration": 0.5,
+				"fixedweight": true,
 				"dropsByType": {
 					"*-surface": [
 						{
@@ -574,7 +584,7 @@
 					]
 				}
 			},
-			{ "code": "loot" },
+			{ "code": "ripharvestable" },
 			{ "code": "entitystatetags" }
 		],
 		"spawnconditions": {

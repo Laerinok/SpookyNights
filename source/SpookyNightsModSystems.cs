@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
+using Vintagestory.API.Util;
 
 namespace Spookynights
 {
@@ -117,8 +118,21 @@ namespace Spookynights
             if (damageSource.SourceEntity is not EntityPlayer) return;
 
             string entityCode = entity.Code.ToString();
+            string? matchedKey = null;
 
-            if (LoadedConfig.CandyLootTable.TryGetValue(entityCode, out string? lootConfigString))
+            // Iterate through the loot table keys to find a wildcard match
+            foreach (var key in LoadedConfig.CandyLootTable.Keys)
+            {
+                if (WildcardUtil.Match(new AssetLocation(key), entity.Code))
+                {
+                    matchedKey = key;
+                    break;
+                }
+            }
+
+            if (matchedKey == null) return;
+
+            if (LoadedConfig.CandyLootTable.TryGetValue(matchedKey, out string? lootConfigString))
             {
                 if (string.IsNullOrEmpty(lootConfigString)) return;
 

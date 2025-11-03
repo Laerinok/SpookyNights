@@ -73,6 +73,7 @@
 			]
 		},
 		"behaviors": [
+			{ "code": "ripharvestable" },
 			{ "code": "repulseagents" },
 			{
 				"code": "controlledphysics",
@@ -83,7 +84,10 @@
 				"onlyWhenDead": true
 			},
 			{ "code": "interpolateposition" },
-			{ "code": "harvestable" },
+			{
+				"code": "harvestable",
+				"duration": 0.5
+			},
 			{
 				"code": "despawn",
 				"minPlayerDistance": 16,
@@ -148,6 +152,34 @@
 	"server": {
 		"behaviors": [
 			{ "code": "repulseagents" },
+			{
+				"code": "deaddecay",
+				"hoursToDecay": 3
+			},
+			{
+				"code": "harvestable",
+				"duration": 0.5,
+				"dropsByType": {
+					"spectralwolf-eurasian-adult-*": [
+						{
+							"type": "item",
+							"code": "gear-temporal",
+							"quantity": {
+								"avg": 0.25,
+								"var": 0
+							}
+						},
+						{
+							"type": "item",
+							"code": "gear-rusty",
+							"quantity": {
+								"avg": 1,
+								"var": 0.5
+							}
+						}
+					]
+				}
+			},
 			{
 				"code": "controlledphysics",
 				"stepHeight": 1.1251

@@ -115,7 +115,11 @@
 				"code": "floatupwhenstuck",
 				"onlyWhenDead": true
 			},
-			{ "code": "interpolateposition" }
+			{ "code": "interpolateposition" },
+			{
+				"code": "harvestable",
+				"duration": 0.5
+			}
 		],
 		"animations": [
 			{
@@ -246,6 +250,10 @@
 					"*-bellhead": 66,
 					"*-deepsplit": 60
 				}
+			},
+			{
+				"code": "deaddecay",
+				"hoursToDecay": 3
 			},
 			{
 				"code": "floatupwhenstuck",
@@ -452,7 +460,9 @@
 				]
 			},
 			{
-				"code": "loot",
+				"code": "harvestable",
+				"duration": 0.5,
+				"fixedweight": true,
 				"dropsByType": {
 					"*-surface": [
 						{
@@ -626,6 +636,7 @@
 					]
 				}
 			},
+			{ "code": "ripharvestable" },
 			{ "code": "entitystatetags" }
 		],
 		"spawnconditions": {
