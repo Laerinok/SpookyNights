@@ -1,6 +1,6 @@
 ﻿// In source/SpookyNightsModSystems.cs
 
-using SpookyNights;
+using SpookyNights; 
 using System;
 using System.Collections.Generic;
 using Vintagestory.API.Common;
@@ -17,6 +17,7 @@ namespace Spookynights
         public static ModConfig LoadedConfig { get; private set; } = default!;
         private ICoreAPI api = default!;
         private ICoreServerAPI sapi = default!;
+        private List<string> spectralCreatureCodes = new List<string>();
 
         public override void StartPre(ICoreAPI api)
         {
@@ -24,7 +25,6 @@ namespace Spookynights
             LoadAndMigrateConfig(api);
         }
 
-        // ... (The LoadAndMigrateConfig method from the last correct version)
         private void LoadAndMigrateConfig(ICoreAPI api)
         {
             try
@@ -86,11 +86,20 @@ namespace Spookynights
             this.sapi = api;
             api.Event.OnEntityDeath += OnEntityDeath;
             api.Event.OnTrySpawnEntity += OnTrySpawnEntity;
+
+            spectralCreatureCodes = new List<string>
+            {
+                "spectraldrifter",
+                "spectralbowtorn",
+                "spectralshiver",
+                "spectralwolf",
+                "spectralbear"
+            };
+            api.Event.RegisterGameTickListener(OnDaylightCheck, 5000);
         }
 
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
-            // ... (The OnEntityDeath method remains unchanged)
             if (sapi == null || !LoadedConfig.EnableCandyLoot) return;
             if (damageSource.SourceEntity is not EntityPlayer) return;
             string? matchedKey = null;
@@ -131,8 +140,6 @@ namespace Spookynights
             }
         }
 
-        // THIS METHOD IS NOW CORRECTLY PLACED AT THE CLASS LEVEL
-        // AND USES .Debug() FOR LOGGING
         private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
         {
             if (properties.Code.Domain != "spookynights")
@@ -238,5 +245,42 @@ namespace Spookynights
             return true;
         }
 
-    } 
-} 
+        private void OnDaylightCheck(float dt)
+        {
+            if (!LoadedConfig.SpawnOnlyAtNight)
+            {
+                return;
+            }
+
+            bool isDayTime = sapi.World.Calendar.HourOfDay > 6 && sapi.World.Calendar.HourOfDay < 20;
+
+            if (isDayTime)
+            {
+                foreach (var entity in sapi.World.LoadedEntities.Values)
+                {
+                    if (IsSpectralCreature(entity.Code))
+                    {
+                        entity.Die(EnumDespawnReason.Expire);
+                    }
+                }
+            }
+        }
+
+        private bool IsSpectralCreature(AssetLocation entityCode)
+        {
+            if (entityCode == null || entityCode.Domain != "spookynights")
+            {
+                return false;
+            }
+
+            foreach (var code in spectralCreatureCodes)
+            {
+                if (entityCode.Path.StartsWith(code))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+}

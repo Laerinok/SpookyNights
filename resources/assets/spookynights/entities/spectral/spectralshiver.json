@@ -652,48 +652,43 @@
 			"runtime": {
 				"group": "hostile",
 				"maxQuantityByType": {
-					"*-surface": 1,
-					"*-deep": 1,
-					"*-tainted": 1,
+					"*-surface": 2,
+					"*-deep": 2,
+					"*-tainted": 2,
+					"*-corrupt": 1,
+					"*-nightmare": 1,
 					"*-stilt": 1,
 					"*-bellhead": 1,
-					"*-corrupt": 2,
-					"*-nightmare": 2,
-					"*": 0
+					"*-deepsplit": 1
 				},
 				"maxLightLevel": 7,
-				"chance": 0.1,
+				"chance": 0.02,
 				"lightLevelType": "OnlyBlockLight",
-				"groupSizeByType": {
-					"*-surface": {
-						"dist": "invexp",
-						"avg": 1,
-						"var": 0
-					},
-					"*": {
-						"dist": "uniform",
-						"avg": 1,
-						"var": 0
-					}
+				"groupSize": {
+					"dist": "uniform",
+					"avg": 1,
+					"var": 0
 				},
 				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:loosestones-*" ],
 				"minYByType": {
 					"*-surface": 0.85,
 					"*-deep": 0.22,
 					"*-tainted": 0.1,
+					"*-corrupt": 0,
+					"*-nightmare": 0,
 					"*-stilt": 0.1,
 					"*-bellhead": 0.1,
-					"*-corrupt": 0,
-					"*-nightmare": 0
+					"*-deepsplit": 0
 				},
 				"maxYByType": {
-					"*-surface": 2,
+					"*-surface": 1.0,
 					"*-deep": 0.89,
 					"*-tainted": 0.55,
 					"*-corrupt": 0.35,
 					"*-nightmare": 0.23,
 					"*-stilt": 0.19,
-					"*-bellhead": 0.19
+					"*-bellhead": 0.19,
+					"*-deepsplit": 0.19
 				}
 			}
 		}

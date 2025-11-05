@@ -96,7 +96,7 @@
 				"minPlayerDistance": 16,
 				"belowLightLevel": 8,
 				"minSeconds": 300,
-				"afterDays": 14
+				"afterDays": 1
 			}
 		],
 		"animations": [
@@ -467,14 +467,13 @@
 		"spawnconditions": {
 			"runtime": {
 				"group": "hostile",
-				"MinDistanceToPlayer": 0,
 				"tryOnlySurface": true,
-				"chance": 0.05,
-				"maxQuantity": 2,
+				"chance": 0.03,
+				"maxQuantity": 5,
 				"maxLightLevel": 5,
 				"groupSize": {
 					"dist": "uniform",
-					"avg": 3,
+					"avg": 2,
 					"var": 1
 				},
 				"insideBlockCodes": [ "game:air", "game:tallgrass-*" ],

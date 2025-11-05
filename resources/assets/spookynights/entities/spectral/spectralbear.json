@@ -91,10 +91,10 @@
 			{ "code": "interpolateposition" },
 			{
 				"code": "despawn",
-				"minPlayerDistance": 16,
+				"minPlayerDistance": 24,
 				"belowLightLevel": 8,
 				"minSeconds": 300,
-				"afterDays": 14
+				"afterDays": 1
 			}
 		],
 		"animations": [
@@ -463,44 +463,29 @@
 			}
 		],
 		"spawnconditions": {
-			"worldgen": {
-				"TriesPerChunk": {
-					"avg": 0.007,
-					"var": 0
-				},
-				"tryOnlySurface": true,
-				"groupSize": {
-					"dist": "verynarrowgaussian",
-					"avg": 1,
-					"var": 1
-				},
-				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:snowlayer-*", "game:flower-*" ]
-			},
 			"runtime": {
 				"group": "hostile",
-				"MinDistanceToPlayer": 30,
 				"tryOnlySurface": true,
-				"chance": 0.0015,
-				"maxQuantity": 1,
-				"maxQuantityByGroup": {
-					"code": "spectralbear-*",
-					"maxQuantity": 4
+				"chanceByType": {
+					"*-brown-*-*": 0.01,
+					"*-giant-*-*": 0.005
 				},
+				"maxQuantityByType": {
+					"*-brown-*-*": 1,
+					"*-giant-*-*": 1
+				},
+				"maxLightLevel": 7,
+				"lightLevelType": "onlyBlockLight",
 				"groupSize": {
-					"dist": "verynarrowgaussian",
+					"dist": "uniform",
 					"avg": 1,
-					"var": 1
+					"var": 0
 				},
 				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:snowlayer-*", "game:flower-*" ],
-				"maxLightLevel": 7,
-				"lightLevelType": "onlyBlockLight"
-			},
-			"climate": {
-				"maxY": 1.6,
-				"minTemp": -15,
-				"maxTemp": 10,
-				"minRain": 0.1,
-				"minForest": 0.2
+				"climate": {
+					"minForest": 0.5,
+					"minRain": 0.3
+				}
 			}
 		}
 	},
