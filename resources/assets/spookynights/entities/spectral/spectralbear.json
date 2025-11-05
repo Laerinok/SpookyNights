@@ -17,20 +17,33 @@
 			"states": [ "male", "female" ]
 		}
 	],
+	"skipVariants": [
+		"giant-*-female"
+	],
 	"canClimb": true,
 	"collisionBoxSizeByType": {
-		"*-male": {
-			"x": 1.3,
-			"y": 1.2
+		"*-brown-*-male": {
+			"x": 4,
+			"y": 2
 		},
-		"*-female": {
-			"x": 1.25,
-			"y": 1.1
+		"*-brown-*-female": {
+			"x": 4,
+			"y": 2
+		},
+		"*-giant-*-male": {
+			"x": 5,
+			"y": 3
 		}
 	},
-	"selectionBoxSize": {
-		"x": 1.5,
-		"y": 1.8
+	"selectionBoxSizeByType": {
+		"*-brown-*": {
+			"x": 4,
+			"y": 2
+		},
+		"*-giant-*": {
+			"x": 5,
+			"y": 3
+		}
 	},
 	"knockbackResistance": 0.9,
 	"eyeHeight": 0.95,
@@ -52,26 +65,37 @@
 		"renderer": "Shape",
 		"renderFlags": [ "alphatransparent" ],
 		"glowLevelByType": {
-			"*-male": 110,
-			"*-female": 160
+			"*-brown-*-male": 110,
+			"*-brown-*-female": 110,
+			"*-giant-*-male": 200
 		},
 		"glowColorByType": {
-			"*-male": "#FF3333",
-			"*-female": "#0066FF"
+			"*-brown-*-male": "#FF3333",
+			"*-brown-*-female": "#0066FF",
+			"*-giant-*-male": "#FFFFFF"
 		},
 		"skipRenderUntil": "alive",
 		"shape": { "base": "entity/spectral/animal/bear" },
 		"texturesByType": {
-			"base": "entity/spectral/animal/bear/brown-adult1",
-			"alternates": [
-				{ "base": "entity/spectral/animal/bear/brown-adult2" },
-				{ "base": "entity/spectral/animal/bear/brown-adult3" }
-			]
+			"*-brown-*-*": {
+				"texture": {
+					"base": "entity/spectral/animal/bear/brown-adult1",
+					"alternates": [
+						{ "base": "entity/spectral/animal/bear/brown-adult2" },
+						{ "base": "entity/spectral/animal/bear/brown-adult3" }
+					]
+				}
+			},
+			"*-giant-*-*": {
+				"texture": {
+					"base": "entity/spectral/animal/bear/polar-adult"
+				}
+			}
 		},
 		"sizeByType": {
-			"*-male": 1.65,
-			"*-female": 1.35,
-			"*-giant-*-*": 2.2
+			"*-brown-*-male": 1.65,
+			"*-brown-*-female": 1.35,
+			"*-giant-*-male": 2.5
 		},
 		"behaviors": [
 			{ "code": "ripharvestable" },
@@ -236,14 +260,17 @@
 					{
 						"code": "meleeattack",
 						"priority": 2,
-						"entityCodes": [ "player" ],
+						"entityCodes": [ "player", "chicken-*", "hare-*", "fox-*", "raccoon-*", "pig-*", "sheep-*", "deer-*", "goat-*" ],
 						"damageTierByType": {
 							"*-brown-*-*": 2,
-							"*-giant-*-*": 4
+							"*-giant-*-male": 4
 						},
 						"damageByType": {
 							"*-brown-*-*": 18,
-							"*-giant-*-*": 30
+							"*-giant-*-male": 30
+						},
+						"knockbackStrengthByType": {
+							"*-giant-*-male": 3
 						},
 						"damageType": "SlashingAttack",
 						"minDist": 2.5,
@@ -255,8 +282,7 @@
 						"damagePlayerAtMs": 500,
 						"animation": "Attack",
 						"animationSpeed": 1,
-						"sound": "creature/bear/attack",
-						"whenInEmotionState": "aggressiveondamage"
+						"sound": "creature/bear/attack"
 					},
 					{
 						"code": "fleeentity",
@@ -282,24 +308,6 @@
 						"whenNotInEmotionState": "saturated",
 						"animationSpeed": 2,
 						"movespeed": 0.055
-					},
-					{
-						"code": "meleeattack",
-						"priority": 1.5,
-						"entityCodes": [ "player", "chicken-*", "hare-*", "fox-*", "raccoon-*", "pig-*", "sheep-*", "deer-*", "goat-*" ],
-						"damage": 12,
-						"damageTier": 2,
-						"damageType": "SlashingAttack",
-						"minDist": 2,
-						"minVerDist": 1.5,
-						"slot": 1,
-						"mincooldown": 1500,
-						"maxcooldown": 1500,
-						"attackDurationMs": 800,
-						"damagePlayerAtMs": 500,
-						"animation": "Attack",
-						"animationSpeed": 1,
-						"sound": "creature/bear/attack"
 					},
 					{
 						"code": "seekentity",

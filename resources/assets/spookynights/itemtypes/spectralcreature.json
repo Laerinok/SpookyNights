@@ -32,6 +32,7 @@
         "spectralbowtorn-gearfoot",
         "spectralbear-brown-adult-male",
         "spectralbear-brown-adult-female",
+        "spectralbear-giant-adult-male",
         "spectralwolf-eurasian-adult-male",
         "spectralwolf-eurasian-adult-female"
       ]
@@ -44,7 +45,7 @@
     "*-spectraldrifter-*": { "base": "entity/spectral/drifter/surface" },
     "*-spectralshiver-*": { "base": "entity/spectral/shiver/surface" },
     "*-spectralbowtorn-*": { "base": "entity/spectral/bowtorn/surface" },
-    "*-spectralbear-brown-adult-*": { "base": "entity/spectral/animal/bear" },
+    "*-spectralbear-*-adult-*": { "base": "entity/spectral/animal/bear" },
     "*-spectralwolf-eurasian-adult-*": { "base": "entity/spectral/animal/wolf" }
   },
   "guiTransformByType": {

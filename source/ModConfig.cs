@@ -1,3 +1,4 @@
+
 // In source/ModConfig.cs
 
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace SpookyNights
     public class ModConfig
     {
         public string Version { get; set; } = "1.1.0";
-        public bool EnableCandyLoot { get; set; } = true;
+        public bool EnableCandyLoot { get; set; } = false;
         public Dictionary<string, string> CandyLootTable { get; set; }
         public Dictionary<string, float> SpawnMultipliers { get; set; }
         public bool UseTimeBasedSpawning { get; set; } = true;
