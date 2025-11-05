@@ -240,24 +240,24 @@
 			{
 				"code": "health",
 				"currenthealthByType": {
-					"*-surface": 14,
-					"*-deep": 19,
-					"*-tainted": 25,
-					"*-corrupt": 34,
-					"*-nightmare": 45,
-					"*-stilt": 45,
-					"*-bellhead": 66,
-					"*-deepsplit": 60
+					"*-surface": 17,
+					"*-deep": 22,
+					"*-tainted": 28,
+					"*-corrupt": 40,
+					"*-nightmare": 49,
+					"*-stilt": 52,
+					"*-bellhead": 71,
+					"*-deepsplit": 66
 				},
 				"maxhealthByType": {
-					"*-surface": 14,
-					"*-deep": 19,
-					"*-tainted": 25,
-					"*-corrupt": 34,
-					"*-nightmare": 45,
-					"*-stilt": 45,
-					"*-bellhead": 66,
-					"*-deepsplit": 60
+					"*-surface": 17,
+					"*-deep": 22,
+					"*-tainted": 28,
+					"*-corrupt": 40,
+					"*-nightmare": 49,
+					"*-stilt": 52,
+					"*-bellhead": 71,
+					"*-deepsplit": 66
 				}
 			},
 			{
@@ -362,12 +362,12 @@
 						"entityCodes": [ "player" ],
 						"priority": 2,
 						"damageByType": {
-							"*-surface": 2.5,
-							"*-deep": 4,
-							"*-tainted": 8,
-							"*-corrupt": 12,
-							"*-nightmare": 20,
-							"*": 24
+							"*-surface": 3,
+							"*-deep": 4.2,
+							"*-tainted": 10,
+							"*-corrupt": 15,
+							"*-nightmare": 24,
+							"*": 30
 						},
 						"damageTierByType": {
 							"*-surface": 0,

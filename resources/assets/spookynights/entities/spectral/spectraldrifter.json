@@ -221,20 +221,20 @@
 			{
 				"code": "health",
 				"currenthealthByType": {
-					"*-normal": 12,
-					"*-deep": 16,
-					"*-tainted": 22,
-					"*-corrupt": 30,
-					"*-nightmare": 40,
-					"*-double-headed": 54
+					"*-normal": 15,
+					"*-deep": 20,
+					"*-tainted": 30,
+					"*-corrupt": 40,
+					"*-nightmare": 55,
+					"*-double-headed": 75
 				},
 				"maxhealthByType": {
-					"*-normal": 12,
-					"*-deep": 16,
-					"*-tainted": 22,
-					"*-corrupt": 30,
-					"*-nightmare": 40,
-					"*-double-headed": 54
+					"*-normal": 15,
+					"*-deep": 20,
+					"*-tainted": 30,
+					"*-corrupt": 40,
+					"*-nightmare": 55,
+					"*-double-headed": 75
 				}
 			},
 			{
@@ -320,12 +320,12 @@
 						"entityCodes": [ "player" ],
 						"priority": 2,
 						"damageByType": {
-							"*-normal": 2.5,
-							"*-deep": 4,
-							"*-tainted": 8,
-							"*-corrupt": 12,
-							"*-nightmare": 20,
-							"*-double-headed": 24
+							"*-normal": 3,
+							"*-deep": 5,
+							"*-tainted": 10,
+							"*-corrupt": 15,
+							"*-nightmare": 22,
+							"*-double-headed": 30
 						},
 						"damageTierByType": {
 							"*-normal": 0,

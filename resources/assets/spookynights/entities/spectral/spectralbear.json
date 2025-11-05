@@ -6,7 +6,7 @@
 	"variantgroups": [
 		{
 			"code": "type",
-			"states": [ "brown" ]
+			"states": [ "brown", "giant" ]
 		},
 		{
 			"code": "age",
@@ -70,7 +70,8 @@
 		},
 		"sizeByType": {
 			"*-male": 1.65,
-			"*-female": 1.35
+			"*-female": 1.35,
+			"*-giant-*-*": 2.2
 		},
 		"behaviors": [
 			{ "code": "ripharvestable" },
@@ -180,7 +181,10 @@
 			},
 			{
 				"code": "health",
-				"maxhealth": 84
+				"maxhealthByType": {
+					"*-brown-*-*": 80,
+					"*-giant-*-*": 160
+				}
 			},
 			{
 				"code": "floatupwhenstuck",
@@ -233,8 +237,14 @@
 						"code": "meleeattack",
 						"priority": 2,
 						"entityCodes": [ "player" ],
-						"damageTier": 2,
-						"damage": 12,
+						"damageTierByType": {
+							"*-brown-*-*": 2,
+							"*-giant-*-*": 4
+						},
+						"damageByType": {
+							"*-brown-*-*": 18,
+							"*-giant-*-*": 30
+						},
 						"damageType": "SlashingAttack",
 						"minDist": 2.5,
 						"minVerDist": 1.5,

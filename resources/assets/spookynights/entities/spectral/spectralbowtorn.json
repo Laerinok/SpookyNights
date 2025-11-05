@@ -190,20 +190,20 @@
 			{
 				"code": "health",
 				"currenthealthByType": {
-					"*-surface": 10,
-					"*-deep": 13,
-					"*-tainted": 18,
-					"*-corrupt": 25,
-					"*-nightmare": 32,
-					"*-gearfoot": 50
+					"*-surface": 12,
+					"*-deep": 18,
+					"*-tainted": 22,
+					"*-corrupt": 30,
+					"*-nightmare": 38,
+					"*-gearfoot": 60
 				},
 				"maxhealthByType": {
-					"*-surface": 10,
-					"*-deep": 13,
-					"*-tainted": 18,
-					"*-corrupt": 25,
-					"*-nightmare": 32,
-					"*-gearfoot": 50
+					"*-surface": 12,
+					"*-deep": 18,
+					"*-tainted": 22,
+					"*-corrupt": 30,
+					"*-nightmare": 38,
+					"*-gearfoot": 60
 				}
 			},
 			{
@@ -253,12 +253,12 @@
 						"entityCodes": [ "player" ],
 						"priority": 4,
 						"damageByType": {
-							"*-surface": 1.5,
-							"*-deep": 2.5,
-							"*-tainted": 5,
-							"*-corrupt": 7,
-							"*-nightmare": 12,
-							"*-gearfoot": 14
+							"*-surface": 2,
+							"*-deep": 3.5,
+							"*-tainted": 7,
+							"*-corrupt": 9,
+							"*-nightmare": 16,
+							"*-gearfoot": 20
 						},
 						"damageTierByType": {
 							"*-surface": 0,

@@ -251,7 +251,7 @@
 						"code": "meleeattack",
 						"entityCodes": [ "deer-*", "gazelle-*", "sheep-bighorn-baby-*", "goat-*", "player" ],
 						"priority": 2.1,
-						"damage": 8,
+						"damage": 10,
 						"damageTier": 2,
 						"damageType": "SlashingAttack",
 						"slot": 1,
