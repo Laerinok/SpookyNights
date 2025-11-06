@@ -1,6 +1,6 @@
 ﻿// In source/SpookyNightsModSystems.cs
 
-using SpookyNights; 
+using SpookyNights;
 using System;
 using System.Collections.Generic;
 using Vintagestory.API.Common;
@@ -14,7 +14,9 @@ namespace Spookynights
 {
     public sealed class SpookyNights : ModSystem
     {
-        public static ModConfig LoadedConfig { get; private set; } = default!;
+        public static ServerConfig ServerConf { get; private set; } = default!;
+        public static ClientConfig ClientConf { get; private set; } = default!;
+
         private ICoreAPI api = default!;
         private ICoreServerAPI sapi = default!;
         private List<string> spectralCreatureCodes = new List<string>();
@@ -22,56 +24,81 @@ namespace Spookynights
         public override void StartPre(ICoreAPI api)
         {
             this.api = api;
-            LoadAndMigrateConfig(api);
+
+            if (api.Side.IsServer())
+            {
+                LoadServerConfig(api);
+            }
+
+            if (api.Side.IsClient())
+            {
+                LoadClientConfig(api);
+            }
         }
 
-        private void LoadAndMigrateConfig(ICoreAPI api)
+        private void LoadServerConfig(ICoreAPI api)
         {
             try
             {
-                LoadedConfig = api.LoadModConfig<ModConfig>("spookynightsconfig.json");
-                if (LoadedConfig == null)
+                // Change is on the next line
+                ServerConf = api.LoadModConfig<ServerConfig>("spookynights-server.json");
+                if (ServerConf == null)
                 {
-                    LoadedConfig = new ModConfig();
-                    api.StoreModConfig(LoadedConfig, "spookynightsconfig.json");
+                    ServerConf = new ServerConfig();
+                    // And on the next line
+                    api.StoreModConfig(ServerConf, "spookynights-server.json");
                 }
                 else
                 {
-                    bool configUpdated = false;
-                    ModConfig defaultConfig = new ModConfig();
-                    foreach (var pair in defaultConfig.SpawnMultipliers)
+                    ServerConfig defaultConfig = new ServerConfig();
+                    if (ServerConf.Version != defaultConfig.Version)
                     {
-                        if (!LoadedConfig.SpawnMultipliers.ContainsKey(pair.Key))
-                        {
-                            LoadedConfig.SpawnMultipliers[pair.Key] = pair.Value;
-                            configUpdated = true;
-                        }
-                    }
-                    if (LoadedConfig.Version != defaultConfig.Version || configUpdated)
-                    {
-                        LoadedConfig.Version = defaultConfig.Version;
-                        api.StoreModConfig(LoadedConfig, "spookynightsconfig.json");
+                        // And on the next line
+                        api.StoreModConfig(ServerConf, "spookynights-server.json");
                     }
                 }
             }
             catch (Exception e)
             {
-                api.Logger.Error("[SpookyNights] Failed to load or create config file, using defaults: " + e.Message);
-                LoadedConfig = new ModConfig();
+                api.Logger.Error("[SpookyNights] Failed to load or create server config file, using defaults: " + e.Message);
+                ServerConf = new ServerConfig();
+            }
+        }
+
+        private void LoadClientConfig(ICoreAPI api)
+        {
+            try
+            {
+                ClientConf = api.LoadModConfig<ClientConfig>("spookynights-client.json");
+                if (ClientConf == null)
+                {
+                    ClientConf = new ClientConfig();
+                    api.StoreModConfig(ClientConf, "spookynights-client.json");
+                }
+            }
+            catch (Exception e)
+            {
+                api.Logger.Error("[SpookyNights] Failed to load or create client config file, using defaults: " + e.Message);
+                ClientConf = new ClientConfig();
             }
         }
 
         public override void AssetsFinalize(ICoreAPI api)
         {
-            if (LoadedConfig.EnableJackOLanternParticles) return;
-            string[] variants = { "north", "east", "south", "west" };
-            foreach (string variant in variants)
+            if (api.Side.IsClient())
             {
-                AssetLocation blockCode = new AssetLocation("spookynights", "jackolantern-" + variant);
-                Block block = api.World.GetBlock(blockCode);
-                if (block != null) { block.ParticleProperties = null; }
+                if (!ClientConf.EnableJackOLanternParticles)
+                {
+                    string[] variants = { "north", "east", "south", "west" };
+                    foreach (string variant in variants)
+                    {
+                        AssetLocation blockCode = new AssetLocation("spookynights", "jackolantern-" + variant);
+                        Block block = api.World.GetBlock(blockCode);
+                        if (block != null) { block.ParticleProperties = null; }
+                    }
+                    api.Logger.Debug("[SpookyNights] Particles for jack-o'-lanterns have been disabled via client config.");
+                }
             }
-            api.Logger.Debug("[SpookyNights] Particles for jack-o'-lanterns have been disabled via config.");
         }
 
         public override void Start(ICoreAPI api)
@@ -100,10 +127,10 @@ namespace Spookynights
 
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
-            if (sapi == null || !LoadedConfig.EnableCandyLoot) return;
+            if (sapi == null || !ServerConf.EnableCandyLoot) return;
             if (damageSource.SourceEntity is not EntityPlayer) return;
             string? matchedKey = null;
-            foreach (var key in LoadedConfig.CandyLootTable.Keys)
+            foreach (var key in ServerConf.CandyLootTable.Keys)
             {
                 if (WildcardUtil.Match(new AssetLocation(key), entity.Code))
                 {
@@ -112,7 +139,7 @@ namespace Spookynights
                 }
             }
             if (matchedKey == null) return;
-            if (LoadedConfig.CandyLootTable.TryGetValue(matchedKey, out string? lootConfigString))
+            if (ServerConf.CandyLootTable.TryGetValue(matchedKey, out string? lootConfigString))
             {
                 if (string.IsNullOrEmpty(lootConfigString)) return;
                 try
@@ -149,21 +176,21 @@ namespace Spookynights
 
             sapi.Logger.Debug("[SpookyNights] Game wants to spawn '{0}'. Checking our custom rules...", properties.Code);
 
-            if (LoadedConfig.UseTimeBasedSpawning)
+            if (ServerConf.UseTimeBasedSpawning)
             {
                 if (WildcardUtil.Match(new AssetLocation("spookynights:spectralbear-*"), properties.Code))
                 {
-                    if (LoadedConfig.BearSpawnConfig.Enabled)
+                    if (ServerConf.BearSpawnConfig.Enabled)
                     {
                         string currentMoonPhase = sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant();
-                        if (!LoadedConfig.BearSpawnConfig.AllowedMoonPhases.Contains(currentMoonPhase))
+                        if (!ServerConf.BearSpawnConfig.AllowedMoonPhases.Contains(currentMoonPhase))
                         {
                             sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': incorrect moon phase ('{1}').", properties.Code, currentMoonPhase);
                             return false;
                         }
                     }
                 }
-                if (LoadedConfig.SpawnOnlyAtNight)
+                if (ServerConf.SpawnOnlyAtNight)
                 {
                     float hour = sapi.World.Calendar.HourOfDay;
                     if (hour > 6 && hour < 20)
@@ -172,16 +199,16 @@ namespace Spookynights
                         return false;
                     }
                 }
-                if (LoadedConfig.AllowedSpawnMonths != null && LoadedConfig.AllowedSpawnMonths.Count > 0)
+                if (ServerConf.AllowedSpawnMonths != null && ServerConf.AllowedSpawnMonths.Count > 0)
                 {
                     int currentMonth = sapi.World.Calendar.Month;
-                    if (!LoadedConfig.AllowedSpawnMonths.Contains(currentMonth))
+                    if (!ServerConf.AllowedSpawnMonths.Contains(currentMonth))
                     {
                         sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': incorrect month ('{1}').", properties.Code, currentMonth);
                         return false;
                     }
                 }
-                if (LoadedConfig.SpawnOnlyOnLastDayOfMonth)
+                if (ServerConf.SpawnOnlyOnLastDayOfMonth)
                 {
                     int currentDay = (int)(sapi.World.Calendar.TotalDays % sapi.World.Calendar.DaysPerMonth) + 1;
                     int daysInMonth = sapi.World.Calendar.DaysPerMonth;
@@ -191,7 +218,7 @@ namespace Spookynights
                         return false;
                     }
                 }
-                if (LoadedConfig.SpawnOnlyOnLastDayOfWeek)
+                if (ServerConf.SpawnOnlyOnLastDayOfWeek)
                 {
                     const int daysInWeek = 7;
                     int currentDayOfWeek = (int)sapi.World.Calendar.TotalDays % daysInWeek;
@@ -207,7 +234,7 @@ namespace Spookynights
 
             float multiplier = 1.0f;
             bool foundMatch = false;
-            foreach (var pair in LoadedConfig.SpawnMultipliers)
+            foreach (var pair in ServerConf.SpawnMultipliers)
             {
                 if (WildcardUtil.Match(new AssetLocation(pair.Key), properties.Code))
                 {
@@ -247,7 +274,7 @@ namespace Spookynights
 
         private void OnDaylightCheck(float dt)
         {
-            if (!LoadedConfig.SpawnOnlyAtNight)
+            if (!ServerConf.SpawnOnlyAtNight)
             {
                 return;
             }

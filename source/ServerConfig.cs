@@ -1,8 +1,6 @@
-
-// In source/ModConfig.cs
+// In source/ServerConfig.cs
 
 using System.Collections.Generic;
-using Vintagestory.API.Common;
 
 namespace SpookyNights
 {
@@ -12,9 +10,9 @@ namespace SpookyNights
         public List<string> AllowedMoonPhases { get; set; } = new List<string>() { "full" };
     }
 
-    public class ModConfig
+    public class ServerConfig
     {
-        public string Version { get; set; } = "1.1.0";
+        public string Version { get; set; } = "1.0.0";
         public bool EnableCandyLoot { get; set; } = false;
         public Dictionary<string, string> CandyLootTable { get; set; }
         public Dictionary<string, float> SpawnMultipliers { get; set; }
@@ -24,11 +22,8 @@ namespace SpookyNights
         public bool SpawnOnlyOnLastDayOfMonth { get; set; } = false;
         public bool SpawnOnlyOnLastDayOfWeek { get; set; } = false;
         public BossSpawningConfig BearSpawnConfig { get; set; } = new BossSpawningConfig();
-        public bool EnableJackOLanternParticles { get; set; } = true;
 
-        // This is the constructor. It runs when "new ModConfig()" is called.
-        // We define all default collections here.
-        public ModConfig()
+        public ServerConfig()
         {
             CandyLootTable = new Dictionary<string, string>()
             {
@@ -53,7 +48,8 @@ namespace SpookyNights
                 { "spookynights:spectralbowtorn-nightmare", "0.65@3-5" },
                 { "spookynights:spectralbowtorn-gearfoot", "0.75@4-6" },
                 { "spookynights:spectralbear-brown-adult-*", "0.5@2-4" },
-                { "spookynights:spectralwolf-eurasian-adult-*", "0.3@1-2" }
+                { "spookynights:spectralwolf-eurasian-adult-*", "0.3@1-2" },
+                { "spookynights:spectralbear-giant-adult-*", "1.0@8-12" }
             };
 
             SpawnMultipliers = new Dictionary<string, float>()
