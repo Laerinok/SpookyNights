@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <!-- Mod info -->
   <PropertyGroup>
-    <ModName>spookynights</ModName>
+    <ModName>Spooky Nights</ModName>
     <ModType>code</ModType>
-    <ModVersion>0.2.0-dev.2</ModVersion>
+    <ModVersion>0.2.0</ModVersion>
     <ModId>spookynights</ModId>
-    <Description>A small overhaul mod for a special Halloween night. Enjoy the frights!</Description>
+    <Description>A small overhaul mod introducing spectral creatures that haunt the darkness. Experience the chilling presence of the unknown when the sun sets.</Description>
     <Side>universal</Side>
     <RequiredOnClient>true</RequiredOnClient>
     <RequiredOnServer>true</RequiredOnServer>
@@ -19,7 +19,7 @@
 
   <!-- Dependencies -->
   <ItemGroup>
-    <Dependencies Include="game" Version="*" />
+    <Dependencies Include="game" Version="1.21.5" />
   </ItemGroup>
 
   <!-- Project settings -->

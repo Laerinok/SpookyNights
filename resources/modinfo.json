@@ -2,9 +2,9 @@
   "type": "code",
   "modid": "spookynights",
   "name": "Spooky Nights",
-  "authors": ["Laerinok"],
-  "version": "0.2.0-dev.2",
-  "description": "A small overhaul mod for a special Halloween night. Enjoy the frights!",
+  "authors": [ "Laerinok" ],
+  "version": "0.2.0",
+  "description": "A small overhaul mod introducing spectral creatures that haunt the darkness. Experience the chilling presence of the unknown when the sun sets.",
   "side": "Universal",
-  "dependencies": {}
+  "dependencies": { "game": "1.21.5" }
 }

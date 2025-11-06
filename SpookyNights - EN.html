@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spooky Nights Mod Showcase</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fdfdfd;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h1, h2, h3 {
+            color: #d9534f; /* A Halloween orange color */
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+        }
+        .tagline {
+            text-align: center;
+            font-style: italic;
+            color: #777;
+            margin-bottom: 30px;
+        }
+        .feature-box {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        td.center {
+            text-align: center;
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .changelog {
+            background-color: #f9f9f9;
+            border-left: 4px solid #d9534f;
+            padding: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Spooky Nights</h1>
+    <p class="tagline">Halloween comes to your Vintage Story world!</p>
+
+    <p>Get ready for a unique and thrilling gameplay experience with <strong>Spooky Nights</strong>, the mod that turns your world into a real Halloween playground! Specters are coming, and most importantly, monsters now hide delicious treats with surprising powers. Will you be brave enough to face the darkness and collect the sweet loot?</p>
+
+    <h2>Main Features</h2>
+    
+    <div class="feature-box">
+        <h3>New Spectral Creatures</h3>
+        <p>The world of Vintage Story will never be the same at night! Spectral versions of familiar creatures appear, emitting a sinister, colorful glow in the dark. Thanks to the v0.2 overhaul, these are no longer simple variations, but <strong>entirely new entities</strong> with their own characteristics.</p>
+        <ul>
+            <li>Spectral Drifters (Surface, Deep, Tainted, Corrupt, Nightmare, Double-headed)</li>
+            <li>Spectral Bow-Torns (Surface, Deep, Tainted, Corrupt, Nightmare, Gearfoot)</li>
+            <li>Spectral Shivers (Surface, Deep, Tainted, Corrupt, Nightmare, Bellhead, Deepsplit, Stilt)</li>
+            <li>Spectral Wolves and Bears (including a mini-boss, the Giant Bear)</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Halloween Candies with Unique Powers</h3>
+        <p>The candy loot system is <strong>disabled by default</strong> now that Halloween is over, in order to be reworked and rebalanced. However, you can easily re-enable it via the <code>EnableCandyLoot</code> option in the mod's config file!</p>
+        <ul>
+            <li><strong>Mummy (Common):</strong> Restores <strong>40 satiety</strong>.</li>
+            <li><strong>Spider Gummy (Uncommon):</strong> A very nourishing treat that restores <strong>60 satiety</strong>.</li>
+            <li><strong>Ghostly Caramel (Uncommon+):</strong> Restores <strong>40 satiety</strong> and instantly heals <strong>0.5 health</strong>.</li>
+            <li><strong>Vampire Fangs (Rare):</strong> Restores <strong>40 satiety</strong> and heals <strong>1 health</strong>.</li>
+            <li><strong>Shadow Cube (Very Rare):</strong> No effect for now. Once the candy system is reworked, it will grant a random effect (buff or debuff).</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Full Customization via Configuration</h3>
+        <p>With version 0.2, a comprehensive configuration file has been added to allow you to tailor the mod to your playstyle. You can now:</p>
+        <ul>
+            <li>Enable or disable the candy loot system (<code>CandyLoot</code>).</li>
+            <li>Fine-tune creature spawn rates and loot tables.</li>
+            <li>Enable or disable the time-based spectral creature spawn system.</li>
+            <li>Choose the spawn period.</li>
+            <li>Enable or disable the decorative smoke from Jack O' Lanterns.</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>Crafting and Decorations</h3>
+        <p>To make your base as festive as the rest of the world!</p>
+        <ul>
+            <li><strong>Jack O' Lantern:</strong> The essential Halloween decoration! A carved pumpkin that emits light, craftable via a recipe.</li>
+            <li><strong>Spiderweb:</strong> The game's spiderweb block is now craftable with 4 flax fibers and 1 flax twine.</li>
+        </ul>
+    </div>
+
+    <h2>Candy Hunting Guide</h2>
+    <p>Candies aren't found just anywhere! Only <strong>spectral creatures</strong> drop these precious treats. The more dangerous the monster, the better your chances of getting rare candies!</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Entities & Difficulty Level</th>
+                <th class="center">Mummy (Common)</th>
+                <th class="center">Spider Gummy (Uncommon)</th>
+                <th class="center">Ghostly Caramel (Uncommon+)</th>
+                <th class="center">Vampire Fangs (Rare)</th>
+                <th class="center">Shadow Cube (Very Rare)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Tier 1</strong><br>(Normal, Surface)</td>
+                <td class="center">~80%</td>
+                <td class="center">~20%</td>
+                <td class="center">~15%</td>
+                <td class="center">~8%</td>
+                <td class="center">~5%</td>
+            </tr>
+            <tr>
+                <td><strong>Tier 2</strong><br>(Deep, Tainted)</td>
+                <td class="center">100% (1-2)</td>
+                <td class="center">~50%</td>
+                <td class="center">~30%</td>
+                <td class="center">~15%</td>
+                <td class="center">~10%</td>
+            </tr>
+            <tr>
+                <td><strong>Tier 3</strong><br>(Corrupt, Nightmare)</td>
+                <td class="center">100% (2)</td>
+                <td class="center">~80%</td>
+                <td class="center">~60%</td>
+                <td class="center">~25%</td>
+                <td class="center">~30%</td>
+            </tr>
+            <tr>
+                <td><strong>Tier 4 (Elites)</strong><br>(Double-headed, etc.)</td>
+                <td class="center">100% (3-4)</td>
+                <td class="center">100% (2)</td>
+                <td class="center">~75%</td>
+                <td class="center">~50%</td>
+                <td class="center">~40%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Roadmap (Upcoming Updates)</h2>
+    <div class="feature-box">
+        <p>The development of <strong>Spooky Nights</strong> continues! Here is a preview of what is planned for the next major updates (potentially v1.0.0):</p>
+        <ul>
+            <li><strong>New Hunting Mechanic:</strong> To make specter hunting more engaging, you will be able to craft <strong>special weapons</strong> that are much more effective against spectral creatures.</li>
+            <li><strong>Loot System Overhaul:</strong> The current loot (mostly gears) will be completely rethought. The goal is to provide unique and useful rewards that will fully justify hunting spectral entities, beyond the Halloween season.</li>
+        </ul>
+    </div>
+
+    <h2>Latest Updates</h2>
+    <div class="changelog">
+<strong>v0.2.0 (2025-11-06)</strong>
+- Added: Configuration file for advanced mod customization.
+- Added: Spectral creatures are now unique entities, not just patches on vanilla mobs.
+- Added: Option to enable/disable pumpkin smoke via config.
+- Added: Option to enable/disable the CandyLoot system via config.
+- Changed: Overhauled the loot system.
+- Changed: Overhauled the spawn system (now based on a defined period).
+
+<strong>v0.2-dev1 (2025-10-31)</strong>
+- added: New Candy Bag Interaction: You now hold the right mouse button to open a candy bag.
+- added: Patch for remapping candy and candybag items. All old candybags cannot be remapped to new candybag, so you SHOULD OPEN THEM before if you don't want to lose them.
+- changed: Candy Bag Rework: All previous candy bag variants have been merged into a single, generic candybag item. Each bag now drops a random amount (1-3) of a random candy type upon being opened.
+    </div>
+
+</body>
+</html>

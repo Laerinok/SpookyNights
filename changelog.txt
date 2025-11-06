@@ -1,9 +1,10 @@
-v0.2 
-- fichier config
-- fumée citrouille (ON/OFF)
-- candyloot ON/OFF
-- loot-overhaul
-- spawn-overhaul
+v0.2.0 2025-11-06
+- Added: Configuration file for advanced mod customization.
+- Added: Spectral creatures are now unique entities, not just patches on vanilla mobs.
+- Added: Option to enable/disable pumpkin smoke via config.
+- Added: Option to enable/disable the CandyLoot system via config.
+- Changed: Overhauled the loot system.
+- Changed: Overhauled the spawn system (now based on a defined period).
 
 v0.2-dev1 2025-10-31
 - added: New Candy Bag Interaction: You now hold the right mouse button to open a candy bag.
