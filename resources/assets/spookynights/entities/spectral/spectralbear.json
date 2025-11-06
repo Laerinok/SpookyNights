@@ -273,7 +273,10 @@
 							"*-giant-*-male": 3
 						},
 						"damageType": "SlashingAttack",
-						"minDist": 2.5,
+						"minDistByType": {
+							"*-brown-*-*": 3.0,
+							"*-giant-*-male": 3.5
+						},
 						"minVerDist": 1.5,
 						"slot": 1,
 						"mincooldown": 1500,
