@@ -1,24 +1,18 @@
 ﻿// In source/SpookyNightsModSystems.cs
 
-using SpookyNights; // We keep this to access ConfigManager
+using SpookyNights;
 using System;
 using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
-using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
-
-// Note: using Newtonsoft.Json.Linq; is no longer needed here.
 
 namespace Spookynights
 {
     public sealed class SpookyNights : ModSystem
     {
-        // The config properties are now in ConfigManager.
-        // We can remove them from this file.
-
         private ICoreAPI api = default!;
         private ICoreServerAPI sapi = default!;
         private List<string> spectralCreatureCodes = new List<string>();
@@ -26,27 +20,14 @@ namespace Spookynights
         public override void StartPre(ICoreAPI api)
         {
             this.api = api;
-
-            // The logic is now neatly encapsulated in the ConfigManager.
-            if (api.Side.IsServer())
-            {
-                ConfigManager.LoadServerConfig(api);
-            }
-
-            if (api.Side.IsClient())
-            {
-                ConfigManager.LoadClientConfig(api);
-            }
+            if (api.Side.IsServer()) { ConfigManager.LoadServerConfig(api); }
+            if (api.Side.IsClient()) { ConfigManager.LoadClientConfig(api); }
         }
-
-        // The LoadServerConfig and LoadClientConfig methods are now
-        // in ConfigManager and can be completely removed from this file.
 
         public override void AssetsFinalize(ICoreAPI api)
         {
             if (api.Side.IsClient())
             {
-                // We now access the client config via ConfigManager.ClientConf
                 if (ConfigManager.ClientConf != null && !ConfigManager.ClientConf.EnableJackOLanternParticles)
                 {
                     string[] variants = { "north", "east", "south", "west" };
@@ -74,20 +55,12 @@ namespace Spookynights
             api.Event.OnEntityDeath += OnEntityDeath;
             api.Event.OnTrySpawnEntity += OnTrySpawnEntity;
 
-            spectralCreatureCodes = new List<string>
-            {
-                "spectraldrifter",
-                "spectralbowtorn",
-                "spectralshiver",
-                "spectralwolf",
-                "spectralbear"
-            };
+            spectralCreatureCodes = new List<string> { "spectraldrifter", "spectralbowtorn", "spectralshiver", "spectralwolf", "spectralbear" };
             api.Event.RegisterGameTickListener(OnDaylightCheck, 5000);
         }
 
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
-            // All references to ServerConf are now prefixed with ConfigManager.
             if (sapi == null || ConfigManager.ServerConf == null || !ConfigManager.ServerConf.EnableCandyLoot) return;
             if (damageSource.SourceEntity is not EntityPlayer) return;
             string? matchedKey = null;
@@ -113,13 +86,8 @@ namespace Spookynights
                     int max = (quantityParts.Length > 1) ? int.Parse(quantityParts[1]) : min;
                     int amount = sapi.World.Rand.Next(min, max + 1);
                     if (amount <= 0) return;
-                    AssetLocation candyBagCode = new AssetLocation("spookynights", "candybag");
-                    Item? candyBagItem = sapi.World.GetItem(candyBagCode);
-                    if (candyBagItem != null)
-                    {
-                        ItemStack stack = new ItemStack(candyBagItem, amount);
-                        sapi.World.SpawnItemEntity(stack, entity.ServerPos.XYZ);
-                    }
+                    ItemStack stack = new ItemStack(sapi.World.GetItem(new AssetLocation("spookynights", "candybag")), amount);
+                    sapi.World.SpawnItemEntity(stack, entity.ServerPos.XYZ);
                 }
                 catch (Exception e)
                 {
@@ -130,13 +98,9 @@ namespace Spookynights
 
         private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
         {
-            if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights")
-            {
-                return true;
-            }
+            if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights") { return true; }
 
             sapi.Logger.Debug("[SpookyNights] Game wants to spawn '{0}'. Checking our custom rules...", properties.Code);
-
             bool isHandledAsBoss = false;
 
             if (ConfigManager.ServerConf.UseTimeBasedSpawning)
@@ -176,13 +140,28 @@ namespace Spookynights
 
                     if (ConfigManager.ServerConf.SpawnOnlyAtNight)
                     {
-                        float hour = sapi.World.Calendar.HourOfDay;
-                        if (hour > 6 && hour < 20)
+                        bool isDarkEnough;
+                        if (string.Equals(ConfigManager.ServerConf.NightTimeMode, "Manual", StringComparison.OrdinalIgnoreCase))
                         {
-                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': it's daytime.", properties.Code);
+                            float hour = sapi.World.Calendar.HourOfDay;
+                            float start = ConfigManager.ServerConf.NightStartHour;
+                            float end = ConfigManager.ServerConf.NightEndHour;
+                            if (start > end) { isDarkEnough = hour >= start || hour < end; }
+                            else { isDarkEnough = hour >= start && hour < end; }
+                        }
+                        else // Auto mode
+                        {
+                            int lightLevel = sapi.World.BlockAccessor.GetLightLevel(spawnPosition.AsBlockPos, EnumLightLevelType.MaxLight);
+                            isDarkEnough = lightLevel <= ConfigManager.ServerConf.LightLevelThreshold;
+                        }
+
+                        if (!isDarkEnough)
+                        {
+                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not dark enough.", properties.Code);
                             return false;
                         }
                     }
+
                     if (ConfigManager.ServerConf.AllowedSpawnMonths != null && ConfigManager.ServerConf.AllowedSpawnMonths.Count > 0)
                     {
                         int currentMonth = sapi.World.Calendar.Month;
@@ -195,8 +174,7 @@ namespace Spookynights
                     if (ConfigManager.ServerConf.SpawnOnlyOnLastDayOfMonth)
                     {
                         int currentDay = (int)(sapi.World.Calendar.TotalDays % sapi.World.Calendar.DaysPerMonth) + 1;
-                        int daysInMonth = sapi.World.Calendar.DaysPerMonth;
-                        if (currentDay != daysInMonth)
+                        if (currentDay != sapi.World.Calendar.DaysPerMonth)
                         {
                             sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not the last day of the month.", properties.Code);
                             return false;
@@ -216,7 +194,6 @@ namespace Spookynights
             }
 
             sapi.Logger.Debug("[SpookyNights] Time checks PASSED for '{0}'. Now checking multiplier...", properties.Code);
-
             float multiplier = 1.0f;
             bool foundMatch = false;
             foreach (var pair in ConfigManager.ServerConf.SpawnMultipliers)
@@ -229,11 +206,7 @@ namespace Spookynights
                 }
             }
 
-            if (!foundMatch)
-            {
-                sapi.Logger.Debug("[SpookyNights] ALLOWING spawn for '{0}': no multiplier found, defaulting to allow.", properties.Code);
-                return true;
-            }
+            if (!foundMatch) { return true; }
 
             if (!isHandledAsBoss && !ConfigManager.ServerConf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant() == "full")
             {
@@ -241,36 +214,24 @@ namespace Spookynights
                 multiplier *= ConfigManager.ServerConf.FullMoonSpawnMultiplier;
             }
 
-            if (multiplier <= 0)
-            {
-                sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': multiplier is {1}.", properties.Code, multiplier);
-                return false;
-            }
+            if (multiplier <= 0) { return false; }
+            if (multiplier >= 1) { return true; }
+            if (sapi.World.Rand.NextDouble() > multiplier) { return false; }
 
-            if (multiplier >= 1)
-            {
-                sapi.Logger.Debug("[SpookyNights] ALLOWING spawn for '{0}': multiplier is {1}.", properties.Code, multiplier);
-                return true;
-            }
-
-            if (sapi.World.Rand.NextDouble() > multiplier)
-            {
-                sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': failed chance roll with multiplier {1}.", properties.Code, multiplier);
-                return false;
-            }
-
-            sapi.Logger.Debug("[SpookyNights] ALLOWING spawn for '{0}': passed chance roll with multiplier {1}.", properties.Code);
             return true;
         }
 
         private void OnDaylightCheck(float dt)
         {
-            if (ConfigManager.ServerConf == null || !ConfigManager.ServerConf.SpawnOnlyAtNight)
-            {
-                return;
-            }
+            if (ConfigManager.ServerConf == null || !ConfigManager.ServerConf.SpawnOnlyAtNight) { return; }
 
-            bool isDayTime = sapi.World.Calendar.HourOfDay > 6 && sapi.World.Calendar.HourOfDay < 20;
+            float hour = sapi.World.Calendar.HourOfDay;
+            float start = ConfigManager.ServerConf.NightStartHour;
+            float end = ConfigManager.ServerConf.NightEndHour;
+
+            bool isDayTime;
+            if (start > end) { isDayTime = hour >= end && hour < start; }
+            else { isDayTime = hour < start || hour >= end; }
 
             if (isDayTime)
             {
@@ -278,7 +239,12 @@ namespace Spookynights
                 {
                     if (IsSpectralCreature(entity.Code))
                     {
-                        entity.Die(EnumDespawnReason.Expire);
+                        // FINAL AND DEFINITIVE CORRECTION based on the user-provided documentation.
+                        // "Will get you sunlight * sunbrightness" - This is exactly what's needed.
+                        if (sapi.World.BlockAccessor.GetLightLevel(entity.ServerPos.AsBlockPos, EnumLightLevelType.TimeOfDaySunLight) > 0)
+                        {
+                            entity.Die(EnumDespawnReason.Expire);
+                        }
                     }
                 }
             }
@@ -286,17 +252,10 @@ namespace Spookynights
 
         private bool IsSpectralCreature(AssetLocation entityCode)
         {
-            if (entityCode == null || entityCode.Domain != "spookynights")
-            {
-                return false;
-            }
-
+            if (entityCode == null || entityCode.Domain != "spookynights") { return false; }
             foreach (var code in spectralCreatureCodes)
             {
-                if (entityCode.Path.StartsWith(code))
-                {
-                    return true;
-                }
+                if (entityCode.Path.StartsWith(code)) { return true; }
             }
             return false;
         }

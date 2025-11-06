@@ -72,31 +72,34 @@ namespace Spookynights
                 if (loadedObject == null)
                 {
                     api.Logger.Notification("[SpookyNights] Server config file not found. Creating a new one with default values.");
-                    ServerConf = GetDefaultServerConfig(); // Use our new method to get a fully populated config
+                    ServerConf = GetDefaultServerConfig();
                     api.StoreModConfig(ServerConf, "spookynights-server.json");
                     return;
                 }
 
-                var defaultConfig = new ServerConfig(); // This is just for getting the version number
+                var defaultConfig = new ServerConfig();
                 string? loadedVersion = loadedObject.ContainsKey("Version") ? loadedObject["Version"]?.ToString() : null;
 
                 if (defaultConfig.Version != loadedVersion)
                 {
                     api.Logger.Notification("[SpookyNights] Old server config version detected. Migrating...");
                     var oldConfig = loadedObject.ToObject<ServerConfig>()!;
-
-                    // Start with a new, fully populated default config
                     var newConfig = GetDefaultServerConfig();
 
-                    // Now, overwrite the defaults with the user's saved values
                     newConfig.EnableCandyLoot = oldConfig.EnableCandyLoot;
                     newConfig.CandyLootTable = oldConfig.CandyLootTable;
                     newConfig.SpawnMultipliers = oldConfig.SpawnMultipliers;
                     newConfig.UseTimeBasedSpawning = oldConfig.UseTimeBasedSpawning;
                     newConfig.SpawnOnlyAtNight = oldConfig.SpawnOnlyAtNight;
+                    newConfig.NightTimeMode = oldConfig.NightTimeMode;
+                    newConfig.NightStartHour = oldConfig.NightStartHour;
+                    newConfig.NightEndHour = oldConfig.NightEndHour;
+                    newConfig.LightLevelThreshold = oldConfig.LightLevelThreshold;
                     newConfig.AllowedSpawnMonths = oldConfig.AllowedSpawnMonths;
                     newConfig.SpawnOnlyOnLastDayOfMonth = oldConfig.SpawnOnlyOnLastDayOfMonth;
                     newConfig.SpawnOnlyOnLastDayOfWeek = oldConfig.SpawnOnlyOnLastDayOfWeek;
+                    newConfig.SpawnOnlyOnFullMoon = oldConfig.SpawnOnlyOnFullMoon;
+                    newConfig.FullMoonSpawnMultiplier = oldConfig.FullMoonSpawnMultiplier;
                     newConfig.Bosses = oldConfig.Bosses;
 
                     api.StoreModConfig(newConfig, "spookynights-server.json");
@@ -111,13 +114,12 @@ namespace Spookynights
             catch (Exception e)
             {
                 api.Logger.Error("[SpookyNights] CRITICAL ERROR loading or migrating server config. Falling back to default settings. Details: " + e.Message);
-                ServerConf = GetDefaultServerConfig(); // Fallback to defaults in case of error
+                ServerConf = GetDefaultServerConfig();
             }
         }
 
         public static void LoadClientConfig(ICoreAPI api)
         {
-            // This method remains correct because ClientConfig constructor is already empty.
             try
             {
                 var loadedObject = api.LoadModConfig<JObject>("spookynights-client.json");

@@ -4,7 +4,7 @@ namespace SpookyNights
 {
     public class ClientConfig
     {
-        public string Version { get; set; } = "1.1.0";
+        public string Version { get; set; } = "1.3.0";
         public bool EnableJackOLanternParticles { get; set; } = true;
 
         public ClientConfig() { }
