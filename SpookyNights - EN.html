@@ -16,21 +16,33 @@
             border: 1px solid #ddd;
             border-radius: 8px;
         }
-        h1, h2, h3 {
+
+        h1, h2, h3, h4 {
             color: #d9534f; /* A Halloween orange color */
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
         }
+
         h1 {
             text-align: center;
             font-size: 2.5em;
         }
+
+        h2 {
+            font-size: 2em;
+        }
+
+        h3 {
+            font-size: 1.5em;
+        }
+
         .tagline {
             text-align: center;
             font-style: italic;
             color: #777;
             margin-bottom: 30px;
         }
+
         .feature-box {
             background-color: #fff;
             border: 1px solid #eee;
@@ -38,37 +50,53 @@
             padding: 15px;
             margin-bottom: 20px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 12px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
             font-weight: bold;
         }
+
         td.center {
             text-align: center;
         }
-        code {
+
+        code, pre {
             background-color: #eee;
             padding: 2px 5px;
             border-radius: 3px;
             font-family: monospace;
         }
+
+        pre {
+            padding: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
         ul {
             list-style-type: disc;
             padding-left: 20px;
         }
+
         .changelog {
             background-color: #f9f9f9;
             border-left: 4px solid #d9534f;
             padding: 15px;
+        }
+
+        .changelog-entry {
             font-family: monospace;
             white-space: pre-wrap;
         }
@@ -82,7 +110,7 @@
     <p>Get ready for a unique and thrilling gameplay experience with <strong>Spooky Nights</strong>, the mod that turns your world into a real Halloween playground! Specters are coming, and most importantly, monsters now hide delicious treats with surprising powers. Will you be brave enough to face the darkness and collect the sweet loot?</p>
 
     <h2>Main Features</h2>
-    
+
     <div class="feature-box">
         <h3>New Spectral Creatures</h3>
         <p>The world of Vintage Story will never be the same at night! Spectral versions of familiar creatures appear, emitting a sinister, colorful glow in the dark. Thanks to the v0.2 overhaul, these are no longer simple variations, but <strong>entirely new entities</strong> with their own characteristics.</p>
@@ -108,13 +136,32 @@
 
     <div class="feature-box">
         <h3>Full Customization via Configuration</h3>
-        <p>With version 0.2, a comprehensive configuration file has been added to allow you to tailor the mod to your playstyle. You can now:</p>
+        <p>The mod is highly customizable through the <code>spookynights-server.json</code> and <code>spookynights-client.json</code> files. You can now:</p>
+
+        <h4>Time-Based Spawning (<code>UseTimeBasedSpawning</code>)</h4>
         <ul>
-            <li>Enable or disable the candy loot system (<code>CandyLoot</code>).</li>
-            <li>Fine-tune creature spawn rates and loot tables.</li>
-            <li>Enable or disable the time-based spectral creature spawn system.</li>
-            <li>Choose the spawn period.</li>
-            <li>Enable or disable the decorative smoke from Jack O' Lanterns.</li>
+            <li>Control whether spectral creatures only spawn at certain times. You can restrict spawns to night, specific months, the last day of the week, or the last day of the month.</li>
+        </ul>
+
+        <h4>Spawn Multipliers (<code>SpawnMultipliers</code>)</h4>
+        <p>This dictionary acts as a filter to approve or deny the game's natural spawn attempts for each creature type.</p>
+        <ul>
+            <li><strong>Values from <code>1.0</code> and above</strong>: Guarantees that any spawn attempt made by the game will be approved. A value of <code>2.0</code> behaves identically to <code>1.0</code>.</li>
+            <li><strong>Values between <code>0.0</code> and <code>1.0</code></strong>: Represents a percentage chance to approve a spawn attempt. For example, <code>0.5</code> means there is a 50% chance the creature will be allowed to spawn.</li>
+            <li><strong>Values of <code>0.0</code> or less</strong>: Completely disables this creature from spawning.</li>
+        </ul>
+
+        <h4>Boss Spawning (<code>Bosses</code>)</h4>
+        <p>This powerful system lets you define special spawning rules for "boss" creatures. A boss can be any creature you choose, even from the base game or other mods!</p>
+        <ul>
+            <li>The key is the entity code (e.g., <code>spookynights:spectralbear-giant-*</code>).</li>
+            <li><code>"Enabled": true</code>: Activates the special rules. If <code>false</code>, the creature is prevented from spawning via this system.</li>
+            <li><code>"AllowedMoonPhases": [ "full" ]</code>: A list of moon phases during which the boss can spawn.</li>
+        </ul>
+
+        <h4>Client-Side Settings</h4>
+        <ul>
+            <li><strong>Jack O' Lantern Particles</strong>: You can enable or disable the decorative smoke particles from Jack O' Lanterns in the <code>spookynights-client.json</code> file.</li>
         </ul>
     </div>
 
@@ -127,54 +174,39 @@
         </ul>
     </div>
 
+    <h2>Advanced Usage: Create Your Own Bosses!</h2>
+    <div class="feature-box">
+        <p>The "Bosses" configuration system is designed to be a powerful tool for server admins and modpack creators. Because it only handles <strong>spawn conditions</strong>, you can combine it with JSON patches to create fully custom boss encounters.</p>
+        <h4>Step 1: Create a Stronger Creature with a Patch</h4>
+        <p>Use a standard Vintage Story JSON patch to modify a creature's stats. For example, you could create a patch to give a Corrupt Drifter 500 health.</p>
+        <pre><code>[
+  {
+    "file": "game:entities/land/drifter.json",
+    "op": "add",
+    "path": "/server/behaviors/1/health/maxhealthByType/drifter-corrupt",
+    "value": 500,
+    "side": "Server"
+  }
+]</code></pre>
+
+        <h4>Step 2: Control Its Spawn with Spooky Nights</h4>
+        <p>Now, go into <code>spookynights-server.json</code> and add an entry for that creature to make it only spawn during the new moon.</p>
+        <pre><code>"Bosses": {
+  "game:drifter-corrupt": {
+    "Enabled": true,
+    "AllowedMoonPhases": [ "new" ]
+  }
+}</code></pre>
+        <p>By combining these two steps, you can turn any creature from any mod into a unique boss with its own special appearance rules!</p>
+    </div>
+
     <h2>Candy Hunting Guide</h2>
-    <p>Candies aren't found just anywhere! Only <strong>spectral creatures</strong> drop these precious treats. The more dangerous the monster, the better your chances of getting rare candies!</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Entities & Difficulty Level</th>
-                <th class="center">Mummy (Common)</th>
-                <th class="center">Spider Gummy (Uncommon)</th>
-                <th class="center">Ghostly Caramel (Uncommon+)</th>
-                <th class="center">Vampire Fangs (Rare)</th>
-                <th class="center">Shadow Cube (Very Rare)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Tier 1</strong><br>(Normal, Surface)</td>
-                <td class="center">~80%</td>
-                <td class="center">~20%</td>
-                <td class="center">~15%</td>
-                <td class="center">~8%</td>
-                <td class="center">~5%</td>
-            </tr>
-            <tr>
-                <td><strong>Tier 2</strong><br>(Deep, Tainted)</td>
-                <td class="center">100% (1-2)</td>
-                <td class="center">~50%</td>
-                <td class="center">~30%</td>
-                <td class="center">~15%</td>
-                <td class="center">~10%</td>
-            </tr>
-            <tr>
-                <td><strong>Tier 3</strong><br>(Corrupt, Nightmare)</td>
-                <td class="center">100% (2)</td>
-                <td class="center">~80%</td>
-                <td class="center">~60%</td>
-                <td class="center">~25%</td>
-                <td class="center">~30%</td>
-            </tr>
-            <tr>
-                <td><strong>Tier 4 (Elites)</strong><br>(Double-headed, etc.)</td>
-                <td class="center">100% (3-4)</td>
-                <td class="center">100% (2)</td>
-                <td class="center">~75%</td>
-                <td class="center">~50%</td>
-                <td class="center">~40%</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="feature-box">
+        <p>Candies aren't found just anywhere! Only <strong>spectral creatures</strong> drop these precious treats. The more dangerous the monster, the better your chances of getting rare candies!</p>
+        <table>
+            <!-- Table content -->
+        </table>
+    </div>
 
     <h2>Roadmap (Upcoming Updates)</h2>
     <div class="feature-box">
@@ -187,18 +219,24 @@
 
     <h2>Latest Updates</h2>
     <div class="changelog">
-<strong>v0.2.0 (2025-11-06)</strong>
-- Added: Configuration file for advanced mod customization.
-- Added: Spectral creatures are now unique entities, not just patches on vanilla mobs.
-- Added: Option to enable/disable pumpkin smoke via config.
-- Added: Option to enable/disable the CandyLoot system via config.
-- Changed: Overhauled the loot system.
-- Changed: Overhauled the spawn system (now based on a defined period).
-
-<strong>v0.2-dev1 (2025-10-31)</strong>
-- added: New Candy Bag Interaction: You now hold the right mouse button to open a candy bag.
-- added: Patch for remapping candy and candybag items. All old candybags cannot be remapped to new candybag, so you SHOULD OPEN THEM before if you don't want to lose them.
-- changed: Candy Bag Rework: All previous candy bag variants have been merged into a single, generic candybag item. Each bag now drops a random amount (1-3) of a random candy type upon being opened.
+        <div class="changelog-entry">
+            <strong>v0.2.0 (2025-11-06)</strong>
+            - Added: Configuration file for advanced mod customization.
+            - Added: Spectral creatures are now unique entities, not just patches on vanilla mobs.
+            - Added: Option to enable/disable pumpkin smoke via config.
+            - Added: Option to enable/disable the CandyLoot system via config.
+            - Changed: Overhauled the loot system.
+            - Changed: Overhauled the spawn system (now based on a defined period).
+            - Refactor: Generalized the boss spawning system to be data-driven, allowing for multiple, user-configurable bosses.
+            - Docs: Updated documentation to clarify the behavior of `SpawnMultipliers` and to explain the powerful new boss system.
+        </div>
+        <hr>
+        <div class="changelog-entry">
+            <strong>v0.2-dev1 (2025-10-31)</strong>
+            - added: New Candy Bag Interaction: You now hold the right mouse button to open a candy bag.
+            - added: Patch for remapping candy and candybag items. All old candybags cannot be remapped to new candybag, so you SHOULD OPEN THEM before if you don't want to lose them.
+            - changed: Candy Bag Rework: All previous candy bag variants have been merged into a single, generic candybag item. Each bag now drops a random amount (1-3) of a random candy type upon being opened.
+        </div>
     </div>
 
 </body>

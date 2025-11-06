@@ -53,29 +53,48 @@ This file controls the game's logic and rules. In single-player mode, you are yo
 *   `"SpawnOnlyOnLastDayOfWeek": false`
     If `true`, creatures will only spawn on the last day of the week (which is 7 days long in-game).
 
-#### Bear (Boss) Spawning
+### Boss Spawning
 
-*   `"BearSpawnConfig"`
-    Controls the spawning of spectral Giant Bear.
-    *   `"Enabled": true`: Enables (`true`) or disables (`false`) the special rules for bears.
-    *   `"AllowedMoonPhases": [ "full" ]`: A list of moon phases during which spectral bears are allowed to spawn.
-        *   Possible phases: `"new"`, `"waxingcrescent"`, `"firstquarter"`, `"waxinggibbous"`, `"full"`, `"waninggibbous"`, `"thirdquarter"`, `"waningcrescent"`.
+*   `"Bosses"`
+    Controls special spawning rules for creatures designated as bosses. This is an object where each key is the entity code of a boss (wildcards `*` are supported), and the value contains its specific spawning rules.
+
+    *   **Example Key**: `"spookynights:spectralbear-giant-*"`
+        This key targets the giant spectral bear. Inside this key, you define its specific rules:
+        *   `"Enabled": true`: Enables (`true`) or disables (`false`) the special rules for this specific boss. If set to `false`, this boss will be prevented from spawning by this system.
+        *   `"AllowedMoonPhases": [ "full" ]`: A list of moon phases during which this boss is allowed to spawn. If the list is empty, the moon phase check is ignored for this boss.
+            *   Possible phases: `"new"`, `"waxingcrescent"`, `"firstquarter"`, `"waxinggibbous"`, `"full"`, `"waninggibbous"`, `"thirdquarter"`, `"waningcrescent"`.
+
+#### Example Configuration
+
+You can add multiple entries to the `"Bosses"` object to configure different bosses, each with their own set of rules.
+
+```json
+"Bosses": {
+  "spookynights:spectralbear-giant-*": {
+    "Enabled": true,
+    "AllowedMoonPhases": [
+      "full"
+    ]
+  },
+  "spookynights:some-other-future-boss-*": {
+    "Enabled": true,
+    "AllowedMoonPhases": [
+      "new",
+      "waningcrescent"
+    ]
+  }
+}
+```
+
 
 #### Spawn Multipliers (`SpawnMultipliers`)
 
-This dictionary controls the spawn frequency of each creature type.
-*   `1.0`: Normal frequency (100% of base chance).
-*   `0.5`: Half frequency (50% chance).
-*   `2.0`: Double frequency (200% chance).
-*   `0.0`: Completely disables this creature from spawning.
+This dictionary acts as a filter to approve or deny the game's natural spawn attempts for each creature type.
 
-*Example:*
-```json
-"SpawnMultipliers": {
-  "spookynights:spectralwolf-*": 0.5,  // Wolves are twice as rare
-  "spookynights:spectralbear-*": 0.0   // Bears will never spawn
-}
-```
+*   **Values from `1.0` and above**: Guarantees that any spawn attempt made by the game will be approved. A value of `2.0` behaves identically to `1.0`. This is the default behavior.
+*   **Values between `0.0` and `1.0`**: Represents a percentage chance to approve a spawn attempt. For example, `0.5` means there is a 50% chance the creature will be allowed to spawn when the game tries.
+*   **Values of `0.0` or less**: Completely disables this creature from spawning by denying all spawn attempts
+
 
 #### Loot Table (`CandyLootTable`)
 
