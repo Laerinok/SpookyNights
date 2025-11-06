@@ -18,10 +18,12 @@ namespace SpookyNights
         public Dictionary<string, float> SpawnMultipliers { get; set; }
         public bool UseTimeBasedSpawning { get; set; } = true;
         public bool SpawnOnlyAtNight { get; set; } = true;
-        public List<int> AllowedSpawnMonths { get; set; } = new List<int>() { 10 };
+        public List<int> AllowedSpawnMonths { get; set; } = new List<int>() { };
         public bool SpawnOnlyOnLastDayOfMonth { get; set; } = false;
         public bool SpawnOnlyOnLastDayOfWeek { get; set; } = false;
-        public BossSpawningConfig BearSpawnConfig { get; set; } = new BossSpawningConfig();
+
+        // This is the new, generic boss configuration system
+        public Dictionary<string, BossSpawningConfig> Bosses { get; set; }
 
         public ServerConfig()
         {
@@ -59,6 +61,12 @@ namespace SpookyNights
                 { "spookynights:spectraldrifter-*", 1.0f },
                 { "spookynights:spectralshiver-*", 1.0f },
                 { "spookynights:spectralbowtorn-*", 1.0f }
+            };
+
+            // Initialize the default boss configuration here
+            Bosses = new Dictionary<string, BossSpawningConfig>
+            {
+                { "spookynights:spectralbear-giant-*", new BossSpawningConfig() }
             };
         }
     }

@@ -40,12 +40,10 @@ namespace Spookynights
         {
             try
             {
-                // Change is on the next line
                 ServerConf = api.LoadModConfig<ServerConfig>("spookynights-server.json");
                 if (ServerConf == null)
                 {
                     ServerConf = new ServerConfig();
-                    // And on the next line
                     api.StoreModConfig(ServerConf, "spookynights-server.json");
                 }
                 else
@@ -53,7 +51,6 @@ namespace Spookynights
                     ServerConfig defaultConfig = new ServerConfig();
                     if (ServerConf.Version != defaultConfig.Version)
                     {
-                        // And on the next line
                         api.StoreModConfig(ServerConf, "spookynights-server.json");
                     }
                 }
@@ -178,18 +175,30 @@ namespace Spookynights
 
             if (ServerConf.UseTimeBasedSpawning)
             {
-                if (WildcardUtil.Match(new AssetLocation("spookynights:spectralbear-*"), properties.Code))
+                // This is the new logic block for bosses
+                foreach (var bossEntry in ServerConf.Bosses)
                 {
-                    if (ServerConf.BearSpawnConfig.Enabled)
+                    if (WildcardUtil.Match(new AssetLocation(bossEntry.Key), properties.Code))
                     {
-                        string currentMoonPhase = sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant();
-                        if (!ServerConf.BearSpawnConfig.AllowedMoonPhases.Contains(currentMoonPhase))
+                        BossSpawningConfig bossConfig = bossEntry.Value;
+                        if (bossConfig.Enabled)
                         {
-                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': incorrect moon phase ('{1}').", properties.Code, currentMoonPhase);
-                            return false;
+                            string currentMoonPhase = sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant();
+                            if (!bossConfig.AllowedMoonPhases.Contains(currentMoonPhase))
+                            {
+                                sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for boss '{0}': incorrect moon phase ('{1}').", properties.Code, currentMoonPhase);
+                                return false; // Cancel spawn
+                            }
                         }
+                        else
+                        {
+                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for boss '{0}': disabled in config.", properties.Code);
+                            return false; // Boss is disabled
+                        }
+                        break; // Boss found and rules applied, no need to check other bosses
                     }
                 }
+
                 if (ServerConf.SpawnOnlyAtNight)
                 {
                     float hour = sapi.World.Calendar.HourOfDay;
