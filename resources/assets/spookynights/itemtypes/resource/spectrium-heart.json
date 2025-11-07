@@ -10,8 +10,6 @@
     "general": [ "*" ]
   },
   "maxstacksize": 64,
-  "glowLevel": 100,
-  "glowColor": "#AADDFF",
   "grindingProps": {
     "groundStack": {
       "type": "item",
@@ -91,5 +89,17 @@
       "z": 0.5
     },
     "scale": 5
+  },
+  "tpHandTransform": {
+    "rotation": {
+      "x": -13,
+      "y": -32,
+      "z": 47
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.7,
+      "z": 0.5
+    }
   }
 }

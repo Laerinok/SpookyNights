@@ -437,15 +437,23 @@
 					"spectralbear-brown-adult-*": [
 						{
 							"type": "item",
-							"code": "gear-temporal",
+							"code": "spectralheart",
 							"quantity": {
-								"avg": 2,
-								"var": 1
+								"avg": 0.35,
+								"var": 0
 							}
 						},
 						{
 							"type": "item",
-							"code": "gear-rusty",
+							"code": "game:gear-temporal",
+							"quantity": {
+								"avg": 0.07,
+								"var": 0
+							}
+						},
+						{
+							"type": "item",
+							"code": "game:gear-rusty",
 							"quantity": {
 								"avg": 4,
 								"var": 2
@@ -455,15 +463,23 @@
 					"spectralbear-giant-adult-*": [
 						{
 							"type": "item",
-							"code": "gear-temporal",
+							"code": "spectralheart",
 							"quantity": {
-								"avg": 4,
+								"avg": 3,
 								"var": 1
 							}
 						},
 						{
 							"type": "item",
-							"code": "gear-rusty",
+							"code": "game:gear-temporal",
+							"quantity": {
+								"avg": 2,
+								"var": 0.6
+							}
+						},
+						{
+							"type": "item",
+							"code": "game:gear-rusty",
 							"quantity": {
 								"avg": 6,
 								"var": 2

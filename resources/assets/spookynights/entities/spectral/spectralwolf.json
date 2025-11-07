@@ -166,6 +166,14 @@
 					"spectralwolf-eurasian-adult-*": [
 						{
 							"type": "item",
+							"code": "spectralheart",
+							"quantity": {
+								"avg": 0.20,
+								"var": 0
+							}
+						},
+						{
+							"type": "item",
 							"code": "gear-temporal",
 							"quantity": {
 								"avg": 0.25,
@@ -177,7 +185,7 @@
 							"code": "gear-rusty",
 							"quantity": {
 								"avg": 1,
-								"var": 0.5
+								"var": 0
 							}
 						}
 					]

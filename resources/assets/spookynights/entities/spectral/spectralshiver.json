@@ -476,6 +476,14 @@
 					"*-surface": [
 						{
 							"type": "item",
+							"code": "spectralheart",
+							"quantity": {
+								"avg": 0.12,
+								"var": 0
+							}
+						},
+						{
+							"type": "item",
 							"code": "gear-temporal",
 							"quantity": {
 								"avg": 0.02666,
@@ -501,6 +509,14 @@
 						}
 					],
 					"*-deep": [
+						{
+							"type": "item",
+							"code": "spectralheart",
+							"quantity": {
+								"avg": 0.2,
+								"var": 0
+							}
+						},
 						{
 							"type": "item",
 							"code": "gear-temporal",
@@ -530,6 +546,14 @@
 					"*-tainted": [
 						{
 							"type": "item",
+							"code": "spectralheart",
+							"quantity": {
+								"avg": 0.35,
+								"var": 0
+							}
+						},
+						{
+							"type": "item",
 							"code": "gear-temporal",
 							"quantity": {
 								"avg": 0.03999,
@@ -555,6 +579,14 @@
 						}
 					],
 					"*-corrupt": [
+						{
+							"type": "item",
+							"code": "spectralheart",
+							"quantity": {
+								"avg": 0.5,
+								"var": 0
+							}
+						},
 						{
 							"type": "item",
 							"code": "gear-temporal",
@@ -584,6 +616,14 @@
 					"*-nightmare": [
 						{
 							"type": "item",
+							"code": "spectralheart",
+							"quantity": {
+								"avg": 0.7,
+								"var": 0
+							}
+						},
+						{
+							"type": "item",
 							"code": "gear-temporal",
 							"quantity": {
 								"avg": 0.05332,
@@ -609,6 +649,14 @@
 						}
 					],
 					"*": [
+						{
+							"type": "item",
+							"code": "spectralheart",
+							"quantity": {
+								"avg": 2,
+								"var": 0
+							}
+						},
 						{
 							"type": "item",
 							"code": "gear-temporal",

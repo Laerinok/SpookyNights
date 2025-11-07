@@ -1,0 +1,10 @@
+{
+	"ingredients": [
+		{ "type": "item", "code": "ingot-spectrium", "minratio": 0.40, "maxratio": 0.50  },
+		{ "type": "item", "code": "ingot-iron", "minratio": 0.50, "maxratio": 0.60  }
+	],
+	"output": {
+		"type": "item",
+		"code": "ingot-aetherium"
+	}
+}
