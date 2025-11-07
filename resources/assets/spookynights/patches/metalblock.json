@@ -1,0 +1,20 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/skipVariants/-",
+    "value": "metalblock-*-*-spectrium",
+    "file": "game:blocktypes/metal/metalblock.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/skipVariants/-",
+    "value": "metalblock-*-*-etherium",
+    "file": "game:blocktypes/metal/metalblock.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/skipVariants/-",
+    "value": "metalblock-*-*-aetherium",
+    "file": "game:blocktypes/metal/metalblock.json"
+  }
+]

@@ -77,5 +77,9 @@
   "item-creature-spectralbear-brown-adult-male": "Brown Spectral Bear (Male)",
   "item-dead-creature-spectralbear-brown-adult-male": "Dead Brown Spectral Bear (Male)",
   "item-creature-spectralbear-giant-adult-male": "Giant Spectral Bear (male)",
-  "item-dead-creature-spectralbear-giant-adult-male": "Dead Giant Spectral Bear (Male)"
+  "item-dead-creature-spectralbear-giant-adult-male": "Dead Giant Spectral Bear (Male)",
+
+  "item-spectralheart": "Spectral Heart",
+  "itemdesc-etheriumheart": "You can get some spectrium nugget from the hard cold heart",
+  "item-spectriumpowder": "Etherium Powder"
 }

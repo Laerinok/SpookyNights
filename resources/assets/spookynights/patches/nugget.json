@@ -1,0 +1,56 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/creativeinventory/spookynights",
+    "value": [
+      "nugget-spectrium",
+      "nugget-etherium",
+      "nugget-aetherium"
+    ],
+    "file": "game:itemtypes/resource/nugget.json"
+  },
+
+  {
+    "op": "addmerge",
+    "path": "/combustiblePropsByType/*-spectrium",
+    "value": {
+      "meltingPoint": 1025,
+      "meltingDuration": 30,
+      "smeltedRatio": 20,
+      "smeltedStack": {
+        "type": "item",
+        "code": "ingot-spectrium"
+      }
+    },
+    "file": "game:itemtypes/resource/nugget.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/combustiblePropsByType/*-etherium",
+    "value": {
+      "meltingPoint": 1150,
+      "meltingDuration": 30,
+      "smeltedRatio": 20,
+      "smeltedStack": {
+        "type": "item",
+        "code": "ingot-etherium"
+      }
+    },
+    "file": "game:itemtypes/resource/nugget.json"
+  },
+
+  {
+    "op": "add",
+    "path": "/combustiblePropsByType/*-aetherium",
+    "value": {
+      "meltingPoint": 1025,
+      "meltingDuration": 30,
+      "smeltedRatio": 20,
+      "smeltedStack": {
+        "type": "item",
+        "code": "ingot-aetherium"
+      }
+    },
+    "file": "game:itemtypes/resource/nugget.json"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "op": "add",
+    "path": "/creativeinventory/spookynights",
+    "value": [
+      "ingot-spectrium",
+      "ingot-etherium",
+      "ingot-aetherium"
+    ],
+    "file": "game:itemtypes/resource/ingot.json"
+  },
+  {
+    "op": "add",
+    "path": "/combustiblePropsByType/ingot-spectrium",
+    "value": {
+      "meltingPoint": 1025,
+      "meltingDuration": 30,
+      "smeltedRatio": 20,
+      "smeltedStack": {
+        "type": "item",
+        "code": "ingot-spectrium"
+      }
+    },
+    "file": "game:itemtypes/resource/ingot.json"
+  },
+  {
+    "op": "add",
+    "path": "/materialDensityByType/*-spectrium",
+    "value": 8500,
+    "file": "game:itemtypes/resource/ingot.json"
+  },
+  {
+    "op": "add",
+    "path": "/combustiblePropsByType/ingot-etherium",
+    "value": {
+      "meltingPoint": 1150,
+      "meltingDuration": 30,
+      "smeltedRatio": 20,
+      "smeltedStack": {
+        "type": "item",
+        "code": "ingot-etherium"
+      }
+    },
+    "file": "game:itemtypes/resource/ingot.json"
+  },
+  {
+    "op": "add",
+    "path": "/materialDensityByType/*-etherium",
+    "value": 7500,
+    "file": "game:itemtypes/resource/ingot.json"
+  },
+  {
+    "op": "add",
+    "path": "/combustiblePropsByType/ingot-aetherium",
+    "value": {
+      "meltingPoint": 1025,
+      "meltingDuration": 30,
+      "smeltedRatio": 20,
+      "smeltedStack": {
+        "type": "item",
+        "code": "ingot-aetherium"
+      }
+    },
+    "file": "game:itemtypes/resource/ingot.json"
+  },
+  {
+    "op": "add",
+    "path": "/materialDensityByType/*-aetherium",
+    "value": 8500,
+    "file": "game:itemtypes/resource/ingot.json"
+  }
+]

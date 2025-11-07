@@ -1,0 +1,20 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/skipVariants/-",
+    "value": "metalsheet-spectrium-down",
+    "file": "game:blocktypes/metal/sheet.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/skipVariants/-",
+    "value": "metalsheet-etherium-down",
+    "file": "game:blocktypes/metal/sheet.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/skipVariants/-",
+    "value": "metalsheet-aetherium-down",
+    "file": "game:blocktypes/metal/sheet.json"
+  }
+]

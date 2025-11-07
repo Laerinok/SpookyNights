@@ -1,0 +1,20 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/skipVariants/-",
+    "value": "spectrium",
+    "file": "game:itemtypes/resource/metalchain.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/skipVariants/-",
+    "value": "etherium",
+    "file": "game:itemtypes/resource/metalchain.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/skipVariants/-",
+    "value": "aetherium",
+    "file": "game:itemtypes/resource/metalchain.json"
+  }
+]
