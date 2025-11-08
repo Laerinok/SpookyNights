@@ -1,4 +1,12 @@
-**v0.2-dev1 2025-10-31
+v0.2.0 2025-11-06
+- Added: Configuration file for advanced mod customization.
+- Added: Spectral creatures are now unique entities, not just patches on vanilla mobs.
+- Added: Option to enable/disable pumpkin smoke via config.
+- Added: Option to enable/disable the CandyLoot system via config.
+- Changed: Overhauled the loot system.
+- Changed: Overhauled the spawn system (now based on a defined period).
+
+v0.2-dev1 2025-10-31
 - added: New Candy Bag Interaction: You now hold the right mouse button to open a candy bag.
 - added: Patch for remapping candy and candybag items. All old candybags cannot be remmapped to new candybag, so you SHOULD OPEN THEM before if you don't want to lose them.
 - changed: Candy Bag Rework: All previous candy bag variants have been merged into a single, generic candybag item. Each bag now drops a random amount (1-3) of a random candy type upon being opened.

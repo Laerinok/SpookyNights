@@ -3,9 +3,9 @@
   <PropertyGroup>
     <ModName>Spooky Nights</ModName>
     <ModType>code</ModType>
-    <ModVersion>0.2.0-dev1</ModVersion>
+    <ModVersion>0.2.0</ModVersion>
     <ModId>spookynights</ModId>
-    <Description>A small overhaul mod for a special Halloween night. Enjoy the frights!</Description>
+    <Description>A small overhaul mod introducing spectral creatures that haunt the darkness. Experience the chilling presence of the unknown when the sun sets.</Description>
     <Side>universal</Side>
     <RequiredOnClient>true</RequiredOnClient>
     <RequiredOnServer>true</RequiredOnServer>
@@ -19,7 +19,7 @@
 
   <!-- Dependencies -->
   <ItemGroup>
-    <Dependencies Include="game" Version="*" />
+    <Dependencies Include="game" Version="1.21.5" />
   </ItemGroup>
 
   <!-- Project settings -->
@@ -60,10 +60,6 @@
   </PropertyGroup>
 
   <!-- Project item includes -->
-  <ItemGroup>
-    <Folder Include="resources\assets\spookynights\entities\animal\mammal\" />
-    <Folder Include="spookynights\assets\spookynights\sounds\item\" />
-  </ItemGroup>
 
   <!-- Formatting JSON files -->
   <PropertyGroup>
@@ -102,6 +98,14 @@
     <Reference Include="$(GameDirectory)/Lib/OpenTK*.dll" Private="false" />
     <!-- External libraries -->
     <Reference Include="$(ExternalLibDir)/**/*.dll" Private="false" Condition="'$(ExternalLibDir)' != ''" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="resources\assets\spookynights\entities\animal\**" />
+    <Compile Remove="spookynights\**" />
+    <EmbeddedResource Remove="resources\assets\spookynights\entities\animal\**" />
+    <EmbeddedResource Remove="spookynights\**" />
+    <None Remove="resources\assets\spookynights\entities\animal\**" />
+    <None Remove="spookynights\**" />
   </ItemGroup>
 
   <!-- Creating local settings file -->
