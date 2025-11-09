@@ -35,5 +35,16 @@
   "item-metallamellae-aetherium": "Metallamellae (aetherium)",
   "item-metalplate-aetherium": "Metalplate (aetherium)",
   "item-metalscale-aetherium": "Metalscale (aetherium)",
-  "item-nugget-aetherium": "Nugget (aetherium)"
+  "item-nugget-aetherium": "Nugget (aetherium)",
+
+  "material-spectrium": "Spectrium",
+  "material-etherium": "Etherium",
+  "material-aetherium": "Aetherium",
+
+  "item-blade-falx-aetherium": "Blade falx (aetherium)",
+  "item-blade-falx-etherium": "Blade falx (etherium)",
+  "item-blade-falx-spectrium": "Blade falx (spectrium)",
+  "item-bladehead-falx-aetherium": "Bladehead falx (aetherium)",
+  "item-bladehead-falx-etherium": "Bladehead falx (etherium)",
+  "item-bladehead-falx-spectrium": "Bladehead falx (spectrium)"
 }

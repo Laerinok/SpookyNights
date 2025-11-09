@@ -3,13 +3,19 @@
     "op": "addmerge",
     "path": "/creativeinventory/spookynights",
     "value": [
-      "nugget-spectrium",
-      "nugget-etherium",
-      "nugget-aetherium"
+      "nugget-spectrium"
     ],
     "file": "game:itemtypes/resource/nugget.json"
   },
-
+  {
+    "op": "addmerge",
+    "path": "/creativeinventory/spookynights",
+    "value": [
+      "metalbit-etherium",
+      "metalbit-aetherium"
+    ],
+    "file": "game:itemtypes/resource/metalbit.json"
+  },
   {
     "op": "addmerge",
     "path": "/combustiblePropsByType/*-spectrium",
@@ -36,11 +42,11 @@
         "code": "ingot-etherium"
       }
     },
-    "file": "game:itemtypes/resource/nugget.json"
+    "file": "game:itemtypes/resource/metalbit.json"
   },
 
   {
-    "op": "add",
+    "op": "addmerge",
     "path": "/combustiblePropsByType/*-aetherium",
     "value": {
       "meltingPoint": 1025,
@@ -51,6 +57,6 @@
         "code": "ingot-aetherium"
       }
     },
-    "file": "game:itemtypes/resource/nugget.json"
+    "file": "game:itemtypes/resource/metalbit.json"
   }
 ]

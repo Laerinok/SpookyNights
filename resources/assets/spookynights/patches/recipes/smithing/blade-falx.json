@@ -1,0 +1,20 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/ingredient/allowedVariants/-",
+    "value": "spectrium",
+    "file": "game:recipes/smithing/blade-falx.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredient/allowedVariants/-",
+    "value": "etherium",
+    "file": "game:recipes/smithing/blade-falx.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredient/allowedVariants/-",
+    "value": "aetherium",
+    "file": "game:recipes/smithing/blade-falx.json"
+  }
+]

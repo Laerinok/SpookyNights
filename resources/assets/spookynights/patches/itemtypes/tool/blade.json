@@ -1,0 +1,115 @@
+[
+  {
+    "op": "add",
+    "path": "/creativeinventoryByType/*/spookynights",
+    "value": [
+      "blade-falx-spectrium",
+      "blade-falx-etherium",
+      "blade-falx-aetherium"
+    ],
+    "file": "game:itemtypes/tool/blade.json"
+  },
+
+  {
+    "op": "addmerge",
+    "path": "/variantgroups/1/states/-",
+    "value": "spectrium",
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/variantgroups/1/states/-",
+    "value": "etherium",
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/variantgroups/1/states/-",
+    "value": "aetherium",
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/durabilitybytype/blade-falx-spectrium",
+    "value": 600,
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attackpowerbytype/blade-falx-spectrium",
+    "value": 6,
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/blade-falx-spectrium",
+    "value": {
+      "falxstring": { "base": "game:block/cloth/burlap/string" },
+      "thongs": { "base": "game:block/cloth/leather/longstiches" },
+      "woodguard": { "base": "game:block/wood/debarked/veryaged" },
+      "handle": { "base": "game:block/wood/debarked/veryaged" },
+      "falxblade": { "base": "block/metal/ingot/spectrium" },
+      "cloth": { "base": "game:block/transparent" },
+      "handguard": { "base": "game:block/transparent" },
+      "spinerivet": { "base": "game:block/transparent" },
+      "pips": { "base": "game:block/transparent" }
+    },
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/durabilitybytype/blade-falx-etherium",
+    "value": 1800,
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attackpowerbytype/blade-falx-etherium",
+    "value": 7.5,
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/blade-falx-etherium",
+    "value": {
+      "falxstring": { "base": "game:block/cloth/burlap/string" },
+      "thongs": { "base": "game:block/cloth/leather/longstiches" },
+      "woodguard": { "base": "game:block/wood/debarked/veryaged" },
+      "handle": { "base": "game:block/wood/debarked/veryaged" },
+      "falxblade": { "base": "block/metal/ingot/etherium" },
+      "cloth": { "base": "game:block/transparent" },
+      "handguard": { "base": "game:block/transparent" },
+      "spinerivet": { "base": "game:block/transparent" },
+      "pips": { "base": "game:block/transparent" }
+    },
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/durabilitybytype/blade-falx-aetherium",
+    "value": 2500,
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attackpowerbytype/blade-falx-aetherium",
+    "value": 9,
+    "file": "game:itemtypes/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/blade-falx-aetherium",
+    "value": {
+      "falxstring": { "base": "game:block/cloth/burlap/string" },
+      "thongs": { "base": "game:block/cloth/leather/longstiches" },
+      "woodguard": { "base": "game:block/wood/debarked/veryaged" },
+      "handle": { "base": "game:block/wood/debarked/veryaged" },
+      "falxblade": { "base": "block/metal/ingot/aetherium" },
+      "cloth": { "base": "game:block/transparent" },
+      "handguard": { "base": "game:block/transparent" },
+      "spinerivet": { "base": "game:block/transparent" },
+      "pips": { "base": "game:block/transparent" }
+    },
+    "file": "game:itemtypes/tool/blade.json"
+  }
+]

@@ -653,8 +653,8 @@
 							"type": "item",
 							"code": "spectralheart",
 							"quantity": {
-								"avg": 2,
-								"var": 0
+								"avg": 5,
+								"var": 1
 							}
 						},
 						{
