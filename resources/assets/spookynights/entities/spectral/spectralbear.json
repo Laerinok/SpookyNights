@@ -65,20 +65,20 @@
 		"renderer": "Shape",
 		"renderFlags": [ "alphatransparent" ],
 		"glowLevelByType": {
-			"*-brown-*-male": 110,
-			"*-brown-*-female": 110,
+			"*-brown-*-male": 150,
+			"*-brown-*-female": 100,
 			"*-giant-*-male": 200
 		},
 		"glowColorByType": {
-			"*-brown-*-male": "#FF3333",
-			"*-brown-*-female": "#0066FF",
-			"*-giant-*-male": "#FFFFFF"
+			"*-brown-*-male": "#ffff66",
+			"*-brown-*-female": "#ffff99",
+			"*-giant-*-male": "#ccffff"
 		},
 		"skipRenderUntil": "alive",
 		"shape": { "base": "entity/spectral/animal/bear" },
 		"texturesByType": {
 			"*-brown-*-*": {
-				"texture": {
+				"skin": {
 					"base": "entity/spectral/animal/bear/brown-adult1",
 					"alternates": [
 						{ "base": "entity/spectral/animal/bear/brown-adult2" },
@@ -87,8 +87,8 @@
 				}
 			},
 			"*-giant-*-*": {
-				"texture": {
-					"base": "entity/spectral/animal/bear/polar-adult"
+				"skin": {
+					"base": "entity/spectral/animal/bear/polar-adult1"
 				}
 			}
 		},
@@ -433,13 +433,14 @@
 			{
 				"code": "harvestable",
 				"duration": 0.5,
+				"quantitySlots": 8,
 				"dropsByType": {
 					"spectralbear-brown-adult-*": [
 						{
 							"type": "item",
-							"code": "spectralheart",
+							"code": "spookynights:spectralheart",
 							"quantity": {
-								"avg": 0.35,
+								"avg": 0.8,
 								"var": 0
 							}
 						},
@@ -463,10 +464,10 @@
 					"spectralbear-giant-adult-*": [
 						{
 							"type": "item",
-							"code": "spectralheart",
+							"code": "spookynights:spectralheart",
 							"quantity": {
-								"avg": 3,
-								"var": 1
+								"avg": 1,
+								"var": 0
 							}
 						},
 						{

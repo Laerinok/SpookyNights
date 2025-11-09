@@ -166,23 +166,23 @@
 					"spectralwolf-eurasian-adult-*": [
 						{
 							"type": "item",
-							"code": "spectralheart",
+							"code": "spookynights:spectralheart",
 							"quantity": {
-								"avg": 0.20,
+								"avg": 0.1,
 								"var": 0
 							}
 						},
 						{
 							"type": "item",
-							"code": "gear-temporal",
+							"code": "game:gear-temporal",
 							"quantity": {
-								"avg": 0.25,
+								"avg": 0.15,
 								"var": 0
 							}
 						},
 						{
 							"type": "item",
-							"code": "gear-rusty",
+							"code": "game:gear-rusty",
 							"quantity": {
 								"avg": 1,
 								"var": 0

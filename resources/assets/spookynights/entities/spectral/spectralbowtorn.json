@@ -387,12 +387,13 @@
 			{
 				"code": "harvestable",
 				"duration": 0.5,
+				"quantitySlots": 8,
 				"fixedweight": true,
 				"dropsByType": {
 					"*-surface": [
 						{
 							"type": "item",
-							"code": "spectralheart",
+							"code": "spookynights:spectralheart",
 							"quantity": {
 								"avg": 0.12,
 								"var": 0
@@ -400,7 +401,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-temporal",
+							"code": "game:gear-temporal",
 							"quantity": {
 								"avg": 0.02666,
 								"var": 0
@@ -408,7 +409,7 @@
 						},
 						{
 							"type": "item",
-							"code": "flaxfibers",
+							"code": "game:flaxfibers",
 							"quantity": {
 								"avg": 0.2,
 								"var": 0
@@ -416,7 +417,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-rusty",
+							"code": "game:gear-rusty",
 							"dropModbyStat": "rustyGearDropRate",
 							"quantity": {
 								"avg": 0.01,
@@ -425,7 +426,7 @@
 						},
 						{
 							"type": "item",
-							"code": "arrow-bone",
+							"code": "game:arrow-bone",
 							"quantity": {
 								"avg": 0.8,
 								"var": 0
@@ -435,7 +436,7 @@
 					"*-deep": [
 						{
 							"type": "item",
-							"code": "spectralheart",
+							"code": "spookynights:spectralheart",
 							"quantity": {
 								"avg": 0.2,
 								"var": 0
@@ -443,7 +444,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-temporal",
+							"code": "game:gear-temporal",
 							"quantity": {
 								"avg": 0.033325,
 								"var": 0
@@ -451,7 +452,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-rusty",
+							"code": "game:gear-rusty",
 							"dropModbyStat": "rustyGearDropRate",
 							"quantity": {
 								"avg": 0.03,
@@ -460,7 +461,7 @@
 						},
 						{
 							"type": "item",
-							"code": "flaxfibers",
+							"code": "game:flaxfibers",
 							"quantity": {
 								"avg": 0.4,
 								"var": 0
@@ -468,7 +469,7 @@
 						},
 						{
 							"type": "item",
-							"code": "arrow-bone",
+							"code": "game:arrow-bone",
 							"quantity": {
 								"avg": 1,
 								"var": 0
@@ -478,7 +479,7 @@
 					"*-tainted": [
 						{
 							"type": "item",
-							"code": "spectralheart",
+							"code": "spookynights:spectralheart",
 							"quantity": {
 								"avg": 0.35,
 								"var": 0
@@ -486,7 +487,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-temporal",
+							"code": "game:gear-temporal",
 							"quantity": {
 								"avg": 0.03999,
 								"var": 0
@@ -494,7 +495,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-rusty",
+							"code": "game:gear-rusty",
 							"dropModbyStat": "rustyGearDropRate",
 							"quantity": {
 								"avg": 0.07,
@@ -503,7 +504,7 @@
 						},
 						{
 							"type": "item",
-							"code": "flaxfibers",
+							"code": "game:flaxfibers",
 							"quantity": {
 								"avg": 0.6,
 								"var": 0
@@ -511,7 +512,7 @@
 						},
 						{
 							"type": "item",
-							"code": "arrow-bone",
+							"code": "game:arrow-bone",
 							"quantity": {
 								"avg": 1.5,
 								"var": 0
@@ -521,7 +522,7 @@
 					"*-corrupt": [
 						{
 							"type": "item",
-							"code": "spectralheart",
+							"code": "spookynights:spectralheart",
 							"quantity": {
 								"avg": 0.5,
 								"var": 0
@@ -529,7 +530,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-temporal",
+							"code": "game:gear-temporal",
 							"quantity": {
 								"avg": 0.046655,
 								"var": 0
@@ -537,7 +538,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-rusty",
+							"code": "game:gear-rusty",
 							"dropModbyStat": "rustyGearDropRate",
 							"quantity": {
 								"avg": 0.1,
@@ -546,7 +547,7 @@
 						},
 						{
 							"type": "item",
-							"code": "flaxfibers",
+							"code": "game:flaxfibers",
 							"quantity": {
 								"avg": 0.8,
 								"var": 0
@@ -554,7 +555,7 @@
 						},
 						{
 							"type": "item",
-							"code": "arrow-bone",
+							"code": "game:arrow-bone",
 							"quantity": {
 								"avg": 2,
 								"var": 0
@@ -564,7 +565,7 @@
 					"*-nightmare": [
 						{
 							"type": "item",
-							"code": "spectralheart",
+							"code": "spookynights:spectralheart",
 							"quantity": {
 								"avg": 0.7,
 								"var": 0
@@ -572,7 +573,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-temporal",
+							"code": "game:gear-temporal",
 							"quantity": {
 								"avg": 0.05332,
 								"var": 0
@@ -580,7 +581,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-rusty",
+							"code": "game:gear-rusty",
 							"dropModbyStat": "rustyGearDropRate",
 							"quantity": {
 								"avg": 0.2,
@@ -589,7 +590,7 @@
 						},
 						{
 							"type": "item",
-							"code": "flaxfibers",
+							"code": "game:flaxfibers",
 							"quantity": {
 								"avg": 1,
 								"var": 0
@@ -597,7 +598,7 @@
 						},
 						{
 							"type": "item",
-							"code": "arrow-bone",
+							"code": "game:arrow-bone",
 							"quantity": {
 								"avg": 3,
 								"var": 0
@@ -607,7 +608,7 @@
 					"*-gearfoot": [
 						{
 							"type": "item",
-							"code": "spectralheart",
+							"code": "spookynights:spectralheart",
 							"quantity": {
 								"avg": 0.2,
 								"var": 0
@@ -615,7 +616,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-temporal",
+							"code": "game:gear-temporal",
 							"quantity": {
 								"avg": 1,
 								"var": 0.4
@@ -623,7 +624,7 @@
 						},
 						{
 							"type": "item",
-							"code": "gear-rusty",
+							"code": "game:gear-rusty",
 							"dropModbyStat": "rustyGearDropRate",
 							"quantity": {
 								"avg": 5,
@@ -632,7 +633,7 @@
 						},
 						{
 							"type": "item",
-							"code": "flaxfibers",
+							"code": "game:flaxfibers",
 							"quantity": {
 								"avg": 2,
 								"var": 0
@@ -640,7 +641,7 @@
 						},
 						{
 							"type": "item",
-							"code": "stackrandomizer-alljonas",
+							"code": "game:stackrandomizer-alljonas",
 							"quantity": {
 								"avg": 0.4,
 								"var": 0
