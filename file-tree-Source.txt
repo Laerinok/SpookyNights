@@ -3,4 +3,5 @@ source/
 ├─ ConfigManager.cs
 ├─ ItemCandyBag.cs
 ├─ ServerConfig.cs
+├─ EntityBehaviorSpectralResistance.cs
 └─ SpookyNightsModSystems.cs

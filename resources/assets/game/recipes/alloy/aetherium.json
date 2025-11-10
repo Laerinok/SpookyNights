@@ -1,7 +1,8 @@
 {
 	"ingredients": [
-		{ "type": "item", "code": "ingot-spectrium", "minratio": 0.40, "maxratio": 0.50  },
-		{ "type": "item", "code": "ingot-tin", "minratio": 0.50, "maxratio": 0.60  }
+		{ "type": "item", "code": "ingot-spectrium", "minratio": 0.38, "maxratio": 0.42  },
+		{ "type": "item", "code": "ingot-bismuth", "minratio": 0.38, "maxratio": 0.42  },
+		{ "type": "item", "code": "ingot-silver", "minratio": 0.18, "maxratio": 0.22  }
 
 	],
 	"output": {

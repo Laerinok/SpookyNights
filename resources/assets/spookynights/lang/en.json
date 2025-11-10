@@ -85,12 +85,5 @@
   "item-spectralheart-rich": "Spectral Heart (rich)",
   "item-spectralheart": "Spectral Heart",
   "itemdesc-spectralheart-*": "You can get some spectrium nugget from the hard cold heart",
-  "item-spectriumpowder": "Spectrium Powder",
-
-  "item-bladehead-falx-aetherium": "Bladehead falx (aetherium)",
-  "item-bladehead-falx-etherium": "Bladehead falx (etherium)",
-  "item-bladehead-falx-spectrium": "Bladehead falx (spectrium)",
-  "item-bladehead-short-aetherium": "Bladehead short (aetherium)",
-  "item-bladehead-short-etherium": "Bladehead short (etherium)",
-  "item-bladehead-short-spectrium": "Bladehead short (spectrium)"
+  "item-spectriumpowder": "Spectrium Powder"
 }

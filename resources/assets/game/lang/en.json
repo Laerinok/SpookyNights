@@ -15,9 +15,15 @@
   "material-etherium": "Etherium",
   "material-aetherium": "Aetherium",
 
-  "item-blade-falx-aetherium": "Blade falx (aetherium)",
-  "item-blade-falx-etherium": "Blade falx (etherium)",
-  "item-blade-falx-spectrium": "Blade falx (spectrium)",
+  "item-blade-falx-spectrium": "Spectrium Falx",
+  "itemdesc-blade-falx-spectrium": "Forged with spectral essence. Deals increased damage (+50%) to spectral creatures .",
+
+  "item-blade-falx-etherium": "Etherium Falx",
+  "itemdesc-blade-falx-etherium": "A potent alloy against the undead. Deals greatly increased (+75%) damage to spectral creatures.",
+
+  "item-blade-falx-aetherium": "Aetherium Falx",
+  "itemdesc-blade-falx-aetherium": "The bane of phantoms. Deals double damage (+100%) to spectral creatures.",
+  
   "item-bladehead-falx-aetherium": "Bladehead falx (aetherium)",
   "item-bladehead-falx-etherium": "Bladehead falx (etherium)",
   "item-bladehead-falx-spectrium": "Bladehead falx (spectrium)"

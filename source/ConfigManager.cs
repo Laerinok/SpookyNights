@@ -1,5 +1,3 @@
-// In source/ConfigManager.cs
-
 using Newtonsoft.Json.Linq;
 using SpookyNights;
 using System;
@@ -101,6 +99,7 @@ namespace Spookynights
                     newConfig.SpawnOnlyOnFullMoon = oldConfig.SpawnOnlyOnFullMoon;
                     newConfig.FullMoonSpawnMultiplier = oldConfig.FullMoonSpawnMultiplier;
                     newConfig.Bosses = oldConfig.Bosses;
+                    newConfig.EnableDebugLogging = oldConfig.EnableDebugLogging; // Preserve the user's setting during migration
 
                     api.StoreModConfig(newConfig, "spookynights-server.json");
                     ServerConf = newConfig;

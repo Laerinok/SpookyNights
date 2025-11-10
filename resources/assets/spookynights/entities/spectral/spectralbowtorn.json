@@ -182,6 +182,10 @@
 	},
 	"server": {
 		"behaviors": [
+			{
+				"code": "spectralresistance",
+				"resistance": 0.5
+			},
 			{ "code": "repulseagents" },
 			{
 				"code": "controlledphysics",
@@ -279,7 +283,7 @@
 						"attackDurationMs": 1000,
 						"animation": "stab",
 						"animationSpeed": 1.5,
-						"sound": "creature/drifter-hit",
+						"sound": "game:creature/drifter-hit",
 						"soundStartMs": 400
 					},
 					{
@@ -694,8 +698,8 @@
 	},
 	"idleSoundRange": 14,
 	"sounds": {
-		"hurt": "creature/bowtorn/hurt",
-		"death": "creature/bowtorn/death",
-		"idle": "creature/bowtorn/idle"
+		"hurt": "game:creature/bowtorn/hurt",
+		"death": "game:creature/bowtorn/death",
+		"idle": "game:creature/bowtorn/idle"
 	}
 }

@@ -1,0 +1,61 @@
+[
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "spookynights:spectralheart-poor",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 2
+        },
+        "price": {
+          "avg": 4,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "spookynights:spectralheart-medium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 2
+        },
+        "price": {
+          "avg": 6,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "spookynights:spectralheart-rich",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 1
+        },
+        "price": {
+          "avg": 8,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "spookynights:spectralheart-bountiful",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 1
+        },
+        "price": {
+          "avg": 12,
+          "var": 0.75
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-treasurehunter.json"
+  }
+]

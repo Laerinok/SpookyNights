@@ -46,12 +46,26 @@ namespace Spookynights
         {
             base.Start(api);
             api.RegisterItemClass("ItemCandyBag", typeof(ItemCandyBag));
+            api.RegisterEntityBehaviorClass("spectralresistance", typeof(EntityBehaviorSpectralResistance));
             api.Logger.Notification("🌟 Spooky Nights is loaded!");
         }
 
         public override void StartServerSide(ICoreServerAPI api)
         {
             this.sapi = api;
+
+            // We already load the config in StartPre, but we check its value here
+            // after the server is fully started.
+            if (ConfigManager.ServerConf != null)
+            {
+                // This is our diagnostic log. It will ALWAYS show up.
+                sapi.Logger.Notification("[SpookyNights] Config loaded. Debug logging is set to: {0}", ConfigManager.ServerConf.EnableDebugLogging);
+            }
+            else
+            {
+                sapi.Logger.Error("[SpookyNights] CRITICAL: Server config was not loaded at StartServerSide!");
+            }
+
             api.Event.OnEntityDeath += OnEntityDeath;
             api.Event.OnTrySpawnEntity += OnTrySpawnEntity;
 
@@ -98,9 +112,20 @@ namespace Spookynights
 
         private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
         {
-            if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights") { return true; }
+            // Return early if it's not our mod's entity or if the config is missing.
+            if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights")
+            {
+                return true;
+            }
 
-            sapi.Logger.Debug("[SpookyNights] Game wants to spawn '{0}'. Checking our custom rules...", properties.Code);
+            // This is the main debug switch. All detailed spawning logs are inside this block.
+            bool debugEnabled = ConfigManager.ServerConf.EnableDebugLogging;
+
+            if (debugEnabled)
+            {
+                sapi.Logger.Debug("[SpookyNights] Game wants to spawn '{0}'. Checking our custom rules...", properties.Code);
+            }
+
             bool isHandledAsBoss = false;
 
             if (ConfigManager.ServerConf.UseTimeBasedSpawning)
@@ -117,13 +142,13 @@ namespace Spookynights
                         {
                             if (!bossConfig.AllowedMoonPhases.Contains(currentMoonPhase))
                             {
-                                sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for boss '{0}': incorrect moon phase ('{1}').", properties.Code, currentMoonPhase);
+                                if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for boss '{0}': incorrect moon phase ('{1}').", properties.Code, currentMoonPhase);
                                 return false;
                             }
                         }
                         else
                         {
-                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for boss '{0}': disabled in config.", properties.Code);
+                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for boss '{0}': disabled in config.", properties.Code);
                             return false;
                         }
                         break;
@@ -134,7 +159,7 @@ namespace Spookynights
                 {
                     if (ConfigManager.ServerConf.SpawnOnlyOnFullMoon && currentMoonPhase != "full")
                     {
-                        sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not a full moon.", properties.Code);
+                        if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not a full moon.", properties.Code);
                         return false;
                     }
 
@@ -157,17 +182,17 @@ namespace Spookynights
 
                         if (!isDarkEnough)
                         {
-                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not dark enough.", properties.Code);
+                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not dark enough.", properties.Code);
                             return false;
                         }
                     }
-
+                    // ... (The rest of the time checks follow the same pattern)
                     if (ConfigManager.ServerConf.AllowedSpawnMonths != null && ConfigManager.ServerConf.AllowedSpawnMonths.Count > 0)
                     {
                         int currentMonth = sapi.World.Calendar.Month;
                         if (!ConfigManager.ServerConf.AllowedSpawnMonths.Contains(currentMonth))
                         {
-                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': incorrect month ('{1}').", properties.Code, currentMonth);
+                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': incorrect month ('{1}').", properties.Code, currentMonth);
                             return false;
                         }
                     }
@@ -176,7 +201,7 @@ namespace Spookynights
                         int currentDay = (int)(sapi.World.Calendar.TotalDays % sapi.World.Calendar.DaysPerMonth) + 1;
                         if (currentDay != sapi.World.Calendar.DaysPerMonth)
                         {
-                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not the last day of the month.", properties.Code);
+                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not the last day of the month.", properties.Code);
                             return false;
                         }
                     }
@@ -186,14 +211,18 @@ namespace Spookynights
                         int currentDayOfWeek = (int)sapi.World.Calendar.TotalDays % daysInWeek;
                         if (currentDayOfWeek != daysInWeek - 1)
                         {
-                            sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not the last day of the week.", properties.Code);
+                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not the last day of the week.", properties.Code);
                             return false;
                         }
                     }
                 }
             }
 
-            sapi.Logger.Debug("[SpookyNights] Time checks PASSED for '{0}'. Now checking multiplier...", properties.Code);
+            if (debugEnabled)
+            {
+                sapi.Logger.Debug("[SpookyNights] Time checks PASSED for '{0}'. Now checking multiplier...", properties.Code);
+            }
+
             float multiplier = 1.0f;
             bool foundMatch = false;
             foreach (var pair in ConfigManager.ServerConf.SpawnMultipliers)
@@ -210,7 +239,10 @@ namespace Spookynights
 
             if (!isHandledAsBoss && !ConfigManager.ServerConf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant() == "full")
             {
-                sapi.Logger.Debug("[SpookyNights] Applying full moon multiplier ({0}x) to '{1}'.", ConfigManager.ServerConf.FullMoonSpawnMultiplier, properties.Code);
+                if (debugEnabled)
+                {
+                    sapi.Logger.Debug("[SpookyNights] Applying full moon multiplier ({0}x) to '{1}'.", ConfigManager.ServerConf.FullMoonSpawnMultiplier, properties.Code);
+                }
                 multiplier *= ConfigManager.ServerConf.FullMoonSpawnMultiplier;
             }
 
@@ -239,8 +271,6 @@ namespace Spookynights
                 {
                     if (IsSpectralCreature(entity.Code))
                     {
-                        // FINAL AND DEFINITIVE CORRECTION based on the user-provided documentation.
-                        // "Will get you sunlight * sunbrightness" - This is exactly what's needed.
                         if (sapi.World.BlockAccessor.GetLightLevel(entity.ServerPos.AsBlockPos, EnumLightLevelType.TimeOfDaySunLight) > 0)
                         {
                             entity.Die(EnumDespawnReason.Expire);

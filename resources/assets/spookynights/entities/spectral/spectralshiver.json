@@ -232,6 +232,10 @@
 	},
 	"server": {
 		"behaviors": [
+			{
+				"code": "spectralresistance",
+				"resistance": 0.5
+			},
 			{ "code": "repulseagents" },
 			{
 				"code": "controlledphysics",
@@ -390,7 +394,7 @@
 						"attackDurationMs": 1000,
 						"animation": "bite",
 						"animationSpeed": 1,
-						"sound": "creature/drifter-hit",
+						"sound": "game:creature/drifter-hit",
 						"soundStartMs": 400
 					},
 					{
@@ -411,7 +415,7 @@
 						"executionChance": 0.5,
 						"seekingRange": 20,
 						"animation": "run",
-						"sound": "creature/shiver/aggro"
+						"sound": "game:creature/shiver/aggro"
 					},
 					{
 						"code": "getoutofwater",
@@ -779,8 +783,8 @@
 	},
 	"idleSoundRange": 32,
 	"sounds": {
-		"hurt": "creature/shiver/hurt",
-		"death": "creature/shiver/death",
-		"idle": "creature/shiver/idle*"
+		"hurt": "game:creature/shiver/hurt",
+		"death": "game:creature/shiver/death",
+		"idle": "game:creature/shiver/idle*"
 	}
 }

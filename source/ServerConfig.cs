@@ -1,5 +1,3 @@
-// In source/ServerConfig.cs
-
 using System.Collections.Generic;
 
 namespace SpookyNights
@@ -12,7 +10,7 @@ namespace SpookyNights
 
     public class ServerConfig
     {
-        public string? Version { get; set; } = "1.3.0";
+        public string? Version { get; set; } = "1.4.0";
         public bool EnableCandyLoot { get; set; } = false;
         public Dictionary<string, string> CandyLootTable { get; set; } = new Dictionary<string, string>();
         public Dictionary<string, float> SpawnMultipliers { get; set; } = new Dictionary<string, float>();
@@ -36,6 +34,9 @@ namespace SpookyNights
         public bool SpawnOnlyOnFullMoon { get; set; } = false;
         public float FullMoonSpawnMultiplier { get; set; } = 2.0f;
         public Dictionary<string, BossSpawningConfig> Bosses { get; set; } = new Dictionary<string, BossSpawningConfig>();
+
+        // New property to control debug logging for performance
+        public bool EnableDebugLogging { get; set; } = false;
 
         public ServerConfig()
         {

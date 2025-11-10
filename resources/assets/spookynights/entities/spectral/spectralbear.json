@@ -191,6 +191,10 @@
 			}
 		},
 		"behaviors": [
+			{
+				"code": "spectralresistance",
+				"resistance": 0.5
+			},
 			{ "code": "repulseagents" },
 			{
 				"code": "controlledphysics",
@@ -285,7 +289,7 @@
 						"damagePlayerAtMs": 500,
 						"animation": "Attack",
 						"animationSpeed": 1,
-						"sound": "creature/bear/attack"
+						"sound": "game:creature/bear/attack"
 					},
 					{
 						"code": "fleeentity",
@@ -293,7 +297,7 @@
 						"entityCodes": [ "player" ],
 						"seekingRange": 20,
 						"animation": "Run",
-						"sound": "creature/bear/flee",
+						"sound": "game:creature/bear/flee",
 						"whenInEmotionState": "fleeondamage",
 						"animationSpeed": 2,
 						"movespeed": 0.055
@@ -307,7 +311,7 @@
 						"belowTempSeekingRange": 25,
 						"belowTempThreshold": -10,
 						"animation": "Run",
-						"sound": "creature/bear/aggro",
+						"sound": "game:creature/bear/aggro",
 						"whenNotInEmotionState": "saturated",
 						"animationSpeed": 2,
 						"movespeed": 0.055
@@ -321,7 +325,7 @@
 						"leapAtTarget": true,
 						"leapAnimation": null,
 						"leapChance": 0.01,
-						"sound": "creature/bear/aggro",
+						"sound": "game:creature/bear/aggro",
 						"whenInEmotionState": "aggressiveondamage",
 						"animationSpeed": 2,
 						"movespeed": 0.055
@@ -518,9 +522,9 @@
 		}
 	},
 	"sounds": {
-		"hurt": "creature/bear/hurt",
-		"death": "creature/bear/flee",
-		"idle": "creature/bear/growl*"
+		"hurt": "game:creature/bear/hurt",
+		"death": "game:creature/bear/flee",
+		"idle": "game:creature/bear/growl*"
 	},
 	"idleSoundChance": 0.1
 }

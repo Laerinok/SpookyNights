@@ -1,5 +1,25 @@
 resources/
 ├─ assets/
+│  ├─ game/
+│  │  ├─ lang/
+│  │  │  └─ en.json
+│  │  ├─ recipes/
+│  │  │  └─ alloy/
+│  │  │     ├─ aetherium.json
+│  │  │     └─ etherium.json
+│  │  └─ textures/
+│  │     ├─ block/
+│  │     │  └─ metal/
+│  │     │     └─ ingot/
+│  │     │        ├─ aetherium.png
+│  │     │        ├─ etherium.png
+│  │     │        └─ spectrium.png
+│  │     └─ item/
+│  │        └─ resource/
+│  │           └─ nugget/
+│  │              ├─ aetherium.png
+│  │              ├─ etherium.png
+│  │              └─ spectrium.png
 │  └─ spookynights/
 │     ├─ blocktypes/
 │     │  └─ jackolantern.json
@@ -13,18 +33,37 @@ resources/
 │     ├─ itemtypes/
 │     │  ├─ food/
 │     │  │  └─ candy.json
+│     │  ├─ resource/
+│     │  │  ├─ spectrium-heart.json
+│     │  │  └─ spectrium-powder.json
+│     │  ├─ toolhead/
+│     │  │  └─ bladehead.json
 │     │  ├─ candybag.json
 │     │  └─ spectralcreature.json
 │     ├─ lang/
 │     │  ├─ en.json
 │     │  └─ fr.json
 │     ├─ patches/
-│     │  └─ remaps.json
+│     │  ├─ itemtypes/
+│     │  │  ├─ resource/
+│     │  │  │  ├─ ingot.json
+│     │  │  │  └─ nugget-metalbit.json
+│     │  │  └─ tool/
+│     │  │     └─ blade.json
+│     │  ├─ worldproperties/
+│     │  │  └─ block/
+│     │  │     ├─ metal.json
+│     │  │     └─ ore-nugget.json
+│     │  ├─ remaps.json
+│     │  └─ remove-metal-blocs.json
 │     ├─ recipes/
-│     │  ├─ alloy/
-│     │  └─ grid/
-│     │     ├─ jackolantern.json
-│     │     └─ spiderweb.json
+│     │  ├─ grid/
+│     │  │  ├─ falx.json
+│     │  │  ├─ jackolantern.json
+│     │  │  ├─ spectrium-nugget.json
+│     │  │  └─ spiderweb.json
+│     │  └─ smithing/
+│     │     └─ blade-falx.json
 │     ├─ shapes/
 │     │  ├─ block/
 │     │  │  └─ jackolantern/
@@ -65,6 +104,20 @@ resources/
 │     │     │     ├─ shadowcube.json
 │     │     │     ├─ spidergummy.json
 │     │     │     └─ vampireteeth.json
+│     │     ├─ resource/
+│     │     │  └─ spectralheart.json
+│     │     ├─ tool/
+│     │     │  └─ blade/
+│     │     │     └─ falx/
+│     │     │        ├─ aetherium.json
+│     │     │        ├─ etherium.json
+│     │     │        └─ spectrium.json
+│     │     ├─ toolhead/
+│     │     │  └─ blade/
+│     │     │     └─ falx/
+│     │     │        ├─ aetherium.json
+│     │     │        ├─ etherium.json
+│     │     │        └─ spectrium.json
 │     │     └─ candybag.json
 │     ├─ sounds/
 │     │  ├─ block/
@@ -156,6 +209,16 @@ resources/
 │           │     ├─ shadowcube.png
 │           │     ├─ spidergummy.png
 │           │     └─ vampireteeth.png
+│           ├─ resource/
+│           │  ├─ aetherium.png
+│           │  ├─ etherium.png
+│           │  ├─ silverpowder.png
+│           │  ├─ spectrium-bountiful.png
+│           │  ├─ spectrium-medium.png
+│           │  ├─ spectrium-poor.png
+│           │  ├─ spectrium-rich.png
+│           │  ├─ spectrium.png
+│           │  └─ spectriumpowder.png
 │           ├─ candybag.png
 │           └─ string.png
 ├─ modicon.png

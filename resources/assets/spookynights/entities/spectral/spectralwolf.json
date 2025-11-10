@@ -154,6 +154,10 @@
 	},
 	"server": {
 		"behaviors": [
+			{
+				"code": "spectralresistance",
+				"resistance": 0.5
+			},
 			{ "code": "repulseagents" },
 			{
 				"code": "deaddecay",
@@ -269,7 +273,7 @@
 						"damagePlayerAtMs": 900,
 						"animation": "attack-withwindup",
 						"animationSpeed": 1.5,
-						"sound": "creature/wolf/attack"
+						"sound": "game:creature/wolf/attack"
 					},
 					{
 						"code": "meleeattack",
@@ -285,7 +289,7 @@
 						"damagePlayerAtMs": 500,
 						"animation": "Attack-High",
 						"animationSpeed": 1.5,
-						"sound": "creature/wolf/attack"
+						"sound": "game:creature/wolf/attack"
 					},
 					{
 						"code": "meleeattack",
@@ -302,7 +306,7 @@
 						"retaliateAttacks": false,
 						"animation": "Attack-Low",
 						"animationSpeed": 1.5,
-						"sound": "creature/wolf/attack"
+						"sound": "game:creature/wolf/attack"
 					},
 					{
 						"code": "fleeentity",
@@ -327,7 +331,7 @@
 						"leapAnimation": null,
 						"animationSpeed": 2,
 						"leapChance": 0.01,
-						"sound": "creature/wolf/growl",
+						"sound": "game:creature/wolf/growl",
 						"whenNotInEmotionState": "saturated"
 					},
 					{
@@ -343,7 +347,7 @@
 						"leapAnimation": null,
 						"animationSpeed": 1.5,
 						"leapChance": 0.01,
-						"sound": "creature/wolf/growl",
+						"sound": "game:creature/wolf/growl",
 						"whenNotInEmotionState": "saturated"
 					},
 					{
@@ -357,7 +361,7 @@
 						"leapAnimation": null,
 						"animationSpeed": 2,
 						"leapChance": 0.01,
-						"sound": "creature/wolf/growl",
+						"sound": "game:creature/wolf/growl",
 						"whenInEmotionState": "aggressiveondamage"
 					},
 					{
@@ -429,7 +433,7 @@
 						"mincooldown": 80000,
 						"maxcooldown": 500000,
 						"animationSpeed": 0.7,
-						"sound": "creature/wolf/howl*",
+						"sound": "game:creature/wolf/howl*",
 						"soundRange": 110
 					},
 					{
@@ -494,9 +498,9 @@
 		}
 	},
 	"sounds": {
-		"hurt": "creature/wolf/hurt",
-		"death": "creature/wolf/hurt",
-		"idle": "creature/wolf/howl*"
+		"hurt": "game:creature/wolf/hurt",
+		"death": "game:creature/wolf/hurt",
+		"idle": "game:creature/wolf/howl*"
 	},
 	"idleSoundChance": 0
 }
