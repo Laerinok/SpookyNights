@@ -477,7 +477,7 @@
 					"*-surface": [
 						{
 							"type": "item",
-							"code": "spookynights:spectralheart",
+							"code": "spookynights:spectralheart-poor",
 							"quantity": {
 								"avg": 0.5,
 								"var": 0.5
@@ -512,7 +512,7 @@
 					"*-deep": [
 						{
 							"type": "item",
-							"code": "spookynights:spectralheart",
+							"code": "spookynights:spectralheart-poor",
 							"quantity": {
 								"avg": 0.2,
 								"var": 0
@@ -547,7 +547,7 @@
 					"*-tainted": [
 						{
 							"type": "item",
-							"code": "spookynights:spectralheart",
+							"code": "spookynights:spectralheart-medium",
 							"quantity": {
 								"avg": 0.35,
 								"var": 0
@@ -582,7 +582,7 @@
 					"*-corrupt": [
 						{
 							"type": "item",
-							"code": "spookynights:spectralheart",
+							"code": "spookynights:spectralheart-medium",
 							"quantity": {
 								"avg": 0.5,
 								"var": 0
@@ -617,7 +617,42 @@
 					"*-nightmare": [
 						{
 							"type": "item",
-							"code": "spookynights:spectralheart",
+							"code": "spookynights:spectralheart-rich",
+							"quantity": {
+								"avg": 0.7,
+								"var": 0
+							}
+						},
+						{
+							"type": "item",
+							"code": "game:gear-temporal",
+							"quantity": {
+								"avg": 0.05332,
+								"var": 0
+							}
+						},
+						{
+							"type": "item",
+							"code": "game:gear-rusty",
+							"dropModbyStat": "rustyGearDropRate",
+							"quantity": {
+								"avg": 0.2,
+								"var": 0
+							}
+						},
+						{
+							"type": "item",
+							"code": "game:flaxfibers",
+							"quantity": {
+								"avg": 1,
+								"var": 0
+							}
+						}
+					],
+					"*-stilt": [
+						{
+							"type": "item",
+							"code": "spookynights:spectralheart-rich",
 							"quantity": {
 								"avg": 0.7,
 								"var": 0
@@ -652,7 +687,7 @@
 					"*": [
 						{
 							"type": "item",
-							"code": "spookynights:spectralheart",
+							"code": "spookynights:spectralheart-bountiful",
 							"quantity": {
 								"avg": 1,
 								"var": 0

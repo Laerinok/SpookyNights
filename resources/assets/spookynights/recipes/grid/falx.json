@@ -1,0 +1,24 @@
+[
+  {
+    "ingredientPattern": "F,S",
+    "ingredients": {
+      "F": {
+        "type": "item",
+        "code": "bladehead-falx-*",
+        "name": "metal",
+        "allowedVariants": [ "spectrium", "etherium", "aetherium" ]
+      },
+      "S": {
+        "type": "item",
+        "code": "game:stick"
+      }
+    },
+    "width": 1,
+    "height": 2,
+    "output": {
+      "type": "item",
+      "code": "game:blade-falx-{metal}",
+      "quantity": 1
+    }
+  }
+]

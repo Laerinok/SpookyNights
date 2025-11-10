@@ -438,7 +438,7 @@
 					"spectralbear-brown-adult-*": [
 						{
 							"type": "item",
-							"code": "spookynights:spectralheart",
+							"code": "spookynights:spectralheart-rich",
 							"quantity": {
 								"avg": 0.8,
 								"var": 0
@@ -464,7 +464,7 @@
 					"spectralbear-giant-adult-*": [
 						{
 							"type": "item",
-							"code": "spookynights:spectralheart",
+							"code": "spookynights:spectralheart-bountiful",
 							"quantity": {
 								"avg": 1,
 								"var": 0

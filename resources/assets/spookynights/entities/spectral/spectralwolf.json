@@ -166,7 +166,7 @@
 					"spectralwolf-eurasian-adult-*": [
 						{
 							"type": "item",
-							"code": "spookynights:spectralheart",
+							"code": "spookynights:spectralheart-medium",
 							"quantity": {
 								"avg": 0.1,
 								"var": 0

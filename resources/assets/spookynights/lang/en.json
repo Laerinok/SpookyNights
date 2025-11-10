@@ -79,7 +79,18 @@
   "item-creature-spectralbear-giant-adult-male": "Giant Spectral Bear (male)",
   "item-dead-creature-spectralbear-giant-adult-male": "Dead Giant Spectral Bear (Male)",
 
+  "item-spectralheart-bountiful": "Spectral Heart (bountiful)",
+  "item-spectralheart-medium": "Spectral Heart (medium)",
+  "item-spectralheart-poor": "Spectral Heart (poor)",
+  "item-spectralheart-rich": "Spectral Heart (rich)",
   "item-spectralheart": "Spectral Heart",
-  "itemdesc-etheriumheart": "You can get some spectrium nugget from the hard cold heart",
-  "item-spectriumpowder": "Etherium Powder"
+  "itemdesc-spectralheart-*": "You can get some spectrium nugget from the hard cold heart",
+  "item-spectriumpowder": "Spectrium Powder",
+
+  "item-bladehead-falx-aetherium": "Bladehead falx (aetherium)",
+  "item-bladehead-falx-etherium": "Bladehead falx (etherium)",
+  "item-bladehead-falx-spectrium": "Bladehead falx (spectrium)",
+  "item-bladehead-short-aetherium": "Bladehead short (aetherium)",
+  "item-bladehead-short-etherium": "Bladehead short (etherium)",
+  "item-bladehead-short-spectrium": "Bladehead short (spectrium)"
 }

@@ -1,20 +1,52 @@
 {
   "code": "spectralheart",
   "class": "Item",
+  "variantgroups": [
+    {
+      "code": "grade",
+      "states": [ "poor", "medium", "rich", "bountiful" ]
+    }
+  ],
   "shape": { "base": "item/resource/spectralheart" },
-  "textures": {
-    "etherium": { "base": "item/resource/spectrium" }
+  "texturesByType": {
+    "spectralheart-poor": { "spectrium": { "base": "item/resource/spectrium-poor" } },
+    "spectralheart-medium": { "spectrium": { "base": "item/resource/spectrium-medium" } },
+    "spectralheart-rich": { "spectrium": { "base": "item/resource/spectrium-rich" } },
+    "spectralheart-bountiful": { "spectrium": { "base": "item/resource/spectrium-bountiful" } }
   },
   "creativeinventory": {
     "spookynights": [ "*" ],
     "general": [ "*" ]
   },
   "maxstacksize": 64,
-  "grindingProps": {
-    "groundStack": {
-      "type": "item",
-      "code": "spectriumpowder",
-      "quantity": 5
+  "grindingPropsByType": {
+    "spectralheart-poor": {
+      "groundStack": {
+        "type": "item",
+        "code": "spectriumpowder",
+        "quantity": 5
+      }
+    },
+    "spectralheart-medium": {
+      "groundStack": {
+        "type": "item",
+        "code": "spectriumpowder",
+        "quantity": 10
+      }
+    },
+    "spectralheart-rich": {
+      "groundStack": {
+        "type": "item",
+        "code": "spectriumpowder",
+        "quantity": 15
+      }
+    },
+    "spectralheart-bountiful": {
+      "groundStack": {
+        "type": "item",
+        "code": "spectriumpowder",
+        "quantity": 20
+      }
     }
   },
   "attributes": {
