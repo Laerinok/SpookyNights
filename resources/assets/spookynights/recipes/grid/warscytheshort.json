@@ -1,10 +1,10 @@
 [
   {
-    "ingredientPattern": "F,S",
+    "ingredientPattern": "W,S",
     "ingredients": {
-      "F": {
+      "W": {
         "type": "item",
-        "code": "bladehead-falx-*",
+        "code": "warscythehead-short-*",
         "name": "metal",
         "allowedVariants": [ "spectrium", "etherium", "aetherium" ]
       },
@@ -17,7 +17,7 @@
     "height": 2,
     "output": {
       "type": "item",
-      "code": "game:blade-falx-{metal}",
+      "code": "warscythe-short-{metal}",
       "quantity": 1
     }
   }

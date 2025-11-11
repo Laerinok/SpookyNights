@@ -1,0 +1,98 @@
+{
+  "code": "spectralarrow",
+  "class": "ItemSpectralArrow",
+  "maxstacksize": 64,
+  "variantgroups": [
+    {
+      "code": "metal",
+      "states": [ "spectrium", "etherium", "aetherium" ]
+    }
+  ],
+  "shape": { "base": "item/tool/spectralarrow" },
+  "textures": {
+    "material": { "base": "item/resource/spectrium" },
+    "stick": { "base": "game:block/wood/planks/birch1" },
+    "feathers": { "base": "game:item/tool/material/feather" }
+  },
+  "attributesByType": {
+    "*-spectrium": {
+      "damage": 3.5,
+      "spectralDamageBonus": 1
+    },
+    "*-etherium": {
+      "damage": 4.0,
+      "spectralDamageBonus": 1.2
+    },
+    "*-aetherium": {
+      "damage": 4.5,
+      "spectralDamageBonus": 1.4
+    }
+  },
+  "damageByType": {
+    "*-spectrium": 3.5,
+    "*-etherium": 4.0,
+    "*-aetherium": 4.5
+  },
+  "creativeinventory": {
+    "general": [ "*" ],
+    "items": [ "*" ],
+    "spookynights": [ "*" ]
+  },
+  "guiTransform": {
+    "rotation": {
+      "x": -23,
+      "y": -45,
+      "z": -145
+    },
+    "origin": {
+      "x": 0.7,
+      "y": -0.45,
+      "z": 0
+    },
+    "scale": 1.44
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": 0.35,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 87,
+      "y": 90,
+      "z": -30
+    },
+    "scale": 1.14
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": -1.05,
+      "y": -0.4599,
+      "z": -0.87
+    },
+    "rotation": {
+      "x": 0,
+      "y": 2,
+      "z": 3
+    },
+    "scale": 0.55
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": -0.03,
+      "z": 0.5
+    },
+    "scale": 2.64
+  }
+}

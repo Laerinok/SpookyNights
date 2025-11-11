@@ -79,11 +79,32 @@
   "item-creature-spectralbear-giant-adult-male": "Giant Spectral Bear (male)",
   "item-dead-creature-spectralbear-giant-adult-male": "Dead Giant Spectral Bear (Male)",
 
+  "item-bladehead-falx-aetherium": "Bladehead falx (aetherium)",
+  "item-bladehead-falx-etherium": "Bladehead falx (etherium)",
+  "item-bladehead-falx-spectrium": "Bladehead falx (spectrium)",
+
   "item-spectralheart-bountiful": "Spectral Heart (bountiful)",
   "item-spectralheart-medium": "Spectral Heart (medium)",
   "item-spectralheart-poor": "Spectral Heart (poor)",
   "item-spectralheart-rich": "Spectral Heart (rich)",
   "item-spectralheart": "Spectral Heart",
   "itemdesc-spectralheart-*": "You can get some spectrium nugget from the hard cold heart",
-  "item-spectriumpowder": "Spectrium Powder"
+  "item-spectriumpowder": "Spectrium Powder",
+
+  "item-warscythe-short-spectrium": "Short Warscythe (Spectrium)",
+  "item-warscythe-short-etherium": "Short Warscythe (Etherium)",
+  "item-warscythe-short-aetherium": "Short Warscythe (Aetherium)",
+  "itemdesc-warscythe-short-*": "Forged with spectral essence",
+
+  "item-warscythehead-short-aetherium": "Short War Scythe Head (Aetherium)",
+  "item-warscythehead-short-etherium": "Short War Scythe Head (Etherium)",
+  "item-warscythehead-short-spectrium": "Short War Scythe Head (Spectrium)",
+
+  "item-spectralarrow-spectrium": "Spectral Arrow (Spectrium)",
+  "item-spectralarrow-etherium": "Spectral Arrow (Etherium)",
+  "item-spectralarrow-aetherium": "Spectral Arrow (Aetherium)",
+  "itemdesc-spectralarrow-*": "Forged with spectral essence",
+
+  "iteminfo-spectralbonus-simplified": "<font color=\"#a08ee0\">+{0}% bonus damage vs spectral creatures.</font>",
+  "iteminfo-spectralmalus": "<font color=\"#ff8080\">-50% damage penalty against spectral creatures.</font>"
 }

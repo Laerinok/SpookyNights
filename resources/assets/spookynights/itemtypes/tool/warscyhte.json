@@ -1,0 +1,232 @@
+{
+  "code": "warscythe",
+  "tags": [ "weapon", "weapon-melee" ],
+  "class": "ItemWarScythe",
+  "damagedby": [ "blockbreaking", "attacking" ],
+  "tool": "sword",
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [ "short" ]
+    },
+    {
+      "code": "metal",
+      "states": [ "spectrium", "etherium", "aetherium" ]
+    }
+  ],
+  "shapeByType": {
+    "warscythe-short-*": { "base": "item/tool/warscythe-short" }
+  },
+  "texturesByType": {
+    "warscythe-short-spectrium": {
+      "handle": { "base": "game:item/tool/material/handle" },
+      "blueleather": { "base": "game:item/tool/shield/leather/blue" },
+      "brownleather": { "base": "game:item/tool/shield/leather/brown" },
+      "warscytheblade": { "base": "item/resource/spectrium" }
+    },
+    "warscythe-short-etherium": {
+      "handle": { "base": "game:item/tool/material/handle" },
+      "blueleather": { "base": "game:item/tool/shield/leather/blue" },
+      "brownleather": { "base": "game:item/tool/shield/leather/brown" },
+      "warscytheblade": { "base": "item/resource/etherium" }
+    },
+    "warscythe-short-aetherium": {
+      "handle": { "base": "game:item/tool/material/handle" },
+      "blueleather": { "base": "game:item/tool/shield/leather/blue" },
+      "brownleather": { "base": "game:item/tool/shield/leather/brown" },
+      "warscytheblade": { "base": "item/resource/aetherium" }
+    }
+  },
+  "attributes": {
+    "heldItemPitchFollow": 0.9,
+    "handbook": {
+      "groupBy": [ "warscythe-*" ]
+    },
+    "toolrackTransformByType": {
+      "warscythe-short-*": {
+        "translation": {
+          "x": 0.2,
+          "y": 0.85,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        },
+        "origin": {
+          "x": 1,
+          "y": 0.5,
+          "z": 0.5
+        },
+        "scale": 1.66
+      }
+    },
+    "groundStorageTransformByType": {
+      "warscythe-short-*": {
+        "translation": {
+          "x": 0,
+          "y": 0.4,
+          "z": 0.3
+        },
+        "rotation": {
+          "x": 25,
+          "y": 90,
+          "z": -90
+        },
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        }
+      }
+    }
+  },
+  "attributesByType": {
+    "warscythe-short-spectrium": {
+      "ripHarvest": true,
+      "spectralDamageBonus": 1
+    },
+    "warscythe-short-etherium": {
+      "ripHarvest": true,
+      "spectralDamageBonus": 1.2
+    },
+    "warscythe-short-aetherium": {
+      "ripHarvest": true,
+      "spectralDamageBonus": 1.4
+    }
+  },
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "WallHalves",
+        "wallOffYByType": {
+          "warscythe-short-spectrium": 1
+        },
+        "ctrlKey": true,
+        "selectionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.1,
+          "z2": 1
+        },
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 0,
+          "y2": 0,
+          "z2": 0
+        }
+      }
+    },
+    { "name": "AnimationAuthoritative" }
+  ],
+  "heldTpHitAnimationByType": {
+    "warscythe-short-*": "falx"
+  },
+  "attackRangebytype": {
+    "*": 2.5
+  },
+  "tooltierbytype": {
+    "*-spectrium": 2,
+    "*-etherium": 3,
+    "*-aetherium": 4
+  },
+  "attackpowerbytype": {
+    "warscythe-short-spectrium": 3.8,
+    "warscythe-short-etherium": 4.3,
+    "warscythe-short-aetherium": 4.8
+  },
+  "durabilitybytype": {
+    "warscythe-short-spectrium": 400,
+    "warscythe-short-etherium": 900,
+    "warscythe-short-aetherium": 1200
+  },
+  "creativeinventoryByType": {
+    "*": {
+      "general": [ "*" ],
+      "items": [ "*" ],
+      "tools": [ "*" ],
+      "spookynights": [ "*" ]
+    }
+  },
+  "guiTransformByType": {
+    "warscythe-short-*": {
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": -94,
+        "y": 47,
+        "z": 44
+      },
+      "origin": {
+        "x": 0.6,
+        "y": 0,
+        "z": 0.52
+      },
+      "scale": 2.6
+    }
+  },
+  "fpHandTransformByType": {
+    "warscythe-short-*": {
+      "translation": {
+        "x": -0.2,
+        "y": -0.4,
+        "z": 0
+      },
+      "rotation": {
+        "x": -13,
+        "y": 15,
+        "z": 90
+      },
+      "scale": 3.69
+    }
+  },
+  "groundTransformByType": {
+    "warscythe-short-*": {
+      "translation": {
+        "x": 0,
+        "y": 0.05,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.5
+      },
+      "scale": 3.67
+    }
+  },
+  "tpHandTransformByType": {
+    "warscythe-short-*": {
+      "translation": {
+        "x": -0.65,
+        "y": -1,
+        "z": 0.2
+      },
+      "rotation": {
+        "x": 90,
+        "y": 0,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.3,
+        "y": 0.8,
+        "z": 0.5
+      },
+      "scale": 0.9
+    }
+  }
+}

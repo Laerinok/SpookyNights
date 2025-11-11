@@ -366,6 +366,7 @@
 						"seekingRange": 15,
 						"animationSpeed": 1.5,
 						"animation": "standthrowleft",
+						"projectileCode": "game:thrownstone-{rock}",
 						"projectileDamage": 1,
 						"projectileDamageTier": 0
 					},

@@ -1,17 +1,14 @@
-﻿// In source/SpookyNightsModSystems.cs
-
-using SpookyNights;
-using System;
-using System.Collections.Generic;
+﻿using Spookynights;
+using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 
-namespace Spookynights
+namespace SpookyNights
 {
-    public sealed class SpookyNights : ModSystem
+    public sealed class SpookyNightsModSystem : ModSystem
     {
         private ICoreAPI api = default!;
         private ICoreServerAPI sapi = default!;
@@ -45,8 +42,14 @@ namespace Spookynights
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
+
+            // Register all custom classes here
+            new Harmony("fr.laerinok.spookynights").PatchAll();
+            api.RegisterItemClass("ItemWarScythe", typeof(ItemWarScythe));
+            api.RegisterItemClass("ItemSpectralArrow", typeof(ItemSpectralArrow));
             api.RegisterItemClass("ItemCandyBag", typeof(ItemCandyBag));
             api.RegisterEntityBehaviorClass("spectralresistance", typeof(EntityBehaviorSpectralResistance));
+
             api.Logger.Notification("🌟 Spooky Nights is loaded!");
         }
 
@@ -54,11 +57,8 @@ namespace Spookynights
         {
             this.sapi = api;
 
-            // We already load the config in StartPre, but we check its value here
-            // after the server is fully started.
             if (ConfigManager.ServerConf != null)
             {
-                // This is our diagnostic log. It will ALWAYS show up.
                 sapi.Logger.Notification("[SpookyNights] Config loaded. Debug logging is set to: {0}", ConfigManager.ServerConf.EnableDebugLogging);
             }
             else
@@ -75,6 +75,9 @@ namespace Spookynights
 
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
+
+            if (damageSource == null) return;
+
             if (sapi == null || ConfigManager.ServerConf == null || !ConfigManager.ServerConf.EnableCandyLoot) return;
             if (damageSource.SourceEntity is not EntityPlayer) return;
             string? matchedKey = null;
@@ -112,13 +115,11 @@ namespace Spookynights
 
         private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
         {
-            // Return early if it's not our mod's entity or if the config is missing.
             if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights")
             {
                 return true;
             }
 
-            // This is the main debug switch. All detailed spawning logs are inside this block.
             bool debugEnabled = ConfigManager.ServerConf.EnableDebugLogging;
 
             if (debugEnabled)
@@ -138,6 +139,8 @@ namespace Spookynights
                     {
                         isHandledAsBoss = true;
                         BossSpawningConfig bossConfig = bossEntry.Value;
+                        if (bossConfig == null) continue;
+
                         if (bossConfig.Enabled)
                         {
                             if (!bossConfig.AllowedMoonPhases.Contains(currentMoonPhase))
@@ -174,7 +177,7 @@ namespace Spookynights
                             if (start > end) { isDarkEnough = hour >= start || hour < end; }
                             else { isDarkEnough = hour >= start && hour < end; }
                         }
-                        else // Auto mode
+                        else
                         {
                             int lightLevel = sapi.World.BlockAccessor.GetLightLevel(spawnPosition.AsBlockPos, EnumLightLevelType.MaxLight);
                             isDarkEnough = lightLevel <= ConfigManager.ServerConf.LightLevelThreshold;
@@ -186,7 +189,6 @@ namespace Spookynights
                             return false;
                         }
                     }
-                    // ... (The rest of the time checks follow the same pattern)
                     if (ConfigManager.ServerConf.AllowedSpawnMonths != null && ConfigManager.ServerConf.AllowedSpawnMonths.Count > 0)
                     {
                         int currentMonth = sapi.World.Calendar.Month;
