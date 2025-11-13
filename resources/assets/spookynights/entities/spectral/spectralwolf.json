@@ -433,7 +433,7 @@
 						"mincooldown": 80000,
 						"maxcooldown": 500000,
 						"animationSpeed": 0.7,
-						"sound": "game:creature/wolf/howl*",
+						"sound": "creature/wolf/howl1",
 						"soundRange": 110
 					},
 					{
@@ -500,7 +500,7 @@
 	"sounds": {
 		"hurt": "game:creature/wolf/hurt",
 		"death": "game:creature/wolf/hurt",
-		"idle": "game:creature/wolf/howl*"
+		"idle": "creature/wolf/howl1"
 	},
 	"idleSoundChance": 0
 }

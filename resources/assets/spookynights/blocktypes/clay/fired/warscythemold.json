@@ -1,23 +1,21 @@
 {
   "code": "warscythemold",
-  "class": "Block",
+  "class": "BlockToolMold",
+  "entityClass": "ToolMold",
 
   "behaviors": [
-    {
-      "name": "GroundStorable",
-      "properties": { "layout": "SingleCenter" }
-    },
-    { "name": "Unplaceable" }, // The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility
-    { "name": "RightClickPickup" }
+    { "name": "Lockable" },
+    { "name": "UnstableFalling" }
   ],
+  "entityBehaviors": [ { "name": "TemperatureSensitive" } ],
   "variantgroups": [
     {
       "code": "color",
-      "states": [ "blue", "red", "fire" ]
+      "states": [ "blue", "fire", "black", "brown", "cream", "gray", "orange", "red", "tan" ]
     },
     {
       "code": "materialtype",
-      "states": [ "raw" ]
+      "states": [ "fired" ]
     },
     {
       "code": "warscythetype",
@@ -30,9 +28,13 @@
       "rotateY": 0
     }
   },
-  "textures": { "all": { "base": "game:block/clay/{color}clay" } },
+  "textures": {
+    "floor": { "base": "game:block/clay/hardened/{color}" },
+    "other": { "base": "game:block/clay/hardened/{color}" }
+  },
   "attributes": {
     "reinforcable": true,
+    "shatteredShape": { "base": "block/clay/mold/shattered-ingot" },
     "onTongTransformByType": {
       "*": {
         "translation": {
@@ -57,64 +59,24 @@
     }
   },
   "attributesByType": {
-    "warscythemold-red-raw-*": {
-      "beehivekiln": {
-        "0": {
-          "type": "block",
-          "code": "warscythemold-tan-fired-{warscythetype}"
-        },
-        "1": {
-          "type": "block",
-          "code": "warscythemold-orange-fired-{warscythetype}"
-        },
-        "2": {
-          "type": "block",
-          "code": "warscythemold-red-fired-{warscythetype}"
-        },
-        "3": {
-          "type": "block",
-          "code": "warscythemold-brown-fired-{warscythetype}"
-        }
+    "warscythemold-*-fired-warscythe-short": {
+      "requiredUnits": 100,
+      "fillHeight": 1,
+      "moldrackable": true,
+      "onmoldrackTransform": { "rotation": { "z": 90 } },
+      "drop": {
+        "type": "item",
+        "code": "warscythehead-short-{metal}"
       }
     },
-    "warscythemold-blue-raw-*": {
-      "beehivekiln": {
-        "0": {
-          "type": "block",
-          "code": "warscythemold-cream-fired-{warscythetype}"
-        },
-        "1": {
-          "type": "block",
-          "code": "warscythemold-gray-fired-{warscythetype}"
-        },
-        "2": {
-          "type": "block",
-          "code": "warscythemold-black-fired-{warscythetype}"
-        },
-        "3": {
-          "type": "block",
-          "code": "warscythemold-black-fired-{warscythetype}"
-        }
-      }
-    },
-    "warscythemold-fire-raw-*": {
-      "beehivekiln": {
-        "0": {
-          "type": "block",
-          "code": "warscythemold-fire-fired-{warscythetype}"
-        },
-        "1": {
-          "type": "block",
-          "code": "warscythemold-fire-fired-{warscythetype}"
-        },
-        "2": {
-          "type": "block",
-          "code": "warscythemold-fire-fired-{warscythetype}"
-        },
-        "3": {
-          "type": "block",
-          "code": "warscythemold-fire-fired-{warscythetype}"
-        }
+    "warscythemold-*-fired-warscythe-long": {
+      "requiredUnits": 100,
+      "fillHeight": 1,
+      "moldrackable": true,
+      "onmoldrackTransform": { "rotation": { "z": 90 } },
+      "drop": {
+        "type": "item",
+        "code": "warscythehead-long-{metal}"
       }
     }
   },

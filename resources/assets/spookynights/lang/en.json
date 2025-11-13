@@ -94,11 +94,19 @@
   "item-warscythe-short-spectrium": "Short Warscythe (Spectrium)",
   "item-warscythe-short-etherium": "Short Warscythe (Etherium)",
   "item-warscythe-short-aetherium": "Short Warscythe (Aetherium)",
-  "itemdesc-warscythe-short-*": "Forged with spectral essence",
+  "itemdesc-warscythe-short-*": "Forged with spectral essence. Short but fast",
 
-  "item-warscythehead-short-aetherium": "Short War Scythe Head (Aetherium)",
-  "item-warscythehead-short-etherium": "Short War Scythe Head (Etherium)",
-  "item-warscythehead-short-spectrium": "Short War Scythe Head (Spectrium)",
+  "item-warscythe-long-aetherium": "Warscythe long (aetherium)",
+  "item-warscythe-long-etherium": "Warscythe long (etherium)",
+  "item-warscythe-long-spectrium": "Warscythe long (spectrium)",
+  "itemdesc-warscythe-long-*": "Forged with spectral essence. Slow but powerfull",
+
+  "item-warscythehead-short-aetherium": "Short Warscythe Head (Aetherium)",
+  "item-warscythehead-short-etherium": "Short Warscythe Head (Etherium)",
+  "item-warscythehead-short-spectrium": "Short Warscythe Head (Spectrium)",
+  "item-warscythehead-long-aetherium": "Long Warscythe Head (aetherium)",
+  "item-warscythehead-long-etherium": "Long Warscythe Head (etherium)",
+  "item-warscythehead-long-spectrium": "Long Warscythe Head (spectrium)",
 
   "item-spectralarrow-spectrium": "Spectral Arrow (Spectrium)",
   "item-spectralarrow-etherium": "Spectral Arrow (Etherium)",
@@ -106,5 +114,31 @@
   "itemdesc-spectralarrow-*": "Forged with spectral essence",
 
   "iteminfo-spectralbonus-simplified": "<font color=\"#a08ee0\">+{0}% bonus damage vs spectral creatures.</font>",
-  "iteminfo-spectralmalus": "<font color=\"#ff8080\">-50% damage penalty against spectral creatures.</font>"
+  "iteminfo-spectralmalus": "<font color=\"#ff8080\">-50% damage penalty against spectral creatures.</font>",
+
+  "block-warscythemold-black-fired-warscythe-long": "Black fired long warscythe mold",
+  "block-warscythemold-black-fired-warscythe-short": "Black fired short warscythe mold",
+  "block-warscythemold-blue-fired-warscythe-long": "Blue fired long warscythe mold",
+  "block-warscythemold-blue-fired-warscythe-short": "Blue fired short warscythe mold",
+  "block-warscythemold-blue-raw-warscythe-long": "Blue raw long warscythe mold",
+  "block-warscythemold-blue-raw-warscythe-short": "Blue raw short warscythe mold",
+  "block-warscythemold-brown-fired-warscythe-long": "Brown fired long warscythe mold",
+  "block-warscythemold-brown-fired-warscythe-short": "Brown fired short warscythe mold",
+  "block-warscythemold-cream-fired-warscythe-long": "Cream fired long warscythe mold",
+  "block-warscythemold-cream-fired-warscythe-short": "Cream fired short warscythe mold",
+  "block-warscythemold-fire-fired-warscythe-long": "Fire fired long warscythe mold",
+  "block-warscythemold-fire-fired-warscythe-short": "Fire fired short warscythe mold",
+  "block-warscythemold-fire-raw-warscythe-long": "Fire raw long warscythe mold",
+  "block-warscythemold-fire-raw-warscythe-short": "Fire raw short warscythe mold",
+  "block-warscythemold-gray-fired-warscythe-long": "Gray fired long warscythe mold",
+  "block-warscythemold-gray-fired-warscythe-short": "Gray fired short warscythe mold",
+  "block-warscythemold-orange-fired-warscythe-long": "Orange fired long warscythe mold",
+  "block-warscythemold-orange-fired-warscythe-short": "Orange fired short warscythe mold",
+  "block-warscythemold-red-fired-warscythe-long": "Red fired long warscythe mold",
+  "block-warscythemold-red-fired-warscythe-short": "Red fired short warscythe mold",
+  "block-warscythemold-red-raw-warscythe-long": "Red raw long warscythe mold",
+  "block-warscythemold-red-raw-warscythe-short": "Red raw short warscythe mold",
+  "block-warscythemold-tan-fired-warscythe-long": "Tan fired long warscythe mold",
+  "block-warscythemold-tan-fired-warscythe-short": "Tan fired short warscythe mold"
+
 }

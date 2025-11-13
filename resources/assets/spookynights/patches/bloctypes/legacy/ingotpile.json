@@ -1,0 +1,26 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/textures/spectrium",
+    "value": {
+      "base": "spookynights:item/resource/spectrium"
+    },
+    "file": "blocktypes/legacy/ingotpile.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/textures/etherium",
+    "value": {
+      "base": "spookynights:item/resource/etherium"
+    },
+    "file": "blocktypes/legacy/ingotpile.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/textures/aetherium",
+    "value": {
+      "base": "spookynights:item/resource/aetherium"
+    },
+    "file": "blocktypes/legacy/ingotpile.json"
+  }
+]

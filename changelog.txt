@@ -1,3 +1,6 @@
+v0.3.0 2025-11-12
+- added:1 metal (spectrium) and 2 alloys (etherium/aetherium) for crafting new spectral-themed weapons.
+
 v0.2.0 2025-11-06
 - Added: Configuration file for advanced mod customization.
 - Added: Spectral creatures are now unique entities, not just patches on vanilla mobs.

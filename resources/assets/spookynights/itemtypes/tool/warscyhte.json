@@ -7,7 +7,7 @@
   "variantgroups": [
     {
       "code": "type",
-      "states": [ "short" ]
+      "states": [ "short", "long" ]
     },
     {
       "code": "metal",
@@ -15,7 +15,8 @@
     }
   ],
   "shapeByType": {
-    "warscythe-short-*": { "base": "item/tool/warscythe-short" }
+    "warscythe-short-*": { "base": "item/tool/warscythe-short" },
+    "warscythe-long-*": { "base": "item/tool/warscythe-long" }
   },
   "texturesByType": {
     "warscythe-short-spectrium": {
@@ -32,16 +33,25 @@
     },
     "warscythe-short-aetherium": {
       "handle": { "base": "game:item/tool/material/handle" },
-      "blueleather": { "base": "game:item/tool/shield/leather/blue" },
-      "brownleather": { "base": "game:item/tool/shield/leather/brown" },
+      "warscytheblade": { "base": "item/resource/aetherium" }
+    },
+    "warscythe-long-spectrium": {
+      "handle": { "base": "game:item/tool/material/handle" },
+      "warscytheblade": { "base": "item/resource/spectrium" }
+    },
+    "warscythe-long-etherium": {
+      "handle": { "base": "game:item/tool/material/handle" },
+      "warscytheblade": { "base": "item/resource/etherium" }
+    },
+    "warscythe-long-aetherium": {
+      "handle": { "base": "game:item/tool/material/handle" },
       "warscytheblade": { "base": "item/resource/aetherium" }
     }
   },
   "attributes": {
     "heldItemPitchFollow": 0.9,
-    "handbook": {
-      "groupBy": [ "warscythe-*" ]
-    },
+    "ripHarvest": true,
+    "handbook": { "groupBy": [ "warscythe-*" ] },
     "toolrackTransformByType": {
       "warscythe-short-*": {
         "translation": {
@@ -56,6 +66,24 @@
         },
         "origin": {
           "x": 1,
+          "y": 0.5,
+          "z": 0.5
+        },
+        "scale": 1.66
+      },
+      "warscythe-long-*": {
+        "translation": {
+          "x": 0,
+          "y": 0.85,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "origin": {
+          "x": 1.4,
           "y": 0.5,
           "z": 0.5
         },
@@ -79,20 +107,34 @@
           "y": 0,
           "z": 0.5
         }
+      },
+      "warscythe-long-*": {
+        "translation": {
+          "x": 0,
+          "y": 1.1,
+          "z": 0.75
+        },
+        "rotation": {
+          "x": 25,
+          "y": 90,
+          "z": -90
+        },
+        "origin": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
       }
     }
   },
   "attributesByType": {
-    "warscythe-short-spectrium": {
-      "ripHarvest": true,
+    "warscythe-*-spectrium": {
       "spectralDamageBonus": 1
     },
-    "warscythe-short-etherium": {
-      "ripHarvest": true,
+    "warscythe-*-etherium": {
       "spectralDamageBonus": 1.2
     },
-    "warscythe-short-aetherium": {
-      "ripHarvest": true,
+    "warscythe-*-aetherium": {
       "spectralDamageBonus": 1.4
     }
   },
@@ -102,7 +144,8 @@
       "properties": {
         "layout": "WallHalves",
         "wallOffYByType": {
-          "warscythe-short-spectrium": 1
+          "warscythe-short-spectrium": 1,
+          "warscythe-long-spectrium": 2
         },
         "ctrlKey": true,
         "selectionBox": {
@@ -126,25 +169,33 @@
     { "name": "AnimationAuthoritative" }
   ],
   "heldTpHitAnimationByType": {
-    "warscythe-short-*": "falx"
+    "warscythe-short-*": "falx",
+    "warscythe-long-*": "axehit"
   },
-  "attackRangebytype": {
-    "*": 2.5
+  "attackRangeByType": {
+    "warscythe-short-*": 2.5,
+    "warscythe-long-*": 3.8
   },
-  "tooltierbytype": {
+  "toolTierByType": {
     "*-spectrium": 2,
     "*-etherium": 3,
     "*-aetherium": 4
   },
-  "attackpowerbytype": {
+  "attackPowerByType": {
     "warscythe-short-spectrium": 3.8,
     "warscythe-short-etherium": 4.3,
-    "warscythe-short-aetherium": 4.8
+    "warscythe-short-aetherium": 4.8,
+    "warscythe-long-spectrium": 4.2,
+    "warscythe-long-etherium": 4.8,
+    "warscythe-long-aetherium": 5.5
   },
-  "durabilitybytype": {
+  "durabilityByType": {
     "warscythe-short-spectrium": 400,
     "warscythe-short-etherium": 900,
-    "warscythe-short-aetherium": 1200
+    "warscythe-short-aetherium": 1200,
+    "warscythe-long-spectrium": 550,
+    "warscythe-long-etherium": 1100,
+    "warscythe-long-aetherium": 1500
   },
   "creativeinventoryByType": {
     "*": {
@@ -172,10 +223,41 @@
         "z": 0.52
       },
       "scale": 2.6
+    },
+    "warscythe-long-*": {
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 90,
+        "y": 154,
+        "z": 180
+      },
+      "origin": {
+        "x": 0.92,
+        "y": 0,
+        "z": 0.44
+      },
+      "scale": 1.7
     }
   },
   "fpHandTransformByType": {
     "warscythe-short-*": {
+      "translation": {
+        "x": -0.2,
+        "y": -0.4,
+        "z": 0
+      },
+      "rotation": {
+        "x": -13,
+        "y": 15,
+        "z": 90
+      },
+      "scale": 3.69
+    },
+    "warscythe-long-*": {
       "translation": {
         "x": -0.2,
         "y": -0.4,
@@ -207,10 +289,46 @@
         "z": 0.5
       },
       "scale": 3.67
+    },
+    "warscythe-long-*": {
+      "translation": {
+        "x": 0,
+        "y": 0.05,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.5
+      },
+      "scale": 3.67
     }
   },
   "tpHandTransformByType": {
     "warscythe-short-*": {
+      "translation": {
+        "x": -0.65,
+        "y": -1,
+        "z": 0.2
+      },
+      "rotation": {
+        "x": 90,
+        "y": 0,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.3,
+        "y": 0.8,
+        "z": 0.5
+      },
+      "scale": 0.9
+    },
+    "warscythe-long-*": {
       "translation": {
         "x": -0.65,
         "y": -1,
