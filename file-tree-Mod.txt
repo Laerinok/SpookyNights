@@ -22,6 +22,11 @@ resources/
 │  │              └─ spectrium.png
 │  └─ spookynights/
 │     ├─ blocktypes/
+│     │  ├─ clay/
+│     │  │  ├─ fired/
+│     │  │  │  └─ warscythemold.json
+│     │  │  └─ raw/
+│     │  │     └─ warscythemold.json
 │     │  └─ jackolantern.json
 │     ├─ entities/
 │     │  └─ spectral/
@@ -36,36 +41,49 @@ resources/
 │     │  ├─ resource/
 │     │  │  ├─ spectrium-heart.json
 │     │  │  └─ spectrium-powder.json
+│     │  ├─ tool/
+│     │  │  └─ warscyhte.json
 │     │  ├─ toolhead/
-│     │  │  └─ bladehead.json
+│     │  │  └─ warscythehead.json
 │     │  ├─ candybag.json
 │     │  └─ spectralcreature.json
 │     ├─ lang/
 │     │  ├─ en.json
 │     │  └─ fr.json
 │     ├─ patches/
+│     │  ├─ bloctypes/
+│     │  │  └─ legacy/
+│     │  │     └─ ingotpile.json
+│     │  ├─ handbook/
+│     │  │  └─ survival-handbook.json
 │     │  ├─ itemtypes/
-│     │  │  ├─ resource/
-│     │  │  │  ├─ ingot.json
-│     │  │  │  └─ nugget-metalbit.json
-│     │  │  └─ tool/
-│     │  │     └─ blade.json
+│     │  │  └─ resource/
+│     │  │     ├─ ingot.json
+│     │  │     └─ nugget-metalbit.json
 │     │  ├─ worldproperties/
 │     │  │  └─ block/
 │     │  │     ├─ metal.json
 │     │  │     └─ ore-nugget.json
 │     │  ├─ remaps.json
-│     │  └─ remove-metal-blocs.json
+│     │  ├─ remove-metal-blocs.json
+│     │  └─ trader.json
 │     ├─ recipes/
+│     │  ├─ clayforming/
+│     │  │  └─ warscythe-short-mold.json
 │     │  ├─ grid/
-│     │  │  ├─ falx.json
 │     │  │  ├─ jackolantern.json
 │     │  │  ├─ spectrium-nugget.json
-│     │  │  └─ spiderweb.json
+│     │  │  ├─ spiderweb.json
+│     │  │  └─ warscytheshort.json
 │     │  └─ smithing/
-│     │     └─ blade-falx.json
+│     │     ├─ warscythe-long.json
+│     │     └─ warscythe-short.json
 │     ├─ shapes/
 │     │  ├─ block/
+│     │  │  ├─ clay/
+│     │  │  │  └─ mold/
+│     │  │  │     ├─ warscythe-long.json
+│     │  │  │     └─ warscythe-short.json
 │     │  │  └─ jackolantern/
 │     │  │     └─ jackolantern.json
 │     │  ├─ entity/
@@ -107,17 +125,8 @@ resources/
 │     │     ├─ resource/
 │     │     │  └─ spectralheart.json
 │     │     ├─ tool/
-│     │     │  └─ blade/
-│     │     │     └─ falx/
-│     │     │        ├─ aetherium.json
-│     │     │        ├─ etherium.json
-│     │     │        └─ spectrium.json
-│     │     ├─ toolhead/
-│     │     │  └─ blade/
-│     │     │     └─ falx/
-│     │     │        ├─ aetherium.json
-│     │     │        ├─ etherium.json
-│     │     │        └─ spectrium.json
+│     │     │  ├─ warscythe-long.json
+│     │     │  └─ warscythe-short.json
 │     │     └─ candybag.json
 │     ├─ sounds/
 │     │  ├─ block/
@@ -127,7 +136,7 @@ resources/
 │     │  │  └─ halloween-scream.ogg
 │     │  └─ creature/
 │     │     └─ wolf/
-│     │        └─ howl4.ogg
+│     │        └─ howl1.ogg
 │     └─ textures/
 │        ├─ block/
 │        │  └─ jackolantern/

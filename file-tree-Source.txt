@@ -1,7 +1,10 @@
 source/
-├─ ClientConfig.cs
-├─ ConfigManager.cs
-├─ ItemCandyBag.cs
-├─ ServerConfig.cs
+├─ config/
+│  ├─ ClientConfig.cs
+│  ├─ ConfigManager.cs
+│  └─ ServerConfig.cs
 ├─ EntityBehaviorSpectralResistance.cs
+├─ HarmonyPatches.cs
+├─ ItemCandyBag.cs
+├─ ItemWarScythe.cs
 └─ SpookyNightsModSystems.cs

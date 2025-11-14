@@ -22,20 +22,13 @@ namespace SpookyNights
             float spectralBonus = 0f;
             ItemStack? sourceStack = null;
 
-            // Case 1: Damage from a projectile (arrow, thrown spear)
-            if (damageSource.SourceEntity is EntityProjectile projectile)
-            {
-                // === THE FINAL FIX ===
-                // The correct property to get the item of the projectile is 'ProjectileStack'.
-                sourceStack = projectile.ProjectileStack;
-            }
-            // Case 2: Damage from a direct melee attack by a player
-            else if (damageSource.SourceEntity is EntityPlayer player)
+            // Case: Damage from a direct melee attack by a player
+            if (damageSource.SourceEntity is EntityPlayer player)
             {
                 sourceStack = player.Player.InventoryManager.ActiveHotbarSlot?.Itemstack;
             }
 
-            // Now, check the source item (whether it was held or a projectile)
+            // Now, check the source item if it was held by a player
             if (sourceStack != null)
             {
                 spectralBonus = sourceStack.Collectible.Attributes?["spectralDamageBonus"].AsFloat(0f) ?? 0f;

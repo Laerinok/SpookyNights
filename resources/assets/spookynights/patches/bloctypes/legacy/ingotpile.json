@@ -5,7 +5,7 @@
     "value": {
       "base": "spookynights:item/resource/spectrium"
     },
-    "file": "blocktypes/legacy/ingotpile.json"
+    "file": "game:blocktypes/legacy/ingotpile.json"
   },
   {
     "op": "addmerge",
@@ -13,7 +13,7 @@
     "value": {
       "base": "spookynights:item/resource/etherium"
     },
-    "file": "blocktypes/legacy/ingotpile.json"
+    "file": "game:blocktypes/legacy/ingotpile.json"
   },
   {
     "op": "addmerge",
@@ -21,6 +21,6 @@
     "value": {
       "base": "spookynights:item/resource/aetherium"
     },
-    "file": "blocktypes/legacy/ingotpile.json"
+    "file": "game:blocktypes/legacy/ingotpile.json"
   }
 ]

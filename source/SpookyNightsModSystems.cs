@@ -46,7 +46,6 @@ namespace SpookyNights
             // Register all custom classes here
             new Harmony("fr.laerinok.spookynights").PatchAll();
             api.RegisterItemClass("ItemWarScythe", typeof(ItemWarScythe));
-            api.RegisterItemClass("ItemSpectralArrow", typeof(ItemSpectralArrow));
             api.RegisterItemClass("ItemCandyBag", typeof(ItemCandyBag));
             api.RegisterEntityBehaviorClass("spectralresistance", typeof(EntityBehaviorSpectralResistance));
 
