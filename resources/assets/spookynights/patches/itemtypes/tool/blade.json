@@ -1,0 +1,129 @@
+[
+  {
+    "file": "game:itemtypes/tool/blade.json",
+    "op": "add",
+    "path": "/variantgroups/1/states/-",
+    "value": "spectrium"
+  },
+  {
+    "file": "game:itemtypes/tool/blade.json",
+    "op": "add",
+    "path": "/variantgroups/1/states/-",
+    "value": "etherium"
+  },
+  {
+    "file": "game:itemtypes/tool/blade.json",
+    "op": "add",
+    "path": "/variantgroups/1/states/-",
+    "value": "aetherium"
+  },
+  {
+    "file": "game:itemtypes/tool/blade.json",
+    "op": "addmerge",
+    "path": "/classByType",
+    "value": {
+      "blade-*-spectrium": "ItemSpectralWeapon",
+      "blade-*-etherium": "ItemSpectralWeapon",
+      "blade-*-aetherium": "ItemSpectralWeapon"
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/blade.json",
+    "op": "replace",
+    "path": "/attributesByType",
+    "value": {
+      "blade-falx-spectrium": {
+        "ripHarvest": true,
+        "attachableToEntity": {
+          "categoryCode": "weaponfalx",
+          "attachedShapeBySlotCode": {
+            "frontrightside": { "base": "item/wearable/hooved/elk/weaponr-falx" },
+            "frontleftside": { "base": "item/wearable/hooved/elk/weaponl-falx" }
+          }
+        },
+        "spectralDamageBonus": 1.0
+      },
+      "blade-falx-etherium": {
+        "ripHarvest": true,
+        "attachableToEntity": {
+          "categoryCode": "weaponfalx",
+          "attachedShapeBySlotCode": {
+            "frontrightside": { "base": "item/wearable/hooved/elk/weaponr-falx" },
+            "frontleftside": { "base": "item/wearable/hooved/elk/weaponl-falx" }
+          }
+        },
+        "spectralDamageBonus": 1.2
+      },
+      "blade-falx-aetherium": {
+        "ripHarvest": true,
+        "attachableToEntity": {
+          "categoryCode": "weaponfalx",
+          "attachedShapeBySlotCode": {
+            "frontrightside": { "base": "item/wearable/hooved/elk/weaponr-falx" },
+            "frontleftside": { "base": "item/wearable/hooved/elk/weaponl-falx" }
+          }
+        },
+        "spectralDamageBonus": 1.4
+      },
+      "blade-falx-*": {
+        "ripHarvest": true,
+        "attachableToEntity": {
+          "categoryCode": "weaponfalx",
+          "attachedShapeBySlotCode": {
+            "frontrightside": { "base": "item/wearable/hooved/elk/weaponr-falx" },
+            "frontleftside": { "base": "item/wearable/hooved/elk/weaponl-falx" }
+          }
+        }
+      },
+      "blade-blackguard-iron": {
+        "attachableToEntity": {
+          "categoryCode": "weapon1m",
+          "attachedShapeBySlotCode": {
+            "frontrightside": { "base": "item/wearable/hooved/elk/weaponr-blackguard" },
+            "frontleftside": { "base": "item/wearable/hooved/elk/weaponl-blackguard" }
+          }
+        }
+      }
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/blade.json",
+    "op": "addmerge",
+    "path": "/texturesByType",
+    "value": {
+      "blade-falx-spectrium": { "falxblade": { "base": "spookynights:item/resource/spectrium" } },
+      "blade-falx-etherium": { "falxblade": { "base": "spookynights:item/resource/etherium" } },
+      "blade-falx-aetherium": { "falxblade": { "base": "spookynights:item/resource/aetherium" } }
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/blade.json",
+    "op": "addmerge",
+    "path": "/attackpowerbytype",
+    "value": {
+      "blade-falx-spectrium": 4.8,
+      "blade-falx-etherium": 5.3,
+      "blade-falx-aetherium": 5.8
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/blade.json",
+    "op": "addmerge",
+    "path": "/tooltierbytype",
+    "value": {
+      "*-spectrium": 2,
+      "*-etherium": 3,
+      "*-aetherium": 4
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/blade.json",
+    "op": "addmerge",
+    "path": "/durabilitybytype",
+    "value": {
+      "blade-falx-spectrium": 650,
+      "blade-falx-etherium": 1200,
+      "blade-falx-aetherium": 1600
+    }
+  }
+]

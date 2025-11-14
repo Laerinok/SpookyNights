@@ -1,7 +1,7 @@
 {
   "code": "warscythe",
   "tags": [ "weapon", "weapon-melee" ],
-  "class": "ItemWarScythe",
+  "class": "ItemSpectralWeapon",
   "damagedby": [ "blockbreaking", "attacking" ],
   "tool": "sword",
   "variantgroups": [

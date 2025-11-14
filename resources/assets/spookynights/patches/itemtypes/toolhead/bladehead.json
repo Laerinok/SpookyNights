@@ -1,0 +1,22 @@
+[
+  {
+    "file": "game:itemtypes/toolhead/bladehead.json",
+    "op": "addmerge",
+    "path": "/variantgroups/1/states",
+    "value": [
+      "spectrium",
+      "etherium",
+      "aetherium"
+    ]
+  },
+  {
+    "file": "game:itemtypes/toolhead/bladehead.json",
+    "op": "addmerge",
+    "path": "/texturesByType",
+    "value": {
+      "bladehead-falx-spectrium": {},
+      "bladehead-falx-etherium": {},
+      "bladehead-falx-aetherium": {}
+    }
+  }
+]

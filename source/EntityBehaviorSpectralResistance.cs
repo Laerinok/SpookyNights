@@ -1,7 +1,6 @@
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
-using Vintagestory.GameContent;
 
 namespace SpookyNights
 {
@@ -19,29 +18,24 @@ namespace SpookyNights
 
         public override void OnEntityReceiveDamage(DamageSource damageSource, ref float damage)
         {
-            float spectralBonus = 0f;
-            ItemStack? sourceStack = null;
+            ItemStack? sourceStack = (damageSource.SourceEntity as EntityPlayer)?.Player.InventoryManager.ActiveHotbarSlot?.Itemstack;
 
-            // Case: Damage from a direct melee attack by a player
-            if (damageSource.SourceEntity is EntityPlayer player)
+            if (sourceStack == null)
             {
-                sourceStack = player.Player.InventoryManager.ActiveHotbarSlot?.Itemstack;
+                damage *= this.resistance;
+                return;
             }
 
-            // Now, check the source item if it was held by a player
-            if (sourceStack != null)
+            if (sourceStack.Collectible is ItemSpectralWeapon)
             {
-                spectralBonus = sourceStack.Collectible.Attributes?["spectralDamageBonus"].AsFloat(0f) ?? 0f;
-            }
+                float spectralBonus = sourceStack.Attributes.GetFloat("spectralDamageBonus",
+                    sourceStack.Collectible.Attributes?["spectralDamageBonus"].AsFloat(1f) ?? 1f);
 
-            // Apply bonus or resistance based on the result
-            if (spectralBonus > 0)
-            {
-                damage *= spectralBonus; // Apply bonus damage
+                damage *= spectralBonus;
             }
             else
             {
-                damage *= this.resistance; // Apply resistance malus
+                damage *= this.resistance;
             }
         }
 

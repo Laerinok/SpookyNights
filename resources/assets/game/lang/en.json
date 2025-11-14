@@ -13,5 +13,17 @@
 
   "material-spectrium": "Spectrium",
   "material-etherium": "Etherium",
-  "material-aetherium": "Aetherium"
+  "material-aetherium": "Aetherium",
+
+  "item-blade-falx-aetherium": "Aetherium falx",
+
+  "item-blade-falx-etherium": "Etherium falx",
+  "item-blade-falx-spectrium": "Spectrium falx",
+  "item-spear-generic-aetherium": "Aetherium Spear",
+  "item-spear-generic-etherium": "Etherium spear",
+  "item-spear-generic-spectrium": "Spectrium spear",
+
+  "item-bladehead-falx-aetherium": "Aetherium falx head",
+  "item-bladehead-falx-etherium": "Etherium falx head",
+  "item-bladehead-falx-spectrium": "Spectrium falx head"
 }

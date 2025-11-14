@@ -1,5 +1,6 @@
-﻿using Spookynights;
-using HarmonyLib;
+﻿using HarmonyLib;
+using Spookynights;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
@@ -45,7 +46,7 @@ namespace SpookyNights
 
             // Register all custom classes here
             new Harmony("fr.laerinok.spookynights").PatchAll();
-            api.RegisterItemClass("ItemWarScythe", typeof(ItemWarScythe));
+            api.RegisterItemClass("ItemSpectralWeapon", typeof(ItemSpectralWeapon));
             api.RegisterItemClass("ItemCandyBag", typeof(ItemCandyBag));
             api.RegisterEntityBehaviorClass("spectralresistance", typeof(EntityBehaviorSpectralResistance));
 
