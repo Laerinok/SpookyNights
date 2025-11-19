@@ -112,6 +112,7 @@
   "iteminfo-spectralmalus": "<font color=\"#ff8080\">Faible contre les créatures spectrales.</font>",
   "iteminfo-spectralbonus": "<font color=\"#80ff80\">Inflige d'énormes dégâts aux créatures spectrales.</font>",
   "iteminfo-spectral-attack-power": "Puissance d'attaque contre les spectres:",
+  "iteminfo-spectral-ranged-damage": "Dégâts perforants spectraux : {0} pv",
 
   "block-warscythemold-black-fired-warscythe-long": "Moule de Faux de Guerre longue cuite noire",
   "block-warscythemold-black-fired-warscythe-short": "Moule de Faux de Guerre courte cuite noire",

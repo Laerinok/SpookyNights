@@ -16,14 +16,18 @@
   "material-aetherium": "Aethérium",
 
   "item-blade-falx-aetherium": "Falx en aethérium",
-
   "item-blade-falx-etherium": "falx en ethérium",
   "item-blade-falx-spectrium": "falx en spectrium",
+
   "item-spear-generic-aetherium": "Lance en aethérium",
   "item-spear-generic-etherium": "Lance en ethérium",
   "item-spear-generic-spectrium": "Lance en spectrium",
 
   "item-bladehead-falx-aetherium": "Tête de falx en aethérium",
   "item-bladehead-falx-etherium": "Tête de falx en ethérium",
-  "item-bladehead-falx-spectrium": "Tête de falx en spectrium"
+  "item-bladehead-falx-spectrium": "Tête de falx en spectrium",
+
+  "item-spearhead-aetherium": "Tête de lance en aethérium",
+  "item-spearhead-etherium": "Tête de lance en ethérium",
+  "item-spearhead-spectrium": "Tête de lance en spectrium"
 }

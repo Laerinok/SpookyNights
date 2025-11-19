@@ -110,6 +110,7 @@
   "iteminfo-spectralbonus-simplified": "<font color=\"#a08ee0\">+{0}% bonus damage vs spectral creatures.</font>",
   "iteminfo-spectralmalus": "<font color=\"#ff8080\">-50% damage penalty against spectral creatures.</font>",
   "iteminfo-spectral-attack-power": "Spectral attack power:",
+  "iteminfo-spectral-ranged-damage": "Spectral piercing damage: {0} hp",
 
   "block-warscythemold-black-fired-warscythe-long": "Black fired long warscythe mold",
   "block-warscythemold-black-fired-warscythe-short": "Black fired short warscythe mold",
