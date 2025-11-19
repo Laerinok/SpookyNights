@@ -16,5 +16,23 @@
     "path": "/0/ingredients/T/allowedVariants/-",
     "value": "aetherium",
     "file": "game:recipes/grid/tool/blade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/T/allowedVariants/-",
+    "value": "spectrium",
+    "file": "game:recipes/grid/tool/spear.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/T/allowedVariants/-",
+    "value": "etherium",
+    "file": "game:recipes/grid/tool/spear.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/T/allowedVariants/-",
+    "value": "aetherium",
+    "file": "game:recipes/grid/tool/spear.json"
   }
 ]

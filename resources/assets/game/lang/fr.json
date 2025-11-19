@@ -1,0 +1,29 @@
+{
+  "item-ingot-spectrium": "Lingot (spectrium)",
+  "item-ingot-etherium": "Lingot (ethérium)",
+  "item-ingot-aetherium": "Lingot (aethérium)",
+
+  "item-metalbit-spectrium": "Morceau de métal (spectrium)",
+  "item-metalbit-etherium": "Morceau de métal (ethérium)",
+  "item-metalbit-aetherium": "Morceau de métal (aethérium)",
+
+  "item-nugget-spectrium": "Pépite (spectrium)",
+  "item-nugget-aetherium": "Pépite (aethérium)",
+  "item-nugget-etherium": "Pépite (ethérium)",
+
+  "material-spectrium": "Spectrium",
+  "material-etherium": "Ethérium",
+  "material-aetherium": "Aethérium",
+
+  "item-blade-falx-aetherium": "Falx en aethérium",
+
+  "item-blade-falx-etherium": "falx en ethérium",
+  "item-blade-falx-spectrium": "falx en spectrium",
+  "item-spear-generic-aetherium": "Lance en aethérium",
+  "item-spear-generic-etherium": "Lance en ethérium",
+  "item-spear-generic-spectrium": "Lance en spectrium",
+
+  "item-bladehead-falx-aetherium": "Tête de falx en aethérium",
+  "item-bladehead-falx-etherium": "Tête de falx en ethérium",
+  "item-bladehead-falx-spectrium": "Tête de falx en spectrium"
+}

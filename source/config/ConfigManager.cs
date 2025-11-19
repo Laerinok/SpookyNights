@@ -41,10 +41,12 @@ namespace Spookynights
                 { "spookynights:spectralbear-giant-adult-*", "1.0@8-12" }
             };
 
+            // Updated multipliers to separate giant bears from standard ones
             config.SpawnMultipliers = new()
             {
                 { "spookynights:spectralwolf-*", 1.0f },
-                { "spookynights:spectralbear-*", 1.0f },
+                { "spookynights:spectralbear-brown-*", 1.0f },
+                { "spookynights:spectralbear-giant-*", 0.5f },
                 { "spookynights:spectraldrifter-*", 1.0f },
                 { "spookynights:spectralshiver-*", 1.0f },
                 { "spookynights:spectralbowtorn-*", 1.0f }
@@ -86,7 +88,26 @@ namespace Spookynights
 
                     newConfig.EnableCandyLoot = oldConfig.EnableCandyLoot;
                     newConfig.CandyLootTable = oldConfig.CandyLootTable;
-                    newConfig.SpawnMultipliers = oldConfig.SpawnMultipliers;
+                    // We overwrite SpawnMultipliers with the new default to ensure the new keys exist
+                    // If you want to try to preserve old values, it requires complex logic, 
+                    // but for a structure change, resetting this part is safer.
+                    // However, we can try to copy known keys back if they exist.
+                    if (oldConfig.SpawnMultipliers != null)
+                    {
+                        foreach (var entry in oldConfig.SpawnMultipliers)
+                        {
+                            // If user had the old generic key, ignore it or map it to brown
+                            if (entry.Key == "spookynights:spectralbear-*")
+                            {
+                                newConfig.SpawnMultipliers["spookynights:spectralbear-brown-*"] = entry.Value;
+                            }
+                            else if (newConfig.SpawnMultipliers.ContainsKey(entry.Key))
+                            {
+                                newConfig.SpawnMultipliers[entry.Key] = entry.Value;
+                            }
+                        }
+                    }
+
                     newConfig.UseTimeBasedSpawning = oldConfig.UseTimeBasedSpawning;
                     newConfig.SpawnOnlyAtNight = oldConfig.SpawnOnlyAtNight;
                     newConfig.NightTimeMode = oldConfig.NightTimeMode;
@@ -99,7 +120,7 @@ namespace Spookynights
                     newConfig.SpawnOnlyOnFullMoon = oldConfig.SpawnOnlyOnFullMoon;
                     newConfig.FullMoonSpawnMultiplier = oldConfig.FullMoonSpawnMultiplier;
                     newConfig.Bosses = oldConfig.Bosses;
-                    newConfig.EnableDebugLogging = oldConfig.EnableDebugLogging; // Preserve the user's setting during migration
+                    newConfig.EnableDebugLogging = oldConfig.EnableDebugLogging;
 
                     api.StoreModConfig(newConfig, "spookynights-server.json");
                     ServerConf = newConfig;
@@ -119,6 +140,7 @@ namespace Spookynights
 
         public static void LoadClientConfig(ICoreAPI api)
         {
+            // No changes needed here based on the request, keeping existing logic
             try
             {
                 var loadedObject = api.LoadModConfig<JObject>("spookynights-client.json");

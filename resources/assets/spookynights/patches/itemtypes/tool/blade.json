@@ -101,9 +101,9 @@
     "op": "addmerge",
     "path": "/attackpowerbytype",
     "value": {
-      "blade-falx-spectrium": 4.8,
-      "blade-falx-etherium": 5.3,
-      "blade-falx-aetherium": 5.8
+      "blade-falx-spectrium": 3.8,
+      "blade-falx-etherium": 4.3,
+      "blade-falx-aetherium": 4.8
     }
   },
   {
@@ -113,7 +113,7 @@
     "value": {
       "*-spectrium": 2,
       "*-etherium": 3,
-      "*-aetherium": 4
+      "*-aetherium":3
     }
   },
   {
@@ -121,9 +121,9 @@
     "op": "addmerge",
     "path": "/durabilitybytype",
     "value": {
-      "blade-falx-spectrium": 650,
-      "blade-falx-etherium": 1200,
-      "blade-falx-aetherium": 1600
+      "blade-falx-spectrium": 400,
+      "blade-falx-etherium": 900,
+      "blade-falx-aetherium": 1200
     }
   }
 ]

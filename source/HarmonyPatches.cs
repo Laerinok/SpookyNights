@@ -17,14 +17,11 @@ namespace SpookyNights
             if (__instance is ItemSpectralWeapon) return;
             if (__instance.Tool != EnumTool.Sword && __instance.Tool != EnumTool.Spear) return;
 
-            // --- THE DEFINITIVE FIX IS HERE ---
-            // This is the guard clause. If our text already exists, stop immediately to prevent duplication.
             string spectralPowerText = Lang.Get("spookynights:iteminfo-spectral-attack-power");
             if (dsc.ToString().Contains(spectralPowerText))
             {
                 return;
             }
-            // ------------------------------------
 
             string originalDescription = dsc.ToString();
             var lines = new List<string>(originalDescription.Split('\n'));

@@ -20,27 +20,23 @@
 	"skipVariants": [ "giant-*-female" ],
 	"canClimb": true,
 	"collisionBoxSizeByType": {
-		"*-brown-*-male": {
-			"x": 4,
-			"y": 2
+		"*-brown-*-*": {
+			"x": 1.5,
+			"y": 1.8
 		},
-		"*-brown-*-female": {
+		"*-giant-*-*": {
 			"x": 4,
-			"y": 2
-		},
-		"*-giant-*-male": {
-			"x": 5,
 			"y": 3
 		}
 	},
 	"selectionBoxSizeByType": {
-		"*-brown-*": {
-			"x": 4,
-			"y": 2
+		"*-brown-*-*": {
+			"x": 1.5,
+			"y": 1.8
 		},
-		"*-giant-*": {
-			"x": 5,
-			"y": 3
+		"*-giant-*-*": {
+			"x": 4.5,
+			"y": 3.5
 		}
 	},
 	"knockbackResistance": 0.9,
@@ -174,6 +170,18 @@
 				"animation": "walk",
 				"supressDefaultAnimation": true,
 				"blendMode": "AddAverage"
+			},
+			{
+				"code": "run",
+				"animation": "run",
+				"supressDefaultAnimation": true,
+				"blendMode": "AddAverage"
+			},
+			{
+				"code": "attack",
+				"animation": "attack",
+				"supressDefaultAnimation": true,
+				"blendMode": "AddAverage"
 			}
 		]
 	},
@@ -205,7 +213,7 @@
 				"code": "health",
 				"maxhealthByType": {
 					"*-brown-*-*": 70,
-					"*-giant-*-*": 160
+					"*-giant-*-*": 300
 				}
 			},
 			{
@@ -213,94 +221,76 @@
 				"onlyWhenDead": true
 			},
 			{
-				"code": "emotionstates",
-				"states": [
-					{
-						"code": "awakened",
-						"duration": 60,
-						"chance": 1,
-						"slot": 0,
-						"priority": 2,
-						"accumType": "noaccum"
-					},
-					{
-						"code": "destabilized",
-						"duration": 999,
-						"chance": 1,
-						"slot": 1,
-						"priority": 5,
-						"accumType": "noaccum",
-						"whenHealthRelBelow": 0.3
-					},
-					{
-						"code": "unleashedPower",
-						"duration": 999,
-						"chance": 1,
-						"slot": 0,
-						"priority": 5,
-						"accumType": "noaccum",
-						"whenHealthRelBelow": 0.6
-					},
-					{
-						"code": "finalManifestation",
-						"duration": 999,
-						"chance": 1,
-						"slot": 1,
-						"priority": 6,
-						"accumType": "noaccum",
-						"whenHealthRelBelow": 0.2
-					}
-				]
-			},
-			{
 				"code": "taskai",
 				"aiCreatureType": "LandCreature",
 				"aitasks": [
 					{
-						"code": "findnearbycreatures",
+						"code": "meleeattack",
 						"priority": 3.0,
-						"entityType": "spectralbear-brown-*-*",
-						"mobCode": "player",
-						"seekingRange": 15,
-						"mustBeHurt": false,
-						"setEmotionState": "awakened",
-						"whenNotInEmotionState": "awakened"
+						"entityType": "spectralbear-giant-*-*",
+						"entityCodes": [ "player" ],
+						"damage": 22,
+						"damageTier": 4,
+						"damageType": "SlashingAttack",
+						"minDist": 5.5,
+						"minVerDist": 2.5,
+						"slot": 1,
+						"mincooldown": 1500,
+						"maxcooldown": 2500,
+						"attackDurationMs": 900,
+						"damagePlayerAtMs": 500,
+						"animation": "Attack",
+						"sound": "game:creature/bear/attack"
 					},
 					{
 						"code": "meleeattack",
-						"priority": 2.0,
+						"priority": 2.5,
 						"entityType": "spectralbear-brown-*-*",
 						"entityCodes": [ "player" ],
 						"damage": 8,
+						"damageTier": 2,
 						"damageType": "SlashingAttack",
-						"minDist": 3.0,
+						"minDist": 2.5,
+						"minVerDist": 1.5,
 						"slot": 1,
-						"mincooldown": 1800,
-						"maxcooldown": 1800,
+						"mincooldown": 1500,
+						"maxcooldown": 2500,
 						"attackDurationMs": 800,
 						"damagePlayerAtMs": 500,
 						"animation": "Attack",
-						"whenInEmotionState": "awakened"
+						"sound": "game:creature/bear/attack"
 					},
 					{
 						"code": "seekentity",
-						"priority": 1.8,
-						"entityType": "spectralbear-brown-*-*",
+						"priority": 2.5,
+						"entityType": "spectralbear-giant-*-*",
 						"entityCodes": [ "player" ],
-						"seekingRange": 20,
+						"seekingRange": 30,
 						"animation": "Run",
 						"sound": "game:creature/bear/aggro",
-						"whenInEmotionState": "awakened",
-						"animationSpeed": 2,
+						"animationSpeed": 2.5,
+						"movespeed": 0.075
+					},
+					{
+						"code": "seekentity",
+						"priority": 2.0,
+						"entityType": "spectralbear-brown-*-*",
+						"entityCodes": [ "player" ],
+						"seekingRange": 18,
+						"animation": "Run",
+						"sound": "game:creature/bear/aggro",
+						"animationSpeed": 1.8,
 						"movespeed": 0.055
 					},
 					{
 						"code": "wander",
-						"priority": 0.5,
-						"entityType": "spectralbear-brown-*-*",
-						"movespeed": 0.01,
-						"animation": "Walk",
-						"whenNotInEmotionState": "awakened"
+						"priority": 1.0,
+						"movespeed": 0.015,
+						"animation": "Walk"
+					},
+					{
+						"code": "lookaround",
+						"priority": 0.5
 					}
 				]
 			},
@@ -320,14 +310,6 @@
 							"code": "spookynights:spectralheart-rich",
 							"quantity": {
 								"avg": 0.8,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-temporal",
-							"quantity": {
-								"avg": 0.07,
 								"var": 0
 							}
 						},
@@ -356,14 +338,6 @@
 								"avg": 2,
 								"var": 0.6
 							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-rusty",
-							"quantity": {
-								"avg": 6,
-								"var": 2
-							}
 						}
 					]
 				}
@@ -374,8 +348,8 @@
 				"group": "hostile",
 				"tryOnlySurface": true,
 				"chanceByType": {
-					"*-brown-*-*": 0.01,
-					"*-giant-*-*": 0.005
+					"*-brown-*-*": 0.005,
+					"*-giant-*-*": 0.0005
 				},
 				"maxQuantityByType": {
 					"*-brown-*-*": 1,
@@ -390,7 +364,7 @@
 				},
 				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:snowlayer-*", "game:flower-*" ],
 				"climate": {
-					"minForest": 0.5,
+					"minForest": 0.2,
 					"minRain": 0.3
 				}
 			}

@@ -179,7 +179,7 @@
   "toolTierByType": {
     "*-spectrium": 2,
     "*-etherium": 3,
-    "*-aetherium": 4
+    "*-aetherium": 3
   },
   "attackPowerByType": {
     "warscythe-short-spectrium": 3.8,

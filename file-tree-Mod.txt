@@ -2,11 +2,24 @@ resources/
 ├─ assets/
 │  ├─ game/
 │  │  ├─ lang/
-│  │  │  └─ en.json
+│  │  │  ├─ en.json
+│  │  │  └─ fr.json
 │  │  ├─ recipes/
 │  │  │  └─ alloy/
 │  │  │     ├─ aetherium.json
 │  │  │     └─ etherium.json
+│  │  ├─ shapes/
+│  │  │  └─ item/
+│  │  │     └─ tool/
+│  │  │        ├─ blade/
+│  │  │        │  └─ falx/
+│  │  │        │     ├─ aetherium.json
+│  │  │        │     ├─ etherium.json
+│  │  │        │     └─ spectrium.json
+│  │  │        └─ spear/
+│  │  │           ├─ aetherium.json
+│  │  │           ├─ etherium.json
+│  │  │           └─ spectrium.json
 │  │  └─ textures/
 │  │     ├─ block/
 │  │     │  └─ metal/
@@ -54,12 +67,26 @@ resources/
 │     │  ├─ bloctypes/
 │     │  │  └─ legacy/
 │     │  │     └─ ingotpile.json
+│     │  ├─ entities/
+│     │  │  └─ nonliving/
+│     │  │     └─ projectile/
 │     │  ├─ handbook/
 │     │  │  └─ survival-handbook.json
 │     │  ├─ itemtypes/
-│     │  │  └─ resource/
-│     │  │     ├─ ingot.json
-│     │  │     └─ nugget-metalbit.json
+│     │  │  ├─ resource/
+│     │  │  │  ├─ ingot.json
+│     │  │  │  └─ nugget-metalbit.json
+│     │  │  ├─ tool/
+│     │  │  │  ├─ blade.json
+│     │  │  │  └─ spear.json
+│     │  │  └─ toolhead/
+│     │  │     └─ bladehead.json
+│     │  ├─ recipes/
+│     │  │  ├─ grid/
+│     │  │  │  └─ tool/
+│     │  │  │     └─ spectral-weapons.json
+│     │  │  └─ smithing/
+│     │  │     └─ spectral-weapons.json
 │     │  ├─ worldproperties/
 │     │  │  └─ block/
 │     │  │     ├─ metal.json
