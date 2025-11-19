@@ -1,4 +1,21 @@
 {
+  "tabname-spookynights": "Spooky Nights",
+
+  "spookynights-guide-mechanics-title": "Spooky Nights - Spectral Resistance",
+  "spookynights-guide-mechanics-text": "The darkness has grown stronger. Ghostly entities now roam the world, and they are not made of flesh and bone.<br><br><strong>Spectral Resistance</strong><br>Physical weapons (Copper, Iron, Steel...) simply pass through them without full effect. All vanilla weapons suffer a <strong>-50% damage penalty</strong> against spectral creatures.<br><br>To fight them effectively, you must use weapons made of <strong>Spectrium</strong>, <strong>Etherium</strong>, or the legendary <strong>Aetherium</strong>. These metals can bypass the resistance and even inflict massive bonus damage.",
+
+  "spookynights-guide-metallurgy-title": "Spooky Nights - Metallurgy",
+  "spookynights-guide-metallurgy-text": "To forge weapons capable of harming ghosts, you must process the loot they drop.<br><br><strong>1. Spectrium (Tier 1)</strong><br>Hunting spectral creatures yields <strong>Spectral Hearts</strong>. Place a <strong>Hammer</strong> and a Heart in the crafting grid to crush it into <strong>Spectrium Nuggets</strong>.<br><em>Smelting point: 1025°C</em><br><br><strong>2. Etherium (Tier 2)</strong><br>An alloy made in a crucible. It requires a mix of <strong>Copper</strong> and <strong>Spectrium</strong>.<br><em>Ratio: 30-40% Spectrium / 60-70% Copper</em><br>It offers better durability and damage than Spectrium.<br><br><strong>3. Aetherium (Tier 3)</strong><br>The ultimate ghost-hunting alloy. It requires mixing <strong>Spectrium</strong>, <strong>Bismuth</strong>, and <strong>Silver</strong> in a crucible.<br><em>Ratio: ~40% Spectrium / ~40% Bismuth / ~20% Silver</em>",
+
+  "spookynights-guide-weapons-title": "Spooky Nights - War Scythes",
+  "spookynights-guide-weapons-text": "While Spears and Swords are effective, the spectral threat sometimes requires a different approach. The <strong>War Scythe</strong> is a specialized weapon forged from spectral metals.<br><br><strong>Short War Scythe</strong><br>A fast, versatile weapon (Range: 2.5m). Its sharp blade is also capable of harvesting animal resources.<br><br><strong>Long War Scythe</strong><br>A heavy polearm with an exceptional <strong>reach of 3.8 meters</strong> (longer than a spear). It allows you to keep dangerous entities at a safe distance while inflicting heavy sweeping damage. Perfect for fighting groups of drifters.",
+
+  "guide-metallurgy-title": "Spectral Metallurgy",
+  "guide-metallurgy-text": "...",
+
+  "guide-weapons-title": "War Scythes",
+  "guide-weapons-text": "...",
+
   "item-ingot-spectrium": "Ingot (spectrium)",
   "item-ingot-etherium": "Ingot (etherium)",
   "item-ingot-aetherium": "Ingot (aetherium)",

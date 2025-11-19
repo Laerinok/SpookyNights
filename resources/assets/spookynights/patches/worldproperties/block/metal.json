@@ -32,7 +32,7 @@
     "path": "/variants/-",
     "value": {
       "code": "aetherium",
-      "meltPoint": 1650,
+      "meltPoint": 1025,
       "boilPoint": 2800.0,
       "density": 7400,
       "specificHeatCapacity": 0.330,

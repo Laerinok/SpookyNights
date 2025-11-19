@@ -1,6 +1,4 @@
 {
-  "game:tabname-spookynights": "Spooky Nights",
-
   "block-jackolantern-*": "Jack O' Lantern",
   "blockdesc-jackolantern-*": "A hollowed-out pumpkin with a carved face, lit from within. A classic symbol of the spooky season.",
 
@@ -135,5 +133,6 @@
   "block-warscythemold-red-raw-warscythe-long": "Red raw long warscythe mold",
   "block-warscythemold-red-raw-warscythe-short": "Red raw short warscythe mold",
   "block-warscythemold-tan-fired-warscythe-long": "Tan fired long warscythe mold",
-  "block-warscythemold-tan-fired-warscythe-short": "Tan fired short warscythe mold"
+  "block-warscythemold-tan-fired-warscythe-short": "Tan fired short warscythe mold",
+
 }

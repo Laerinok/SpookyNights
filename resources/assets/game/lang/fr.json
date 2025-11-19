@@ -1,4 +1,15 @@
 {
+  "tabname-spookynights": "Spooky Nights",
+
+  "spookynights-guide-mechanics-title": "Spooky Nights - Résistance Spectrale",
+  "spookynights-guide-mechanics-text": "L'obscurité s'est renforcée. Des entités fantomatiques rôdent désormais, et elles ne sont pas faites de chair et d'os.<br><br><strong>Résistance Spectrale</strong><br>Les armes physiques (Cuivre, Fer, Acier...) les traversent sans effet total. Toutes les armes classiques subissent une <strong>pénalité de dégâts de -50%</strong> contre les créatures spectrales.<br><br>Pour les combattre efficacement, vous devez utiliser des armes en <strong>Spectrium</strong>, <strong>Etherium</strong>, ou le légendaire <strong>Aetherium</strong>. Ces métaux ignorent la résistance et infligent des dégâts bonus massifs.",
+
+  "spookynights-guide-metallurgy-title": "Spooky Nights - Métallurgie",
+  "spookynights-guide-metallurgy-text": "Pour forger des armes capables de blesser les fantômes, vous devez traiter leur butin.<br><br><strong>1. Spectrium (Tier 1)</strong><br>Chasser les créatures spectrales donne des <strong>Cœurs Spectraux</strong>. Placez un <strong>Marteau</strong> et un Cœur dans la grille d'artisanat pour l'écraser en <strong>Pépites de Spectrium</strong>.<br><em>Point de fusion : 1025°C</em><br><br><strong>2. Etherium (Tier 2)</strong><br>Un alliage fait au creuset. Il nécessite un mélange de <strong>Cuivre</strong> et de <strong>Spectrium</strong>.<br><em>Ratio : 30-40% Spectrium / 60-70% Cuivre</em><br>Il offre une meilleure durabilité et de meilleurs dégâts.<br><br><strong>3. Aetherium (Tier 3)</strong><br>L'alliage ultime. Il nécessite de mélanger du <strong>Spectrium</strong>, du <strong>Bismuth</strong>, et de l'<strong>Argent</strong> dans un creuset.<br><em>Ratio : ~40% Spectrium / ~40% Bismuth / ~20% Argent</em>",
+
+  "spookynights-guide-weapons-title": "Spooky Nights - Faux de Guerre",
+  "spookynights-guide-weapons-text": "Bien que les Lances et Épées soient efficaces, la menace spectrale nécessite parfois une approche différente. La <strong>Faux de Guerre</strong> est une arme spécialisée forgée dans les métaux spectraux.<br><br><strong>Faux de Guerre Courte</strong><br>Une arme rapide et polyvalente (Portée : 2,5m). Sa lame tranchante permet aussi de dépecer les animaux.<br><br><strong>Faux de Guerre Longue</strong><br>Une arme d'hast lourde avec une <strong>portée exceptionnelle de 3,8 mètres</strong> (plus longue qu'une lance). Elle permet de garder les entités dangereuses à distance tout en infligeant de lourds dégâts de balayage. Idéal contre les groupes.",
+
   "item-ingot-spectrium": "Lingot (spectrium)",
   "item-ingot-etherium": "Lingot (ethérium)",
   "item-ingot-aetherium": "Lingot (aethérium)",
