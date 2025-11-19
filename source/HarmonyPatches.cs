@@ -95,5 +95,49 @@ namespace SpookyNights
 
             dsc.Clear().Append(string.Join("\n", lines));
         }
+        // PATCH 3: Arrows (Vanilla Malus)
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(ItemArrow), "GetHeldItemInfo")]
+        public static void Postfix_Arrow(ItemArrow __instance, ItemSlot inSlot, StringBuilder dsc)
+        {
+            // Skip Custom Arrows
+            if (__instance is ItemSpectralArrow) return;
+
+            float spectralResistance = 0.5f;
+            var lines = dsc.ToString().Split('\n').ToList();
+
+            // Vanilla arrows store damage in attributes key "damage"
+            float baseDamage = __instance.Attributes?["damage"].AsFloat(0f) ?? 0f;
+
+            if (baseDamage > 0)
+            {
+                float damageWithMalus = baseDamage * spectralResistance;
+                string rangedLabel = Lang.Get("spookynights:iteminfo-spectral-ranged-damage", damageWithMalus.ToString("0.##"));
+                string spectralLine = $"<font color=\"#ff8080\">{rangedLabel}</font>";
+
+                string numStrDot = baseDamage.ToString(CultureInfo.InvariantCulture);
+                string numStrComma = baseDamage.ToString(CultureInfo.GetCultureInfo("fr-FR"));
+
+                int index = lines.FindLastIndex(line => line.Contains(numStrDot) || line.Contains(numStrComma));
+
+                if (index != -1)
+                {
+                    lines.Insert(index + 1, spectralLine);
+                }
+                else
+                {
+                    lines.Add(spectralLine);
+                }
+            }
+
+            // Footer
+            string malusText = Lang.Get("spookynights:iteminfo-spectralmalus");
+            if (!lines.Any(l => l.Contains(malusText)))
+            {
+                lines.Add(malusText);
+            }
+
+            dsc.Clear().Append(string.Join("\n", lines));
+        }
     }
 }

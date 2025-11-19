@@ -1,0 +1,30 @@
+[
+  {
+    "file": "game:entities/nonliving/projectile/arrow.json",
+    "op": "add",
+    "path": "/variantgroups/0/states/-",
+    "value": "spectrium"
+  },
+  {
+    "file": "game:entities/nonliving/projectile/arrow.json",
+    "op": "add",
+    "path": "/variantgroups/0/states/-",
+    "value": "etherium"
+  },
+  {
+    "file": "game:entities/nonliving/projectile/arrow.json",
+    "op": "add",
+    "path": "/variantgroups/0/states/-",
+    "value": "aetherium"
+  },
+  {
+    "file": "game:entities/nonliving/projectile/arrow.json",
+    "op": "addmerge",
+    "path": "/client/texturesByType",
+    "value": {
+      "arrow-spectrium": { "material": { "base": "spookynights:item/resource/spectrium" } },
+      "arrow-etherium": { "material": { "base": "spookynights:item/resource/etherium" } },
+      "arrow-aetherium": { "material": { "base": "spookynights:item/resource/aetherium" } }
+    }
+  }
+]

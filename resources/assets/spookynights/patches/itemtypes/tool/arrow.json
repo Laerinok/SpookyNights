@@ -1,0 +1,79 @@
+[
+  {
+    "file": "game:itemtypes/tool/arrow.json",
+    "op": "addmerge",
+    "path": "/variantgroups/0/states",
+    "value": [ "spectrium", "etherium", "aetherium" ]
+  },
+  {
+    "file": "game:itemtypes/tool/arrow.json",
+    "op": "add",
+    "path": "/classByType",
+    "value": {
+      "arrow-spectrium": "ItemSpectralArrow",
+      "arrow-etherium": "ItemSpectralArrow",
+      "arrow-aetherium": "ItemSpectralArrow"
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/arrow.json",
+    "op": "add",
+    "path": "/shapeByType/arrow-spectrium",
+    "value": { "base": "entity/nonliving/projectile/arrow/copper" }
+  },
+  {
+    "file": "game:itemtypes/tool/arrow.json",
+    "op": "add",
+    "path": "/shapeByType/arrow-etherium",
+    "value": { "base": "entity/nonliving/projectile/arrow/copper" }
+  },
+  {
+    "file": "game:itemtypes/tool/arrow.json",
+    "op": "add",
+    "path": "/shapeByType/arrow-aetherium",
+    "value": { "base": "entity/nonliving/projectile/arrow/copper" }
+  },
+  {
+    "file": "game:itemtypes/tool/arrow.json",
+    "op": "add",
+    "path": "/texturesByType/arrow-spectrium",
+    "value": { "material": { "base": "spookynights:item/resource/spectrium" } }
+  },
+  {
+    "file": "game:itemtypes/tool/arrow.json",
+    "op": "add",
+    "path": "/texturesByType/arrow-etherium",
+    "value": { "material": { "base": "spookynights:item/resource/etherium" } }
+  },
+  {
+    "file": "game:itemtypes/tool/arrow.json",
+    "op": "add",
+    "path": "/texturesByType/arrow-aetherium",
+    "value": { "material": { "base": "spookynights:item/resource/aetherium" } }
+  },
+  {
+    "file": "game:itemtypes/tool/arrow.json",
+    "op": "add",
+    "path": "/attributesByType",
+    "value": {
+      "arrow-spectrium": {
+        "damage": 2.5,
+        "breakChanceOnImpact": 0.05,
+        "spectralDamageBonus": 1.0,
+        "spectralRangedDamage": 2.5
+      },
+      "arrow-etherium": {
+        "damage": 3.25,
+        "breakChanceOnImpact": 0.03,
+        "spectralDamageBonus": 1.2,
+        "spectralRangedDamage": 3.25
+      },
+      "arrow-aetherium": {
+        "damage": 4.0,
+        "breakChanceOnImpact": 0.01,
+        "spectralDamageBonus": 1.4,
+        "spectralRangedDamage": 4.0
+      }
+    }
+  }
+]

@@ -29,5 +29,13 @@
 
   "item-spearhead-aetherium": "Aetherium spear head",
   "item-spearhead-etherium": "Etherium spear head",
-  "item-spearhead-spectrium": "Spectrium spear head"
+  "item-spearhead-spectrium": "Spectrium spear head",
+
+  "item-arrow-aetherium": "Aetherium arrow",
+  "item-arrow-etherium": "Etherium arrow",
+  "item-arrow-spectrium": "Spectrium arrow",
+
+  "item-arrowhead-aetherium": "Aetherium arrowhead",
+  "item-arrowhead-etherium": "Etherium arrowhead",
+  "item-arrowhead-spectrium": "Spectrium arrowhead"
 }
