@@ -7,7 +7,7 @@
   "variantgroups": [
     {
       "code": "type",
-      "states": [ "short", "long" ]
+      "states": [ "long" ]
     },
     {
       "code": "metal",
@@ -15,26 +15,9 @@
     }
   ],
   "shapeByType": {
-    "warscythe-short-*": { "base": "item/tool/warscythe-short" },
     "warscythe-long-*": { "base": "item/tool/warscythe-long" }
   },
   "texturesByType": {
-    "warscythe-short-spectrium": {
-      "handle": { "base": "game:item/tool/material/handle" },
-      "blueleather": { "base": "game:item/tool/shield/leather/blue" },
-      "brownleather": { "base": "game:item/tool/shield/leather/brown" },
-      "warscytheblade": { "base": "item/resource/spectrium" }
-    },
-    "warscythe-short-etherium": {
-      "handle": { "base": "game:item/tool/material/handle" },
-      "blueleather": { "base": "game:item/tool/shield/leather/blue" },
-      "brownleather": { "base": "game:item/tool/shield/leather/brown" },
-      "warscytheblade": { "base": "item/resource/etherium" }
-    },
-    "warscythe-short-aetherium": {
-      "handle": { "base": "game:item/tool/material/handle" },
-      "warscytheblade": { "base": "item/resource/aetherium" }
-    },
     "warscythe-long-spectrium": {
       "handle": { "base": "game:item/tool/material/handle" },
       "warscytheblade": { "base": "item/resource/spectrium" }
@@ -52,78 +35,39 @@
     "heldItemPitchFollow": 0.9,
     "ripHarvest": true,
     "handbook": { "groupBy": [ "warscythe-*" ] },
-    "toolrackTransformByType": {
-      "warscythe-short-*": {
-        "translation": {
-          "x": 0.2,
-          "y": 0.85,
-          "z": 0
-        },
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 1
-        },
-        "origin": {
-          "x": 1,
-          "y": 0.5,
-          "z": 0.5
-        },
-        "scale": 1.66
+    "toolrackTransform": {
+      "translation": {
+        "x": 0,
+        "y": 0.85,
+        "z": 0
       },
-      "warscythe-long-*": {
-        "translation": {
-          "x": 0,
-          "y": 0.85,
-          "z": 0
-        },
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0
-        },
-        "origin": {
-          "x": 1.4,
-          "y": 0.5,
-          "z": 0.5
-        },
-        "scale": 1.66
-      }
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "origin": {
+        "x": 1.4,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "scale": 1.66
     },
-    "groundStorageTransformByType": {
-      "warscythe-short-*": {
-        "translation": {
-          "x": 0,
-          "y": 0.4,
-          "z": 0.3
-        },
-        "rotation": {
-          "x": 25,
-          "y": 90,
-          "z": -90
-        },
-        "origin": {
-          "x": 0.5,
-          "y": 0,
-          "z": 0.5
-        }
+    "groundStorageTransform": {
+      "translation": {
+        "x": 0,
+        "y": 1.1,
+        "z": 0.75
       },
-      "warscythe-long-*": {
-        "translation": {
-          "x": 0,
-          "y": 1.1,
-          "z": 0.75
-        },
-        "rotation": {
-          "x": 25,
-          "y": 90,
-          "z": -90
-        },
-        "origin": {
-          "x": 0,
-          "y": 0,
-          "z": 0
-        }
+      "rotation": {
+        "x": 25,
+        "y": 90,
+        "z": -90
+      },
+      "origin": {
+        "x": 0,
+        "y": 0,
+        "z": 0
       }
     }
   },
@@ -136,6 +80,12 @@
     },
     "warscythe-*-aetherium": {
       "spectralDamageBonus": 1.4
+    },
+    "warscythe-long-*": {
+      "statModifiers": {
+        "attackSpeed": -0.35,
+        "walkSpeed": -0.1
+      }
     }
   },
   "behaviors": [
@@ -143,10 +93,7 @@
       "name": "GroundStorable",
       "properties": {
         "layout": "WallHalves",
-        "wallOffYByType": {
-          "warscythe-short-spectrium": 1,
-          "warscythe-long-spectrium": 2
-        },
+        "wallOffY": 2,
         "ctrlKey": true,
         "selectionBox": {
           "x1": 0,
@@ -168,183 +115,94 @@
     },
     { "name": "AnimationAuthoritative" }
   ],
-  "heldTpHitAnimationByType": {
-    "warscythe-short-*": "falx",
-    "warscythe-long-*": "axehit"
-  },
-  "attackRangeByType": {
-    "warscythe-short-*": 2.5,
-    "warscythe-long-*": 3.8
-  },
+  "heldTpHitAnimation": "axehit",
+  "attackRange": 3.8,
   "toolTierByType": {
     "*-spectrium": 2,
     "*-etherium": 3,
     "*-aetherium": 3
   },
   "attackPowerByType": {
-    "warscythe-short-spectrium": 3.8,
-    "warscythe-short-etherium": 4.3,
-    "warscythe-short-aetherium": 4.8,
     "warscythe-long-spectrium": 4.2,
     "warscythe-long-etherium": 4.8,
     "warscythe-long-aetherium": 5.5
   },
   "durabilityByType": {
-    "warscythe-short-spectrium": 400,
-    "warscythe-short-etherium": 900,
-    "warscythe-short-aetherium": 1200,
     "warscythe-long-spectrium": 550,
     "warscythe-long-etherium": 1100,
     "warscythe-long-aetherium": 1500
   },
-  "creativeinventoryByType": {
-    "*": {
-      "general": [ "*" ],
-      "items": [ "*" ],
-      "tools": [ "*" ],
-      "spookynights": [ "*" ]
-    }
+  "creativeinventory": {
+    "general": [ "*" ],
+    "items": [ "*" ],
+    "tools": [ "*" ],
+    "spookynights": [ "*" ]
   },
-  "guiTransformByType": {
-    "warscythe-short-*": {
-      "translation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "rotation": {
-        "x": -94,
-        "y": 47,
-        "z": 44
-      },
-      "origin": {
-        "x": 0.6,
-        "y": 0,
-        "z": 0.52
-      },
-      "scale": 2.6
+  "guiTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
     },
-    "warscythe-long-*": {
-      "translation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "rotation": {
-        "x": 90,
-        "y": 154,
-        "z": 180
-      },
-      "origin": {
-        "x": 0.92,
-        "y": 0,
-        "z": 0.44
-      },
-      "scale": 1.7
-    }
+    "rotation": {
+      "x": 90,
+      "y": 154,
+      "z": 180
+    },
+    "origin": {
+      "x": 0.92,
+      "y": 0,
+      "z": 0.44
+    },
+    "scale": 1.7
   },
-  "fpHandTransformByType": {
-    "warscythe-short-*": {
-      "translation": {
-        "x": -0.2,
-        "y": -0.4,
-        "z": 0
-      },
-      "rotation": {
-        "x": -13,
-        "y": 15,
-        "z": 90
-      },
-      "scale": 3.69
+  "fpHandTransform": {
+    "translation": {
+      "x": -0.2,
+      "y": -0.4,
+      "z": 0
     },
-    "warscythe-long-*": {
-      "translation": {
-        "x": -0.2,
-        "y": -0.4,
-        "z": 0
-      },
-      "rotation": {
-        "x": -13,
-        "y": 15,
-        "z": 90
-      },
-      "scale": 3.69
-    }
+    "rotation": {
+      "x": -13,
+      "y": 15,
+      "z": 90
+    },
+    "scale": 3.69
   },
-  "groundTransformByType": {
-    "warscythe-short-*": {
-      "translation": {
-        "x": 0,
-        "y": 0.05,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0,
-        "z": 0.5
-      },
-      "scale": 3.67
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0.05,
+      "z": 0
     },
-    "warscythe-long-*": {
-      "translation": {
-        "x": 0,
-        "y": 0.05,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0,
-        "z": 0.5
-      },
-      "scale": 3.67
-    }
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "scale": 3.67
   },
-  "tpHandTransformByType": {
-    "warscythe-short-*": {
-      "translation": {
-        "x": -0.65,
-        "y": -1,
-        "z": 0.2
-      },
-      "rotation": {
-        "x": 90,
-        "y": 0,
-        "z": 0
-      },
-      "origin": {
-        "x": 0.3,
-        "y": 0.8,
-        "z": 0.5
-      },
-      "scale": 0.9
+  "tpHandTransform": {
+    "translation": {
+      "x": -0.65,
+      "y": -1,
+      "z": 0.2
     },
-    "warscythe-long-*": {
-      "translation": {
-        "x": -0.65,
-        "y": -1,
-        "z": 0.2
-      },
-      "rotation": {
-        "x": 90,
-        "y": 0,
-        "z": 0
-      },
-      "origin": {
-        "x": 0.3,
-        "y": 0.8,
-        "z": 0.5
-      },
-      "scale": 0.9
-    }
+    "rotation": {
+      "x": 90,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.3,
+      "y": 0.8,
+      "z": 0.5
+    },
+    "scale": 0.9
   }
 }

@@ -4,28 +4,6 @@
     "ingredients": {
       "W": {
         "type": "item",
-        "code": "warscythehead-short-*",
-        "name": "metal",
-        "allowedVariants": [ "spectrium", "etherium", "aetherium" ]
-      },
-      "S": {
-        "type": "item",
-        "code": "game:stick"
-      }
-    },
-    "width": 1,
-    "height": 2,
-    "output": {
-      "type": "item",
-      "code": "warscythe-short-{metal}",
-      "quantity": 1
-    }
-  },
-  {
-    "ingredientPattern": "W,S",
-    "ingredients": {
-      "W": {
-        "type": "item",
         "code": "warscythehead-long-*",
         "name": "metal",
         "allowedVariants": [ "spectrium", "etherium", "aetherium" ]

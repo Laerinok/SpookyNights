@@ -19,7 +19,7 @@
     },
     {
       "code": "warscythetype",
-      "states": [ "warscythe-short", "warscythe-long" ]
+      "states": [ "warscythe-long" ]
     }
   ],
   "shapeByType": {

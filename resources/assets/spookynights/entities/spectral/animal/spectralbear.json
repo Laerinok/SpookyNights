@@ -213,7 +213,7 @@
 				"code": "health",
 				"maxhealthByType": {
 					"*-brown-*-*": 70,
-					"*-giant-*-*": 300
+					"*-giant-*-*": 150
 				}
 			},
 			{

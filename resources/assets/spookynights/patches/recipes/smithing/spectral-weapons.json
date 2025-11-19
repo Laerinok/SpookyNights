@@ -21,24 +21,6 @@
     "op": "add",
     "path": "/ingredient/allowedVariants/-",
     "value": "spectrium",
-    "file": "game:recipes/smithing/blade-short.json"
-  },
-  {
-    "op": "add",
-    "path": "/ingredient/allowedVariants/-",
-    "value": "etherium",
-    "file": "game:recipes/smithing/blade-short.json"
-  },
-  {
-    "op": "add",
-    "path": "/ingredient/allowedVariants/-",
-    "value": "aetherium",
-    "file": "game:recipes/smithing/blade-short.json"
-  },
-  {
-    "op": "add",
-    "path": "/ingredient/allowedVariants/-",
-    "value": "spectrium",
     "file": "game:recipes/smithing/spear.json"
   },
   {

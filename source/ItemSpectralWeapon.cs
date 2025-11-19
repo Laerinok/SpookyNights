@@ -7,6 +7,7 @@ namespace SpookyNights
 {
     public class ItemSpectralWeapon : Item
     {
+
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
         {
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
@@ -14,8 +15,6 @@ namespace SpookyNights
             float spectralBonus = inSlot.Itemstack.Attributes.GetFloat("spectralDamageBonus",
                 Attributes?["spectralDamageBonus"].AsFloat(1f) ?? 1f
             );
-
-            // This code now runs for ALL spectral weapons, including neutral ones.
 
             float baseDamage = GetAttackPower(inSlot.Itemstack);
             float totalSpectralDamage = baseDamage * spectralBonus;
@@ -49,7 +48,6 @@ namespace SpookyNights
                 dsc.Clear().Append(string.Join("\n", newLines));
             }
 
-            // Only show the "+X% bonus" text if there is an actual bonus.
             if (spectralBonus > 1.001f)
             {
                 string bonusText = Lang.Get("spookynights:iteminfo-spectralbonus-simplified", ((spectralBonus - 1) * 100).ToString("0"));
