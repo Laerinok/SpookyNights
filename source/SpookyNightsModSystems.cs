@@ -2,7 +2,7 @@
 using Spookynights;
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq; // Required for JObject
+using Newtonsoft.Json.Linq;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -10,7 +10,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
-using Vintagestory.GameContent; // Required for ItemStackRandomizer
+using Vintagestory.GameContent;
 
 namespace SpookyNights
 {
@@ -19,6 +19,8 @@ namespace SpookyNights
         private ICoreAPI api = default!;
         private ICoreServerAPI sapi = default!;
         private List<string> spectralCreatureCodes = new List<string>();
+
+        // --- LIFECYCLE METHODS ---
 
         public override void StartPre(ICoreAPI api)
         {
@@ -29,6 +31,7 @@ namespace SpookyNights
 
         public override void AssetsFinalize(ICoreAPI api)
         {
+            // Client-side config to disable particles if needed
             if (api.Side.IsClient())
             {
                 if (ConfigManager.ClientConf != null && !ConfigManager.ClientConf.EnableJackOLanternParticles)
@@ -49,12 +52,14 @@ namespace SpookyNights
         {
             base.Start(api);
 
+            // Register custom classes
             new Harmony("fr.laerinok.spookynights").PatchAll();
             api.RegisterItemClass("ItemSpectralArrow", typeof(ItemSpectralArrow));
             api.RegisterItemClass("ItemSpectralSpear", typeof(ItemSpectralSpear));
             api.RegisterItemClass("ItemSpectralWeapon", typeof(ItemSpectralWeapon));
             api.RegisterItemClass("ItemCandyBag", typeof(ItemCandyBag));
 
+            // Register Behaviors
             api.RegisterEntityBehaviorClass("spectralresistance", typeof(EntityBehaviorSpectralResistance));
             api.RegisterEntityBehaviorClass("spectralhandling", typeof(EntityBehaviorSpectralHandling));
 
@@ -63,6 +68,7 @@ namespace SpookyNights
 
         public override void StartClientSide(ICoreClientAPI api)
         {
+            // Attach behavior on client for immediate feedback
             api.Event.OnEntitySpawn += AddPlayerBehavior;
             api.Event.OnEntityLoaded += AddPlayerBehavior;
         }
@@ -76,14 +82,19 @@ namespace SpookyNights
                 sapi.Logger.Notification("[SpookyNights] Config loaded. Debug logging is set to: {0}", ConfigManager.ServerConf.EnableDebugLogging);
             }
 
+            // Event listeners
             api.Event.OnEntityDeath += OnEntityDeath;
             api.Event.OnTrySpawnEntity += OnTrySpawnEntity;
+
+            // Attach behavior on server
             api.Event.OnEntitySpawn += AddPlayerBehavior;
             api.Event.OnEntityLoaded += AddPlayerBehavior;
 
             spectralCreatureCodes = new List<string> { "spectraldrifter", "spectralbowtorn", "spectralshiver", "spectralwolf", "spectralbear" };
             api.Event.RegisterGameTickListener(OnDaylightCheck, 5000);
         }
+
+        // --- EVENT HANDLERS ---
 
         private void AddPlayerBehavior(Entity entity)
         {
@@ -100,8 +111,10 @@ namespace SpookyNights
         {
             if (damageSource == null) return;
 
+            // 1. Handle Candy Loot (Halloween event)
             HandleCandyLoot(entity, damageSource);
 
+            // 2. Handle Spectral Logic (Particles, Drops, Despawn)
             if (IsSpectralCreature(entity.Code))
             {
                 HandleSpectralDeath(entity);
@@ -109,19 +122,21 @@ namespace SpookyNights
         }
 
         // --- SPECTRAL DEATH LOGIC ---
+
         private void HandleSpectralDeath(Entity entity)
         {
-            // 1. Get Color (with Debug Logs)
+            // A. Get dynamic color for particles
             int particleColor = GetEntityGlowColor(entity);
 
-            // 2. Spawn Bright Particles
+            // B. Spawn bright, vapor-like particles
             SpawnSpectralParticles(entity.ServerPos.XYZ, particleColor);
 
-            // 3. Process Custom Drops
+            // C. Process Custom Drops from JSON attributes
             if (entity.Properties.Attributes?["spectralDrops"]?.Token is JObject dropTable)
             {
                 foreach (var entry in dropTable)
                 {
+                    // Match the entity variant to the drop table key
                     if (WildcardUtil.Match(entry.Key, entity.Code.Path))
                     {
                         if (entry.Value is JArray drops)
@@ -131,19 +146,18 @@ namespace SpookyNights
                                 TrySpawnDrop(dropToken, entity.ServerPos.XYZ);
                             }
                         }
-                        break;
+                        break; // Stop after finding the matching variant
                     }
                 }
             }
 
-            // 4. Despawn
+            // D. Immediate Despawn (Vaporization effect)
             entity.Die(EnumDespawnReason.Expire);
         }
 
-        // --- COLOR LOGIC (CHAT DEBUG VERSION) ---
         private int GetEntityGlowColor(Entity entity)
         {
-            // Par défaut : Cyan (Alpha 150, R 0, G 255, B 255)
+            // Default: Cyan (Alpha 150, R 0, G 255, B 255)
             int defaultColor = ColorUtil.ToRgba(150, 0, 255, 255);
 
             try
@@ -151,25 +165,22 @@ namespace SpookyNights
                 JsonObject? mainAttrs = entity.Properties.Attributes;
                 if (mainAttrs == null) return defaultColor;
 
-                // CAS 1 : Le jeu a déjà résolu la couleur (Cas le plus probable vu tes logs)
+                // Case 1: The engine already resolved the color into a single string
                 if (mainAttrs.KeyExists("glowColor"))
                 {
                     JToken? token = mainAttrs["glowColor"]?.Token;
 
-                    // Si c'est direct un texte (ex: "#FF0000")
                     if (token != null && token.Type == JTokenType.String)
                     {
-                        string hexColor = token.ToString();
-                        return ParseHexColor(hexColor);
+                        return ParseHexColor(token.ToString());
                     }
-                    // Si c'est encore une table (cas rare)
                     else if (token is JObject glowTable)
                     {
                         return ParseGlowTable(glowTable, entity, defaultColor);
                     }
                 }
 
-                // CAS 2 : On doit chercher manuellement dans glowColorByType
+                // Case 2: We need to parse the "glowColorByType" table manually
                 if (mainAttrs.KeyExists("glowColorByType") && mainAttrs["glowColorByType"]?.Token is JObject glowTableByType)
                 {
                     return ParseGlowTable(glowTableByType, entity, defaultColor);
@@ -177,20 +188,20 @@ namespace SpookyNights
             }
             catch
             {
-                // Ignore errors
+                // Ignore errors, return default
             }
 
             return defaultColor;
         }
 
-        // Petite fonction utilitaire pour éviter de répéter le code
         private int ParseHexColor(string hexColor)
         {
             int rgb = ColorUtil.Hex2Int(hexColor);
             int r = (rgb >> 16) & 0xFF;
             int g = (rgb >> 8) & 0xFF;
             int b = rgb & 0xFF;
-            // (Alpha, Rouge, Vert, Bleu)
+            // Returns (Alpha, Red, Green, Blue) - VS uses BGR logic internally often, but ToRgba maps it correctly.
+            // Re-ordered to standard RGBA mapping logic for ColorUtil
             return ColorUtil.ToRgba(150, r, g, b);
         }
 
@@ -208,34 +219,33 @@ namespace SpookyNights
             return defaultColor;
         }
 
-        // --- PARTICLE LOGIC (BRIGHTNESS FIX) ---
         private void SpawnSpectralParticles(Vec3d pos, int color)
         {
             SimpleParticleProperties particles = new SimpleParticleProperties(
-                20, 30,
+                15, 25, // Quantity
                 color,
                 new Vec3d(), new Vec3d(),
-                new Vec3f(-0.5f, 0, -0.5f),
-                new Vec3f(0.5f, 2.0f, 0.5f),
-                1.5f,
-                0,
-                0.5f, 2.0f,
+                new Vec3f(-0.3f, 0f, -0.3f), // Min Velocity
+                new Vec3f(0.3f, 1.0f, 0.3f), // Max Velocity (Float up)
+                2.0f, // Life length
+                -0.05f, // Gravity (Negative = float up)
+                0.5f, 1.5f, // Size
                 EnumParticleModel.Quad
             );
 
-            particles.MinPos = pos.AddCopy(-0.5, 0, -0.5);
-            particles.AddPos = new Vec3d(1, 1.5, 1);
+            particles.MinPos = pos.AddCopy(-0.5, 0.2, -0.5);
+            particles.AddPos = new Vec3d(1, 1.0, 1);
             particles.WithTerrainCollision = false;
+            particles.VertexFlags = 200; // Glow effect
 
-            // Brightness Fix: Ignore shading
-            particles.VertexFlags = 255;
-
-            particles.OpacityEvolve = EvolvingNatFloat.create(EnumTransformFunction.LINEAR, -150);
+            // Fade out effect
+            particles.OpacityEvolve = EvolvingNatFloat.create(EnumTransformFunction.LINEAR, -255);
+            // Size fluctuation
+            particles.SizeEvolve = EvolvingNatFloat.create(EnumTransformFunction.LINEAR, 0.5f);
 
             sapi.World.SpawnParticles(particles);
         }
 
-        // --- DROP LOGIC (RANDOMIZER FIX) ---
         private void TrySpawnDrop(JToken dropToken, Vec3d pos)
         {
             try
@@ -249,11 +259,13 @@ namespace SpookyNights
 
                 if (string.IsNullOrEmpty(code)) return;
 
+                // Calculate Quantity based on AVG and VAR
                 float avg = quantity?["avg"]?.ToObject<float>() ?? 1f;
                 float var = quantity?["var"]?.ToObject<float>() ?? 0f;
                 float finalQuantity = avg + ((float)sapi.World.Rand.NextDouble() * var) - (var / 2f);
 
                 int stackSize = (int)finalQuantity;
+                // Handle probability for partial amounts (e.g. 0.2 -> 20% chance of 1)
                 if (sapi.World.Rand.NextDouble() < (finalQuantity - stackSize)) stackSize++;
 
                 if (stackSize <= 0) return;
@@ -271,7 +283,7 @@ namespace SpookyNights
                             ItemStack tempStack = new ItemStack(item, 1);
                             DummySlot dummySlot = new DummySlot(tempStack);
 
-                            // Resolve imports = true
+                            // Resolve imports = true to allow loading external drop lists
                             randItem.Resolve(dummySlot, sapi.World, true);
 
                             stack = dummySlot.Itemstack;
@@ -290,6 +302,7 @@ namespace SpookyNights
                     if (block != null) stack = new ItemStack(block, stackSize);
                 }
 
+                // Spawn the item entity
                 if (stack != null)
                 {
                     sapi.World.SpawnItemEntity(stack, pos);
@@ -338,10 +351,13 @@ namespace SpookyNights
             }
         }
 
+        // --- SPAWN & DAYLIGHT LOGIC ---
+
         private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
         {
             if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights") return true;
 
+            bool debugEnabled = ConfigManager.ServerConf.EnableDebugLogging;
             bool isHandledAsBoss = false;
 
             if (ConfigManager.ServerConf.UseTimeBasedSpawning)
