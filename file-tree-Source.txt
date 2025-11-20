@@ -6,5 +6,7 @@ source/
 ├─ EntityBehaviorSpectralResistance.cs
 ├─ HarmonyPatches.cs
 ├─ ItemCandyBag.cs
+├─ ItemSpectralArrow.cs
+├─ ItemSpectralSpear.cs
 ├─ ItemSpectralWeapon.cs
 └─ SpookyNightsModSystems.cs

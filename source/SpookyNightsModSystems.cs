@@ -1,5 +1,7 @@
 ﻿using HarmonyLib;
 using Spookynights;
+using System;
+using System.Collections.Generic;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -50,9 +52,19 @@ namespace SpookyNights
             api.RegisterItemClass("ItemSpectralSpear", typeof(ItemSpectralSpear));
             api.RegisterItemClass("ItemSpectralWeapon", typeof(ItemSpectralWeapon));
             api.RegisterItemClass("ItemCandyBag", typeof(ItemCandyBag));
+
+            // Behaviors
             api.RegisterEntityBehaviorClass("spectralresistance", typeof(EntityBehaviorSpectralResistance));
+            api.RegisterEntityBehaviorClass("spectralhandling", typeof(EntityBehaviorSpectralHandling));
 
             api.Logger.Notification("🌟 Spooky Nights is loaded!");
+        }
+
+        // Attach behavior on Client side for immediate feedback
+        public override void StartClientSide(ICoreClientAPI api)
+        {
+            api.Event.OnEntitySpawn += AddPlayerBehavior;
+            api.Event.OnEntityLoaded += AddPlayerBehavior;
         }
 
         public override void StartServerSide(ICoreServerAPI api)
@@ -71,13 +83,27 @@ namespace SpookyNights
             api.Event.OnEntityDeath += OnEntityDeath;
             api.Event.OnTrySpawnEntity += OnTrySpawnEntity;
 
+            // Attach behavior on Server side
+            api.Event.OnEntitySpawn += AddPlayerBehavior;
+            api.Event.OnEntityLoaded += AddPlayerBehavior;
+
             spectralCreatureCodes = new List<string> { "spectraldrifter", "spectralbowtorn", "spectralshiver", "spectralwolf", "spectralbear" };
             api.Event.RegisterGameTickListener(OnDaylightCheck, 5000);
         }
 
+        private void AddPlayerBehavior(Entity entity)
+        {
+            if (entity is EntityPlayer)
+            {
+                if (!entity.HasBehavior("spectralhandling"))
+                {
+                    entity.AddBehavior(new EntityBehaviorSpectralHandling(entity));
+                }
+            }
+        }
+
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
-
             if (damageSource == null) return;
 
             if (sapi == null || ConfigManager.ServerConf == null || !ConfigManager.ServerConf.EnableCandyLoot) return;

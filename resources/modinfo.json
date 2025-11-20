@@ -3,7 +3,7 @@
   "modid": "spookynights",
   "name": "Spooky Nights",
   "authors": [ "Laerinok" ],
-  "version": "0.2.0",
+  "version": "0.3.0-rc.2",
   "description": "A small overhaul mod introducing spectral creatures that haunt the darkness. Experience the chilling presence of the unknown when the sun sets.",
   "side": "Universal",
   "dependencies": { "game": "1.21.5" }

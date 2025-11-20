@@ -35,6 +35,10 @@
     "heldItemPitchFollow": 0.9,
     "ripHarvest": true,
     "handbook": { "groupBy": [ "warscythe-*" ] },
+    "statModifiers": {
+      "walkSpeed": -0.15,
+      "hungerrate": 0.3
+    },
     "toolrackTransform": {
       "translation": {
         "x": 0,
@@ -72,21 +76,9 @@
     }
   },
   "attributesByType": {
-    "warscythe-*-spectrium": {
-      "spectralDamageBonus": 1
-    },
-    "warscythe-*-etherium": {
-      "spectralDamageBonus": 1.2
-    },
-    "warscythe-*-aetherium": {
-      "spectralDamageBonus": 1.4
-    },
-    "warscythe-long-*": {
-      "statModifiers": {
-        "attackSpeed": -0.35,
-        "walkSpeed": -0.1
-      }
-    }
+    "*-spectrium": { "spectralDamageBonus": 1 },
+    "*-etherium": { "spectralDamageBonus": 1.2 },
+    "*-aetherium": { "spectralDamageBonus": 1.4 }
   },
   "behaviors": [
     {
@@ -116,7 +108,7 @@
     { "name": "AnimationAuthoritative" }
   ],
   "heldTpHitAnimation": "axehit",
-  "attackRange": 3.8,
+  "attackRange": 3.2,
   "toolTierByType": {
     "*-spectrium": 2,
     "*-etherium": 3,

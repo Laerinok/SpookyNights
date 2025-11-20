@@ -1,5 +1,7 @@
-v0.3.0 2025-11-12
-- added:1 metal (spectrium) and 2 alloys (etherium/aetherium) for crafting new spectral-themed weapons.
+v0.3.0 2025-11-20 - The spectral weakness
+- Added:1 metal (spectrium) and 2 alloys (etherium/aetherium) for crafting new spectral-themed weapons.
+- Added: spectral weakness mechanic
+- Added: new configuration options
 
 v0.2.0 2025-11-06
 - Added: Configuration file for advanced mod customization.

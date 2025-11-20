@@ -41,13 +41,20 @@ resources/
 │     │  │  └─ raw/
 │     │  │     └─ warscythemold.json
 │     │  └─ jackolantern.json
+│     ├─ config/
+│     │  └─ handbook/
+│     │     ├─ 01-spookynights-mechanics.json.json
+│     │     ├─ 02-spookynights-metallurgy.json
+│     │     └─ 03-spookynights-weapons.json
 │     ├─ entities/
+│     │  ├─ projectile/
 │     │  └─ spectral/
-│     │     ├─ spectralbear.json
-│     │     ├─ spectralbowtorn.json
-│     │     ├─ spectraldrifter.json
-│     │     ├─ spectralshiver.json
-│     │     └─ spectralwolf.json
+│     │     └─ animal/
+│     │        ├─ spectralbear.json
+│     │        ├─ spectralbowtorn.json
+│     │        ├─ spectraldrifter.json
+│     │        ├─ spectralshiver.json
+│     │        └─ spectralwolf.json
 │     ├─ itemtypes/
 │     │  ├─ food/
 │     │  │  └─ candy.json
@@ -68,19 +75,21 @@ resources/
 │     │  │  └─ legacy/
 │     │  │     └─ ingotpile.json
 │     │  ├─ entities/
-│     │  │  └─ nonliving/
-│     │  │     └─ projectile/
-│     │  ├─ handbook/
-│     │  │  └─ survival-handbook.json
+│     │  │  └─ projectile/
+│     │  │     ├─ arrow.json
+│     │  │     └─ spear.json
 │     │  ├─ itemtypes/
 │     │  │  ├─ resource/
 │     │  │  │  ├─ ingot.json
 │     │  │  │  └─ nugget-metalbit.json
 │     │  │  ├─ tool/
+│     │  │  │  ├─ arrow.json
 │     │  │  │  ├─ blade.json
 │     │  │  │  └─ spear.json
 │     │  │  └─ toolhead/
-│     │  │     └─ bladehead.json
+│     │  │     ├─ arrowhead.json
+│     │  │     ├─ bladehead.json
+│     │  │     └─ spearhead.json
 │     │  ├─ recipes/
 │     │  │  ├─ grid/
 │     │  │  │  └─ tool/
@@ -96,21 +105,19 @@ resources/
 │     │  └─ trader.json
 │     ├─ recipes/
 │     │  ├─ clayforming/
-│     │  │  └─ warscythe-short-mold.json
+│     │  │  └─ warscythemold.json
 │     │  ├─ grid/
 │     │  │  ├─ jackolantern.json
 │     │  │  ├─ spectrium-nugget.json
 │     │  │  ├─ spiderweb.json
-│     │  │  └─ warscytheshort.json
+│     │  │  └─ warscythe.json
 │     │  └─ smithing/
-│     │     ├─ warscythe-long.json
-│     │     └─ warscythe-short.json
+│     │     └─ warscythe-long.json
 │     ├─ shapes/
 │     │  ├─ block/
 │     │  │  ├─ clay/
 │     │  │  │  └─ mold/
-│     │  │  │     ├─ warscythe-long.json
-│     │  │  │     └─ warscythe-short.json
+│     │  │  │     └─ warscythe-long.json
 │     │  │  └─ jackolantern/
 │     │  │     └─ jackolantern.json
 │     │  ├─ entity/
@@ -152,8 +159,7 @@ resources/
 │     │     ├─ resource/
 │     │     │  └─ spectralheart.json
 │     │     ├─ tool/
-│     │     │  ├─ warscythe-long.json
-│     │     │  └─ warscythe-short.json
+│     │     │  └─ warscythe-long.json
 │     │     └─ candybag.json
 │     ├─ sounds/
 │     │  ├─ block/
