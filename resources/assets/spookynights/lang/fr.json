@@ -20,6 +20,26 @@
   "item-candybag": "Sachet de bonbons",
   "itemdesc-candybag": "Un petit sachet en papier rempli de friandises.",
 
+  "candy-desc-ghostcaramel": "Bonus : Stabilité / Malus : Faiblesse (30s)",
+  "candy-desc-mummy": "Bonus : Soin + Vie Max / Malus : Lenteur (45s)",
+  "candy-desc-spidergummy": "Bonus : Super Saut / Malus : Morsure venimeuse",
+  "candy-desc-vampireteeth": "Bonus : Soin Majeur / Malus : Métabolisme extrême",
+  "candy-desc-shadowcube": "Effet : Chaos (Risques et Périls)",
+
+  "candy-msg-ghostcaramel": "[SpookyNights] Vous vous sentez éthéré... mais faible.",
+  "candy-expire-weakness": "[SpookyNights] Votre force revient.",
+  "candy-msg-mummy": "[SpookyNights] Les plaies se ferment, mais vous êtes rigide.",
+  "candy-expire-slow": "[SpookyNights] Vous pouvez bouger librement.",
+  "candy-msg-spidergummy": "[SpookyNights] SAUT !",
+  "candy-msg-vampireteeth": "[SpookyNights] Vitalité volée... quel qu'en soit le prix.",
+
+  "candy-msg-shadow-divine": "[SpookyNights] LES OMBRES VOUS BÉNISSENT !",
+  "candy-msg-shadow-speed": "[SpookyNights] PUISSANCE ILLIMITÉE !",
+  "candy-expire-speed": "[SpookyNights] L'effet se dissipe.",
+  "candy-msg-shadow-hallucination": "[SpookyNights] C'était quoi ce bruit ?",
+  "candy-msg-shadow-blind": "[SpookyNights] Les ténèbres vous agrippent...",
+  "candy-msg-shadow-fail": "[SpookyNights] La réalité se déchire !",
+
   "heldhelp-openbag": "Ouvrir le sac (Maintenir)",
 
   "item-creature-spectraldrifter-normal": "Rôdeur de surface spectral",
