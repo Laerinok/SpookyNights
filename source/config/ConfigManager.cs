@@ -14,6 +14,19 @@ namespace Spookynights
         {
             var config = new ServerConfig();
 
+            // --- NOUVELLES VALEURS PAR DEFAUT ---
+            config.EnableCandyLoot = true;       // Loot activé
+            config.HalloweenEventOnly = true;    // Uniquement en Octobre
+
+            config.UseTimeBasedSpawning = true;
+            config.SpawnOnlyAtNight = false;     // Peuvent apparaitre le jour !
+            config.NightTimeMode = "Auto";
+
+            config.SpawnOnlyOnLastDayOfMonth = false;
+            config.SpawnOnlyOnLastDayOfWeek = true; // Uniquement le dernier jour de la semaine
+            config.SpawnOnlyOnFullMoon = false;
+            // ------------------------------------
+
             config.CandyLootTable = new()
             {
                 { "spookynights:spectraldrifter-normal", "0.2@1" },
@@ -41,7 +54,6 @@ namespace Spookynights
                 { "spookynights:spectralbear-giant-adult-*", "1.0@8-12" }
             };
 
-            // Updated multipliers to separate giant bears from standard ones
             config.SpawnMultipliers = new()
             {
                 { "spookynights:spectralwolf-*", 1.0f },
@@ -82,21 +94,19 @@ namespace Spookynights
 
                 if (defaultConfig.Version != loadedVersion)
                 {
-                    api.Logger.Notification("[SpookyNights] Old server config version detected. Migrating...");
+                    api.Logger.Notification($"[SpookyNights] Old server config version detected ({loadedVersion} -> {defaultConfig.Version}). Migrating...");
                     var oldConfig = loadedObject.ToObject<ServerConfig>()!;
                     var newConfig = GetDefaultServerConfig();
 
+                    // Migration: On garde les anciens réglages utilisateurs, mais on applique les nouvelles clés
                     newConfig.EnableCandyLoot = oldConfig.EnableCandyLoot;
+                    newConfig.HalloweenEventOnly = oldConfig.HalloweenEventOnly; // Va prendre false si venant d'une vieille config, ou la valeur user
                     newConfig.CandyLootTable = oldConfig.CandyLootTable;
-                    // We overwrite SpawnMultipliers with the new default to ensure the new keys exist
-                    // If you want to try to preserve old values, it requires complex logic, 
-                    // but for a structure change, resetting this part is safer.
-                    // However, we can try to copy known keys back if they exist.
+
                     if (oldConfig.SpawnMultipliers != null)
                     {
                         foreach (var entry in oldConfig.SpawnMultipliers)
                         {
-                            // If user had the old generic key, ignore it or map it to brown
                             if (entry.Key == "spookynights:spectralbear-*")
                             {
                                 newConfig.SpawnMultipliers["spookynights:spectralbear-brown-*"] = entry.Value;
@@ -140,7 +150,6 @@ namespace Spookynights
 
         public static void LoadClientConfig(ICoreAPI api)
         {
-            // No changes needed here based on the request, keeping existing logic
             try
             {
                 var loadedObject = api.LoadModConfig<JObject>("spookynights-client.json");
@@ -161,9 +170,7 @@ namespace Spookynights
                     api.Logger.Notification("[SpookyNights] Old client config version detected. Migrating...");
                     var oldConfig = loadedObject.ToObject<ClientConfig>()!;
                     var newConfig = new ClientConfig();
-
                     newConfig.EnableJackOLanternParticles = oldConfig.EnableJackOLanternParticles;
-
                     api.StoreModConfig(newConfig, "spookynights-client.json");
                     ClientConf = newConfig;
                     api.Logger.Notification("[SpookyNights] Client config migration complete.");

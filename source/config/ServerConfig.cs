@@ -10,8 +10,12 @@ namespace SpookyNights
 
     public class ServerConfig
     {
-        public string? Version { get; set; } = "1.4.0";
+        public string? Version { get; set; } = "1.5.0"; // Updated Version
         public bool EnableCandyLoot { get; set; } = false;
+
+        // NEW: Restrict candy drops to October (Month 10)
+        public bool HalloweenEventOnly { get; set; } = false;
+
         public Dictionary<string, string> CandyLootTable { get; set; } = new Dictionary<string, string>();
         public Dictionary<string, float> SpawnMultipliers { get; set; } = new Dictionary<string, float>();
         public bool UseTimeBasedSpawning { get; set; } = true;
@@ -25,7 +29,6 @@ namespace SpookyNights
         public float NightEndHour { get; set; } = 6f;
 
         // Light level threshold used only when NightTimeMode is "Auto"
-        // Vanilla drifters spawn at light level 7 or less.
         public int LightLevelThreshold { get; set; } = 7;
 
         public List<int> AllowedSpawnMonths { get; set; } = new List<int>();
@@ -35,7 +38,6 @@ namespace SpookyNights
         public float FullMoonSpawnMultiplier { get; set; } = 2.0f;
         public Dictionary<string, BossSpawningConfig> Bosses { get; set; } = new Dictionary<string, BossSpawningConfig>();
 
-        // New property to control debug logging for performance
         public bool EnableDebugLogging { get; set; } = false;
 
         public ServerConfig()

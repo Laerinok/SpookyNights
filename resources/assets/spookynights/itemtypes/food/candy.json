@@ -1,6 +1,6 @@
 {
   "code": "spookycandy",
-  "class": "Item",
+  "class": "ItemSpookyCandy",
   "variantgroups": [
     {
       "code": "type",
