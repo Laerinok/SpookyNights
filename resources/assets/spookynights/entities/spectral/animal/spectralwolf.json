@@ -42,7 +42,39 @@
 			]
 		},
 		"killedByInfoText": "deadcreature-eaten-large",
-		"handbook": { "groupcode": "creaturegroup-wolf" }
+		"handbook": { "groupcode": "creaturegroup-wolf" },
+		"glowColorByType": {
+			"*-male": "#FF3333",
+			"*-female": "#0066FF"
+		},
+		"spectralDrops": {
+			"spectralwolf-eurasian-adult-*": [
+				{
+					"type": "item",
+					"code": "spookynights:spectralheart-medium",
+					"quantity": {
+						"avg": 0.1,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-temporal",
+					"quantity": {
+						"avg": 0.15,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-rusty",
+					"quantity": {
+						"avg": 1,
+						"var": 0
+					}
+				}
+			]
+		}
 	},
 	"client": {
 		"renderer": "Shape",
@@ -50,10 +82,6 @@
 		"glowLevelByType": {
 			"*-male": 110,
 			"*-female": 160
-		},
-		"glowColorByType": {
-			"*-male": "#FF3333",
-			"*-female": "#0066FF"
 		},
 		"skipRenderUntil": "alive",
 		"shape": { "base": "entity/spectral/animal/wolf" },
@@ -87,10 +115,6 @@
 				"onlyWhenDead": true
 			},
 			{ "code": "interpolateposition" },
-			{
-				"code": "harvestable",
-				"duration": 0.5
-			},
 			{
 				"code": "despawn",
 				"minPlayerDistance": 16,
@@ -162,38 +186,6 @@
 			{
 				"code": "deaddecay",
 				"hoursToDecay": 3
-			},
-			{
-				"code": "harvestable",
-				"duration": 0.5,
-				"dropsByType": {
-					"spectralwolf-eurasian-adult-*": [
-						{
-							"type": "item",
-							"code": "spookynights:spectralheart-medium",
-							"quantity": {
-								"avg": 0.1,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-temporal",
-							"quantity": {
-								"avg": 0.15,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-rusty",
-							"quantity": {
-								"avg": 1,
-								"var": 0
-							}
-						}
-					]
-				}
 			},
 			{
 				"code": "controlledphysics",

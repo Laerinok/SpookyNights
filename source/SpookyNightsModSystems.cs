@@ -2,12 +2,15 @@
 using Spookynights;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq; // Required for JObject
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
+using Vintagestory.GameContent; // Required for ItemStackRandomizer
 
 namespace SpookyNights
 {
@@ -46,21 +49,18 @@ namespace SpookyNights
         {
             base.Start(api);
 
-            // Register all custom classes here
             new Harmony("fr.laerinok.spookynights").PatchAll();
             api.RegisterItemClass("ItemSpectralArrow", typeof(ItemSpectralArrow));
             api.RegisterItemClass("ItemSpectralSpear", typeof(ItemSpectralSpear));
             api.RegisterItemClass("ItemSpectralWeapon", typeof(ItemSpectralWeapon));
             api.RegisterItemClass("ItemCandyBag", typeof(ItemCandyBag));
 
-            // Behaviors
             api.RegisterEntityBehaviorClass("spectralresistance", typeof(EntityBehaviorSpectralResistance));
             api.RegisterEntityBehaviorClass("spectralhandling", typeof(EntityBehaviorSpectralHandling));
 
             api.Logger.Notification("🌟 Spooky Nights is loaded!");
         }
 
-        // Attach behavior on Client side for immediate feedback
         public override void StartClientSide(ICoreClientAPI api)
         {
             api.Event.OnEntitySpawn += AddPlayerBehavior;
@@ -75,15 +75,9 @@ namespace SpookyNights
             {
                 sapi.Logger.Notification("[SpookyNights] Config loaded. Debug logging is set to: {0}", ConfigManager.ServerConf.EnableDebugLogging);
             }
-            else
-            {
-                sapi.Logger.Error("[SpookyNights] CRITICAL: Server config was not loaded at StartServerSide!");
-            }
 
             api.Event.OnEntityDeath += OnEntityDeath;
             api.Event.OnTrySpawnEntity += OnTrySpawnEntity;
-
-            // Attach behavior on Server side
             api.Event.OnEntitySpawn += AddPlayerBehavior;
             api.Event.OnEntityLoaded += AddPlayerBehavior;
 
@@ -106,6 +100,209 @@ namespace SpookyNights
         {
             if (damageSource == null) return;
 
+            HandleCandyLoot(entity, damageSource);
+
+            if (IsSpectralCreature(entity.Code))
+            {
+                HandleSpectralDeath(entity);
+            }
+        }
+
+        // --- SPECTRAL DEATH LOGIC ---
+        private void HandleSpectralDeath(Entity entity)
+        {
+            // 1. Get Color (with Debug Logs)
+            int particleColor = GetEntityGlowColor(entity);
+
+            // 2. Spawn Bright Particles
+            SpawnSpectralParticles(entity.ServerPos.XYZ, particleColor);
+
+            // 3. Process Custom Drops
+            if (entity.Properties.Attributes?["spectralDrops"]?.Token is JObject dropTable)
+            {
+                foreach (var entry in dropTable)
+                {
+                    if (WildcardUtil.Match(entry.Key, entity.Code.Path))
+                    {
+                        if (entry.Value is JArray drops)
+                        {
+                            foreach (var dropToken in drops)
+                            {
+                                TrySpawnDrop(dropToken, entity.ServerPos.XYZ);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // 4. Despawn
+            entity.Die(EnumDespawnReason.Expire);
+        }
+
+        // --- COLOR LOGIC (CHAT DEBUG VERSION) ---
+        private int GetEntityGlowColor(Entity entity)
+        {
+            // Par défaut : Cyan (Alpha 150, R 0, G 255, B 255)
+            int defaultColor = ColorUtil.ToRgba(150, 0, 255, 255);
+
+            try
+            {
+                JsonObject? mainAttrs = entity.Properties.Attributes;
+                if (mainAttrs == null) return defaultColor;
+
+                // CAS 1 : Le jeu a déjà résolu la couleur (Cas le plus probable vu tes logs)
+                if (mainAttrs.KeyExists("glowColor"))
+                {
+                    JToken? token = mainAttrs["glowColor"]?.Token;
+
+                    // Si c'est direct un texte (ex: "#FF0000")
+                    if (token != null && token.Type == JTokenType.String)
+                    {
+                        string hexColor = token.ToString();
+                        return ParseHexColor(hexColor);
+                    }
+                    // Si c'est encore une table (cas rare)
+                    else if (token is JObject glowTable)
+                    {
+                        return ParseGlowTable(glowTable, entity, defaultColor);
+                    }
+                }
+
+                // CAS 2 : On doit chercher manuellement dans glowColorByType
+                if (mainAttrs.KeyExists("glowColorByType") && mainAttrs["glowColorByType"]?.Token is JObject glowTableByType)
+                {
+                    return ParseGlowTable(glowTableByType, entity, defaultColor);
+                }
+            }
+            catch
+            {
+                // Ignore errors
+            }
+
+            return defaultColor;
+        }
+
+        // Petite fonction utilitaire pour éviter de répéter le code
+        private int ParseHexColor(string hexColor)
+        {
+            int rgb = ColorUtil.Hex2Int(hexColor);
+            int r = (rgb >> 16) & 0xFF;
+            int g = (rgb >> 8) & 0xFF;
+            int b = rgb & 0xFF;
+            // (Alpha, Rouge, Vert, Bleu)
+            return ColorUtil.ToRgba(150, r, g, b);
+        }
+
+        private int ParseGlowTable(JObject glowTable, Entity entity, int defaultColor)
+        {
+            foreach (var entry in glowTable)
+            {
+                if (WildcardUtil.Match(entry.Key, entity.Code.Path))
+                {
+                    string? hexColor = entry.Value?.ToString();
+                    if (string.IsNullOrEmpty(hexColor)) return defaultColor;
+                    return ParseHexColor(hexColor);
+                }
+            }
+            return defaultColor;
+        }
+
+        // --- PARTICLE LOGIC (BRIGHTNESS FIX) ---
+        private void SpawnSpectralParticles(Vec3d pos, int color)
+        {
+            SimpleParticleProperties particles = new SimpleParticleProperties(
+                20, 30,
+                color,
+                new Vec3d(), new Vec3d(),
+                new Vec3f(-0.5f, 0, -0.5f),
+                new Vec3f(0.5f, 2.0f, 0.5f),
+                1.5f,
+                0,
+                0.5f, 2.0f,
+                EnumParticleModel.Quad
+            );
+
+            particles.MinPos = pos.AddCopy(-0.5, 0, -0.5);
+            particles.AddPos = new Vec3d(1, 1.5, 1);
+            particles.WithTerrainCollision = false;
+
+            // Brightness Fix: Ignore shading
+            particles.VertexFlags = 255;
+
+            particles.OpacityEvolve = EvolvingNatFloat.create(EnumTransformFunction.LINEAR, -150);
+
+            sapi.World.SpawnParticles(particles);
+        }
+
+        // --- DROP LOGIC (RANDOMIZER FIX) ---
+        private void TrySpawnDrop(JToken dropToken, Vec3d pos)
+        {
+            try
+            {
+                JObject? drop = dropToken as JObject;
+                if (drop == null) return;
+
+                string? code = drop["code"]?.ToString();
+                string? type = drop["type"]?.ToString();
+                JToken? quantity = drop["quantity"];
+
+                if (string.IsNullOrEmpty(code)) return;
+
+                float avg = quantity?["avg"]?.ToObject<float>() ?? 1f;
+                float var = quantity?["var"]?.ToObject<float>() ?? 0f;
+                float finalQuantity = avg + ((float)sapi.World.Rand.NextDouble() * var) - (var / 2f);
+
+                int stackSize = (int)finalQuantity;
+                if (sapi.World.Rand.NextDouble() < (finalQuantity - stackSize)) stackSize++;
+
+                if (stackSize <= 0) return;
+
+                ItemStack? stack = null;
+
+                if (type == "item")
+                {
+                    Item item = sapi.World.GetItem(new AssetLocation(code));
+                    if (item != null)
+                    {
+                        // Handle Randomizers (Jonas parts, Lore, etc.)
+                        if (item is ItemStackRandomizer randItem)
+                        {
+                            ItemStack tempStack = new ItemStack(item, 1);
+                            DummySlot dummySlot = new DummySlot(tempStack);
+
+                            // Resolve imports = true
+                            randItem.Resolve(dummySlot, sapi.World, true);
+
+                            stack = dummySlot.Itemstack;
+                        }
+                        else
+                        {
+                            stack = new ItemStack(item, stackSize);
+                        }
+
+                        if (stack != null) stack.StackSize = stackSize;
+                    }
+                }
+                else // block
+                {
+                    Block block = sapi.World.GetBlock(new AssetLocation(code));
+                    if (block != null) stack = new ItemStack(block, stackSize);
+                }
+
+                if (stack != null)
+                {
+                    sapi.World.SpawnItemEntity(stack, pos);
+                }
+            }
+            catch (Exception ex)
+            {
+                sapi.Logger.Warning("[SpookyNights] Failed to spawn custom drop: " + ex.Message);
+            }
+        }
+
+        private void HandleCandyLoot(Entity entity, DamageSource damageSource)
+        {
             if (sapi == null || ConfigManager.ServerConf == null || !ConfigManager.ServerConf.EnableCandyLoot) return;
             if (damageSource.SourceEntity is not EntityPlayer) return;
             string? matchedKey = null;
@@ -143,17 +340,7 @@ namespace SpookyNights
 
         private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
         {
-            if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights")
-            {
-                return true;
-            }
-
-            bool debugEnabled = ConfigManager.ServerConf.EnableDebugLogging;
-
-            if (debugEnabled)
-            {
-                sapi.Logger.Debug("[SpookyNights] Game wants to spawn '{0}'. Checking our custom rules...", properties.Code);
-            }
+            if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights") return true;
 
             bool isHandledAsBoss = false;
 
@@ -171,28 +358,16 @@ namespace SpookyNights
 
                         if (bossConfig.Enabled)
                         {
-                            if (!bossConfig.AllowedMoonPhases.Contains(currentMoonPhase))
-                            {
-                                if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for boss '{0}': incorrect moon phase ('{1}').", properties.Code, currentMoonPhase);
-                                return false;
-                            }
+                            if (!bossConfig.AllowedMoonPhases.Contains(currentMoonPhase)) return false;
                         }
-                        else
-                        {
-                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for boss '{0}': disabled in config.", properties.Code);
-                            return false;
-                        }
+                        else return false;
                         break;
                     }
                 }
 
                 if (!isHandledAsBoss)
                 {
-                    if (ConfigManager.ServerConf.SpawnOnlyOnFullMoon && currentMoonPhase != "full")
-                    {
-                        if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not a full moon.", properties.Code);
-                        return false;
-                    }
+                    if (ConfigManager.ServerConf.SpawnOnlyOnFullMoon && currentMoonPhase != "full") return false;
 
                     if (ConfigManager.ServerConf.SpawnOnlyAtNight)
                     {
@@ -202,55 +377,32 @@ namespace SpookyNights
                             float hour = sapi.World.Calendar.HourOfDay;
                             float start = ConfigManager.ServerConf.NightStartHour;
                             float end = ConfigManager.ServerConf.NightEndHour;
-                            if (start > end) { isDarkEnough = hour >= start || hour < end; }
-                            else { isDarkEnough = hour >= start && hour < end; }
+                            isDarkEnough = (start > end) ? (hour >= start || hour < end) : (hour >= start && hour < end);
                         }
                         else
                         {
                             int lightLevel = sapi.World.BlockAccessor.GetLightLevel(spawnPosition.AsBlockPos, EnumLightLevelType.MaxLight);
                             isDarkEnough = lightLevel <= ConfigManager.ServerConf.LightLevelThreshold;
                         }
-
-                        if (!isDarkEnough)
-                        {
-                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not dark enough.", properties.Code);
-                            return false;
-                        }
+                        if (!isDarkEnough) return false;
                     }
+
                     if (ConfigManager.ServerConf.AllowedSpawnMonths != null && ConfigManager.ServerConf.AllowedSpawnMonths.Count > 0)
                     {
-                        int currentMonth = sapi.World.Calendar.Month;
-                        if (!ConfigManager.ServerConf.AllowedSpawnMonths.Contains(currentMonth))
-                        {
-                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': incorrect month ('{1}').", properties.Code, currentMonth);
-                            return false;
-                        }
+                        if (!ConfigManager.ServerConf.AllowedSpawnMonths.Contains(sapi.World.Calendar.Month)) return false;
                     }
                     if (ConfigManager.ServerConf.SpawnOnlyOnLastDayOfMonth)
                     {
                         int currentDay = (int)(sapi.World.Calendar.TotalDays % sapi.World.Calendar.DaysPerMonth) + 1;
-                        if (currentDay != sapi.World.Calendar.DaysPerMonth)
-                        {
-                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not the last day of the month.", properties.Code);
-                            return false;
-                        }
+                        if (currentDay != sapi.World.Calendar.DaysPerMonth) return false;
                     }
                     if (ConfigManager.ServerConf.SpawnOnlyOnLastDayOfWeek)
                     {
                         const int daysInWeek = 7;
                         int currentDayOfWeek = (int)sapi.World.Calendar.TotalDays % daysInWeek;
-                        if (currentDayOfWeek != daysInWeek - 1)
-                        {
-                            if (debugEnabled) sapi.Logger.Debug("[SpookyNights] CANCELLING spawn for '{0}': not the last day of the week.", properties.Code);
-                            return false;
-                        }
+                        if (currentDayOfWeek != daysInWeek - 1) return false;
                     }
                 }
-            }
-
-            if (debugEnabled)
-            {
-                sapi.Logger.Debug("[SpookyNights] Time checks PASSED for '{0}'. Now checking multiplier...", properties.Code);
             }
 
             float multiplier = 1.0f;
@@ -265,35 +417,27 @@ namespace SpookyNights
                 }
             }
 
-            if (!foundMatch) { return true; }
+            if (!foundMatch) return true;
 
             if (!isHandledAsBoss && !ConfigManager.ServerConf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant() == "full")
             {
-                if (debugEnabled)
-                {
-                    sapi.Logger.Debug("[SpookyNights] Applying full moon multiplier ({0}x) to '{1}'.", ConfigManager.ServerConf.FullMoonSpawnMultiplier, properties.Code);
-                }
                 multiplier *= ConfigManager.ServerConf.FullMoonSpawnMultiplier;
             }
 
-            if (multiplier <= 0) { return false; }
-            if (multiplier >= 1) { return true; }
-            if (sapi.World.Rand.NextDouble() > multiplier) { return false; }
-
-            return true;
+            if (multiplier <= 0) return false;
+            if (multiplier >= 1) return true;
+            return sapi.World.Rand.NextDouble() <= multiplier;
         }
 
         private void OnDaylightCheck(float dt)
         {
-            if (ConfigManager.ServerConf == null || !ConfigManager.ServerConf.SpawnOnlyAtNight) { return; }
+            if (ConfigManager.ServerConf == null || !ConfigManager.ServerConf.SpawnOnlyAtNight) return;
 
             float hour = sapi.World.Calendar.HourOfDay;
             float start = ConfigManager.ServerConf.NightStartHour;
             float end = ConfigManager.ServerConf.NightEndHour;
 
-            bool isDayTime;
-            if (start > end) { isDayTime = hour >= end && hour < start; }
-            else { isDayTime = hour < start || hour >= end; }
+            bool isDayTime = (start > end) ? (hour >= end && hour < start) : (hour < start || hour >= end);
 
             if (isDayTime)
             {
@@ -312,10 +456,10 @@ namespace SpookyNights
 
         private bool IsSpectralCreature(AssetLocation entityCode)
         {
-            if (entityCode == null || entityCode.Domain != "spookynights") { return false; }
+            if (entityCode == null || entityCode.Domain != "spookynights") return false;
             foreach (var code in spectralCreatureCodes)
             {
-                if (entityCode.Path.StartsWith(code)) { return true; }
+                if (entityCode.Path.StartsWith(code)) return true;
             }
             return false;
         }

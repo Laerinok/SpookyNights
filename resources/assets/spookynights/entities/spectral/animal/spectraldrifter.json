@@ -36,7 +36,6 @@
 			"spectraldrifter-nightmare": 0.3,
 			"spectraldrifter-double-headed": 0.35
 		},
-
 		"oddsToAlter": 5,
 		"dieAnimationCode": "die",
 		"alternativeDieAnimationCode": "crawldie",
@@ -54,6 +53,234 @@
 			"standcry": "crawlemote",
 			"standhurt": "crawlhurt",
 			"standdie": "crawldie"
+		},
+		"glowColorByType": {
+			"*-normal": "#BFEFFF",
+			"*-deep": "#66FFFF",
+			"*-tainted": "#99CC00",
+			"*-corrupt": "#4B0082",
+			"*-nightmare": "#9B30FF",
+			"*-double-headed": "#E6FFFF"
+		},
+		"spectralDrops": {
+			"*-normal": [
+				{
+					"type": "item",
+					"code": "spookynights:spectralheart-poor",
+					"quantity": {
+						"avg": 0.12,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-temporal",
+					"quantity": {
+						"avg": 0.02666,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:flaxfibers",
+					"quantity": {
+						"avg": 0.2,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-rusty",
+					"dropModbyStat": "rustyGearDropRate",
+					"quantity": {
+						"avg": 0.01,
+						"var": 0
+					}
+				}
+			],
+			"*-deep": [
+				{
+					"type": "item",
+					"code": "spookynights:spectralheart-poor",
+					"quantity": {
+						"avg": 0.20,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-temporal",
+					"quantity": {
+						"avg": 0.033325,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-rusty",
+					"dropModbyStat": "rustyGearDropRate",
+					"quantity": {
+						"avg": 0.03,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:flaxfibers",
+					"quantity": {
+						"avg": 0.4,
+						"var": 0
+					}
+				}
+			],
+			"*-tainted": [
+				{
+					"type": "item",
+					"code": "spookynights:spectralheart-medium",
+					"quantity": {
+						"avg": 0.35,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-temporal",
+					"quantity": {
+						"avg": 0.03999,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-rusty",
+					"dropModbyStat": "rustyGearDropRate",
+					"quantity": {
+						"avg": 0.07,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:flaxfibers",
+					"quantity": {
+						"avg": 0.6,
+						"var": 0
+					}
+				}
+			],
+			"*-corrupt": [
+				{
+					"type": "item",
+					"code": "spookynights:spectralheart-medium",
+					"quantity": {
+						"avg": 0.5,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-temporal",
+					"quantity": {
+						"avg": 0.046655,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-rusty",
+					"dropModbyStat": "rustyGearDropRate",
+					"quantity": {
+						"avg": 0.1,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:flaxfibers",
+					"quantity": {
+						"avg": 0.8,
+						"var": 0
+					}
+				}
+			],
+			"*-nightmare": [
+				{
+					"type": "item",
+					"code": "spookynights:spectralheart-rich",
+					"quantity": {
+						"avg": 0.7,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-temporal",
+					"quantity": {
+						"avg": 0.05332,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-rusty",
+					"dropModbyStat": "rustyGearDropRate",
+					"quantity": {
+						"avg": 0.2,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:flaxfibers",
+					"quantity": {
+						"avg": 1,
+						"var": 0
+					}
+				}
+			],
+			"*-double-headed": [
+				{
+					"type": "item",
+					"code": "spookynights:spectralheart-bountiful",
+					"quantity": {
+						"avg": 2,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-temporal",
+					"quantity": {
+						"avg": 1,
+						"var": 0.4
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-rusty",
+					"dropModbyStat": "rustyGearDropRate",
+					"quantity": {
+						"avg": 5,
+						"var": 2.5
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:flaxfibers",
+					"quantity": {
+						"avg": 2,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:stackrandomizer-alljonas",
+					"quantity": {
+						"avg": 0.4,
+						"var": 0
+					}
+				}
+			]
 		}
 	},
 	"client": {
@@ -67,14 +294,6 @@
 			"*-corrupt": 100,
 			"*-nightmare": 80,
 			"*-double-headed": 80
-		},
-		"glowColorByType": {
-			"*-normal": "#BFEFFF",
-			"*-deep": "#66FFFF",
-			"*-tainted": "#99CC00",
-			"*-corrupt": "#4B0082",
-			"*-nightmare": "#9B30FF",
-			"*-double-headed": "#E6FFFF"
 		},
 		"shapeByType": {
 			"*-normal": { "base": "entity/spectral/drifter/surface" },
@@ -109,17 +328,9 @@
 					"alternates": [ { "base": "entity/spectral/drifter/spiked2" } ]
 				}
 			},
-			"*-corrupt": {
-				"skin": {
-					"base": "entity/spectral/drifter/deerhorn"
-				}
-			},
-			"*-nightmare": {
-				"skin": { "base": "entity/spectral/drifter/knife" }
-			},
-			"*-double-headed": {
-				"skin": { "base": "entity/spectral/drifter/double" }
-			}
+			"*-corrupt": { "skin": { "base": "entity/spectral/drifter/deerhorn" } },
+			"*-nightmare": { "skin": { "base": "entity/spectral/drifter/knife" } },
+			"*-double-headed": { "skin": { "base": "entity/spectral/drifter/double" } }
 		},
 		"behaviors": [
 			{ "code": "repulseagents" },
@@ -131,11 +342,7 @@
 				"code": "floatupwhenstuck",
 				"onlyWhenDead": true
 			},
-			{ "code": "interpolateposition" },
-			{
-				"code": "harvestable",
-				"duration": 0.5
-			}
+			{ "code": "interpolateposition" }
 		],
 		"animations": [
 			{
@@ -440,233 +647,6 @@
 					}
 				]
 			},
-			{
-				"code": "harvestable",
-				"duration": 0.5,
-				"quantitySlots": 8,
-				"fixedweight": true,
-				"dropsByType": {
-					"*-normal": [
-						{
-							"type": "item",
-							"code": "spookynights:spectralheart-poor",
-							"quantity": {
-								"avg": 0.12,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-temporal",
-							"quantity": {
-								"avg": 0.02666,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:flaxfibers",
-							"quantity": {
-								"avg": 0.2,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-rusty",
-							"dropModbyStat": "rustyGearDropRate",
-							"quantity": {
-								"avg": 0.01,
-								"var": 0
-							}
-						}
-					],
-					"*-deep": [
-						{
-							"type": "item",
-							"code": "spookynights:spectralheart-poor",
-							"quantity": {
-								"avg": 0.20,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-temporal",
-							"quantity": {
-								"avg": 0.033325,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-rusty",
-							"dropModbyStat": "rustyGearDropRate",
-							"quantity": {
-								"avg": 0.03,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:flaxfibers",
-							"quantity": {
-								"avg": 0.4,
-								"var": 0
-							}
-						}
-					],
-					"*-tainted": [
-						{
-							"type": "item",
-							"code": "spookynights:spectralheart-medium",
-							"quantity": {
-								"avg": 0.35,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-temporal",
-							"quantity": {
-								"avg": 0.03999,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-rusty",
-							"dropModbyStat": "rustyGearDropRate",
-							"quantity": {
-								"avg": 0.07,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:flaxfibers",
-							"quantity": {
-								"avg": 0.6,
-								"var": 0
-							}
-						}
-					],
-					"*-corrupt": [
-						{
-							"type": "item",
-							"code": "spookynights:spectralheart-medium",
-							"quantity": {
-								"avg": 0.5,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-temporal",
-							"quantity": {
-								"avg": 0.046655,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-rusty",
-							"dropModbyStat": "rustyGearDropRate",
-							"quantity": {
-								"avg": 0.1,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:flaxfibers",
-							"quantity": {
-								"avg": 0.8,
-								"var": 0
-							}
-						}
-					],
-					"*-nightmare": [
-						{
-							"type": "item",
-							"code": "spookynights:spectralheart-rich",
-							"quantity": {
-								"avg": 0.7,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-temporal",
-							"quantity": {
-								"avg": 0.05332,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-rusty",
-							"dropModbyStat": "rustyGearDropRate",
-							"quantity": {
-								"avg": 0.2,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:flaxfibers",
-							"quantity": {
-								"avg": 1,
-								"var": 0
-							}
-						}
-					],
-					"*-double-headed": [
-						{
-							"type": "item",
-							"code": "spookynights:spectralheart-bountiful",
-							"quantity": {
-								"avg": 2,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-temporal",
-							"quantity": {
-								"avg": 1,
-								"var": 0.4
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:gear-rusty",
-							"dropModbyStat": "rustyGearDropRate",
-							"quantity": {
-								"avg": 5,
-								"var": 2.5
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:flaxfibers",
-							"quantity": {
-								"avg": 2,
-								"var": 0
-							}
-						},
-						{
-							"type": "item",
-							"code": "game:stackrandomizer-alljonas",
-							"quantity": {
-								"avg": 0.4,
-								"var": 0
-							}
-						}
-					]
-				}
-			},
-			{ "code": "ripharvestable" },
 			{ "code": "entitystatetags" }
 		],
 		"spawnconditions": {

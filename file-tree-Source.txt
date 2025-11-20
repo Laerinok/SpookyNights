@@ -4,6 +4,7 @@ source/
 │  ├─ ConfigManager.cs
 │  └─ ServerConfig.cs
 ├─ EntityBehaviorSpectralResistance.cs
+├─ EntityBehaviorSpectralHandling.cs
 ├─ HarmonyPatches.cs
 ├─ ItemCandyBag.cs
 ├─ ItemSpectralArrow.cs
