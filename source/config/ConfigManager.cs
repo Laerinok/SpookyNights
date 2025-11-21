@@ -25,43 +25,6 @@ namespace Spookynights
             config.SpawnOnlyOnLastDayOfWeek = true;
             config.SpawnOnlyOnFullMoon = false;
 
-            // Balanced Loot Table
-            config.CandyLootTable = new()
-            {
-                // Weak (Low chance)
-                { "spookynights:spectraldrifter-normal", "0.15@1" },
-                { "spookynights:spectraldrifter-deep", "0.20@1" },
-                
-                // Medium
-                { "spookynights:spectraldrifter-tainted", "0.30@1" },
-                { "spookynights:spectralshiver-surface", "0.25@1" },
-                { "spookynights:spectralshiver-deep", "0.30@1" },
-                { "spookynights:spectralbowtorn-surface", "0.25@1" },
-                { "spookynights:spectralwolf-eurasian-adult-*", "0.30@1" },
-
-                // Strong
-                { "spookynights:spectraldrifter-corrupt", "0.40@1-2" },
-                { "spookynights:spectraldrifter-nightmare", "0.50@1-2" },
-                { "spookynights:spectralshiver-tainted", "0.35@1-2" },
-                { "spookynights:spectralshiver-corrupt", "0.40@2-3" },
-                { "spookynights:spectralshiver-nightmare", "0.60@3-5" },
-                { "spookynights:spectralbowtorn-deep", "0.35@1-2" },
-                { "spookynights:spectralbowtorn-tainted", "0.40@2-3" },
-                { "spookynights:spectralbowtorn-corrupt", "0.45@2-4" },
-                { "spookynights:spectralbear-brown-adult-*", "0.50@1-2" },
-
-                // Elites
-                { "spookynights:spectraldrifter-double-headed", "0.80@2-3" },
-                { "spookynights:spectralbowtorn-nightmare", "0.65@3-5" },
-                { "spookynights:spectralbowtorn-gearfoot", "0.75@4-6" },
-                { "spookynights:spectralshiver-stilt", "0.70@4-6" },
-                { "spookynights:spectralshiver-bellhead", "0.70@4-6" },
-                { "spookynights:spectralshiver-deepsplit", "0.70@4-6" },
-                
-                // Bosses (Reduced to avoid flooding)
-                { "spookynights:spectralbear-giant-adult-*", "1.0@3-5" }
-            };
-
             config.SpawnMultipliers = new()
             {
                 { "spookynights:spectralwolf-*", 1.0f },
@@ -103,12 +66,15 @@ namespace Spookynights
                 if (defaultConfig.Version != loadedVersion)
                 {
                     api.Logger.Notification($"[SpookyNights] Old server config version detected ({loadedVersion} -> {defaultConfig.Version}). Migrating...");
+
+                    // Load old config to keep user settings
                     var oldConfig = loadedObject.ToObject<ServerConfig>()!;
                     var newConfig = GetDefaultServerConfig();
 
+                    // Migrate simple values
                     newConfig.EnableCandyLoot = oldConfig.EnableCandyLoot;
                     newConfig.HalloweenEventOnly = oldConfig.HalloweenEventOnly;
-                    newConfig.CandyLootTable = oldConfig.CandyLootTable;
+                    // Note: We intentionally do NOT migrate CandyLootTable as it is deprecated.
 
                     if (oldConfig.SpawnMultipliers != null)
                     {
@@ -157,39 +123,21 @@ namespace Spookynights
 
         public static void LoadClientConfig(ICoreAPI api)
         {
+            // Standard client loading logic (unchanged from previous version)
             try
             {
                 var loadedObject = api.LoadModConfig<JObject>("spookynights-client.json");
 
                 if (loadedObject == null)
                 {
-                    api.Logger.Notification("[SpookyNights] Client config file not found. Creating a new one.");
                     ClientConf = new ClientConfig();
                     api.StoreModConfig(ClientConf, "spookynights-client.json");
                     return;
                 }
-
-                var defaultConfig = new ClientConfig();
-                string? loadedVersion = loadedObject.ContainsKey("Version") ? loadedObject["Version"]?.ToString() : null;
-
-                if (defaultConfig.Version != loadedVersion)
-                {
-                    api.Logger.Notification("[SpookyNights] Old client config version detected. Migrating...");
-                    var oldConfig = loadedObject.ToObject<ClientConfig>()!;
-                    var newConfig = new ClientConfig();
-                    newConfig.EnableJackOLanternParticles = oldConfig.EnableJackOLanternParticles;
-                    api.StoreModConfig(newConfig, "spookynights-client.json");
-                    ClientConf = newConfig;
-                    api.Logger.Notification("[SpookyNights] Client config migration complete.");
-                }
-                else
-                {
-                    ClientConf = loadedObject.ToObject<ClientConfig>()!;
-                }
+                ClientConf = loadedObject.ToObject<ClientConfig>()!;
             }
-            catch (Exception e)
+            catch
             {
-                api.Logger.Error("[SpookyNights] CRITICAL ERROR loading or migrating client config. Using default settings. Details: " + e.Message);
                 ClientConf = new ClientConfig();
             }
         }

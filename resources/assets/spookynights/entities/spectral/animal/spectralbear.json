@@ -238,6 +238,13 @@
     },
     "behaviors": [
       {
+        "code": "proximitywarning",
+        "range": 45,
+        "sound": "spookynights:sounds/creature/bear/bear-giant-growl",
+        "volume": 0.5,
+        "cooldownMs": 12000
+      },
+      {
         "code": "spectralresistance",
         "resistance": 0.5
       },

@@ -28,8 +28,13 @@ resources/
 │  │     │        ├─ etherium.png
 │  │     │        └─ spectrium.png
 │  │     └─ item/
-│  │        └─ resource/
-│  │           └─ nugget/
+│  │        ├─ resource/
+│  │        │  └─ nugget/
+│  │        │     ├─ aetherium.png
+│  │        │     ├─ etherium.png
+│  │        │     └─ spectrium.png
+│  │        └─ tool/
+│  │           └─ material/
 │  │              ├─ aetherium.png
 │  │              ├─ etherium.png
 │  │              └─ spectrium.png
@@ -168,8 +173,9 @@ resources/
 │     │  │  ├─ halloween-scary-ambience.ogg
 │     │  │  └─ halloween-scream.ogg
 │     │  └─ creature/
-│     │     └─ wolf/
-│     │        └─ howl1.ogg
+│     │     ├─ wolf/
+│     │     │  └─ howl1.ogg
+│     │     └─ specter_growls.ogg
 │     └─ textures/
 │        ├─ block/
 │        │  └─ jackolantern/

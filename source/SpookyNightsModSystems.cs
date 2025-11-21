@@ -14,11 +14,66 @@ using Vintagestory.GameContent;
 
 namespace SpookyNights
 {
+    // Helper structure for drop rates
+    public struct CandyDropDefinition
+    {
+        public float Chance;
+        public int MinQuantity;
+        public int MaxQuantity;
+
+        public CandyDropDefinition(float chance, int min, int max)
+        {
+            Chance = chance;
+            MinQuantity = min;
+            MaxQuantity = max;
+        }
+    }
+
     public sealed class SpookyNightsModSystem : ModSystem
     {
         private ICoreAPI api = default!;
         private ICoreServerAPI sapi = default!;
         private List<string> spectralCreatureCodes = new List<string>();
+
+        // --- HARDCODED LOOT TABLE ---
+        // Key: Entity Code Wildcard
+        // Value: Chance (0.0-1.0), Min, Max
+        private static readonly Dictionary<string, CandyDropDefinition> LootTable = new Dictionary<string, CandyDropDefinition>()
+        {
+            // Weak
+            { "spookynights:spectraldrifter-normal",      new CandyDropDefinition(0.15f, 1, 1) },
+            { "spookynights:spectraldrifter-deep",        new CandyDropDefinition(0.20f, 1, 1) },
+            
+            // Medium
+            { "spookynights:spectraldrifter-tainted",     new CandyDropDefinition(0.30f, 1, 1) },
+            { "spookynights:spectralshiver-surface",      new CandyDropDefinition(0.25f, 1, 1) },
+            { "spookynights:spectralshiver-deep",         new CandyDropDefinition(0.30f, 1, 1) },
+            { "spookynights:spectralbowtorn-surface",     new CandyDropDefinition(0.25f, 1, 1) },
+            { "spookynights:spectralwolf-eurasian-adult-*", new CandyDropDefinition(0.30f, 1, 1) },
+
+            // Strong
+            { "spookynights:spectraldrifter-corrupt",     new CandyDropDefinition(0.40f, 1, 2) },
+            { "spookynights:spectraldrifter-nightmare",   new CandyDropDefinition(0.50f, 1, 2) },
+            { "spookynights:spectralshiver-tainted",      new CandyDropDefinition(0.35f, 1, 2) },
+            { "spookynights:spectralshiver-corrupt",      new CandyDropDefinition(0.40f, 2, 3) },
+            { "spookynights:spectralshiver-nightmare",    new CandyDropDefinition(0.60f, 3, 5) },
+            { "spookynights:spectralbowtorn-deep",        new CandyDropDefinition(0.35f, 1, 2) },
+            { "spookynights:spectralbowtorn-tainted",     new CandyDropDefinition(0.40f, 2, 3) },
+            { "spookynights:spectralbowtorn-corrupt",     new CandyDropDefinition(0.45f, 2, 4) },
+            { "spookynights:spectralbear-brown-adult-*",  new CandyDropDefinition(0.50f, 1, 2) },
+
+            // Elites
+            { "spookynights:spectraldrifter-double-headed", new CandyDropDefinition(0.80f, 2, 3) },
+            { "spookynights:spectralbowtorn-nightmare",     new CandyDropDefinition(0.65f, 3, 5) },
+            { "spookynights:spectralbowtorn-gearfoot",      new CandyDropDefinition(0.75f, 4, 6) },
+            { "spookynights:spectralshiver-stilt",          new CandyDropDefinition(0.70f, 4, 6) },
+            { "spookynights:spectralshiver-bellhead",       new CandyDropDefinition(0.70f, 4, 6) },
+            { "spookynights:spectralshiver-deepsplit",      new CandyDropDefinition(0.70f, 4, 6) },
+            
+            // Bosses
+            { "spookynights:spectralbear-giant-adult-*",    new CandyDropDefinition(1.00f, 3, 5) }
+        };
+
 
         // --- LIFECYCLE ---
 
@@ -31,7 +86,6 @@ namespace SpookyNights
 
         public override void AssetsFinalize(ICoreAPI api)
         {
-            // Client-side: Check if we should disable particles based on config
             if (api.Side.IsClient())
             {
                 if (ConfigManager.ClientConf != null && !ConfigManager.ClientConf.EnableJackOLanternParticles)
@@ -54,6 +108,7 @@ namespace SpookyNights
 
             // Register Classes
             new Harmony("fr.laerinok.spookynights").PatchAll();
+            api.RegisterEntityBehaviorClass("proximitywarning", typeof(EntityBehaviorProximityWarning));
             api.RegisterItemClass("ItemSpectralArrow", typeof(ItemSpectralArrow));
             api.RegisterItemClass("ItemSpectralSpear", typeof(ItemSpectralSpear));
             api.RegisterItemClass("ItemSpectralWeapon", typeof(ItemSpectralWeapon));
@@ -121,13 +176,9 @@ namespace SpookyNights
 
         private void HandleSpectralDeath(Entity entity)
         {
-            // 1. Determine particle color
             int particleColor = GetEntityGlowColor(entity);
-
-            // 2. Spawn VFX
             SpawnSpectralParticles(entity.ServerPos.XYZ, particleColor);
 
-            // 3. Process Drops from JSON
             if (entity.Properties.Attributes?["spectralDrops"]?.Token is JObject dropTable)
             {
                 foreach (var entry in dropTable)
@@ -146,20 +197,18 @@ namespace SpookyNights
                 }
             }
 
-            // 4. Immediate Despawn
             entity.Die(EnumDespawnReason.Expire);
         }
 
         private int GetEntityGlowColor(Entity entity)
         {
-            int defaultColor = ColorUtil.ToRgba(150, 0, 255, 255); // Default Cyan
+            int defaultColor = ColorUtil.ToRgba(150, 0, 255, 255);
 
             try
             {
                 JsonObject? mainAttrs = entity.Properties.Attributes;
                 if (mainAttrs == null) return defaultColor;
 
-                // Priority 1: Simple string "glowColor" (Pre-resolved by engine)
                 if (mainAttrs.KeyExists("glowColor"))
                 {
                     JToken? token = mainAttrs["glowColor"]?.Token;
@@ -173,7 +222,6 @@ namespace SpookyNights
                     }
                 }
 
-                // Priority 2: Table "glowColorByType" (Manual resolution)
                 if (mainAttrs.KeyExists("glowColorByType") && mainAttrs["glowColorByType"]?.Token is JObject glowTableByType)
                 {
                     return ParseGlowTable(glowTableByType, entity, defaultColor);
@@ -181,7 +229,7 @@ namespace SpookyNights
             }
             catch
             {
-                // Fail silently, return default
+                // Fail silently
             }
 
             return defaultColor;
@@ -193,7 +241,6 @@ namespace SpookyNights
             int r = (rgb >> 16) & 0xFF;
             int g = (rgb >> 8) & 0xFF;
             int b = rgb & 0xFF;
-            // Returns: Alpha, Red, Green, Blue (VS ColorUtil specific mapping)
             return ColorUtil.ToRgba(150, r, g, b);
         }
 
@@ -228,7 +275,7 @@ namespace SpookyNights
             particles.MinPos = pos.AddCopy(-0.5, 0.2, -0.5);
             particles.AddPos = new Vec3d(1, 1.0, 1);
             particles.WithTerrainCollision = false;
-            particles.VertexFlags = 200; // Glow
+            particles.VertexFlags = 200;
 
             particles.OpacityEvolve = EvolvingNatFloat.create(EnumTransformFunction.LINEAR, -255);
             particles.SizeEvolve = EvolvingNatFloat.create(EnumTransformFunction.LINEAR, 0.5f);
@@ -265,7 +312,6 @@ namespace SpookyNights
                     Item item = sapi.World.GetItem(new AssetLocation(code));
                     if (item != null)
                     {
-                        // Open randomizers (like Jonas parts) immediately
                         if (item is ItemStackRandomizer randItem)
                         {
                             ItemStack tempStack = new ItemStack(item, 1);
@@ -281,7 +327,7 @@ namespace SpookyNights
                         if (stack != null) stack.StackSize = stackSize;
                     }
                 }
-                else // block
+                else
                 {
                     Block block = sapi.World.GetBlock(new AssetLocation(code));
                     if (block != null) stack = new ItemStack(block, stackSize);
@@ -298,6 +344,8 @@ namespace SpookyNights
             }
         }
 
+        // --- CANDY LOOT (REWRITTEN FOR HARDCODED VALUES) ---
+
         private void HandleCandyLoot(Entity entity, DamageSource damageSource)
         {
             if (sapi == null || ConfigManager.ServerConf == null || !ConfigManager.ServerConf.EnableCandyLoot) return;
@@ -311,42 +359,30 @@ namespace SpookyNights
 
             if (damageSource.SourceEntity is not EntityPlayer) return;
 
-            string? matchedKey = null;
-            foreach (var key in ConfigManager.ServerConf.CandyLootTable.Keys)
+            // Look for matching entity in Hardcoded LootTable
+            CandyDropDefinition? dropDef = null;
+
+            foreach (var entry in LootTable)
             {
-                if (WildcardUtil.Match(new AssetLocation(key), entity.Code))
+                if (WildcardUtil.Match(new AssetLocation(entry.Key), entity.Code))
                 {
-                    matchedKey = key;
+                    dropDef = entry.Value;
                     break;
                 }
             }
 
-            if (matchedKey == null) return;
+            if (dropDef == null) return;
 
-            if (ConfigManager.ServerConf.CandyLootTable.TryGetValue(matchedKey, out string? lootConfigString))
-            {
-                if (string.IsNullOrEmpty(lootConfigString)) return;
-                try
-                {
-                    string[] parts = lootConfigString.Split('@');
-                    float chance = float.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture);
+            // Determine if drop happens
+            if (sapi.World.Rand.NextDouble() >= dropDef.Value.Chance) return;
 
-                    if (sapi.World.Rand.NextDouble() >= chance) return;
+            // Determine quantity
+            int amount = sapi.World.Rand.Next(dropDef.Value.MinQuantity, dropDef.Value.MaxQuantity + 1);
+            if (amount <= 0) return;
 
-                    string[] quantityParts = parts[1].Split('-');
-                    int min = int.Parse(quantityParts[0]);
-                    int max = (quantityParts.Length > 1) ? int.Parse(quantityParts[1]) : min;
-                    int amount = sapi.World.Rand.Next(min, max + 1);
-                    if (amount <= 0) return;
-
-                    ItemStack stack = new ItemStack(sapi.World.GetItem(new AssetLocation("spookynights", "candybag")), amount);
-                    sapi.World.SpawnItemEntity(stack, entity.ServerPos.XYZ);
-                }
-                catch (Exception e)
-                {
-                    sapi.Logger.Warning("[SpookyNights] Could not parse loot config string for '{0}'. Error: {1}", entity.Code, e.Message);
-                }
-            }
+            // Spawn
+            ItemStack stack = new ItemStack(sapi.World.GetItem(new AssetLocation("spookynights", "candybag")), amount);
+            sapi.World.SpawnItemEntity(stack, entity.ServerPos.XYZ);
         }
 
         // --- SPAWNING LOGIC ---

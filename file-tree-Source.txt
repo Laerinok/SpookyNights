@@ -3,11 +3,12 @@ source/
 │  ├─ ClientConfig.cs
 │  ├─ ConfigManager.cs
 │  └─ ServerConfig.cs
-├─ EntityBehaviorSpectralResistance.cs
 ├─ EntityBehaviorSpectralHandling.cs
+├─ EntityBehaviorSpectralResistance.cs
 ├─ HarmonyPatches.cs
 ├─ ItemCandyBag.cs
 ├─ ItemSpectralArrow.cs
 ├─ ItemSpectralSpear.cs
 ├─ ItemSpectralWeapon.cs
+├─ ItemSpookyCandy.cs
 └─ SpookyNightsModSystems.cs
