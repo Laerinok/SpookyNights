@@ -21,9 +21,9 @@
   "itemdesc-candybag": "A small paper bag filled with treats.",
 
   "candy-desc-ghostcaramel": "Bonus: Stability recovery / Malus: Weakness (30s)",
-  "candy-desc-mummy": "Bonus: Healing + Max Health / Malus: Slowness (45s)",
+  "candy-desc-mummy": "Bonus: Heal + Knockback Resistance / Malus: Slowness",
   "candy-desc-spidergummy": "Bonus: Super Jump / Malus: Poison bite",
-  "candy-desc-vampireteeth": "Bonus: Major Healing / Malus: Extreme Metabolism",
+  "candy-desc-vampireteeth": "Bonus: Heal / Malus: Mining Fatigue (20s)",
   "candy-desc-shadowcube": "Effect: Chaos (Risk vs Reward)",
 
   "candy-msg-ghostcaramel": "[SpookyNights] You feel ethereal... but weak.",
@@ -31,10 +31,10 @@
   "candy-msg-mummy": "[SpookyNights] Wounds mend, but your limbs stiffen.",
   "candy-expire-slow": "[SpookyNights] You can move freely again.",
   "candy-msg-spidergummy": "[SpookyNights] JUMP!",
-  "candy-msg-vampireteeth": "[SpookyNights] Vitality stolen... at a cost.",
+  "candy-msg-vampireteeth": "[SpookyNights] Your muscles feel heavy...",
 
   "candy-msg-shadow-divine": "[SpookyNights] THE SHADOWS BLESS YOU!",
-  "candy-msg-shadow-speed": "[SpookyNights] UNLIMITED POWER!",
+  "candy-msg-shadow-speed": "[SpookyNights] SUPER SPEED!",
   "candy-expire-speed": "[SpookyNights] The rush fades.",
   "candy-msg-shadow-hallucination": "[SpookyNights] What was that noise?",
   "candy-msg-shadow-blind": "[SpookyNights] The darkness clings to you...",

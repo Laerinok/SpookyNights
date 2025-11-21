@@ -1,8 +1,9 @@
 ﻿using System;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Server;
 
-namespace Spookynights
+namespace SpookyNights
 {
     public class ItemCandyBag : Item
     {
@@ -47,28 +48,45 @@ namespace Spookynights
 
         private void GiveRandomCandy(IPlayer byPlayer)
         {
-            AssetLocation[] candyTypes = new AssetLocation[]
-            {
-                new AssetLocation("spookynights", "spookycandy-ghostcaramel"),
-                new AssetLocation("spookynights", "spookycandy-shadowcube"),
-                new AssetLocation("spookynights", "spookycandy-mummy"),
-                new AssetLocation("spookynights", "spookycandy-spidergummy"),
-                new AssetLocation("spookynights", "spookycandy-vampireteeth")
-            };
+            // Quantity: 1 to 2 candies per bag
+            int amount = rand.Next(1, 3);
 
-            int randomIndex = rand.Next(candyTypes.Length);
-            AssetLocation randomCandyCode = candyTypes[randomIndex];
-            int amount = rand.Next(1, 4);
-
-            Item candyItem = api.World.GetItem(randomCandyCode);
-            if (candyItem != null)
+            for (int i = 0; i < amount; i++)
             {
-                ItemStack candyStack = new ItemStack(candyItem, amount);
-                if (!byPlayer.InventoryManager.TryGiveItemstack(candyStack))
+                string candyCode = GetWeightedRandomCandy();
+                Item candyItem = api.World.GetItem(new AssetLocation("spookynights", candyCode));
+
+                if (candyItem != null)
                 {
-                    api.World.SpawnItemEntity(candyStack, byPlayer.Entity.SidedPos.XYZ);
+                    ItemStack candyStack = new ItemStack(candyItem, 1);
+
+                    if (!byPlayer.InventoryManager.TryGiveItemstack(candyStack))
+                    {
+                        api.World.SpawnItemEntity(candyStack, byPlayer.Entity.SidedPos.XYZ);
+                    }
                 }
             }
+
+            api.World.PlaySoundAt(new AssetLocation("game:sounds/player/collect"), byPlayer.Entity);
+        }
+
+        private string GetWeightedRandomCandy()
+        {
+            double roll = rand.NextDouble(); // 0.0 to 1.0
+
+            // NEW Probability Table (Increased Shadow Cube):
+            // 00% - 25% : Spider Gummy (Common)
+            // 25% - 50% : Mummy (Common)
+            // 50% - 70% : Ghost Caramel (Uncommon)
+            // 70% - 85% : Vampire Teeth (Rare)
+            // 85% - 100%: Shadow Cube (Rare)
+
+            if (roll < 0.25) return "spookycandy-spidergummy";
+            if (roll < 0.50) return "spookycandy-mummy";
+            if (roll < 0.70) return "spookycandy-ghostcaramel";
+            if (roll < 0.85) return "spookycandy-vampireteeth";
+
+            return "spookycandy-shadowcube";
         }
     }
 }

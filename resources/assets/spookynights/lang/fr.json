@@ -21,9 +21,9 @@
   "itemdesc-candybag": "Un petit sachet en papier rempli de friandises.",
 
   "candy-desc-ghostcaramel": "Bonus : Stabilité / Malus : Faiblesse (30s)",
-  "candy-desc-mummy": "Bonus : Soin + Vie Max / Malus : Lenteur (45s)",
+  "candy-desc-mummy": "Bonus : Soin + Inébranlable / Malus : Lenteur",
   "candy-desc-spidergummy": "Bonus : Super Saut / Malus : Morsure venimeuse",
-  "candy-desc-vampireteeth": "Bonus : Soin Majeur / Malus : Métabolisme extrême",
+  "candy-desc-vampireteeth": "Bonus : Soin / Malus : Fatigue Minière (20s)",
   "candy-desc-shadowcube": "Effet : Chaos (Risques et Périls)",
 
   "candy-msg-ghostcaramel": "[SpookyNights] Vous vous sentez éthéré... mais faible.",
@@ -31,7 +31,7 @@
   "candy-msg-mummy": "[SpookyNights] Les plaies se ferment, mais vous êtes rigide.",
   "candy-expire-slow": "[SpookyNights] Vous pouvez bouger librement.",
   "candy-msg-spidergummy": "[SpookyNights] SAUT !",
-  "candy-msg-vampireteeth": "[SpookyNights] Vitalité volée... quel qu'en soit le prix.",
+  "candy-msg-vampireteeth": "[SpookyNights] Vos muscles s'alourdissent...",
 
   "candy-msg-shadow-divine": "[SpookyNights] LES OMBRES VOUS BÉNISSENT !",
   "candy-msg-shadow-speed": "[SpookyNights] PUISSANCE ILLIMITÉE !",

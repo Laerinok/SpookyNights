@@ -53,7 +53,7 @@ namespace SpookyNights
             }
         }
 
-        // --- INTERACTION LOGIC ---
+        // --- INTERACTION HANDLER ---
         public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
@@ -67,7 +67,7 @@ namespace SpookyNights
                 {
                     if (candyType == "spidergummy")
                     {
-                        // Vertical impulse + Forward dash
+                        // Physics impulse
                         byEntity.SidedPos.Motion.Y += 0.35;
                         Vec3f look = byEntity.SidedPos.GetViewVector();
                         byEntity.SidedPos.Motion.X += look.X * 0.5;
@@ -89,7 +89,7 @@ namespace SpookyNights
             IServerPlayer? serverPlayer = playerEntity.Player as IServerPlayer;
             if (serverPlayer == null) return;
 
-            int particleColor = ColorUtil.ToRgba(200, 255, 255, 255);
+            int particleColor = ColorUtil.ToRgba(255, 200, 255, 255);
 
             switch (candyType)
             {
@@ -98,7 +98,7 @@ namespace SpookyNights
                     double currentStab = entity.WatchedAttributes.GetDouble("temporalStability");
                     entity.WatchedAttributes.SetDouble("temporalStability", Math.Min(1.5, currentStab + 0.25));
 
-                    // Malus: Weakness (30s) - Non persistent
+                    // Malus: Weakness (30s)
                     entity.Stats.Set("meleeWeaponsDamage", "candy_weakness", -0.5f, false);
 
                     api.World.RegisterCallback((dt) => {
@@ -107,35 +107,36 @@ namespace SpookyNights
                     }, 30000);
 
                     serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, Lang.Get("spookynights:candy-msg-ghostcaramel"), EnumChatType.Notification);
-                    particleColor = ColorUtil.ToRgba(200, 255, 255, 255); // Cyan
+
+                    // Color: Gold/Beige (A:200, R:215, G:150, B:55)
+                    particleColor = ColorUtil.ToRgba(200, 215, 150, 55);
                     break;
 
                 case "mummy":
-                    // Bonus: Max Health Shield (45s) - Non persistent
-                    entity.Stats.Set("maxhealth", "candy_shield", 10f, false);
-                    entity.WatchedAttributes.MarkPathDirty("stats"); // Sync with client UI
+                    // Bonus: Heal +2
+                    entity.ReceiveDamage(new DamageSource() { Type = EnumDamageType.Heal }, 2f);
 
-                    // Bonus: Heal (+4)
-                    entity.ReceiveDamage(new DamageSource() { Type = EnumDamageType.Heal }, 4f);
+                    // Bonus: Knockback Resistance
+                    entity.Stats.Set("knockbackResistance", "candy_anchor", 1.0f, false);
 
-                    // Malus: Slowness - Non persistent
+                    // Malus: Slowness
                     entity.Stats.Set("walkspeed", "candy_slow", -0.25f, false);
 
                     api.World.RegisterCallback((dt) => {
                         entity.Stats.Remove("walkspeed", "candy_slow");
-                        entity.Stats.Remove("maxhealth", "candy_shield");
-                        entity.WatchedAttributes.MarkPathDirty("stats");
+                        entity.Stats.Remove("knockbackResistance", "candy_anchor");
                         serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, Lang.Get("spookynights:candy-expire-slow"), EnumChatType.Notification);
                     }, 45000);
 
                     serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, Lang.Get("spookynights:candy-msg-mummy"), EnumChatType.Notification);
-                    particleColor = ColorUtil.ToRgba(200, 240, 230, 140); // Sand
+
+                    // Color: White/Grey (A:200, R:215, G:210, B:210)
+                    particleColor = ColorUtil.ToRgba(200, 215, 210, 210);
                     break;
 
                 case "spidergummy":
-                    // Bonus: No Fall Damage for 10 seconds (Safety net)
+                    // Bonus: No Fall Damage
                     entity.Stats.Set("fallDamageMultiplier", "candy_feather", -1.0f, false);
-
                     api.World.RegisterCallback((dt) => {
                         entity.Stats.Remove("fallDamageMultiplier", "candy_feather");
                     }, 10000);
@@ -149,30 +150,33 @@ namespace SpookyNights
                     }, 3000);
 
                     serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, Lang.Get("spookynights:candy-msg-spidergummy"), EnumChatType.Notification);
-                    particleColor = ColorUtil.ToRgba(200, 200, 255, 200); // White/Green
+
+                    // Color: Toxic Green (A:200, R:30, G:255, B:30)
+                    particleColor = ColorUtil.ToRgba(200, 30, 255, 30);
                     break;
 
                 case "vampireteeth":
-                    // Bonus: Heal +6 HP
+                    // Bonus: Heal +6
                     entity.ReceiveDamage(new DamageSource() { Type = EnumDamageType.Heal }, 6f);
 
-                    // Malus: Extreme Hunger Rate (20s) - Non persistent
-                    entity.Stats.Set("hungerrate", "candy_vampire", 10.0f, false);
+                    // MALUS: Mining Fatigue (-50% speed for 20s) - No hunger drain
+                    entity.Stats.Set("miningSpeedMul", "candy_fatigue", -0.5f, false);
 
                     api.World.RegisterCallback((dt) => {
-                        entity.Stats.Remove("hungerrate", "candy_vampire");
+                        entity.Stats.Remove("miningSpeedMul", "candy_fatigue");
                     }, 20000);
 
-                    // Malus: Direct Drain
-                    DrainAllSatiety(entity);
-
                     serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, Lang.Get("spookynights:candy-msg-vampireteeth"), EnumChatType.Notification);
-                    particleColor = ColorUtil.ToRgba(200, 0, 0, 255); // Red
+
+                    // Color: Blood Red (A:200, R:205, G:0, B:0)
+                    particleColor = ColorUtil.ToRgba(200, 205, 0, 0);
                     break;
 
                 case "shadowcube":
                     ApplyShadowChaos(entity, serverPlayer);
-                    particleColor = ColorUtil.ToRgba(200, 255, 0, 255); // Purple
+
+                    // Color: Dark Orange/Brown (A:200, R:70, G:20, B:85)
+                    particleColor = ColorUtil.ToRgba(200, 70, 20, 85);
                     break;
             }
 
@@ -184,38 +188,38 @@ namespace SpookyNights
             int roll = rand.Next(0, 100);
             string msg = "";
 
-            if (roll < 5) // DIVINE (5%)
+            if (roll < 5) // DIVINE
             {
                 entity.ReceiveDamage(new DamageSource() { Type = EnumDamageType.Heal }, 20f);
                 FillAllSatiety(entity);
                 entity.WatchedAttributes.SetDouble("temporalStability", 1.5);
                 msg = Lang.Get("spookynights:candy-msg-shadow-divine");
             }
-            else if (roll < 25) // SPEED (20%)
+            else if (roll < 25) // SPEED
             {
                 entity.Stats.Set("walkspeed", "candy_speed", 0.5f, false);
                 api.World.RegisterCallback((dt) => {
                     entity.Stats.Remove("walkspeed", "candy_speed");
                     serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, Lang.Get("spookynights:candy-expire-speed"), EnumChatType.Notification);
-                }, 60000);
+                }, 45000);
                 msg = Lang.Get("spookynights:candy-msg-shadow-speed");
             }
-            else if (roll < 55) // HALLUCINATION (30%)
+            else if (roll < 55) // HALLUCINATION
             {
                 entity.WatchedAttributes.SetFloat("intoxication", 0.8f);
-                entity.World.PlaySoundAt(new AssetLocation("spookynights:block/halloween-ghost-whisper"), entity);
+                entity.World.PlaySoundAt(new AssetLocation("spookynights:sounds/creature/specter_growls"), entity);
                 msg = Lang.Get("spookynights:candy-msg-shadow-hallucination");
             }
-            else if (roll < 80) // DARKNESS (25%)
+            else if (roll < 80) // DARKNESS
             {
                 entity.Stats.Set("walkspeed", "candy_heavy_slow", -0.5f, false);
-                RegisterParticleLoop(entity, 15, ColorUtil.ToRgba(255, 0, 0, 0)); // Black Cloud
+                RegisterParticleLoop(entity, 15, ColorUtil.ToRgba(255, 0, 0, 0)); // Black
                 api.World.RegisterCallback((dt) => {
                     entity.Stats.Remove("walkspeed", "candy_heavy_slow");
                 }, 15000);
                 msg = Lang.Get("spookynights:candy-msg-shadow-blind");
             }
-            else // TELEPORT FAIL (20%)
+            else // TELEPORT FAIL
             {
                 double dx = (rand.NextDouble() - 0.5) * 20;
                 double dz = (rand.NextDouble() - 0.5) * 20;
@@ -230,7 +234,7 @@ namespace SpookyNights
             serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, msg, EnumChatType.Notification);
         }
 
-        // --- HELPER METHODS ---
+        // --- HELPERS ---
 
         private string GetCandyType(ItemStack stack)
         {
@@ -243,31 +247,14 @@ namespace SpookyNights
             return candyType;
         }
 
-        private void DrainAllSatiety(EntityAgent entity)
-        {
-            ITreeAttribute hungerTree = entity.WatchedAttributes.GetTreeAttribute("hunger");
-            if (hungerTree == null) return;
-
-            hungerTree.SetFloat("saturation", 0);
-            string[] categories = new string[] { "fruit", "vegetable", "grain", "protein", "dairy" };
-            foreach (string cat in categories)
-            {
-                hungerTree.SetFloat(cat, 0f);
-            }
-            entity.WatchedAttributes.MarkPathDirty("hunger");
-        }
-
+        // Only used for Divine effect (reset food)
         private void FillAllSatiety(EntityAgent entity)
         {
             ITreeAttribute hungerTree = entity.WatchedAttributes.GetTreeAttribute("hunger");
             if (hungerTree == null) return;
-
             hungerTree.SetFloat("saturation", 1500f);
             string[] categories = new string[] { "fruit", "vegetable", "grain", "protein", "dairy" };
-            foreach (string cat in categories)
-            {
-                hungerTree.SetFloat(cat, 1500f);
-            }
+            foreach (string cat in categories) hungerTree.SetFloat(cat, 1500f);
             entity.WatchedAttributes.MarkPathDirty("hunger");
         }
 
