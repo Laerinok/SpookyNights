@@ -17,14 +17,14 @@
 
 ### 🧛 Vampire Teeth (Dents de Vampire) (15%)
 *   **🟢 Bonus :** **Soin** (+6 PV).
-*   **🔴 Malus :** **Fatigue Minière** (-50% vitesse de minage pendant 20s).
+*   **🔴 Malus :** **Draine la stabilité temporelle (-30%).
 *   **✨ Visuel :** Rouge Sang.
 
 ---
 
 ### 🎲 Shadow Cube (Cube d'Ombre) 15%)
 *   **🌟 Divin (5%) :** Soin Total + Satiété Max + Stabilité Max.
-*   **⚡ Vitesse (20%) :** Vitesse +50% (1 min).
+*   **⚡ Vitesse (20%) :** Vitesse +50% (45s).
 *   **🌀 Hallucination (30%) :** Ivresse + Sons.
 *   **🌑 Ténèbres (25%) :** Aveuglement (Nuage noir) + Lenteur.
 *   **⚠️ Faille (20%) :** Téléportation aléatoire dans un rayon de 10 blocs
