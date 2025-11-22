@@ -27,23 +27,28 @@ namespace SpookyNights
             {
                 case "ghostcaramel":
                     descText = Lang.Get("spookynights:candy-desc-ghostcaramel");
-                    color = "#BFEFFF";
+                    // Matches particle color (Gold/Caramel)
+                    color = "#D79637";
                     break;
                 case "mummy":
                     descText = Lang.Get("spookynights:candy-desc-mummy");
-                    color = "#F0E68C";
+                    // Matches particle color (Off-White/Grey)
+                    color = "#D7D2D2";
                     break;
                 case "spidergummy":
                     descText = Lang.Get("spookynights:candy-desc-spidergummy");
-                    color = "#FFFFFF";
+                    // Matches particle color (Toxic Green)
+                    color = "#77DD77";
                     break;
                 case "vampireteeth":
                     descText = Lang.Get("spookynights:candy-desc-vampireteeth");
-                    color = "#FF3333";
+                    // Matches particle color (Blood Red)
+                    color = "#FF6666";
                     break;
                 case "shadowcube":
                     descText = Lang.Get("spookynights:candy-desc-shadowcube");
-                    color = "#D02090";
+                    // Matches particle hue (Dark Purple)
+                    color = "#9F5F9F";
                     break;
             }
 
@@ -89,6 +94,7 @@ namespace SpookyNights
             IServerPlayer? serverPlayer = playerEntity.Player as IServerPlayer;
             if (serverPlayer == null) return;
 
+            // Default color just in case
             int particleColor = ColorUtil.ToRgba(255, 200, 255, 255);
 
             switch (candyType)
@@ -159,12 +165,10 @@ namespace SpookyNights
                     // Bonus: Heal +6
                     entity.ReceiveDamage(new DamageSource() { Type = EnumDamageType.Heal }, 6f);
 
-                    // MALUS: Mining Fatigue (-50% speed for 20s) - No hunger drain
-                    entity.Stats.Set("miningSpeedMul", "candy_fatigue", -0.5f, false);
-
-                    api.World.RegisterCallback((dt) => {
-                        entity.Stats.Remove("miningSpeedMul", "candy_fatigue");
-                    }, 20000);
+                    // MALUS: Temporal Instability (-30%)
+                    double vampStab = entity.WatchedAttributes.GetDouble("temporalStability", 1.0);
+                    double newStab = Math.Max(0.0, vampStab - 0.3);
+                    entity.WatchedAttributes.SetDouble("temporalStability", newStab);
 
                     serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, Lang.Get("spookynights:candy-msg-vampireteeth"), EnumChatType.Notification);
 
@@ -175,11 +179,12 @@ namespace SpookyNights
                 case "shadowcube":
                     ApplyShadowChaos(entity, serverPlayer);
 
-                    // Color: Dark Orange/Brown (A:200, R:70, G:20, B:85)
+                    // Color: Dark Orange/Brown/Purple (A:200, R:70, G:20, B:85)
                     particleColor = ColorUtil.ToRgba(200, 70, 20, 85);
                     break;
             }
 
+            // --- CRITICAL: This triggers the "eating" particles for ALL candies ---
             SpawnEatingParticles(entity, particleColor);
         }
 
@@ -213,7 +218,7 @@ namespace SpookyNights
             else if (roll < 80) // DARKNESS
             {
                 entity.Stats.Set("walkspeed", "candy_heavy_slow", -0.5f, false);
-                RegisterParticleLoop(entity, 15, ColorUtil.ToRgba(255, 0, 0, 0)); // Black
+                RegisterParticleLoop(entity, 15, ColorUtil.ToRgba(255, 0, 0, 0)); // Black particles
                 api.World.RegisterCallback((dt) => {
                     entity.Stats.Remove("walkspeed", "candy_heavy_slow");
                 }, 15000);
@@ -247,7 +252,6 @@ namespace SpookyNights
             return candyType;
         }
 
-        // Only used for Divine effect (reset food)
         private void FillAllSatiety(EntityAgent entity)
         {
             ITreeAttribute hungerTree = entity.WatchedAttributes.GetTreeAttribute("hunger");
