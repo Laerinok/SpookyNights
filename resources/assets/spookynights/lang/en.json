@@ -193,5 +193,8 @@
   "block-warscythemold-orange-fired-warscythe-long": "Orange ceramic long warscythe mold",
   "block-warscythemold-red-fired-warscythe-long": "Red ceramic long warscythe mold",
   "block-warscythemold-red-raw-warscythe-long": "Raw red clay long warscythe mold",
-  "block-warscythemold-tan-fired-warscythe-long": "Tan ceramic long warscythe mold"
+  "block-warscythemold-tan-fired-warscythe-long": "Tan ceramic long warscythe mold",
+
+  "malus-walkspeed": "Walk Speed: {0}%",
+  "malus-hungerrate": "Hunger Rate: {0}%"
 }

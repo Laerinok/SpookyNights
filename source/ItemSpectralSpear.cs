@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions; // Used to parse the existing text
+using System.Text.RegularExpressions;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.GameContent;
@@ -21,60 +21,59 @@ namespace SpookyNights
             );
             float effectiveMultiplier = spectralBonus > 0 ? spectralBonus : 1.0f;
 
-            // 2. Prepare Strings
-            string spectralPowerText = Lang.Get("spookynights:iteminfo-spectral-attack-power");
-            string attackPowerLabel = Lang.Get("Attack power:");
-
-            // Get keywords to identify the ranged line (e.g., "piercing damage")
-            // We strip the "{0}" placeholder to get the raw text
-            string vanillaRangedFormat = Lang.Get("itemdescriptor-projectile-damage").Replace("{0}", "").Trim();
-            if (string.IsNullOrEmpty(vanillaRangedFormat)) vanillaRangedFormat = "piercing"; // Fallback
-
             var lines = dsc.ToString().Split('\n').ToList();
+            string spectralPowerText = Lang.Get("spookynights:iteminfo-spectral-attack-power");
 
-            // 3. MELEE Handling
+            // 2. MELEE Handling (Robust Numeric Search)
+            // Matches logic from ItemSpectralWeapon to fix missing lines in French
             float baseMeleeDamage = GetAttackPower(inSlot.Itemstack);
-            int meleeIndex = lines.FindIndex(line => line.StartsWith(attackPowerLabel));
-
-            if (meleeIndex != -1)
+            
+            if (baseMeleeDamage > 0)
             {
-                float totalSpectralMelee = baseMeleeDamage * effectiveMultiplier;
-                // Added '-' sign as requested
-                string spectralLine = $"<font color=\"#a08ee0\">{spectralPowerText} -{totalSpectralMelee:0.##} hp</font>";
-                lines.Insert(meleeIndex + 1, spectralLine);
+                string numStrDot = baseMeleeDamage.ToString("0.#", CultureInfo.InvariantCulture);
+                string numStrComma = baseMeleeDamage.ToString("0.#", CultureInfo.GetCultureInfo("fr-FR"));
+
+                // Find line containing the damage number (e.g. "4" or "-4")
+                int meleeIndex = lines.FindIndex(line => line.Contains(numStrDot) || line.Contains(numStrComma));
+
+                if (meleeIndex != -1)
+                {
+                    float totalSpectralMelee = baseMeleeDamage * effectiveMultiplier;
+                    string spectralLine = $"<font color=\"#a08ee0\">{spectralPowerText}-{totalSpectralMelee:0.##} hp</font>";
+                    lines.Insert(meleeIndex + 1, spectralLine);
+                }
             }
 
-            // 4. RANGED Handling (Parsing Strategy)
-            // We look for the line that contains the vanilla ranged text
+            // 3. RANGED Handling (Regex Parsing)
+            // Get localized keyword for ranged damage (stripped of placeholders)
+            string vanillaRangedFormat = Lang.Get("itemdescriptor-projectile-damage").Replace("{0}", "").Trim();
+            if (string.IsNullOrEmpty(vanillaRangedFormat)) vanillaRangedFormat = "piercing";
+
             int rangedIndex = lines.FindIndex(line => line.Contains(vanillaRangedFormat));
 
             if (rangedIndex != -1)
             {
                 string vanillaLine = lines[rangedIndex];
 
-                // Regex to find a decimal number in the string (handles 5.75 or 5,75)
+                // Extract number from string
                 Match match = Regex.Match(vanillaLine, @"\d+([.,]\d+)?");
 
                 if (match.Success)
                 {
-                    // Parse the number using normalized culture (replace comma with dot)
                     string numStr = match.Value.Replace(',', '.');
                     if (float.TryParse(numStr, NumberStyles.Any, CultureInfo.InvariantCulture, out float baseThrownDamage))
                     {
-                        // Calculate Spectral Damage
                         float totalSpectralThrown = baseThrownDamage * effectiveMultiplier;
 
-                        // Create the line
                         string rangedLabel = Lang.Get("spookynights:iteminfo-spectral-ranged-damage", totalSpectralThrown.ToString("0.##"));
                         string fullRangedLine = $"<font color=\"#a08ee0\">{rangedLabel}</font>";
 
-                        // Insert immediately after
                         lines.Insert(rangedIndex + 1, fullRangedLine);
                     }
                 }
             }
 
-            // 5. Footer
+            // 4. Footer
             if (spectralBonus > 1.001f)
             {
                 string bonusText = Lang.Get("spookynights:iteminfo-spectralbonus-simplified", ((spectralBonus - 1) * 100).ToString("0"));

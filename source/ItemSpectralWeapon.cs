@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -17,35 +19,28 @@ namespace SpookyNights
             );
 
             float baseDamage = GetAttackPower(inSlot.Itemstack);
-            float totalSpectralDamage = baseDamage * spectralBonus;
 
-            // 2. Rebuild the main description
-            string originalDescription = dsc.ToString();
-            string[] lines = originalDescription.Split('\n');
-            string attackPowerLabel = Lang.Get("Attack power:");
-
-            var newLines = new List<string>();
-            bool inserted = false;
-
-            foreach (string line in lines)
+            if (baseDamage > 0)
             {
-                if (!inserted && line.StartsWith(attackPowerLabel))
+                float totalSpectralDamage = baseDamage * spectralBonus;
+
+                // 2. Robust Line Detection (Numeric Search)
+                var lines = dsc.ToString().Split('\n').ToList();
+
+                string numStrDot = baseDamage.ToString("0.#", CultureInfo.InvariantCulture);
+                string numStrComma = baseDamage.ToString("0.#", CultureInfo.GetCultureInfo("fr-FR"));
+
+                int index = lines.FindIndex(l => l.Contains(numStrDot) || l.Contains(numStrComma));
+
+                if (index != -1)
                 {
-                    newLines.Add($"{attackPowerLabel} -{baseDamage:0.#} hp");
                     string spectralPowerText = Lang.Get("spookynights:iteminfo-spectral-attack-power");
-                    string spectralLine = $"<font color=\"#a08ee0\">{spectralPowerText} -{totalSpectralDamage:0.0#} hp</font>";
-                    newLines.Add(spectralLine);
-                    inserted = true;
-                }
-                else
-                {
-                    newLines.Add(line);
-                }
-            }
+                    // Append negative number as it represents damage dealt to enemy
+                    string spectralLine = $"<font color=\"#a08ee0\">{spectralPowerText}-{totalSpectralDamage:0.##} hp</font>";
 
-            if (inserted || newLines.Count > lines.Length)
-            {
-                dsc.Clear().Append(string.Join("\n", newLines));
+                    lines.Insert(index + 1, spectralLine);
+                    dsc.Clear().Append(string.Join("\n", lines));
+                }
             }
 
             // 3. Append Spectral Bonus Footer
@@ -56,7 +51,7 @@ namespace SpookyNights
                 if (!dsc.ToString().Contains(bonusText)) dsc.Append(bonusText);
             }
 
-            // 4. Append Stat Modifiers
+            // 4. Append Stat Modifiers (Localized)
             if (inSlot.Itemstack.ItemAttributes.KeyExists("statModifiers"))
             {
                 var mods = inSlot.Itemstack.ItemAttributes["statModifiers"];
@@ -68,14 +63,19 @@ namespace SpookyNights
 
                 if (walkMalus != 0)
                 {
-                    string color = walkMalus < 0 ? "#ff8080" : "#80ff80";
-                    dsc.Append($"\n<font color=\"{color}\">Walk Speed: {walkMalus * 100:0.#}%</font>");
+                    string color = walkMalus < 0 ? "#ff8080" : "#80ff80"; // Red if negative
+                    string valStr = (walkMalus * 100).ToString("0.#");
+
+                    string text = Lang.Get("spookynights:malus-walkspeed", valStr);
+                    dsc.Append($"\n<font color=\"{color}\">{text}</font>");
                 }
                 if (hungerMalus != 0)
                 {
-                    // Hunger Rate > 0 is a malus (Red)
-                    string color = hungerMalus > 0 ? "#ff8080" : "#80ff80";
-                    dsc.Append($"\n<font color=\"{color}\">Hunger Rate: +{hungerMalus * 100:0.#}%</font>");
+                    string color = hungerMalus > 0 ? "#ff8080" : "#80ff80"; // Red if positive (hunger increases faster)
+                    string valStr = "+" + (hungerMalus * 100).ToString("0.#");
+
+                    string text = Lang.Get("spookynights:malus-hungerrate", valStr);
+                    dsc.Append($"\n<font color=\"{color}\">{text}</font>");
                 }
             }
         }

@@ -37,25 +37,25 @@
   "item-candybag": "Sachet de bonbons",
   "itemdesc-candybag": "Un petit sachet en papier rempli de friandises.",
 
-  "candy-desc-ghostcaramel": "Bonus : Stabilité / Malus : Faiblesse (30s)",
-  "candy-desc-mummy": "Bonus : Soin + Inébranlable / Malus : Lenteur",
-  "candy-desc-spidergummy": "Bonus : Super Saut / Malus : Morsure venimeuse",
-  "candy-desc-vampireteeth": "Bonus : Soin / Malus : Instabilité Temporelle (-30%)",
-  "candy-desc-shadowcube": "Effet : Chaos (Risques et Périls)",
+  "candy-desc-ghostcaramel": "Bonus : Récupération de Stabilité (+25%) / Malus : Faiblesse (-50% Dégâts de Mêlée pendant 30s)",
+  "candy-desc-mummy": "Bonus : Soin (+2 pv) + Résistance au Recul / Malus : Lenteur (-25% pendant 45s)",
+  "candy-desc-spidergummy": "Bonus : Super Saut / Malus : Morsure venimeuse (-2 pv)",
+  "candy-desc-vampireteeth": "Bonus : Soin (+6 pv) / Malus : Perte de Stabilité Temporelle (-30%)",
+  "candy-desc-shadowcube": "Effet : Chaos (Une bénédiction... ou une malédiction ?)",
 
   "candy-msg-ghostcaramel": "[SpookyNights] Vous vous sentez éthéré... mais faible.",
   "candy-expire-weakness": "[SpookyNights] Votre force revient.",
-  "candy-msg-mummy": "[SpookyNights] Les plaies se ferment, mais vous êtes rigide.",
-  "candy-expire-slow": "[SpookyNights] Vous pouvez bouger librement.",
+  "candy-msg-mummy": "[SpookyNights] Les plaies se ferment, mais vos membres se raidissent.",
+  "candy-expire-slow": "[SpookyNights] Vous pouvez bouger librement à nouveau.",
   "candy-msg-spidergummy": "[SpookyNights] SAUT !",
   "candy-msg-vampireteeth": "[SpookyNights] Vos muscles s'alourdissent...",
 
   "candy-msg-shadow-divine": "[SpookyNights] LES OMBRES VOUS BÉNISSENT !",
-  "candy-msg-shadow-speed": "[SpookyNights] SUPER VITESSE ILLIMITÉE !",
+  "candy-msg-shadow-speed": "[SpookyNights] SUPER VITESSE !",
   "candy-expire-speed": "[SpookyNights] L'effet se dissipe.",
   "candy-msg-shadow-hallucination": "[SpookyNights] C'était quoi ce bruit ?",
-  "candy-msg-shadow-blind": "[SpookyNights] Les ténèbres vous agrippent...",
-  "candy-msg-shadow-fail": "[SpookyNights] La réalité se déchire !",
+  "candy-msg-shadow-blind": "[SpookyNights] Les ténèbres s'accrochent à vous...",
+  "candy-msg-shadow-fail": "[SpookyNights] La réalité bascule violemment !",
 
   "heldhelp-openbag": "Ouvrir le sac (Maintenir)",
 
@@ -179,7 +179,7 @@
 
   "iteminfo-spectralbonus-simplified": "<font color=\"#a08ee0\">+{0}% bonus de dégâts contre les spectres.</font>",
   "iteminfo-spectralmalus": "<font color=\"#ff8080\">Dégâts réduits (-50%) contre les créatures spectrales.</font>",
-  "iteminfo-spectral-attack-power": "Puissance d'attaque contre les spectres :",
+  "iteminfo-spectral-attack-power": "Puissance d'attaque contre les spectres : ",
   "iteminfo-spectral-ranged-damage": "Dégâts perforants spectraux : {0} pv",
 
   "block-warscythemold-black-fired-warscythe-long": "Moule de faux de guerre longue cuit (argile noire)",
@@ -193,5 +193,8 @@
   "block-warscythemold-orange-fired-warscythe-long": "Moule de faux de guerre longue cuit (argile orange)",
   "block-warscythemold-red-fired-warscythe-long": "Moule de faux de guerre longue cuit (argile rouge)",
   "block-warscythemold-red-raw-warscythe-long": "Moule de faux de guerre longue cru (argile rouge)",
-  "block-warscythemold-tan-fired-warscythe-long": "Moule de faux de guerre longue cuit (argile havane)"
+  "block-warscythemold-tan-fired-warscythe-long": "Moule de faux de guerre longue cuit (argile havane)",
+
+  "malus-walkspeed": "Vitesse de marche : {0}%",
+  "malus-hungerrate": "Détérioration de la faim : {0}%"
 }
