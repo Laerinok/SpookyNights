@@ -50,6 +50,9 @@
     }
   },
   "attributes": {
+    "handbook": {
+      "groupBy": [ "spectralheart-*" ]
+    },
     "groundable": true,
     "displaycaseable": true,
     "shelvable": true,

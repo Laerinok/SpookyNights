@@ -3,6 +3,7 @@ source/
 │  ├─ ClientConfig.cs
 │  ├─ ConfigManager.cs
 │  └─ ServerConfig.cs
+├─ EntityBehaviorProximityWarning.cs
 ├─ EntityBehaviorSpectralHandling.cs
 ├─ EntityBehaviorSpectralResistance.cs
 ├─ HarmonyPatches.cs

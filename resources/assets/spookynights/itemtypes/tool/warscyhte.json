@@ -34,7 +34,9 @@
   "attributes": {
     "heldItemPitchFollow": 0.9,
     "ripHarvest": true,
-    "handbook": { "groupBy": [ "warscythe-*" ] },
+    "handbook": {
+      "groupBy": [ "warscythe-*" ]
+    },
     "statModifiers": {
       "walkSpeed": -0.15,
       "hungerrate": 0.3
