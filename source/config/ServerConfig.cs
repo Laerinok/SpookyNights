@@ -10,15 +10,15 @@ namespace SpookyNights
 
     public class ServerConfig
     {
-        public string? Version { get; set; } = "1.6.0"; // Bump version to force update
+        public string? Version { get; set; } = "1.7.0"; // Bump version to force update
 
         // Global Toggle for Candy System
         public bool EnableCandyLoot { get; set; } = true;
 
-        // Restrict candy drops to October (Month 10)
-        public bool HalloweenEventOnly { get; set; } = false;
+        public List<int> AllowedCandyMonths { get; set; } = new List<int>();
 
-        // Note: CandyLootTable has been removed to prevent cheating.
+        // NEW: Restrict candy to Full Moon nights only?
+        public bool CandyOnlyOnFullMoon { get; set; } = false;
 
         public Dictionary<string, float> SpawnMultipliers { get; set; } = new Dictionary<string, float>();
         public bool UseTimeBasedSpawning { get; set; } = true;

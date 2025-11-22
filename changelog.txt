@@ -1,7 +1,24 @@
-v0.3.0 2025-11-20 - The spectral weakness
-- Added:1 metal (spectrium) and 2 alloys (etherium/aetherium) for crafting new spectral-themed weapons.
-- Added: spectral weakness mechanic
-- Added: new configuration options
+v1.0.0 2025-11-22 - The Spectral Weakness
+
+New Content & Mechanics:
+- Added: Spectral Resistance mechanic (Vanilla weapons deal -50% damage to spectral mobs).
+- Added: 1 new metal (Spectrium) and 2 alloys (Etherium, Aetherium) to bypass resistance.
+- Added: New weapon type: Warscythe.
+- Added: New sound effects and visual effects for spectral creatures.
+
+Configuration:
+- Added: `AllowedCandyMonths` config option. Defines exactly which months candy bags can drop (e.g., [10] for October). Replaces the old boolean `HalloweenEventOnly`.
+- Added: `CandyOnlyOnFullMoon` config option. When enabled, candy bags only drop on Full Moon nights.
+
+Updates & Balancing:
+- Updated: Spooky Candy mechanics, visual effects, and UI tooltips.
+- Tweaked: Spectral creature spawn rates and loot tables.
+- Tweaked: Balancing for spectral-themed weapons.
+
+Technical & Fixes:
+- Improved: Config migration system. The mod now automatically converts settings and deletes legacy config files (v0.2.0) to keep the folder clean.
+- Fixed: Candy loot logic to support multiple allowed months.
+- Fixed: Various bugs related to spectral creatures and candy loot.
 
 v0.2.0 2025-11-06
 - Added: Configuration file for advanced mod customization.

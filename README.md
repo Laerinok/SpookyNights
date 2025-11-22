@@ -1,8 +1,8 @@
-# Spooky Nights
+﻿# Spooky Nights
 
 **Spooky Nights** is a thematic overhaul mod for Vintage Story that introduces a supernatural threat to your world. The night is no longer just dark; it is resistant to your steel. To survive, you must adapt, learn spectral metallurgy, and embrace the chaos of Halloween.
 
-## ?? Key Features
+## 🌑 Key Features
 
 ### 1. Spectral Resistance System
 Ghosts and spectral entities in this mod are not made of flesh.
@@ -22,10 +22,10 @@ Harvest **Spectral Hearts** from fallen spirits to forge new gear.
 
 ### 3. Trick or Treat
 Loot **Candy Bags** and discover 5 unique candies with "Double-Edged" effects.
-*   **Spider Gummy:** Grants super-jump but poisons you.
-*   **Ghost Caramel:** Restores stability but makes you physically weak.
-*   **Vampire Teeth:** Heals deeply but tires you (Mining Fatigue).
-*   **Mummy Candy:** Makes you immovable (Knockback resist) but slow.
+*   **Spider Gummy:** Grants super-jump but poisons you (-2 hp).
+*   **Ghost Caramel:** Restores stability (+25%) but makes you physically weak (-50% damage).
+*   **Vampire Teeth:** Heals deeply (+6 hp) but drains your **Temporal Stability** by 30%.
+*   **Mummy Candy:** Restores 2 HP and grants knockback resistance, but slows movement by 25%..
 *   **Shadow Cube:** A chaos item. It might fully heal and feed you, or blind you and teleport you into a cobweb. Eat at your own risk!
 
 ### 4. The Spectral Bestiary
@@ -33,10 +33,8 @@ Face new variants of Drifters, Wolves, Bears, and Archers that glow in the dark 
 
 ---
 
-## ?? Configuration
+## ⚙️ Configuration
 
 The mod is highly configurable via `spookynights-server.json` and `spookynights-client.json`.
 *   **Server Owners:** You can adjust spawn rates, enable/disable specific mobs, or restrict the mod to Halloween season only.
 *   **Clients:** You can toggle visual effects like the Jack O' Lantern particles.
-
-***

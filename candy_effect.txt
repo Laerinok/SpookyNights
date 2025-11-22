@@ -1,0 +1,30 @@
+# 🍬 Guide des Bonbons Spooky (Version Finale Nettoyée)
+
+### 👻 Ghost Caramel (Caramel Fantôme) (20%)
+*   **🟢 Bonus :** **Stabilité Temporelle** (+25%).
+*   **🔴 Malus :** **Faiblesse** (-50% Dégâts pendant 30s).
+*   **✨ Visuel :** Beige/Doré.
+
+### 🤕 Mummy (Momie) (25%)
+*   **🟢 Bonus :** **Soin** (+4 PV) + **Inébranlable** (100% Résistance Recul).
+*   **🔴 Malus :** **Lenteur** (-25% Vitesse pendant 45s).
+*   **✨ Visuel :** Blanc/Gris.
+
+### 🕸️ Spider Gummy (Gélatine Araignée) (25%)
+*   **🟢 Bonus :** **Super Saut** (~4 blocs) + **Chute Amortie** (0 dégâts chute pendant 10s).
+*   **🔴 Malus :** **Venin** (2 dégâts différés).
+*   **✨ Visuel :** Vert Toxique.
+
+### 🧛 Vampire Teeth (Dents de Vampire) (15%)
+*   **🟢 Bonus :** **Soin** (+6 PV).
+*   **🔴 Malus :** **Fatigue Minière** (-50% vitesse de minage pendant 20s).
+*   **✨ Visuel :** Rouge Sang.
+
+---
+
+### 🎲 Shadow Cube (Cube d'Ombre) 15%)
+*   **🌟 Divin (5%) :** Soin Total + Satiété Max + Stabilité Max.
+*   **⚡ Vitesse (20%) :** Vitesse +50% (1 min).
+*   **🌀 Hallucination (30%) :** Ivresse + Sons.
+*   **🌑 Ténèbres (25%) :** Aveuglement (Nuage noir) + Lenteur.
+*   **⚠️ Faille (20%) :** Téléportation aléatoire dans un rayon de 10 blocs

@@ -36,8 +36,6 @@ namespace SpookyNights
         private List<string> spectralCreatureCodes = new List<string>();
 
         // --- HARDCODED LOOT TABLE ---
-        // Key: Entity Code Wildcard
-        // Value: Chance (0.0-1.0), Min, Max
         private static readonly Dictionary<string, CandyDropDefinition> LootTable = new Dictionary<string, CandyDropDefinition>()
         {
             // Weak
@@ -344,17 +342,26 @@ namespace SpookyNights
             }
         }
 
-        // --- CANDY LOOT (REWRITTEN FOR HARDCODED VALUES) ---
+        // --- CANDY LOOT (UPDATED V1.7.0) ---
 
         private void HandleCandyLoot(Entity entity, DamageSource damageSource)
         {
             if (sapi == null || ConfigManager.ServerConf == null || !ConfigManager.ServerConf.EnableCandyLoot) return;
 
-            // Seasonal Check
-            if (ConfigManager.ServerConf.HalloweenEventOnly)
+            // 1. Seasonal Check (Month)
+            var allowedMonths = ConfigManager.ServerConf.AllowedCandyMonths;
+            if (allowedMonths != null && allowedMonths.Count > 0)
             {
                 int currentMonth = sapi.World.Calendar.Month;
-                if (currentMonth != 10) return; // Only Month 10 (October)
+                // If current month is NOT in the allowed list, stop.
+                if (!allowedMonths.Contains(currentMonth)) return;
+            }
+
+            // 2. Moon Phase Check
+            if (ConfigManager.ServerConf.CandyOnlyOnFullMoon)
+            {
+                // If it is NOT Full Moon, stop.
+                if (sapi.World.Calendar.MoonPhase != EnumMoonPhase.Full) return;
             }
 
             if (damageSource.SourceEntity is not EntityPlayer) return;

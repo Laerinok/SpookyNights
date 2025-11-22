@@ -1,44 +1,58 @@
 {
   "tabname-spookynights": "Spooky Nights",
 
+  "spookynights-quickstartguide-title": "Spooky Nights - Guide de démarrage",
+  "spookynights-quickstartguide-text": "Bienvenue dans <strong>Spooky Nights</strong>. Le monde a changé. Les nuits sont plus sombres, les ombres bougent et des esprits anciens se sont réveillés. Ce mod introduit une nouvelle couche de survie axée sur l'horreur, le combat stratégique et la métallurgie surnaturelle.\n\n<font size=\"14\"><strong>Pourquoi rester dans le noir ?</strong></font>\nCe mod n'est pas seulement une difficulté accrue ; c'est une question d'<strong>adaptation et de récompense</strong>.\n\n<strong>1. Un Nouveau Défi</strong>\nLes tactiques de survie classiques ne suffiront pas. Les ennemis spectraux possèdent une <strong>Résistance</strong> qui émousse vos lames d'acier (-50% de Dégâts). Vous ne pouvez plus compter uniquement sur la force brute ; vous devez vous préparer.\n\n<strong>2. Métallurgie Progressive</strong>\nChasser ces esprits vous récompense avec des <strong><a href=\"handbooksearch://Cœurs Spectraux\">Cœurs Spectraux</a></strong>. Ils sont la clé d'une nouvelle métallurgie : <strong><a href=\"handbook://item-ingot-spectrium\">Spectrium</a></strong>, <strong><a href=\"handbook://item-ingot-etherium\">Éthérium</a></strong> et <strong><a href=\"handbook://item-ingot-aetherium\">Aethérium</a></strong>. Chaque alliage fait de vous un chasseur plus efficace, transformant la proie en prédateur.\n\n<strong>3. Combat Stratégique</strong>\nLe mod introduit la <strong><a href=\"handbooksearch://Faux de guerre\">Faux de guerre</a></strong>, une arme d'hast spécialisée avec une portée massive (3,2m). Vous préférez votre fidèle Lance ou votre Falx ? Vous pouvez fabriquer des Flèches, Lances et lames de Falx standards avec les nouveaux métaux. Cela vous permet de garder votre style de combat tout en gagnant les dégâts nécessaires pour percer le voile.\n\n<strong>4. Risque & Récompense</strong>\nLe <strong>Système de Bonbons</strong> ajoute un élément de hasard à votre survie. Ce bonbon vous sauvera-t-il la vie avec un soin soudain, ou vous aveuglera-t-il en plein combat ? Le choix vous appartient.\n\n<br><font size=\"14\"><strong>Aperçu du Contenu</strong></font>\n\n<strong>Entités :</strong>\n- <strong>Rôdeurs, Arcracheurs, Frissonneurs Spectraux :</strong> Formes évoluées des ennemis communs.\n- <strong>Loups & Ours Spectraux :</strong> Rapides, agressifs et luisants dans le noir.\n\n<strong>Objets :</strong>\n- <strong><a href=\"handbook://block-spookynights:jackolantern-north\">Citrouilles Lanternes :</a></strong> Pour éclairer votre base.\n- <strong>Sacs de Bonbons :</strong> Friandises à ramasser avec des effets aléatoires.\n- <strong>Armes Spectrales :</strong> Outils de destruction luisants.\n\n<br><strong>--- NAVIGATION ---</strong>\n\nCliquez sur les liens ci-dessous pour les détails :\n\nSelon vos besoins :\n- <strong><a href=\"handbook://spookynights-mechanics\">Mécaniques de Combat</a></strong> : Comment contourner la résistance.\n- <strong><a href=\"handbook://spookynights-metallurgy\">Guide de Métallurgie</a></strong> : Recettes du Spectrium et des alliages.\n- <strong><a href=\"handbook://spookynights-weapons\">Stats des Armes</a></strong> : Détails sur la Faux de guerre et les tiers de dégâts.\n- <strong><a href=\"handbook://spookynights-candies\">Effets des Bonbons</a></strong> : Liste de tous les bonus et malédictions.",
+
   "spookynights-guide-mechanics-title": "Spooky Nights - Résistance Spectrale",
-  "spookynights-guide-mechanics-text": "L'obscurité s'est renforcée. Des entités fantomatiques rôdent désormais, et elles ne sont pas faites de chair et d'os.<br><br><strong>Résistance Spectrale</strong><br>Les armes physiques (Cuivre, Fer, Acier...) les traversent sans effet total. Toutes les armes classiques subissent une <strong>pénalité de dégâts de -50%</strong> contre les créatures spectrales.<br><br>Pour les combattre efficacement, vous devez utiliser des armes en <strong>Spectrium</strong>, <strong>Etherium</strong>, ou le légendaire <strong>Aetherium</strong>. Ces métaux ignorent la résistance et infligent des dégâts bonus massifs.",
+  "spookynights-guide-mechanics-text": "<strong>Résistance Spectrale</strong>\n\nLes entités spectrales ne sont pas soumises aux mêmes lois physiques que les vivants. Elles sont éthérées, laissant la matière ordinaire les traverser avec peu d'effet.\n\n<strong>La Résistance</strong>\nToute arme forgée dans des matériaux banals (Cuivre, Bronze, Fer, Acier, Bronze Noir...) verra ses dégâts réduits de <strong>50%</strong> en frappant une entité spectrale. Cela s'applique aussi bien aux attaques de mêlée qu'aux projectiles (flèches/lances).\n\n<strong>Briser le Voile</strong>\nPour chasser ces créatures efficacement, vous devez forger des armes en <strong>Spectrium</strong> ou ses alliages. Ces matériaux résonnent avec l'énergie spectrale.\n\n<strong>Tiers de Dégâts :</strong>\n- <strong>Spectrium :</strong> Ignore totalement la résistance (100% de Dégâts Normaux).\n- <strong>Éthérium :</strong> Inflige <strong>+20% de Dégâts Bonus</strong> aux entités spectrales.\n- <strong>Aethérium :</strong> Inflige <strong>+40% de Dégâts Bonus</strong> aux entités spectrales.\n\n<em>Astuce : Vérifiez l'infobulle de votre arme. Les armes spectrales affichent leurs dégâts effectifs en texte violet.</em>",
 
   "spookynights-guide-metallurgy-title": "Spooky Nights - Métallurgie",
-  "spookynights-guide-metallurgy-text": "Pour forger des armes capables de blesser les fantômes, vous devez traiter leur butin.<br><br><strong>1. Spectrium (Tier 1)</strong><br>Chasser les créatures spectrales donne des <strong>Cœurs Spectraux</strong>. Placez un <strong>Marteau</strong> et un Cœur dans la grille d'artisanat pour l'écraser en <strong>Pépites de Spectrium</strong>.<br><em>Point de fusion : 1025°C</em><br><br><strong>2. Etherium (Tier 2)</strong><br>Un alliage fait au creuset. Il nécessite un mélange de <strong>Cuivre</strong> et de <strong>Spectrium</strong>.<br><em>Ratio : 30-40% Spectrium / 60-70% Cuivre</em><br>Il offre une meilleure durabilité et de meilleurs dégâts.<br><br><strong>3. Aetherium (Tier 3)</strong><br>L'alliage ultime. Il nécessite de mélanger du <strong>Spectrium</strong>, du <strong>Bismuth</strong>, et de l'<strong>Argent</strong> dans un creuset.<br><em>Ratio : ~40% Spectrium / ~40% Bismuth / ~20% Argent</em>",
+  "spookynights-guide-metallurgy-text": "Pour combattre la menace spectrale, vous devez maîtriser de nouveaux métaux.\n\n<strong>1. Spectrium (Niveau 2)</strong>\nLe métal de base pour la chasse aux fantômes. Il n'est pas extrait de la terre.\n- <strong>Source :</strong> Obtenez des <em>Cœurs Spectraux</em> en tuant des créatures spectrales.\n- <strong>Procédé :</strong> Écrasez les cœurs dans la grille d'artisanat avec un <strong>Marteau</strong> pour obtenir des Pépites.\n- <strong>Fonte :</strong> Fond à <strong>1025°C</strong>.\n\n<strong>2. Éthérium (Niveau 3)</strong>\nUn alliage offrant une durabilité supérieure.\n- <strong>Mélange :</strong> 30-40% Spectrium + 60-70% Cuivre.\n- <strong>Fonte :</strong> Fond à <strong>1150°C</strong>.\n\n<strong>3. Aethérium (Niveau 3+)</strong>\nL'alliage spectral ultime, nécessitant des matériaux rares.\n- <strong>Mélange :</strong> ~40% Spectrium + ~40% Bismuth + ~20% Argent.\n- <strong>Fonte :</strong> Fond à <strong>1025°C</strong>.\n\nCes métaux peuvent être forgés en Faux de guerre, Lances, Flèches et lames de Falx.",
 
   "spookynights-guide-weapons-title": "Spooky Nights - Faux de Guerre",
-  "spookynights-guide-weapons-text": "Bien que les Lances et Épées soient efficaces, la menace spectrale nécessite parfois une approche différente. La <strong>Faux de Guerre</strong> est une arme spécialisée forgée dans les métaux spectraux.<br><br><strong>Faux de Guerre Courte</strong><br>Une arme rapide et polyvalente (Portée : 2,5m). Sa lame tranchante permet aussi de dépecer les animaux.<br><br><strong>Faux de Guerre Longue</strong><br>Une arme d'hast lourde avec une <strong>portée exceptionnelle de 3,8 mètres</strong> (plus longue qu'une lance). Elle permet de garder les entités dangereuses à distance tout en infligeant de lourds dégâts de balayage. Idéal contre les groupes.",
+  "spookynights-guide-weapons-text": "Bien que les Lances et Flèches puissent être faites de métaux spectraux, la <strong>Faux de guerre</strong> est l'arme signature du chasseur de fantômes.\n\n<strong>La Faux de guerre (Longue)</strong>\nUne arme d'hast conçue pour tenir les esprits mortels à distance.\n- <strong>Portée :</strong> <strong>3,2 mètres</strong> (Supérieure à la plupart des ennemis).\n- <strong>Dégâts :</strong> Dégâts tranchants élevés.\n- <strong>Inconvénients :</strong> Lourde et peu maniable, elle réduit la Vitesse de Marche de <strong>15%</strong> et augmente la Faim de <strong>30%</strong> lorsqu'elle est tenue en main.\n\n<strong>Stats de l'Arme (Faux de guerre) :</strong>\n- <strong><a href=\"handbook://item-spookynights:warscythe-long-spectrium\">Spectrium :</a></strong> 4.2 Dégâts (550 Durabilité)\n- <strong><a href=\"handbook://item-spookynights:warscythe-long-etherium\">Éthérium :</a></strong> 4.8 Dégâts (1100 Durabilité)\n- <strong><a href=\"handbook://item-spookynights:warscythe-long-aetherium\">Aethérium :</a></strong> 5.5 Dégâts (1500 Durabilité)\n\n<em>Note : Les lames de Falx, Lances et Flèches peuvent aussi être fabriquées dans ces métaux pour un maniement standard sans les pénalités de la Faux.</em>",
+
+  "spookynights-guide-candies-title": "Spooky Nights - Des bonbons ou un sort",
+  "spookynights-guide-candies-text": "Lors de vos chasses, vous pouvez trouver des <strong>Sacs de Bonbons</strong>. Maintenez le Clic Droit pour les ouvrir et révéler 1 à 3 friandises aléatoires. Attention : chaque bonbon porte une malédiction avec sa bénédiction.\n\n<strong>Gomme Araignée (Commun)</strong>\n- <strong>Bonus :</strong> Accorde un saut massif et annule les dégâts de chute pour 10s.\n- <strong>Malus :</strong> Inflige des dégâts de Poison mineurs.\n\n<strong>Bonbon Momie (Commun)</strong>\n- <strong>Bonus :</strong> Soigne 2 PV et empêche le Recul (Knockback).\n- <strong>Malus :</strong> Lenteur (-25%) pendant 45s.\n\n<strong>Caramel Fantôme (Peu Commun)</strong>\n- <strong>Bonus :</strong> Restaure la Stabilité Temporelle.\n- <strong>Malus :</strong> Faiblesse (-50% Dégâts) pendant 30s. Ne mangez pas en combat !\n\n<strong>Dents de Vampire (Rare)</strong>\n- <strong>Bonus :</strong> Gros Soin (+6 PV).\n- <strong>Malus :</strong> Malus: Perte de stabilité temporelle (-30%)\n\n<strong>Cube d'Ombre (Rare)</strong>\nChaos pur. Les effets sont imprévisibles :\n- <strong>Divin (5%) :</strong> Soin Total + Saturation Max + Stabilité.\n- <strong>Vitesse (20%) :</strong> Super boost de vitesse.\n- <strong>Hallucination (30%) :</strong> Forte intoxication et sons effrayants.\n- <strong>Ténèbres (25%) :</strong> Lenteur extrême et cécité.\n- <strong>Échec (20%) :</strong> Vous téléporte à proximité...",
 
   "item-ingot-spectrium": "Lingot (spectrium)",
-  "item-ingot-etherium": "Lingot (ethérium)",
+  "item-ingot-etherium": "Lingot (éthérium)",
   "item-ingot-aetherium": "Lingot (aethérium)",
 
   "item-metalbit-spectrium": "Morceau de métal (spectrium)",
-  "item-metalbit-etherium": "Morceau de métal (ethérium)",
+  "item-metalbit-etherium": "Morceau de métal (éthérium)",
   "item-metalbit-aetherium": "Morceau de métal (aethérium)",
 
   "item-nugget-spectrium": "Pépite (spectrium)",
   "item-nugget-aetherium": "Pépite (aethérium)",
-  "item-nugget-etherium": "Pépite (ethérium)",
+  "item-nugget-etherium": "Pépite (éthérium)",
 
   "material-spectrium": "Spectrium",
-  "material-etherium": "Ethérium",
+  "material-etherium": "Éthérium",
   "material-aetherium": "Aethérium",
 
   "item-blade-falx-aetherium": "Falx en aethérium",
-  "item-blade-falx-etherium": "falx en ethérium",
-  "item-blade-falx-spectrium": "falx en spectrium",
+  "item-blade-falx-etherium": "Falx en éthérium",
+  "item-blade-falx-spectrium": "Falx en spectrium",
 
   "item-spear-generic-aetherium": "Lance en aethérium",
-  "item-spear-generic-etherium": "Lance en ethérium",
+  "item-spear-generic-etherium": "Lance en éthérium",
   "item-spear-generic-spectrium": "Lance en spectrium",
 
   "item-bladehead-falx-aetherium": "Tête de falx en aethérium",
-  "item-bladehead-falx-etherium": "Tête de falx en ethérium",
+  "item-bladehead-falx-etherium": "Tête de falx en éthérium",
   "item-bladehead-falx-spectrium": "Tête de falx en spectrium",
 
   "item-spearhead-aetherium": "Tête de lance en aethérium",
-  "item-spearhead-etherium": "Tête de lance en ethérium",
-  "item-spearhead-spectrium": "Tête de lance en spectrium"
+  "item-spearhead-etherium": "Tête de lance en éthérium",
+  "item-spearhead-spectrium": "Tête de lance en spectrium",
+
+  "item-arrow-aetherium": "Flèche en aethérium",
+  "item-arrow-etherium": "Flèche en éthérium",
+  "item-arrow-spectrium": "Flèche en spectrium",
+
+  "item-arrowhead-aetherium": "Pointe de flèche en aethérium",
+  "item-arrowhead-etherium": "Pointe de flèche en éthérium",
+  "item-arrowhead-spectrium": "Pointe de flèche en spectrium"
 }
