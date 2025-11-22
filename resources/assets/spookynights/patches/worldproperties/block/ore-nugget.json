@@ -1,0 +1,26 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/variants/-",
+    "value": {
+      "Code": "spectrium"
+    },
+    "file": "game:worldproperties/block/ore-nugget.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/variants/-",
+    "value": {
+      "Code": "etherium"
+    },
+    "file": "game:worldproperties/block/ore-nugget.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/variants/-",
+    "value": {
+      "Code": "aetherium"
+    },
+    "file": "game:worldproperties/block/ore-nugget.json"
+  }
+]

@@ -1,0 +1,498 @@
+{
+	"code": "spectralwolf",
+	"class": "EntityAgent",
+	"tags": [ "animal", "huntable", "adult", "predator", "ferocious", "habitat-land" ],
+	"weight": 76,
+	"variantgroups": [
+		{
+			"code": "type",
+			"states": [ "eurasian" ]
+		},
+		{
+			"code": "age",
+			"states": [ "adult" ]
+		},
+		{
+			"code": "gender",
+			"states": [ "male", "female" ]
+		}
+	],
+	"hitboxSize": {
+		"x": 1.2,
+		"y": 1
+	},
+	"deadHitboxSize": {
+		"x": 1,
+		"y": 0.75
+	},
+	"eyeHeight": 0.9,
+	"drops": [],
+	"attributes": {
+		"hostile": true,
+		"creatureDiet": {
+			"weightedFoodTags": [
+				{
+					"weight": 0.9,
+					"code": "meat"
+				},
+				{
+					"weight": 1,
+					"code": "egg"
+				}
+			]
+		},
+		"killedByInfoText": "deadcreature-eaten-large",
+		"handbook": { "groupcode": "creaturegroup-wolf" },
+		"glowColorByType": {
+			"*-male": "#FF3333",
+			"*-female": "#0066FF"
+		},
+		"spectralDrops": {
+			"spectralwolf-eurasian-adult-*": [
+				{
+					"type": "item",
+					"code": "spookynights:spectralheart-medium",
+					"quantity": {
+						"avg": 0.1,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-temporal",
+					"quantity": {
+						"avg": 0.15,
+						"var": 0
+					}
+				},
+				{
+					"type": "item",
+					"code": "game:gear-rusty",
+					"quantity": {
+						"avg": 1,
+						"var": 0
+					}
+				}
+			]
+		}
+	},
+	"client": {
+		"renderer": "Shape",
+		"renderFlags": [ "alphatransparent" ],
+		"glowLevelByType": {
+			"*-male": 110,
+			"*-female": 160
+		},
+		"skipRenderUntil": "alive",
+		"shape": { "base": "entity/spectral/animal/wolf" },
+		"sizeByType": {
+			"*-male": 1.4,
+			"*": 1.3
+		},
+		"texture": {
+			"base": "entity/spectral/animal/wolf/eurasian-adult1",
+			"alternates": [
+				{ "base": "entity/spectral/animal/wolf/eurasian-adult2" },
+				{ "base": "entity/spectral/animal/wolf/eurasian-adult3" },
+				{ "base": "entity/spectral/animal/wolf/eurasian-adult4" },
+				{ "base": "entity/spectral/animal/wolf/eurasian-adult5" },
+				{ "base": "entity/spectral/animal/wolf/eurasian-adult6" },
+				{ "base": "entity/spectral/animal/wolf/eurasian-adult7" },
+				{ "base": "entity/spectral/animal/wolf/eurasian-adult8" },
+				{ "base": "entity/spectral/animal/wolf/eurasian-adult9" },
+				{ "base": "entity/spectral/animal/wolf/eurasian-adult10" }
+			]
+		},
+		"behaviors": [
+			{ "code": "ripharvestable" },
+			{ "code": "repulseagents" },
+			{
+				"code": "controlledphysics",
+				"stepHeight": 1.1251
+			},
+			{
+				"code": "floatupwhenstuck",
+				"onlyWhenDead": true
+			},
+			{ "code": "interpolateposition" },
+			{
+				"code": "despawn",
+				"minPlayerDistance": 16,
+				"belowLightLevel": 8,
+				"minSeconds": 300,
+				"afterDays": 1
+			}
+		],
+		"animations": [
+			{
+				"code": "hurt",
+				"animation": "hurt",
+				"animationSpeed": 2.2,
+				"weight": 10,
+				"blendMode": "AddAverage"
+			},
+			{
+				"code": "die",
+				"animation": "death",
+				"animationSpeed": 1.25,
+				"weight": 10,
+				"blendMode": "Average",
+				"triggeredBy": { "onControls": [ "dead" ] }
+			},
+			{
+				"code": "idle",
+				"animation": "idle",
+				"blendMode": "AddAverage",
+				"easeOutSpeed": 4,
+				"triggeredBy": { "defaultAnim": true }
+			},
+			{
+				"code": "sleep",
+				"animation": "sleep",
+				"easeInSpeed": 4,
+				"easeOutSpeed": 4,
+				"weight": 5,
+				"blendMode": "Average"
+			},
+			{
+				"code": "eat",
+				"animation": "Eat",
+				"blendMode": "Average"
+			},
+			{
+				"code": "sit",
+				"animation": "sit",
+				"easeInSpeed": 4,
+				"easeOutSpeed": 4,
+				"weight": 10,
+				"blendMode": "Average"
+			},
+			{
+				"code": "attack-withwindup",
+				"animation": "attack-withwindup",
+				"animationSpeed": 1,
+				"blendMode": "Average",
+				"weight": 100
+			}
+		]
+	},
+	"server": {
+		"behaviors": [
+			{
+				"code": "spectralresistance",
+				"resistance": 0.5
+			},
+			{ "code": "repulseagents" },
+			{
+				"code": "deaddecay",
+				"hoursToDecay": 3
+			},
+			{
+				"code": "controlledphysics",
+				"stepHeight": 1.1251
+			},
+			{
+				"code": "despawn",
+				"minPlayerDistance": 8,
+				"belowLightLevel": 8,
+				"minSeconds": 300
+			},
+			{
+				"code": "health",
+				"maxhealthByType": {
+					"*-male": 25,
+					"*": 20
+				}
+			},
+			{
+				"code": "floatupwhenstuck",
+				"onlyWhenDead": true
+			},
+			{
+				"code": "emotionstates",
+				"states": [
+					{
+						"code": "fleeondamage",
+						"duration": 60,
+						"chance": 0.75,
+						"slot": 2,
+						"priority": 5,
+						"accumType": "max",
+						"whenHealthRelBelow": 0.3
+					},
+					{
+						"code": "saturated",
+						"duration": 1200,
+						"chance": 1,
+						"slot": 0,
+						"priority": 1,
+						"accumType": "sum",
+						"belowTempDuration": 600,
+						"belowTempThreshold": -5
+					},
+					{
+						"code": "aggressiveondamage",
+						"duration": 30,
+						"chance": 1,
+						"slot": 2,
+						"priority": 2,
+						"accumType": "noaccum"
+					},
+					{
+						"code": "alarmherdondamage",
+						"chance": 1,
+						"slot": 1,
+						"priority": 1,
+						"accumType": "max"
+					}
+				]
+			},
+			{
+				"code": "taskai",
+				"aiCreatureType": "LandCreature",
+				"aitasks": [
+					{
+						"code": "meleeattack",
+						"entityCodes": [ "deer-*", "gazelle-*", "sheep-bighorn-baby-*", "goat-*", "player" ],
+						"priority": 2.1,
+						"damage": 10,
+						"damageTier": 2,
+						"damageType": "SlashingAttack",
+						"slot": 1,
+						"mincooldown": 500,
+						"maxcooldown": 1500,
+						"attackDurationMs": 1200,
+						"damagePlayerAtMs": 900,
+						"animation": "attack-withwindup",
+						"animationSpeed": 1.5,
+						"sound": "game:creature/wolf/attack"
+					},
+					{
+						"code": "meleeattack",
+						"entityCodes": [ "player" ],
+						"priority": 2,
+						"damage": 8,
+						"damageTier": 2,
+						"damageType": "SlashingAttack",
+						"slot": 1,
+						"mincooldown": 30000,
+						"maxcooldown": 35000,
+						"attackDurationMs": 800,
+						"damagePlayerAtMs": 500,
+						"animation": "Attack-High",
+						"animationSpeed": 1.5,
+						"sound": "game:creature/wolf/attack"
+					},
+					{
+						"code": "meleeattack",
+						"entityCodes": [ "chicken-*", "hare-*", "pig-eurasian-baby-*", "raccoon-*" ],
+						"priority": 2,
+						"damage": 8,
+						"damageTier": 2,
+						"damageType": "SlashingAttack",
+						"slot": 1,
+						"mincooldown": 1500,
+						"maxcooldown": 1500,
+						"attackDurationMs": 800,
+						"damagePlayerAtMs": 500,
+						"retaliateAttacks": false,
+						"animation": "Attack-Low",
+						"animationSpeed": 1.5,
+						"sound": "game:creature/wolf/attack"
+					},
+					{
+						"code": "fleeentity",
+						"entityCodes": [ "player" ],
+						"priority": 1.6,
+						"movespeed": 0.052,
+						"seekingRange": 20,
+						"animation": "Run",
+						"animationSpeed": 2,
+						"whenInEmotionState": "fleeondamage"
+					},
+					{
+						"code": "seekentity",
+						"entityCodes": [ "player" ],
+						"priority": 1.51,
+						"movespeed": 0.045,
+						"seekingRange": 9,
+						"belowTempSeekingRange": 25,
+						"belowTempThreshold": -5,
+						"animation": "Run",
+						"leapAtTarget": true,
+						"leapAnimation": null,
+						"animationSpeed": 2,
+						"leapChance": 0.01,
+						"sound": "game:creature/wolf/growl",
+						"whenNotInEmotionState": "saturated"
+					},
+					{
+						"code": "seekentity",
+						"entityCodes": [ "player", "chicken-*", "gazelle-*", "goat-*", "sheep-bighorn-baby-*", "pig-eurasian-baby-*", "hare-*", "deer-*", "raccoon-*" ],
+						"priority": 1.5,
+						"movespeed": 0.045,
+						"seekingRange": 15,
+						"belowTempSeekingRange": 25,
+						"belowTempThreshold": -5,
+						"animation": "Canter",
+						"leapAtTarget": true,
+						"leapAnimation": null,
+						"animationSpeed": 1.5,
+						"leapChance": 0.01,
+						"sound": "game:creature/wolf/growl",
+						"whenNotInEmotionState": "saturated"
+					},
+					{
+						"code": "seekentity",
+						"entityCodes": [ "player" ],
+						"priority": 1.49,
+						"movespeed": 0.045,
+						"seekingRange": 15,
+						"animation": "Run",
+						"leapAtTarget": true,
+						"leapAnimation": null,
+						"animationSpeed": 2,
+						"leapChance": 0.01,
+						"sound": "game:creature/wolf/growl",
+						"whenInEmotionState": "aggressiveondamage"
+					},
+					{
+						"code": "getoutofwater",
+						"priority": 1.4,
+						"movespeed": 0.015,
+						"animation": "Swim",
+						"animationSpeed": 1
+					},
+					{
+						"code": "stayclosetoentity",
+						"priority": 1.4,
+						"enabledByType": {
+							"*-male": false,
+							"*": true
+						},
+						"entityCode": "spectralwolf-eurasian-adult-male",
+						"movespeed": 0.04,
+						"maxDistance": 10,
+						"searchRange": 25,
+						"animationSpeed": 2,
+						"animation": "Canter"
+					},
+					{
+						"code": "idle",
+						"animation": "Sleep",
+						"priority": 1.35,
+						"priorityForCancel": 1.55,
+						"minduration": 200000,
+						"maxduration": 800000,
+						"mincooldown": 10000,
+						"maxcooldown": 30000,
+						"whenNotInEmotionState": "aggressiveondamage",
+						"duringDayTimeFrames": [
+							{
+								"fromHour": 10,
+								"toHour": 18
+							},
+							{
+								"fromHour": 1,
+								"toHour": 3
+							}
+						],
+						"stopOnNearbyEntityCodes": [ "player" ],
+						"stopRange": 10,
+						"stopOnHurt": true
+					},
+					{
+						"code": "seekfoodandeat",
+						"movespeed": 0.006,
+						"priority": 1.3,
+						"eatItemCategories": [ "protein" ],
+						"eatSound": "creature/animal-eat1",
+						"eatTime": 1.5,
+						"minduration": 4000,
+						"maxduration": 4000,
+						"animation": "Eat",
+						"animationSpeed": 1,
+						"mincooldownHours": 1,
+						"maxcooldownHours": 4
+					},
+					{
+						"code": "idle",
+						"animation": "Howl",
+						"priority": 1.25,
+						"priorityForCancel": 1.35,
+						"minduration": 4667,
+						"maxduration": 4667,
+						"mincooldown": 80000,
+						"maxcooldown": 500000,
+						"animationSpeed": 0.7,
+						"sound": "creature/wolf/howl1",
+						"soundRange": 110
+					},
+					{
+						"code": "idle",
+						"animation": "Sniff",
+						"priority": 1.2,
+						"priorityForCancel": 1.35,
+						"minduration": 5000,
+						"maxduration": 5000,
+						"mincooldown": 6000,
+						"maxcooldown": 20000,
+						"animationSpeed": 1,
+						"whenNotInEmotionState": "aggressiveondamage"
+					},
+					{
+						"code": "wander",
+						"animation": "Walk",
+						"priority": 1.0,
+						"priorityForCancel": 1.35,
+						"movespeed": 0.006,
+						"animationSpeed": 1.25,
+						"preferredLightLevel": 20
+					},
+					{
+						"code": "idle",
+						"animation": "Sit",
+						"priority": 0.9,
+						"minduration": 5000,
+						"maxduration": 30000,
+						"mincooldown": 2000,
+						"maxcooldown": 120000,
+						"priorityForCancel": 1.33,
+						"whenNotInEmotionState": "aggressiveondamage"
+					},
+					{
+						"code": "lookaround",
+						"priority": 0.5
+					}
+				]
+			},
+			{ "code": "entitystatetags" }
+		],
+		"spawnconditions": {
+			"runtime": {
+				"group": "hostile",
+				"tryOnlySurface": true,
+				"chance": 0.03,
+				"maxQuantity": 5,
+				"maxLightLevel": 5,
+				"groupSize": {
+					"dist": "uniform",
+					"avg": 2,
+					"var": 1
+				},
+				"insideBlockCodes": [ "game:air", "game:tallgrass-*" ],
+				"minTemp": -15,
+				"maxTemp": 15,
+				"minRain": 0.25,
+				"minForest": 0.4,
+				"companions": [ "spectralwolf-eurasian-adult-female" ]
+			}
+		}
+	},
+	"sounds": {
+		"hurt": "game:creature/wolf/hurt",
+		"death": "game:creature/wolf/hurt",
+		"idle": "creature/wolf/howl1"
+	},
+	"idleSoundChance": 0
+}

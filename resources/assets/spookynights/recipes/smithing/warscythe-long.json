@@ -1,0 +1,25 @@
+{
+	"ingredient": {
+		"type": "item",
+		"code": "game:ingot-*",
+		"name": "metal",
+		"allowedVariants": [ "spectrium", "etherium", "aetherium" ]
+	},
+	"pattern": [
+		[
+			"______________#_",
+			"_________#___##_",
+			"______########__",
+			"___############_",
+			"__#####__#__##__",
+			"_##__________##_",
+			"_#____________#_",
+			"________________"
+		]
+	],
+	"name": "warscythelong",
+	"output": {
+		"type": "item",
+		"code": "warscythehead-long-{metal}"
+	}
+}

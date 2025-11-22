@@ -1,6 +1,6 @@
 {
   "code": "spookycandy",
-  "class": "Item",
+  "class": "ItemSpookyCandy",
   "variantgroups": [
     {
       "code": "type",
@@ -66,25 +66,24 @@
   },
   "nutritionPropsByType": {
     "*-mummy": {
-      "satiety": 40,
-      "foodcategory": "Dairy"
+      "satiety": 10,
+      "foodcategory": "dairy"
     },
     "*-spidergummy": {
-      "satiety": 60,
+      "satiety": 10,
       "foodcategory": "Fruit"
     },
     "*-ghostcaramel": {
-      "satiety": 40,
-      "foodcategory": "Fruit",
-      "health": 0.5
+      "satiety": 10,
+      "foodcategory": "Fruit"
     },
     "*-vampireteeth": {
-      "satiety": 40,
-      "foodcategory": "Protein",
-      "health": 1
+      "satiety": 10,
+      "foodcategory": "Protein"
     },
     "*-shadowcube": {
-
+      "satiety": 10,
+      "foodcategory": "Grain"
     }
   },
   "attributesByType": {

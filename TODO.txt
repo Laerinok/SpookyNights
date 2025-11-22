@@ -1,6 +1,0 @@
-- ajout messages dans notificatin [event] au chargement du jeu
-- ajout son pour ouverture bonbon
-- à l'ouverture on pourrait avoir plusieurs type de bonbons et pas juste un seul
-- quand clic droit pour ouvrir candybag et qu'il y en a plusieurs, ils s'ouvrent touts en meme temps et on a un butin identique x le nb de sacs.
-- mettre en place le bonbon mystere.
--expliquer CandyLootTable et informer que seulles les valeurs modifées coté server sont prises en compte.

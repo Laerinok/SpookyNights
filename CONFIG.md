@@ -1,126 +1,103 @@
-### Spooky Nights Mod Configuration Guide
+﻿# ⚙️ Configuration Guide
 
-Welcome! This guide explains how to customize your Spooky Nights experience using its configuration files.
+Spooky Nights is highly configurable to suit both immersive survival experiences and seasonal server events.
 
-To provide maximum flexibility, the mod uses two separate configuration files:
-*   `spookynights-server.json`: For gameplay settings (loot, monster spawning, etc.). These rules apply to **all players** on a server.
-*   `spookynights-client.json`: For personal cosmetic settings (visual effects, etc.). These choices only affect **your game**.
+Configuration files are generated automatically after the first launch in:
+`VintagestoryData/ModConfig/`
 
-#### Where to Find the Configuration Files
-
-The configuration files are created automatically the first time you launch the game with the mod. You can find them in the `ModConfig` folder of your Vintage Story installation.
-
-The typical path is: `C:\Users\YourName\AppData\Roaming\VintagoryData\ModConfig`
-
-#### Golden Rules for Editing JSON Files
-
-Before you change anything, here are two very important rules to keep the files valid:
-1.  **No Comments**: The JSON format does not allow comments. Do not add lines starting with `//` or `#`.
-2.  **Watch Your Commas**: Every line must end with a comma, **except for the very last line in a block**. A missing or extra comma is the most common error.
-
-*Example:*
-```json
-{
-  "option_1": true,   <-- Comma here
-  "option_2": false   <-- NO comma here because it's the last line
-}
-```
+There are two files:
+1.  `spookynights-client.json` (Visual settings, per player)
+2.  `spookynights-server.json` (Game rules, spawning, loot)
 
 ---
 
-### Server File: `spookynights-server.json`
+## 🖥️ Client Configuration (`spookynights-client.json`)
+These settings only affect **you**.
 
-This file controls the game's logic and rules. In single-player mode, you are your own server.
+| Option | Type | Description |
+| :--- | :--- | :--- |
+| **EnableJackOLanternParticles** | `true` / `false` | Toggles the flame particles inside Jack o' Lanterns. Disable this if you experience FPS drops near large pumpkin decorations. |
 
-#### General Options
+---
 
-*   `"EnableCandyLoot": true`
-    Enables (`true`) or disables (`false`) the chance for spectral creatures to drop candy bags upon death.
+## 🌍 Server Configuration (`spookynights-server.json`)
+These settings affect gameplay and mechanics.
 
-*   `"UseTimeBasedSpawning": true`
-    This is the master switch for all time-based spawning rules. If set to `false`, the options below (`SpawnOnlyAtNight`, `AllowedSpawnMonths`, etc.) will be ignored.
+### 🍬 Candy System (Trick or Treat)
+Control when players can find candy bags on spectral mobs.
 
-*   `"SpawnOnlyAtNight": true`
-    If `true`, spectral creatures will only spawn at night (between 8 PM and 6 AM). If `false`, they can spawn at any time. This also enables the "daylight burning" feature for spectral creatures.
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| **EnableCandyLoot** | `bool` | `true` | **Master Switch.** If `false`, candy will never drop. |
+| **AllowedCandyMonths** | `list` | `[10]` | List of months (1-12) when candy drops are active.<br>• `[]` (Empty): Drops all year round.<br>• `[10]`: October only.<br>• `[4, 10]`: April and October. |
+| **CandyOnlyOnFullMoon** | `bool` | `false` | If `true`, candy bags will **only** drop during Full Moon nights, regardless of the month. |
 
-*   `"AllowedSpawnMonths": []`
-    A list of months during which spectral creatures can spawn. Months are numbered 1 (January) through 12 (December). By default, this list is empty, which allows creatures to spawn **all year round**. To restrict spawning to specific months, add their numbers to the list, separated by commas.
-    *   *Example: To allow spawns only in October, November, and December, use `[10, 11, 12]`.*
+### 👻 Spawning Rules
+Control the density and conditions for spectral creatures.
 
-*   `"SpawnOnlyOnLastDayOfMonth": false`
-    If `true`, creatures will only spawn on the last day of the current month.
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| **SpawnMultipliers** | `dict` | `1.0` | Adjust spawn rate per entity code.<br>• `1.0`: Normal<br>• `0.5`: Half as often<br>• `2.0`: Twice as often<br>• `0.0`: Disabled |
+| **SpawnOnlyAtNight** | `bool` | `true` | If `true`, spectral mobs vanish/die when the sun rises. |
+| **LightLevelThreshold** | `int` | `7` | Maximum light level for a mob to spawn. |
 
-*   `"SpawnOnlyOnLastDayOfWeek": false`
-    If `true`, creatures will only spawn on the last day of the week (which is 7 days long in-game).
+#### 🕒 Day/Night Cycle
+| Option | Type | Description |
+| :--- | :--- | :--- |
+| **NightTimeMode** | `"Auto"` | • `"Auto"`: Detects sunset/sunrise based on latitude/season.<br>• `"Manual"`: Uses fixed hours defined below. |
+| **NightStartHour** | `float` | Start of danger time (e.g., `20.0` for 8 PM). Ignored in Auto mode. |
+| **NightEndHour** | `float` | End of danger time (e.g., `6.0` for 6 AM). Ignored in Auto mode. |
 
-### Boss Spawning
+### 📅 Seasonal Events & Calendar
+Turn the mod into a rare event.
 
-*   `"Bosses"`
-    Controls special spawning rules for creatures designated as bosses. This is an object where each key is the entity code of a boss (wildcards `*` are supported), and the value contains its specific spawning rules.
+| Option | Type | Description |
+| :--- | :--- | :--- |
+| **AllowedSpawnMonths** | `[ ]` | List of months (1-12) where mobs can spawn. Leave empty `[]` for all year. |
+| **SpawnOnlyOnLastDayOfMonth** | `bool` | Mobs only appear on the very last day of the month. |
+| **SpawnOnlyOnLastDayOfWeek** | `bool` | Mobs only appear on the last day of the week. |
+| **SpawnOnlyOnFullMoon** | `bool` | Mobs only appear during Full Moon nights. |
+| **FullMoonSpawnMultiplier** | `float` | Spawn rate multiplier during Full Moons (e.g., `2.0` = Double trouble). |
 
-    *   **Example Key**: `"spookynights:spectralbear-giant-*"`
-        This key targets the giant spectral bear. Inside this key, you define its specific rules:
-        *   `"Enabled": true`: Enables (`true`) or disables (`false`) the special rules for this specific boss. If set to `false`, this boss will be prevented from spawning by this system.
-        *   `"AllowedMoonPhases": [ "full" ]`: A list of moon phases during which this boss is allowed to spawn. If the list is empty, the moon phase check is ignored for this boss.
-            *   Possible phases: `"new"`, `"waxingcrescent"`, `"firstquarter"`, `"waxinggibbous"`, `"full"`, `"waninggibbous"`, `"thirdquarter"`, `"waningcrescent"`.
-
-#### Example Configuration
-
-You can add multiple entries to the `"Bosses"` object to configure different bosses, each with their own set of rules.
+### 👹 Boss Configuration
+Specific settings for major entities (e.g., Giant Spectral Bear).
 
 ```json
 "Bosses": {
   "spookynights:spectralbear-giant-*": {
     "Enabled": true,
-    "AllowedMoonPhases": [
-      "full"
-    ]
-  },
-  "spookynights:some-other-future-boss-*": {
-    "Enabled": true,
-    "AllowedMoonPhases": [
-      "new",
-      "waningcrescent"
-    ]
+    "AllowedMoonPhases": ["full"]
   }
 }
 ```
+*   **Enabled:** Toggle the boss ON/OFF.
+*   **AllowedMoonPhases:** List of required phases (e.g., `"full"`, `"waxing"`, `"waning"`, `"new"`).
 
+---
 
-#### Spawn Multipliers (`SpawnMultipliers`)
+## 📝 Configuration Examples
 
-This dictionary acts as a filter to approve or deny the game's natural spawn attempts for each creature type.
-
-*   **Values from `1.0` and above**: Guarantees that any spawn attempt made by the game will be approved. A value of `2.0` behaves identically to `1.0`. This is the default behavior.
-*   **Values between `0.0` and `1.0`**: Represents a percentage chance to approve a spawn attempt. For example, `0.5` means there is a 50% chance the creature will be allowed to spawn when the game tries.
-*   **Values of `0.0` or less**: Completely disables this creature from spawning by denying all spawn attempts
-
-
-#### Loot Table (`CandyLootTable`)
-
-This controls the drop chance and quantity of candy bags for each creature.
-The format is `"CHANCE@MIN-MAX"`.
-*   **CHANCE**: A probability from `0.0` (0%) to `1.0` (100%).
-*   **MIN**: The minimum quantity of bags to drop.
-*   **MAX**: The maximum quantity of bags. If MAX is not provided, the quantity will always be equal to MIN.
-
-*Example:*
+### 1. The "Halloween Only" Server (Default)
+Candy and Mobs only appear in October.
 ```json
-"CandyLootTable": {
-  "spookynights:spectraldrifter-normal": "0.2@1",       // 20% chance to drop 1 bag.
-  "spookynights:spectraldrifter-nightmare": "0.6@3-5"   // 60% chance to drop between 3 and 5 bags.
-}
+"AllowedCandyMonths": [ 10 ],
+"AllowedSpawnMonths": [ 10 ]
 ```
 
----
+### 2. The "Full Moon Ritual"
+Mobs and Candy appear all year round, but **ONLY** during Full Moons.
+```json
+"SpawnOnlyOnFullMoon": true,
+"CandyOnlyOnFullMoon": true,
+"AllowedCandyMonths": [],
+"AllowedSpawnMonths": []
+```
 
-### Client File: `spookynights-client.json`
-
-This file controls visual options that only affect your game. It does not change anything for other players.
-
-*   `"EnableJackOLanternParticles": true`
-    Controls the smoke and ember particle effects coming from Jack o'Lanterns. Set this to `false` if you want to improve performance or simply don't like the effect.
-
----
-
-**Important:** After editing and saving a configuration file, you must **restart your game (or server)** for the changes to take effect.
+### 3. The "Hardcore Night"
+Mobs appear every night all year, but Candy is a rare Full Moon reward.
+```json
+"SpawnOnlyAtNight": true,
+"AllowedSpawnMonths": [],
+"AllowedCandyMonths": [],
+"CandyOnlyOnFullMoon": true
+```

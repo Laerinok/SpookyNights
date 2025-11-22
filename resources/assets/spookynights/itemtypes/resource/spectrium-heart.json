@@ -1,0 +1,140 @@
+{
+  "code": "spectralheart",
+  "class": "Item",
+  "variantgroups": [
+    {
+      "code": "grade",
+      "states": [ "poor", "medium", "rich", "bountiful" ]
+    }
+  ],
+  "shape": { "base": "item/resource/spectralheart" },
+  "texturesByType": {
+    "spectralheart-poor": { "spectrium": { "base": "item/resource/spectrium-poor" } },
+    "spectralheart-medium": { "spectrium": { "base": "item/resource/spectrium-medium" } },
+    "spectralheart-rich": { "spectrium": { "base": "item/resource/spectrium-rich" } },
+    "spectralheart-bountiful": { "spectrium": { "base": "item/resource/spectrium-bountiful" } }
+  },
+  "creativeinventory": {
+    "spookynights": [ "*" ],
+    "general": [ "*" ]
+  },
+  "maxstacksize": 64,
+  "grindingPropsByType": {
+    "spectralheart-poor": {
+      "groundStack": {
+        "type": "item",
+        "code": "spectriumpowder",
+        "quantity": 5
+      }
+    },
+    "spectralheart-medium": {
+      "groundStack": {
+        "type": "item",
+        "code": "spectriumpowder",
+        "quantity": 10
+      }
+    },
+    "spectralheart-rich": {
+      "groundStack": {
+        "type": "item",
+        "code": "spectriumpowder",
+        "quantity": 15
+      }
+    },
+    "spectralheart-bountiful": {
+      "groundStack": {
+        "type": "item",
+        "code": "spectriumpowder",
+        "quantity": 20
+      }
+    }
+  },
+  "attributes": {
+    "handbook": {
+      "groupBy": [ "spectralheart-*" ]
+    },
+    "groundable": true,
+    "displaycaseable": true,
+    "shelvable": true,
+    "onshelfTransform": {
+      "origin": {
+        "x": 0.45,
+        "y": 0,
+        "z": 0.55
+      },
+      "scale": 0.5
+    },
+    "groundStorageTransform": {
+      "origin": {
+        "x": 0.45,
+        "y": 0,
+        "z": 0.55
+      },
+      "scale": 0.5
+    }
+  },
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.125,
+          "z2": 1
+        }
+      }
+    }
+  ],
+  "guiTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 28,
+      "y": -93,
+      "z": -86
+    },
+    "origin": {
+      "x": 0.6,
+      "y": 0,
+      "z": 0.5
+    },
+    "scale": 2.33
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "scale": 5
+  },
+  "tpHandTransform": {
+    "rotation": {
+      "x": -13,
+      "y": -32,
+      "z": 47
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.7,
+      "z": 0.5
+    }
+  }
+}

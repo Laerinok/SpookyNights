@@ -70,7 +70,6 @@
       {
         "particleModel": "Quad",
 
-        // TRANSPARENCE AUGMENTÉE ICI
         "hsvaColor": [
           {
             "avg": 15,
@@ -93,7 +92,7 @@
         "opacityEvolve": {
           "transform": "linear",
           "factor": -15
-        }, // Fade out un peu plus lent pour compenser
+        }, 
         "size": {
           "avg": 0.8,
           "var": 0.2

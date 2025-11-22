@@ -1,0 +1,97 @@
+[
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "addmerge",
+    "path": "/variantgroups/0/states",
+    "value": [ "spectrium", "etherium", "aetherium" ]
+  },
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "add",
+    "path": "/shapeByType/*-spectrium",
+    "value": { "base": "game:item/tool/arrowhead-copper" }
+  },
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "add",
+    "path": "/shapeByType/*-etherium",
+    "value": { "base": "game:item/tool/arrowhead-copper" }
+  },
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "add",
+    "path": "/shapeByType/*-aetherium",
+    "value": { "base": "game:item/tool/arrowhead-copper" }
+  },
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "add",
+    "path": "/texturesByType/*-spectrium",
+    "value": { "material": { "base": "spookynights:item/resource/spectrium" } }
+  },
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "add",
+    "path": "/texturesByType/*-etherium",
+    "value": { "material": { "base": "spookynights:item/resource/etherium" } }
+  },
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "add",
+    "path": "/texturesByType/*-aetherium",
+    "value": { "material": { "base": "spookynights:item/resource/aetherium" } }
+  },
+
+
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "remove",
+    "path": "/guiTransformByType/*"
+  },
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "add",
+    "path": "/guiTransformByType/@*-(spectrium|etherium|aetherium)",
+    "value": {
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": -55,
+        "y": 27,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.54,
+        "y": 0.06,
+        "z": 0.48
+      },
+      "scale": 4.2
+    }
+  },
+  {
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+    "op": "add",
+    "path": "/guiTransformByType/*",
+    "value": {
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": -55,
+        "y": 27,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.54,
+        "y": 0.06,
+        "z": 0.48
+      },
+      "scale": 4.2
+    }
+  }
+]

@@ -1,0 +1,97 @@
+[
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "addmerge",
+    "path": "/variantgroups/1/states",
+    "value": [ "spectrium", "etherium", "aetherium" ]
+  },
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "add",
+    "path": "/classByType",
+    "value": {
+      "spear-generic-spectrium": "ItemSpectralSpear",
+      "spear-generic-etherium": "ItemSpectralSpear",
+      "spear-generic-aetherium": "ItemSpectralSpear"
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "addmerge",
+    "path": "/shapeByType",
+    "value": {
+      "spear-generic-spectrium": { "base": "game:item/tool/spear/spectrium" },
+      "spear-generic-etherium": { "base": "game:item/tool/spear/etherium" },
+      "spear-generic-aetherium": { "base": "game:item/tool/spear/aetherium" }
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "replace",
+    "path": "/texturesByType",
+    "value": {
+      "spear-generic-spectrium": { "material": { "base": "spookynights:item/resource/spectrium" } },
+      "spear-generic-etherium": { "material": { "base": "spookynights:item/resource/etherium" } },
+      "spear-generic-aetherium": { "material": { "base": "spookynights:item/resource/aetherium" } },
+      "spear-generic-erel": {},
+      "spear-scrap-scrap": {},
+      "spear-generic-hacking": {},
+      "spear-generic-flint": { "material": { "base": "block/stone/{material}" } },
+      "@spear-generic-(chert|granite|andesite|basalt|obsidian|peridotite)": { "material": { "base": "block/stone/rock/{material}1" } },
+      "@spear-generic-(copper|tinbronze|bismuthbronze|blackbronze)": { "material": { "base": "block/metal/ingot/{material}" } },
+      "spear-generic-ornate*": {},
+      "spear-generic-*": { "material": { "base": "item/tool/material/{material}" } }
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "addmerge",
+    "path": "/attackpowerbytype",
+    "value": {
+      "spear-generic-spectrium": 2.8,
+      "spear-generic-etherium": 3.3,
+      "spear-generic-aetherium": 4
+    }
+  },
+
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "addmerge",
+    "path": "/attributes/damageByType",
+    "value": {
+      "*-spectrium": 5.75,
+      "*-etherium": 6.5,
+      "*-aetherium": 8
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "addmerge",
+    "path": "/attributes/damageTierByType",
+    "value": {
+      "*-spectrium": 0,
+      "*-etherium": 0,
+      "*-aetherium": 0
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "addmerge",
+    "path": "/durabilitybytype",
+    "value": {
+      "spear-generic-spectrium": 250,
+      "spear-generic-etherium": 450,
+      "spear-generic-aetherium": 600
+    }
+  },
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "addmerge",
+    "path": "/attributesByType",
+    "value": {
+      "spear-generic-spectrium": { "spectralDamageBonus": 1.0 },
+      "spear-generic-etherium": { "spectralDamageBonus": 1.2 },
+      "spear-generic-aetherium": { "spectralDamageBonus": 1.4 }
+    }
+  }
+]

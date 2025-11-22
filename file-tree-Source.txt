@@ -1,6 +1,0 @@
-source/
-├─ ClientConfig.cs
-├─ ConfigManager.cs
-├─ ItemCandyBag.cs
-├─ ServerConfig.cs
-└─ SpookyNightsModSystems.cs

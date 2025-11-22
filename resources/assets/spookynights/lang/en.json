@@ -1,6 +1,4 @@
 {
-  "game:tabname-spookynights": "Spooky Nights",
-
   "block-jackolantern-*": "Jack O' Lantern",
   "blockdesc-jackolantern-*": "A hollowed-out pumpkin with a carved face, lit from within. A classic symbol of the spooky season.",
 
@@ -14,13 +12,33 @@
   "itemdesc-spookycandy-shadowcube": "Dark as midnight and almost impossible to see, this cube promises intense, shadowy flavor.",
 
   "item-spookycandy-spidergummy": "Spider Gummy",
-  "itemdesc-spookycandy-spidergummy": "A chewy, semi-transparent treat shaped like a cubical arachnid. Don't worry, the venom is fake!",
+  "itemdesc-spookycandy-spidergummy": "A chewy, semi-transparent treat shaped like a cubical arachnid. Don't worry, the venom is fake... or not!",
 
   "item-spookycandy-vampireteeth": "Vampire Fangs",
   "itemdesc-spookycandy-vampireteeth": "Sharp, sugary fangs that may make you feel a sudden, tiny craving for blood... or more sugar.",
 
   "item-candybag": "Candy Bag",
   "itemdesc-candybag": "A small paper bag filled with treats.",
+
+  "candy-desc-ghostcaramel": "Bonus: Stability recovery (+25%) / Malus: Weakness (-50% Melee Damage for 30s)",
+  "candy-desc-mummy": "Bonus: Heal (+2 hp) + Knockback Resistance / Malus: Slowness (-25% for 45s)",
+  "candy-desc-spidergummy": "Bonus: Super Jump / Malus: Poison bite (-2 hp)",
+  "candy-desc-vampireteeth": "Bonus: Heal (+6 hp) / Malus: Lose Temporal Stability (-30%)",
+  "candy-desc-shadowcube": "Effect: Chaos (A blessing... or a curse?)",
+
+  "candy-msg-ghostcaramel": "[SpookyNights] You feel ethereal... but weak.",
+  "candy-expire-weakness": "[SpookyNights] Your strength returns.",
+  "candy-msg-mummy": "[SpookyNights] Wounds mend, but your limbs stiffen.",
+  "candy-expire-slow": "[SpookyNights] You can move freely again.",
+  "candy-msg-spidergummy": "[SpookyNights] JUMP!",
+  "candy-msg-vampireteeth": "[SpookyNights] Your muscles feel heavy...",
+
+  "candy-msg-shadow-divine": "[SpookyNights] THE SHADOWS BLESS YOU!",
+  "candy-msg-shadow-speed": "[SpookyNights] SUPER SPEED!",
+  "candy-expire-speed": "[SpookyNights] The rush fades.",
+  "candy-msg-shadow-hallucination": "[SpookyNights] What was that noise?",
+  "candy-msg-shadow-blind": "[SpookyNights] The darkness clings to you...",
+  "candy-msg-shadow-fail": "[SpookyNights] Reality shifts violently!",
 
   "heldhelp-openbag": "Open Bag (Hold)",
 
@@ -76,6 +94,90 @@
   "item-dead-creature-spectralbear-brown-adult-female": "Dead Brown Spectral Bear (Female)",
   "item-creature-spectralbear-brown-adult-male": "Brown Spectral Bear (Male)",
   "item-dead-creature-spectralbear-brown-adult-male": "Dead Brown Spectral Bear (Male)",
-  "item-creature-spectralbear-giant-adult-male": "Giant Spectral Bear (male)",
-  "item-dead-creature-spectralbear-giant-adult-male": "Dead Giant Spectral Bear (Male)"
+  "item-creature-spectralbear-giant-adult-male": "Giant Spectral Bear (Male)",
+  "item-dead-creature-spectralbear-giant-adult-male": "Dead Giant Spectral Bear (Male)",
+
+  "item-spectralheart-bountiful": "Spectral Heart (bountiful)",
+  "item-spectralheart-medium": "Spectral Heart (medium)",
+  "item-spectralheart-poor": "Spectral Heart (poor)",
+  "item-spectralheart-rich": "Spectral Heart (rich)",
+  "item-spectralheart": "Spectral Heart",
+  "itemdesc-spectralheart-*": "You can get some spectrium nugget from the hard cold heart",
+  "item-spectriumpowder": "Spectrium Powder",
+
+  "item-warscythe-long-aetherium": "Long Warscythe (aetherium)",
+  "item-warscythe-long-etherium": "Long Warscythe (etherium)",
+  "item-warscythe-long-spectrium": "Long Warscythe (spectrium)",
+  "itemdesc-warscythe-long-*": "A long-reach polearm designed to cut down spectral foes in wide, sweeping arcs. The harvester's grim dance, performed at a distance. Forged with spectral essence. Slow but powerful.",
+
+  "item-warscythehead-long-aetherium": "Aetherium long warscythe head",
+  "item-warscythehead-long-etherium": "Etherium long warscythe head",
+  "item-warscythehead-long-spectrium": "Spectrium long warscythe head",
+  "itemcraftdesc-warscythehead-long-*": "A long, curved scythe head, imbued with spectral energy. Ready to be mounted on a long pole to keep death at a distance.",
+
+  "item-ingot-spectrium": "Ingot (spectrium)",
+  "item-ingot-etherium": "Ingot (etherium)",
+  "item-ingot-aetherium": "Ingot (aetherium)",
+
+  "item-metalbit-spectrium": "Metalbit (spectrium)",
+  "item-metalbit-etherium": "Metalbit (etherium)",
+  "item-metalbit-aetherium": "Metalbit (aetherium)",
+
+  "item-nugget-spectrium": "Nugget (spectrium)",
+  "item-nugget-aetherium": "Nugget (aetherium)",
+  "item-nugget-etherium": "Nugget (etherium)",
+
+  "material-spectrium": "Spectrium",
+  "material-etherium": "Etherium",
+  "material-aetherium": "Aetherium",
+
+  "item-blade-falx-aetherium": "Aetherium falx",
+  "item-blade-falx-etherium": "Etherium falx",
+  "item-blade-falx-spectrium": "Spectrium falx",
+
+  "item-spear-generic-aetherium": "Aetherium Spear",
+  "item-spear-generic-etherium": "Etherium spear",
+  "item-spear-generic-spectrium": "Spectrium spear",
+
+  "item-bladehead-falx-aetherium": "Aetherium falx head",
+  "item-bladehead-falx-etherium": "Etherium falx head",
+  "item-bladehead-falx-spectrium": "Spectrium falx head",
+
+  "item-spearhead-aetherium": "Aetherium spear head",
+  "item-spearhead-etherium": "Etherium spear head",
+  "item-spearhead-spectrium": "Spectrium spear head",
+
+  "item-arrow-aetherium": "Aetherium arrow",
+  "item-arrow-etherium": "Etherium arrow",
+  "item-arrow-spectrium": "Spectrium arrow",
+
+  "item-arrowhead-aetherium": "Aetherium arrowhead",
+  "item-arrowhead-etherium": "Etherium arrowhead",
+  "item-arrowhead-spectrium": "Spectrium arrowhead",
+
+  "item-spectralarrow-spectrium": "Spectral Arrow (Spectrium)",
+  "item-spectralarrow-etherium": "Spectral Arrow (Etherium)",
+  "item-spectralarrow-aetherium": "Spectral Arrow (Aetherium)",
+  "itemdesc-spectralarrow-*": "Forged with spectral essence",
+
+  "iteminfo-spectralbonus-simplified": "<font color=\"#a08ee0\">+{0}% bonus damage vs spectral creatures.</font>",
+  "iteminfo-spectralmalus": "<font color=\"#ff8080\">-50% damage penalty against spectral creatures.</font>",
+  "iteminfo-spectral-attack-power": "Spectral attack power:",
+  "iteminfo-spectral-ranged-damage": "Spectral piercing damage: {0} hp",
+
+  "block-warscythemold-black-fired-warscythe-long": "Black ceramic long warscythe mold",
+  "block-warscythemold-blue-fired-warscythe-long": "Blue ceramic long warscythe mold",
+  "block-warscythemold-blue-raw-warscythe-long": "Raw blue clay long warscythe mold",
+  "block-warscythemold-brown-fired-warscythe-long": "Brown ceramic long warscythe mold",
+  "block-warscythemold-cream-fired-warscythe-long": "Cream ceramic long warscythe mold",
+  "block-warscythemold-fire-fired-warscythe-long": "Fire ceramic long warscythe mold",
+  "block-warscythemold-fire-raw-warscythe-long": "Raw fire clay long warscythe mold",
+  "block-warscythemold-gray-fired-warscythe-long": "Gray ceramic long warscythe mold",
+  "block-warscythemold-orange-fired-warscythe-long": "Orange ceramic long warscythe mold",
+  "block-warscythemold-red-fired-warscythe-long": "Red ceramic long warscythe mold",
+  "block-warscythemold-red-raw-warscythe-long": "Raw red clay long warscythe mold",
+  "block-warscythemold-tan-fired-warscythe-long": "Tan ceramic long warscythe mold",
+
+  "malus-walkspeed": "Walk Speed: {0}%",
+  "malus-hungerrate": "Hunger Rate: {0}%"
 }

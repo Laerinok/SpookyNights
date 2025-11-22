@@ -1,0 +1,387 @@
+{
+  "code": "spectralbear",
+  "class": "EntityAgent",
+  "tags": [
+    "animal",
+    "huntable",
+    "adult",
+    "predator",
+    "ferocious",
+    "habitat-land"
+  ],
+  "weight": 505,
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [ "brown", "giant" ]
+    },
+    {
+      "code": "age",
+      "states": [ "adult" ]
+    },
+    {
+      "code": "gender",
+      "states": [ "male", "female" ]
+    }
+  ],
+  "skipVariants": [ "giant-*-female" ],
+  "canClimb": true,
+  "collisionBoxSizeByType": {
+    "*-brown-*-*": {
+      "x": 1.5,
+      "y": 1.8
+    },
+    "*-giant-*-*": {
+      "x": 4,
+      "y": 3
+    }
+  },
+  "selectionBoxSizeByType": {
+    "*-brown-*-*": {
+      "x": 1.5,
+      "y": 1.8
+    },
+    "*-giant-*-*": {
+      "x": 4.5,
+      "y": 3.5
+    }
+  },
+  "knockbackResistance": 0.9,
+  "eyeHeight": 0.95,
+  "swimmingEyeHeight": 1.1,
+  "attributes": {
+    "hostile": true,
+    "killedByInfoText": "deadcreature-eaten-large",
+    "handbook": {
+      "groupcode": "creaturegroup-spectralbear"
+    },
+    "creatureDiet": {
+      "weightedFoodTags": [
+        {
+          "weight": 1,
+          "code": "meat"
+        }
+      ]
+    },
+    "glowColorByType": {
+      "*-brown-*-male": "#ffff66",
+      "*-brown-*-female": "#ffff99",
+      "*-giant-*-male": "#ccffff"
+    },
+    "spectralDrops": {
+      "spectralbear-brown-adult-*": [
+        {
+          "type": "item",
+          "code": "spookynights:spectralheart-rich",
+          "quantity": {
+            "avg": 0.8,
+            "var": 0
+          }
+        },
+        {
+          "type": "item",
+          "code": "game:gear-rusty",
+          "quantity": {
+            "avg": 4,
+            "var": 2
+          }
+        }
+      ],
+      "spectralbear-giant-adult-*": [
+        {
+          "type": "item",
+          "code": "spookynights:spectralheart-bountiful",
+          "quantity": {
+            "avg": 1,
+            "var": 0
+          }
+        },
+        {
+          "type": "item",
+          "code": "game:gear-temporal",
+          "quantity": {
+            "avg": 2,
+            "var": 0.6
+          }
+        }
+      ]
+    }
+  },
+  "client": {
+    "renderer": "Shape",
+    "renderFlags": [ "alphatransparent" ],
+    "glowLevelByType": {
+      "*-brown-*-male": 150,
+      "*-brown-*-female": 100,
+      "*-giant-*-male": 200
+    },
+    "skipRenderUntil": "alive",
+    "shape": { "base": "entity/spectral/animal/bear" },
+    "texturesByType": {
+      "*-brown-*-*": {
+        "skin": {
+          "base": "entity/spectral/animal/bear/brown-adult1",
+          "alternates": [
+            { "base": "entity/spectral/animal/bear/brown-adult2" },
+            { "base": "entity/spectral/animal/bear/brown-adult3" }
+          ]
+        }
+      },
+      "*-giant-*-*": {
+        "skin": { "base": "entity/spectral/animal/bear/polar-adult1" }
+      }
+    },
+    "sizeByType": {
+      "*-brown-*-male": 1.65,
+      "*-brown-*-female": 1.35,
+      "*-giant-*-male": 2.5
+    },
+    "behaviors": [
+      { "code": "repulseagents" },
+      {
+        "code": "controlledphysics",
+        "stepHeight": 3.1251
+      },
+      {
+        "code": "floatupwhenstuck",
+        "onlyWhenDead": true
+      },
+      { "code": "interpolateposition" },
+      {
+        "code": "despawn",
+        "minPlayerDistance": 24,
+        "belowLightLevel": 8,
+        "minSeconds": 300,
+        "afterDays": 1
+      }
+    ],
+    "animations": [
+      {
+        "code": "hurt",
+        "animation": "hurt",
+        "animationSpeed": 2.2,
+        "weight": 10,
+        "blendMode": "AddAverage"
+      },
+      {
+        "code": "die",
+        "animation": "die",
+        "animationSpeed": 1.25,
+        "weight": 10,
+        "blendMode": "Average",
+        "triggeredBy": { "onControls": [ "dead" ] }
+      },
+      {
+        "code": "idle",
+        "animation": "idle",
+        "blendMode": "AddAverage",
+        "easeOutSpeed": 4,
+        "animationSpeed": 0.6,
+        "triggeredBy": { "defaultAnim": true }
+      },
+      {
+        "code": "sleep",
+        "animation": "sleep",
+        "easeInSpeed": 4,
+        "easeOutSpeed": 4,
+        "weight": 1.25,
+        "blendMode": "Average"
+      },
+      {
+        "code": "sit",
+        "animation": "sit",
+        "easeInSpeed": 4,
+        "easeOutSpeed": 3,
+        "animationSpeed": 0.6,
+        "supressDefaultAnimation": true,
+        "blendMode": "Average"
+      },
+      {
+        "code": "stand",
+        "animation": "stand",
+        "easeOutSpeed": 2,
+        "weight": 1,
+        "blendMode": "Average"
+      },
+      {
+        "code": "lie",
+        "animation": "lie",
+        "animationSpeed": 0.3,
+        "blendMode": "Average"
+      },
+      {
+        "code": "walk",
+        "animation": "walk",
+        "supressDefaultAnimation": true,
+        "blendMode": "AddAverage"
+      },
+      {
+        "code": "run",
+        "animation": "run",
+        "supressDefaultAnimation": true,
+        "blendMode": "AddAverage"
+      },
+      {
+        "code": "attack",
+        "animation": "attack",
+        "supressDefaultAnimation": true,
+        "blendMode": "AddAverage"
+      }
+    ]
+  },
+  "server": {
+    "attributes": {
+      "pathfinder": {
+        "minTurnAnglePerSec": 350,
+        "maxTurnAnglePerSec": 650
+      }
+    },
+    "behaviors": [
+      {
+        "code": "proximitywarning",
+        "range": 45,
+        "sound": "spookynights:sounds/creature/bear/bear-giant-growl",
+        "volume": 0.5,
+        "cooldownMs": 12000
+      },
+      {
+        "code": "spectralresistance",
+        "resistance": 0.5
+      },
+      { "code": "repulseagents" },
+      {
+        "code": "controlledphysics",
+        "stepHeight": 3.1251
+      },
+      {
+        "code": "despawn",
+        "minPlayerDistance": 16,
+        "belowLightLevel": 8,
+        "minSeconds": 300,
+        "afterDays": 21
+      },
+      {
+        "code": "health",
+        "maxhealthByType": {
+          "*-brown-*-*": 70,
+          "*-giant-*-*": 150
+        }
+      },
+      {
+        "code": "floatupwhenstuck",
+        "onlyWhenDead": true
+      },
+      {
+        "code": "taskai",
+        "aiCreatureType": "LandCreature",
+        "aitasks": [
+          {
+            "code": "meleeattack",
+            "priority": 3.0,
+            "entityType": "spectralbear-giant-*-*",
+            "entityCodes": [ "player" ],
+            "damage": 22,
+            "damageTier": 4,
+            "damageType": "SlashingAttack",
+            "minDist": 5.5,
+            "minVerDist": 2.5,
+            "slot": 1,
+            "mincooldown": 1500,
+            "maxcooldown": 2500,
+            "attackDurationMs": 900,
+            "damagePlayerAtMs": 500,
+            "animation": "Attack",
+            "sound": "game:creature/bear/attack"
+          },
+          {
+            "code": "meleeattack",
+            "priority": 2.5,
+            "entityType": "spectralbear-brown-*-*",
+            "entityCodes": [ "player" ],
+            "damage": 8,
+            "damageTier": 2,
+            "damageType": "SlashingAttack",
+            "minDist": 2.5,
+            "minVerDist": 1.5,
+            "slot": 1,
+            "mincooldown": 1500,
+            "maxcooldown": 2500,
+            "attackDurationMs": 800,
+            "damagePlayerAtMs": 500,
+            "animation": "Attack",
+            "sound": "game:creature/bear/attack"
+          },
+          {
+            "code": "seekentity",
+            "priority": 2.5,
+            "entityType": "spectralbear-giant-*-*",
+            "entityCodes": [ "player" ],
+            "seekingRange": 30,
+            "animation": "Run",
+            "sound": "game:creature/bear/aggro",
+            "animationSpeed": 2.5,
+            "movespeed": 0.075
+          },
+          {
+            "code": "seekentity",
+            "priority": 2.0,
+            "entityType": "spectralbear-brown-*-*",
+            "entityCodes": [ "player" ],
+            "seekingRange": 18,
+            "animation": "Run",
+            "sound": "game:creature/bear/aggro",
+            "animationSpeed": 1.8,
+            "movespeed": 0.055
+          },
+          {
+            "code": "wander",
+            "priority": 1.0,
+            "movespeed": 0.015,
+            "animation": "Walk"
+          },
+          {
+            "code": "lookaround",
+            "priority": 0.5
+          }
+        ]
+      },
+      { "code": "entitystatetags" },
+      {
+        "code": "deaddecay",
+        "hoursToDecay": 3
+      }
+    ],
+    "spawnconditions": {
+      "runtime": {
+        "group": "hostile",
+        "tryOnlySurface": true,
+        "chanceByType": {
+          "*-brown-*-*": 0.005,
+          "*-giant-*-*": 0.0005
+        },
+        "maxQuantityByType": {
+          "*-brown-*-*": 1,
+          "*-giant-*-*": 1
+        },
+        "maxLightLevel": 7,
+        "lightLevelType": "onlyBlockLight",
+        "groupSize": {
+          "dist": "uniform",
+          "avg": 1,
+          "var": 0
+        },
+        "insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:snowlayer-*", "game:flower-*" ],
+        "climate": {
+          "minForest": 0.2,
+          "minRain": 0.3
+        }
+      }
+    }
+  },
+  "sounds": {
+    "hurt": "game:creature/bear/hurt",
+    "death": "game:creature/bear/flee",
+    "idle": "game:creature/bear/growl*"
+  },
+  "idleSoundChance": 0.1
+}

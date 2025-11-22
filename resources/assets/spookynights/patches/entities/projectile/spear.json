@@ -1,0 +1,38 @@
+[
+  {
+    "file": "game:entities/nonliving/projectile/spear.json",
+    "op": "add",
+    "path": "/variantgroups/1/states/-",
+    "value": "spectrium"
+  },
+  {
+    "file": "game:entities/nonliving/projectile/spear.json",
+    "op": "add",
+    "path": "/variantgroups/1/states/-",
+    "value": "etherium"
+  },
+  {
+    "file": "game:entities/nonliving/projectile/spear.json",
+    "op": "add",
+    "path": "/variantgroups/1/states/-",
+    "value": "aetherium"
+  },
+  {
+    "file": "game:itemtypes/tool/spear.json",
+    "op": "replace",
+    "path": "/texturesByType",
+    "value": {
+      "spear-generic-spectrium": { "material": { "base": "spookynights:item/resource/spectrium" } },
+      "spear-generic-etherium": { "material": { "base": "spookynights:item/resource/etherium" } },
+      "spear-generic-aetherium": { "material": { "base": "spookynights:item/resource/aetherium" } },
+      "spear-generic-erel": {},
+      "spear-scrap-scrap": {},
+      "spear-generic-hacking": {},
+      "spear-generic-flint": { "material": { "base": "block/stone/{material}" } },
+      "@spear-generic-(chert|granite|andesite|basalt|obsidian|peridotite)": { "material": { "base": "block/stone/rock/{material}1" } },
+      "@spear-generic-(copper|tinbronze|bismuthbronze|blackbronze)": { "material": { "base": "block/metal/ingot/{material}" } },
+      "spear-generic-ornate*": {},
+      "spear-generic-*": { "material": { "base": "item/tool/material/{material}" } }
+    }
+  }
+]
