@@ -71,7 +71,7 @@ Specific settings for major entities (e.g., Giant Spectral Bear).
 }
 ```
 *   **Enabled:** Toggle the boss ON/OFF.
-*   **AllowedMoonPhases:** List of required phases (e.g., `"full"`, `"waxing"`, `"waning"`, `"new"`).
+*   **AllowedMoonPhases:** List of required phases (e.g.,   "Empty", "Grow1", "Grow2", "Grow3", "Full", "Shrink1", "Shrink2", "Shrink3")..
 
 ---
 

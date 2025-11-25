@@ -1,3 +1,6 @@
+v1.0.1 2025-11-25
+
+
 v1.0.0 2025-11-22 - The Spectral Weakness
 
 New Content & Mechanics:

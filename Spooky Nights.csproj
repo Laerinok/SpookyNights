@@ -100,12 +100,15 @@
     <Reference Include="$(ExternalLibDir)/**/*.dll" Private="false" Condition="'$(ExternalLibDir)' != ''" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Info-doc\**" />
     <Compile Remove="Releases\**" />
     <Compile Remove="resources\assets\spookynights\entities\animal\**" />
     <Compile Remove="spookynights\**" />
+    <EmbeddedResource Remove="Info-doc\**" />
     <EmbeddedResource Remove="Releases\**" />
     <EmbeddedResource Remove="resources\assets\spookynights\entities\animal\**" />
     <EmbeddedResource Remove="spookynights\**" />
+    <None Remove="Info-doc\**" />
     <None Remove="Releases\**" />
     <None Remove="resources\assets\spookynights\entities\animal\**" />
     <None Remove="spookynights\**" />

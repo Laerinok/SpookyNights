@@ -14,7 +14,6 @@ using Vintagestory.GameContent;
 
 namespace SpookyNights
 {
-    // Helper structure for drop rates
     public struct CandyDropDefinition
     {
         public float Chance;
@@ -41,14 +40,12 @@ namespace SpookyNights
             // Weak
             { "spookynights:spectraldrifter-normal",      new CandyDropDefinition(0.15f, 1, 1) },
             { "spookynights:spectraldrifter-deep",        new CandyDropDefinition(0.20f, 1, 1) },
-            
             // Medium
             { "spookynights:spectraldrifter-tainted",     new CandyDropDefinition(0.30f, 1, 1) },
             { "spookynights:spectralshiver-surface",      new CandyDropDefinition(0.25f, 1, 1) },
             { "spookynights:spectralshiver-deep",         new CandyDropDefinition(0.30f, 1, 1) },
             { "spookynights:spectralbowtorn-surface",     new CandyDropDefinition(0.25f, 1, 1) },
             { "spookynights:spectralwolf-eurasian-adult-*", new CandyDropDefinition(0.30f, 1, 1) },
-
             // Strong
             { "spookynights:spectraldrifter-corrupt",     new CandyDropDefinition(0.40f, 1, 2) },
             { "spookynights:spectraldrifter-nightmare",   new CandyDropDefinition(0.50f, 1, 2) },
@@ -59,7 +56,6 @@ namespace SpookyNights
             { "spookynights:spectralbowtorn-tainted",     new CandyDropDefinition(0.40f, 2, 3) },
             { "spookynights:spectralbowtorn-corrupt",     new CandyDropDefinition(0.45f, 2, 4) },
             { "spookynights:spectralbear-brown-adult-*",  new CandyDropDefinition(0.50f, 1, 2) },
-
             // Elites
             { "spookynights:spectraldrifter-double-headed", new CandyDropDefinition(0.80f, 2, 3) },
             { "spookynights:spectralbowtorn-nightmare",     new CandyDropDefinition(0.65f, 3, 5) },
@@ -67,11 +63,9 @@ namespace SpookyNights
             { "spookynights:spectralshiver-stilt",          new CandyDropDefinition(0.70f, 4, 6) },
             { "spookynights:spectralshiver-bellhead",       new CandyDropDefinition(0.70f, 4, 6) },
             { "spookynights:spectralshiver-deepsplit",      new CandyDropDefinition(0.70f, 4, 6) },
-            
             // Bosses
             { "spookynights:spectralbear-giant-adult-*",    new CandyDropDefinition(1.00f, 3, 5) }
         };
-
 
         // --- LIFECYCLE ---
 
@@ -95,7 +89,6 @@ namespace SpookyNights
                         Block block = api.World.GetBlock(blockCode);
                         if (block != null) { block.ParticleProperties = null; }
                     }
-                    api.Logger.Debug("[SpookyNights] Particles for jack-o'-lanterns have been disabled via client config.");
                 }
             }
         }
@@ -103,8 +96,6 @@ namespace SpookyNights
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
-
-            // Register Classes
             new Harmony("fr.laerinok.spookynights").PatchAll();
             api.RegisterEntityBehaviorClass("proximitywarning", typeof(EntityBehaviorProximityWarning));
             api.RegisterItemClass("ItemSpectralArrow", typeof(ItemSpectralArrow));
@@ -113,11 +104,13 @@ namespace SpookyNights
             api.RegisterItemClass("ItemCandyBag", typeof(ItemCandyBag));
             api.RegisterItemClass("ItemSpookyCandy", typeof(ItemSpookyCandy));
 
-            // Register Behaviors
             api.RegisterEntityBehaviorClass("spectralresistance", typeof(EntityBehaviorSpectralResistance));
             api.RegisterEntityBehaviorClass("spectralhandling", typeof(EntityBehaviorSpectralHandling));
 
-            api.Logger.Notification("🌟 Spooky Nights is loaded!");
+            if (api.Side.IsServer())
+            {
+                api.Logger.Notification("🌟 Spooky Nights (Server) is loaded!");
+            }
         }
 
         public override void StartClientSide(ICoreClientAPI api)
@@ -137,7 +130,6 @@ namespace SpookyNights
 
             api.Event.OnEntityDeath += OnEntityDeath;
             api.Event.OnTrySpawnEntity += OnTrySpawnEntity;
-
             api.Event.OnEntitySpawn += AddPlayerBehavior;
             api.Event.OnEntityLoaded += AddPlayerBehavior;
 
@@ -161,16 +153,12 @@ namespace SpookyNights
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
             if (damageSource == null) return;
-
             HandleCandyLoot(entity, damageSource);
-
             if (IsSpectralCreature(entity.Code))
             {
                 HandleSpectralDeath(entity);
             }
         }
-
-        // --- SPECTRAL DEATH LOGIC ---
 
         private void HandleSpectralDeath(Entity entity)
         {
@@ -201,7 +189,6 @@ namespace SpookyNights
         private int GetEntityGlowColor(Entity entity)
         {
             int defaultColor = ColorUtil.ToRgba(150, 0, 255, 255);
-
             try
             {
                 JsonObject? mainAttrs = entity.Properties.Attributes;
@@ -211,13 +198,9 @@ namespace SpookyNights
                 {
                     JToken? token = mainAttrs["glowColor"]?.Token;
                     if (token != null && token.Type == JTokenType.String)
-                    {
                         return ParseHexColor(token.ToString());
-                    }
                     else if (token is JObject glowTable)
-                    {
                         return ParseGlowTable(glowTable, entity, defaultColor);
-                    }
                 }
 
                 if (mainAttrs.KeyExists("glowColorByType") && mainAttrs["glowColorByType"]?.Token is JObject glowTableByType)
@@ -225,11 +208,7 @@ namespace SpookyNights
                     return ParseGlowTable(glowTableByType, entity, defaultColor);
                 }
             }
-            catch
-            {
-                // Fail silently
-            }
-
+            catch { }
             return defaultColor;
         }
 
@@ -274,10 +253,8 @@ namespace SpookyNights
             particles.AddPos = new Vec3d(1, 1.0, 1);
             particles.WithTerrainCollision = false;
             particles.VertexFlags = 200;
-
             particles.OpacityEvolve = EvolvingNatFloat.create(EnumTransformFunction.LINEAR, -255);
             particles.SizeEvolve = EvolvingNatFloat.create(EnumTransformFunction.LINEAR, 0.5f);
-
             sapi.World.SpawnParticles(particles);
         }
 
@@ -304,7 +281,6 @@ namespace SpookyNights
                 if (stackSize <= 0) return;
 
                 ItemStack? stack = null;
-
                 if (type == "item")
                 {
                     Item item = sapi.World.GetItem(new AssetLocation(code));
@@ -321,7 +297,6 @@ namespace SpookyNights
                         {
                             stack = new ItemStack(item, stackSize);
                         }
-
                         if (stack != null) stack.StackSize = stackSize;
                     }
                 }
@@ -330,11 +305,7 @@ namespace SpookyNights
                     Block block = sapi.World.GetBlock(new AssetLocation(code));
                     if (block != null) stack = new ItemStack(block, stackSize);
                 }
-
-                if (stack != null)
-                {
-                    sapi.World.SpawnItemEntity(stack, pos);
-                }
+                if (stack != null) sapi.World.SpawnItemEntity(stack, pos);
             }
             catch (Exception ex)
             {
@@ -342,33 +313,25 @@ namespace SpookyNights
             }
         }
 
-        // --- CANDY LOOT (UPDATED V1.7.0) ---
-
         private void HandleCandyLoot(Entity entity, DamageSource damageSource)
         {
             if (sapi == null || ConfigManager.ServerConf == null || !ConfigManager.ServerConf.EnableCandyLoot) return;
 
-            // 1. Seasonal Check (Month)
             var allowedMonths = ConfigManager.ServerConf.AllowedCandyMonths;
             if (allowedMonths != null && allowedMonths.Count > 0)
             {
                 int currentMonth = sapi.World.Calendar.Month;
-                // If current month is NOT in the allowed list, stop.
                 if (!allowedMonths.Contains(currentMonth)) return;
             }
 
-            // 2. Moon Phase Check
             if (ConfigManager.ServerConf.CandyOnlyOnFullMoon)
             {
-                // If it is NOT Full Moon, stop.
                 if (sapi.World.Calendar.MoonPhase != EnumMoonPhase.Full) return;
             }
 
             if (damageSource.SourceEntity is not EntityPlayer) return;
 
-            // Look for matching entity in Hardcoded LootTable
             CandyDropDefinition? dropDef = null;
-
             foreach (var entry in LootTable)
             {
                 if (WildcardUtil.Match(new AssetLocation(entry.Key), entity.Code))
@@ -377,54 +340,63 @@ namespace SpookyNights
                     break;
                 }
             }
-
             if (dropDef == null) return;
-
-            // Determine if drop happens
             if (sapi.World.Rand.NextDouble() >= dropDef.Value.Chance) return;
 
-            // Determine quantity
             int amount = sapi.World.Rand.Next(dropDef.Value.MinQuantity, dropDef.Value.MaxQuantity + 1);
             if (amount <= 0) return;
 
-            // Spawn
             ItemStack stack = new ItemStack(sapi.World.GetItem(new AssetLocation("spookynights", "candybag")), amount);
             sapi.World.SpawnItemEntity(stack, entity.ServerPos.XYZ);
         }
 
-        // --- SPAWNING LOGIC ---
+        // --- SPAWNING LOGIC (FIXED) ---
 
         private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
         {
             if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights") return true;
 
             bool isHandledAsBoss = false;
+            bool debug = ConfigManager.ServerConf.EnableDebugLogging;
 
             if (ConfigManager.ServerConf.UseTimeBasedSpawning)
             {
-                string currentMoonPhase = sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant();
-
+                // 1. BOSS CHECK
                 foreach (var bossEntry in ConfigManager.ServerConf.Bosses)
                 {
                     if (WildcardUtil.Match(new AssetLocation(bossEntry.Key), properties.Code))
                     {
                         isHandledAsBoss = true;
                         BossSpawningConfig bossConfig = bossEntry.Value;
-                        if (bossConfig == null) continue;
+                        if (bossConfig == null) return false;
+                        if (!bossConfig.Enabled) return false;
 
-                        if (bossConfig.Enabled)
+                        string currentPhaseStr = sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant();
+                        bool phaseMatch = false;
+                        foreach (var p in bossConfig.AllowedMoonPhases)
                         {
-                            if (!bossConfig.AllowedMoonPhases.Contains(currentMoonPhase)) return false;
+                            if (p.ToLowerInvariant() == currentPhaseStr) { phaseMatch = true; break; }
                         }
-                        else return false;
+
+                        if (!phaseMatch)
+                        {
+                            if (debug) sapi.Logger.Debug("[SN-Debug] Boss {0} denied. Wrong Moon Phase ({1}).", properties.Code.Path, currentPhaseStr);
+                            return false;
+                        }
                         break;
                     }
                 }
 
                 if (!isHandledAsBoss)
                 {
-                    if (ConfigManager.ServerConf.SpawnOnlyOnFullMoon && currentMoonPhase != "full") return false;
+                    // 2. MOON PHASE
+                    if (ConfigManager.ServerConf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase != EnumMoonPhase.Full)
+                    {
+                        if (debug) sapi.Logger.Debug("[SN-Debug] Spawn denied. Not Full Moon.");
+                        return false;
+                    }
 
+                    // 3. NIGHT / LIGHT CHECK
                     if (ConfigManager.ServerConf.SpawnOnlyAtNight)
                     {
                         bool isDarkEnough;
@@ -440,27 +412,36 @@ namespace SpookyNights
                             int lightLevel = sapi.World.BlockAccessor.GetLightLevel(spawnPosition.AsBlockPos, EnumLightLevelType.MaxLight);
                             isDarkEnough = lightLevel <= ConfigManager.ServerConf.LightLevelThreshold;
                         }
+
                         if (!isDarkEnough) return false;
                     }
 
+                    // 4. MONTHS
                     if (ConfigManager.ServerConf.AllowedSpawnMonths != null && ConfigManager.ServerConf.AllowedSpawnMonths.Count > 0)
                     {
-                        if (!ConfigManager.ServerConf.AllowedSpawnMonths.Contains(sapi.World.Calendar.Month)) return false;
+                        if (!ConfigManager.ServerConf.AllowedSpawnMonths.Contains(sapi.World.Calendar.Month))
+                        {
+                            if (debug) sapi.Logger.Debug("[SN-Debug] Spawn denied. Wrong Month.");
+                            return false;
+                        }
                     }
+
+                    // 5. LAST DAY OF MONTH (CALCULATED)
                     if (ConfigManager.ServerConf.SpawnOnlyOnLastDayOfMonth)
                     {
+                        // FIX CS1061: Calculation of current day manually
                         int currentDay = (int)(sapi.World.Calendar.TotalDays % sapi.World.Calendar.DaysPerMonth) + 1;
-                        if (currentDay != sapi.World.Calendar.DaysPerMonth) return false;
-                    }
-                    if (ConfigManager.ServerConf.SpawnOnlyOnLastDayOfWeek)
-                    {
-                        const int daysInWeek = 7;
-                        int currentDayOfWeek = (int)sapi.World.Calendar.TotalDays % daysInWeek;
-                        if (currentDayOfWeek != daysInWeek - 1) return false;
+
+                        if (currentDay != sapi.World.Calendar.DaysPerMonth)
+                        {
+                            if (debug) sapi.Logger.Debug("[SN-Debug] Spawn denied. Not last day of month ({0}/{1}).", currentDay, sapi.World.Calendar.DaysPerMonth);
+                            return false;
+                        }
                     }
                 }
             }
 
+            // 6. PROBABILITY MULTIPLIERS
             float multiplier = 1.0f;
             bool foundMatch = false;
             foreach (var pair in ConfigManager.ServerConf.SpawnMultipliers)
@@ -475,7 +456,7 @@ namespace SpookyNights
 
             if (!foundMatch) return true;
 
-            if (!isHandledAsBoss && !ConfigManager.ServerConf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant() == "full")
+            if (!isHandledAsBoss && !ConfigManager.ServerConf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase == EnumMoonPhase.Full)
             {
                 multiplier *= ConfigManager.ServerConf.FullMoonSpawnMultiplier;
             }
@@ -489,11 +470,20 @@ namespace SpookyNights
         {
             if (ConfigManager.ServerConf == null || !ConfigManager.ServerConf.SpawnOnlyAtNight) return;
 
-            float hour = sapi.World.Calendar.HourOfDay;
-            float start = ConfigManager.ServerConf.NightStartHour;
-            float end = ConfigManager.ServerConf.NightEndHour;
+            bool isDayTime = false;
 
-            bool isDayTime = (start > end) ? (hour >= end && hour < start) : (hour < start || hour >= end);
+            if (string.Equals(ConfigManager.ServerConf.NightTimeMode, "Manual", StringComparison.OrdinalIgnoreCase))
+            {
+                float hour = sapi.World.Calendar.HourOfDay;
+                float start = ConfigManager.ServerConf.NightStartHour;
+                float end = ConfigManager.ServerConf.NightEndHour;
+                bool isNight = (start > end) ? (hour >= start || hour < end) : (hour >= start && hour < end);
+                isDayTime = !isNight;
+            }
+            else // Auto Mode
+            {
+                isDayTime = true; // Potentially dangerous, check sunlight below
+            }
 
             if (isDayTime)
             {
@@ -501,7 +491,22 @@ namespace SpookyNights
                 {
                     if (IsSpectralCreature(entity.Code))
                     {
-                        if (sapi.World.BlockAccessor.GetLightLevel(entity.ServerPos.AsBlockPos, EnumLightLevelType.TimeOfDaySunLight) > 0)
+                        bool shouldBurn = false;
+
+                        if (string.Equals(ConfigManager.ServerConf.NightTimeMode, "Manual", StringComparison.OrdinalIgnoreCase))
+                        {
+                            shouldBurn = true;
+                        }
+                        else
+                        {
+                            int sunLevel = sapi.World.BlockAccessor.GetLightLevel(entity.ServerPos.AsBlockPos, EnumLightLevelType.TimeOfDaySunLight);
+                            if (sunLevel > ConfigManager.ServerConf.LightLevelThreshold)
+                            {
+                                shouldBurn = true;
+                            }
+                        }
+
+                        if (shouldBurn)
                         {
                             entity.Die(EnumDespawnReason.Expire);
                         }
