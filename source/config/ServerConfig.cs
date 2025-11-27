@@ -10,14 +10,14 @@ namespace SpookyNights
 
     public class ServerConfig
     {
-        public string? Version { get; set; } = "1.7.0"; // Bump version to force update
+        public string? Version { get; set; } = "1.7.1";
 
         // Global Toggle for Candy System
         public bool EnableCandyLoot { get; set; } = true;
 
         public List<int> AllowedCandyMonths { get; set; } = new List<int>();
 
-        // NEW: Restrict candy to Full Moon nights only?
+        // Restrict candy to Full Moon nights only?
         public bool CandyOnlyOnFullMoon { get; set; } = false;
 
         public Dictionary<string, float> SpawnMultipliers { get; set; } = new Dictionary<string, float>();
@@ -31,7 +31,9 @@ namespace SpookyNights
 
         public List<int> AllowedSpawnMonths { get; set; } = new List<int>();
         public bool SpawnOnlyOnLastDayOfMonth { get; set; } = false;
-        public bool SpawnOnlyOnLastDayOfWeek { get; set; } = false;
+
+        // Removed SpawnOnlyOnLastDayOfWeek
+
         public bool SpawnOnlyOnFullMoon { get; set; } = false;
         public float FullMoonSpawnMultiplier { get; set; } = 2.0f;
         public Dictionary<string, BossSpawningConfig> Bosses { get; set; } = new Dictionary<string, BossSpawningConfig>();

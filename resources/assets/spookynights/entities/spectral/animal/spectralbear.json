@@ -24,7 +24,7 @@
       "states": [ "male", "female" ]
     }
   ],
-  "skipVariants": [ "giant-*-female" ],
+  "skipVariants": [ "giant-adult-female" ],
   "canClimb": true,
   "collisionBoxSizeByType": {
     "*-brown-*-*": {
@@ -356,15 +356,15 @@
         "group": "hostile",
         "tryOnlySurface": true,
         "chanceByType": {
-          "*-brown-*-*": 0.005,
-          "*-giant-*-*": 0.0005
+          "*-brown-*-*": 0.016,
+          "*-giant-*-*": 0.005
         },
         "maxQuantityByType": {
           "*-brown-*-*": 1,
           "*-giant-*-*": 1
         },
-        "maxLightLevel": 7,
-        "lightLevelType": "onlyBlockLight",
+        "maxLightLevel": 14,
+        "lightLevelType": "OnlyBlockLight",
         "groupSize": {
           "dist": "uniform",
           "avg": 1,

@@ -118,7 +118,7 @@
 			{
 				"code": "despawn",
 				"minPlayerDistance": 16,
-				"belowLightLevel": 8,
+				"qs": 8,
 				"minSeconds": 300,
 				"afterDays": 1
 			}
@@ -472,19 +472,20 @@
 			"runtime": {
 				"group": "hostile",
 				"tryOnlySurface": true,
-				"chance": 0.03,
-				"maxQuantity": 5,
-				"maxLightLevel": 5,
+				"chance": 0.2,
+				"maxQuantity": 3,
+				"maxLightLevel": 14,
+				"lightLevelType": "OnlyBlockLight",
 				"groupSize": {
 					"dist": "uniform",
 					"avg": 2,
 					"var": 1
 				},
-				"insideBlockCodes": [ "game:air", "game:tallgrass-*" ],
-				"minTemp": -15,
-				"maxTemp": 15,
-				"minRain": 0.25,
-				"minForest": 0.4,
+				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:snowlayer-*", "game:flower-*" ],
+				"minTemp": -30,
+				"maxTemp": 40,
+				"minRain": 0.0,
+				"minForest": 0.0,
 				"companions": [ "spectralwolf-eurasian-adult-female" ]
 			}
 		}
