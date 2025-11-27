@@ -72,7 +72,16 @@ namespace SpookyNights
         public override void StartPre(ICoreAPI api)
         {
             this.api = api;
-            if (api.Side.IsServer()) { ConfigManager.LoadServerConfig(api); }
+            if (api.Side.IsServer())
+            {
+                ConfigManager.LoadServerConfig(api);
+                // Safety: Clamp light threshold
+                if (ConfigManager.ServerConf != null)
+                {
+                    if (ConfigManager.ServerConf.LightLevelThreshold < 0) ConfigManager.ServerConf.LightLevelThreshold = 0;
+                    if (ConfigManager.ServerConf.LightLevelThreshold > 32) ConfigManager.ServerConf.LightLevelThreshold = 32;
+                }
+            }
             if (api.Side.IsClient()) { ConfigManager.LoadClientConfig(api); }
         }
 
@@ -125,30 +134,92 @@ namespace SpookyNights
 
             if (ConfigManager.ServerConf != null)
             {
-                sapi.Logger.Notification("[SpookyNights] Config loaded. Debug logging is set to: {0}", ConfigManager.ServerConf.EnableDebugLogging);
+                sapi.Logger.Notification("[SpookyNights] Config loaded.");
             }
 
+            // --- COMMANDS ---
+
+            // /snlight : Check light levels with color coding
+            api.ChatCommands.Create("snlight")
+                .WithDescription("Displays light levels at player position")
+                .RequiresPrivilege(Privilege.chat)
+                .HandleWith((args) =>
+                {
+                    try
+                    {
+                        var player = args.Caller.Player;
+                        if (player == null) return TextCommandResult.Error("Player only.");
+
+                        BlockPos pos = player.Entity.Pos.AsBlockPos;
+                        int threshold = (ConfigManager.ServerConf != null) ? ConfigManager.ServerConf.LightLevelThreshold : 14;
+
+                        int sun = api.World.BlockAccessor.GetLightLevel(pos, EnumLightLevelType.TimeOfDaySunLight);
+                        int block = api.World.BlockAccessor.GetLightLevel(pos, EnumLightLevelType.OnlyBlockLight);
+                        int total = Math.Max(sun, block);
+
+                        string statusColor = (total <= threshold)
+                            ? "<font color='#00FF00'>YES (Safe)</font>"
+                            : "<font color='#FF0000'>NO (Too Bright)</font>";
+
+                        string message = $"[SN-Debug] Pos: {pos}\n" +
+                                         $"Light Total: <strong>{total}</strong> (Max: {threshold}) -> {statusColor}\n" +
+                                         $"Details: Sun/Moon={sun}, Block={block}";
+
+                        return TextCommandResult.Success(message);
+                    }
+                    catch (Exception ex)
+                    {
+                        return TextCommandResult.Error($"Internal error: {ex.Message}");
+                    }
+                });
+
+            // /snmoon : Check current moon phase with red alert for Full Moon
+            api.ChatCommands.Create("snmoon")
+                .WithDescription("Displays current moon phase")
+                .RequiresPrivilege(Privilege.chat)
+                .HandleWith((args) =>
+                {
+                    var calendar = api.World.Calendar;
+                    string color = (calendar.MoonPhase == EnumMoonPhase.Full) ? "#FF0000" : "#FFFFFF";
+                    string message = $"[SN-Debug] Current Moon: <font color='{color}'><strong>{calendar.MoonPhase}</strong></font>";
+                    return TextCommandResult.Success(message);
+                });
+
+            // Events
             api.Event.OnEntityDeath += OnEntityDeath;
+
+            // "The Doorman" : Checks conditions BEFORE spawn
             api.Event.OnTrySpawnEntity += OnTrySpawnEntity;
-            api.Event.OnEntitySpawn += AddPlayerBehavior;
-            api.Event.OnEntityLoaded += AddPlayerBehavior;
+
+            // Note: OnEntitySpawn removed as requested to let player see the mob before it dies (if invalid)
+
+            api.Event.OnEntityLoaded += OnEntityLoaded;
 
             spectralCreatureCodes = new List<string> { "spectraldrifter", "spectralbowtorn", "spectralshiver", "spectralwolf", "spectralbear" };
+
+            // "Cinderella" : Periodic check (Daylight & Boss Moon logic)
             api.Event.RegisterGameTickListener(OnDaylightCheck, 5000);
         }
 
-        // --- EVENTS ---
+        // --- HANDLERS ---
+
+        private void OnEntityLoaded(Entity entity)
+        {
+            if (entity is EntityPlayer && !entity.HasBehavior("spectralhandling"))
+            {
+                entity.AddBehavior(new EntityBehaviorSpectralHandling(entity));
+            }
+        }
 
         private void AddPlayerBehavior(Entity entity)
         {
-            if (entity is EntityPlayer)
+            if (entity is EntityPlayer && !entity.HasBehavior("spectralhandling"))
             {
-                if (!entity.HasBehavior("spectralhandling"))
-                {
-                    entity.AddBehavior(new EntityBehaviorSpectralHandling(entity));
-                }
+                entity.AddBehavior(new EntityBehaviorSpectralHandling(entity));
             }
         }
+
+        // --- DEATH & LOOT ---
 
         private void OnEntityDeath(Entity entity, DamageSource damageSource)
         {
@@ -350,166 +421,167 @@ namespace SpookyNights
             sapi.World.SpawnItemEntity(stack, entity.ServerPos.XYZ);
         }
 
-        // --- SPAWNING LOGIC (FIXED) ---
+        // --- THE DOORMAN: SPAWNING LOGIC ---
 
         private bool OnTrySpawnEntity(IBlockAccessor blockAccessor, ref EntityProperties properties, Vec3d spawnPosition, long herdId)
         {
             if (ConfigManager.ServerConf == null || properties.Code.Domain != "spookynights") return true;
+            var conf = ConfigManager.ServerConf;
+            if (!conf.UseTimeBasedSpawning) return true;
 
-            bool isHandledAsBoss = false;
-            bool debug = ConfigManager.ServerConf.EnableDebugLogging;
+            string entityCodeStr = properties.Code.ToString();
 
-            if (ConfigManager.ServerConf.UseTimeBasedSpawning)
+            // 1. BOSS LOGIC
+            foreach (var bossEntry in conf.Bosses)
             {
-                // 1. BOSS CHECK
-                foreach (var bossEntry in ConfigManager.ServerConf.Bosses)
+                if (WildcardUtil.Match(bossEntry.Key, entityCodeStr))
                 {
-                    if (WildcardUtil.Match(new AssetLocation(bossEntry.Key), properties.Code))
+                    BossSpawningConfig bossConfig = bossEntry.Value;
+                    if (bossConfig == null || !bossConfig.Enabled) return false;
+
+                    string currentPhase = sapi.World.Calendar.MoonPhase.ToString();
+                    bool moonValid = false;
+
+                    foreach (var allowed in bossConfig.AllowedMoonPhases)
                     {
-                        isHandledAsBoss = true;
-                        BossSpawningConfig bossConfig = bossEntry.Value;
-                        if (bossConfig == null) return false;
-                        if (!bossConfig.Enabled) return false;
-
-                        string currentPhaseStr = sapi.World.Calendar.MoonPhase.ToString().ToLowerInvariant();
-                        bool phaseMatch = false;
-                        foreach (var p in bossConfig.AllowedMoonPhases)
+                        if (string.Equals(allowed, currentPhase, StringComparison.OrdinalIgnoreCase))
                         {
-                            if (p.ToLowerInvariant() == currentPhaseStr) { phaseMatch = true; break; }
-                        }
-
-                        if (!phaseMatch)
-                        {
-                            if (debug) sapi.Logger.Debug("[SN-Debug] Boss {0} denied. Wrong Moon Phase ({1}).", properties.Code.Path, currentPhaseStr);
-                            return false;
-                        }
-                        break;
-                    }
-                }
-
-                if (!isHandledAsBoss)
-                {
-                    // 2. MOON PHASE
-                    if (ConfigManager.ServerConf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase != EnumMoonPhase.Full)
-                    {
-                        if (debug) sapi.Logger.Debug("[SN-Debug] Spawn denied. Not Full Moon.");
-                        return false;
-                    }
-
-                    // 3. NIGHT / LIGHT CHECK
-                    if (ConfigManager.ServerConf.SpawnOnlyAtNight)
-                    {
-                        bool isDarkEnough;
-                        if (string.Equals(ConfigManager.ServerConf.NightTimeMode, "Manual", StringComparison.OrdinalIgnoreCase))
-                        {
-                            float hour = sapi.World.Calendar.HourOfDay;
-                            float start = ConfigManager.ServerConf.NightStartHour;
-                            float end = ConfigManager.ServerConf.NightEndHour;
-                            isDarkEnough = (start > end) ? (hour >= start || hour < end) : (hour >= start && hour < end);
-                        }
-                        else
-                        {
-                            int lightLevel = sapi.World.BlockAccessor.GetLightLevel(spawnPosition.AsBlockPos, EnumLightLevelType.MaxLight);
-                            isDarkEnough = lightLevel <= ConfigManager.ServerConf.LightLevelThreshold;
-                        }
-
-                        if (!isDarkEnough) return false;
-                    }
-
-                    // 4. MONTHS
-                    if (ConfigManager.ServerConf.AllowedSpawnMonths != null && ConfigManager.ServerConf.AllowedSpawnMonths.Count > 0)
-                    {
-                        if (!ConfigManager.ServerConf.AllowedSpawnMonths.Contains(sapi.World.Calendar.Month))
-                        {
-                            if (debug) sapi.Logger.Debug("[SN-Debug] Spawn denied. Wrong Month.");
-                            return false;
+                            moonValid = true;
+                            break;
                         }
                     }
 
-                    // 5. LAST DAY OF MONTH (CALCULATED)
-                    if (ConfigManager.ServerConf.SpawnOnlyOnLastDayOfMonth)
-                    {
-                        // FIX CS1061: Calculation of current day manually
-                        int currentDay = (int)(sapi.World.Calendar.TotalDays % sapi.World.Calendar.DaysPerMonth) + 1;
-
-                        if (currentDay != sapi.World.Calendar.DaysPerMonth)
-                        {
-                            if (debug) sapi.Logger.Debug("[SN-Debug] Spawn denied. Not last day of month ({0}/{1}).", currentDay, sapi.World.Calendar.DaysPerMonth);
-                            return false;
-                        }
-                    }
-                }
-            }
-
-            // 6. PROBABILITY MULTIPLIERS
-            float multiplier = 1.0f;
-            bool foundMatch = false;
-            foreach (var pair in ConfigManager.ServerConf.SpawnMultipliers)
-            {
-                if (WildcardUtil.Match(new AssetLocation(pair.Key), properties.Code))
-                {
-                    multiplier = pair.Value;
-                    foundMatch = true;
+                    if (!moonValid) return false;
                     break;
                 }
             }
 
-            if (!foundMatch) return true;
+            // 2. STANDARD LOGIC
+            bool isBoss = false;
+            foreach (var k in conf.Bosses.Keys) { if (WildcardUtil.Match(k, entityCodeStr)) isBoss = true; }
 
-            if (!isHandledAsBoss && !ConfigManager.ServerConf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase == EnumMoonPhase.Full)
+            if (!isBoss)
             {
-                multiplier *= ConfigManager.ServerConf.FullMoonSpawnMultiplier;
+                if (conf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase != EnumMoonPhase.Full) return false;
+
+                if (conf.SpawnOnlyAtNight)
+                {
+                    BlockPos pos = spawnPosition.AsBlockPos;
+                    int sun = sapi.World.BlockAccessor.GetLightLevel(pos, EnumLightLevelType.TimeOfDaySunLight);
+                    int block = sapi.World.BlockAccessor.GetLightLevel(pos, EnumLightLevelType.OnlyBlockLight);
+                    if (Math.Max(sun, block) > conf.LightLevelThreshold) return false;
+                }
+
+                if (conf.AllowedSpawnMonths != null && conf.AllowedSpawnMonths.Count > 0)
+                {
+                    if (!conf.AllowedSpawnMonths.Contains(sapi.World.Calendar.Month)) return false;
+                }
+                if (conf.SpawnOnlyOnLastDayOfMonth)
+                {
+                    int currentDay = (int)(sapi.World.Calendar.TotalDays % sapi.World.Calendar.DaysPerMonth) + 1;
+                    if (currentDay != sapi.World.Calendar.DaysPerMonth) return false;
+                }
             }
 
-            if (multiplier <= 0) return false;
-            if (multiplier >= 1) return true;
+            // 3. MULTIPLIERS
+            float multiplier = 1.0f;
+            foreach (var pair in conf.SpawnMultipliers)
+            {
+                if (WildcardUtil.Match(pair.Key, entityCodeStr))
+                {
+                    multiplier = pair.Value;
+                    break;
+                }
+            }
+
+            if (!isBoss && !conf.SpawnOnlyOnFullMoon && sapi.World.Calendar.MoonPhase == EnumMoonPhase.Full)
+            {
+                multiplier *= conf.FullMoonSpawnMultiplier;
+            }
+
+            if (multiplier <= 0.0f) return false;
+            if (multiplier >= 1.0f) return true;
+
             return sapi.World.Rand.NextDouble() <= multiplier;
         }
 
+        // --- PERIODIC CHECK (Daylight & Boss Moon) ---
+
         private void OnDaylightCheck(float dt)
         {
-            if (ConfigManager.ServerConf == null || !ConfigManager.ServerConf.SpawnOnlyAtNight) return;
+            if (ConfigManager.ServerConf == null) return;
+            var conf = ConfigManager.ServerConf;
+            if (!conf.UseTimeBasedSpawning) return; // Skip if mechanics disabled
 
-            bool isDayTime = false;
+            int threshold = conf.LightLevelThreshold;
+            bool manualMode = string.Equals(conf.NightTimeMode, "Manual", StringComparison.OrdinalIgnoreCase);
+            string currentMoonPhase = sapi.World.Calendar.MoonPhase.ToString();
 
-            if (string.Equals(ConfigManager.ServerConf.NightTimeMode, "Manual", StringComparison.OrdinalIgnoreCase))
+            foreach (var entity in sapi.World.LoadedEntities.Values)
             {
-                float hour = sapi.World.Calendar.HourOfDay;
-                float start = ConfigManager.ServerConf.NightStartHour;
-                float end = ConfigManager.ServerConf.NightEndHour;
-                bool isNight = (start > end) ? (hour >= start || hour < end) : (hour >= start && hour < end);
-                isDayTime = !isNight;
-            }
-            else // Auto Mode
-            {
-                isDayTime = true; // Potentially dangerous, check sunlight below
-            }
-
-            if (isDayTime)
-            {
-                foreach (var entity in sapi.World.LoadedEntities.Values)
+                if (IsSpectralCreature(entity.Code))
                 {
-                    if (IsSpectralCreature(entity.Code))
-                    {
-                        bool shouldBurn = false;
+                    bool shouldDie = false;
+                    string entityCodeStr = entity.Code.ToString();
 
-                        if (string.Equals(ConfigManager.ServerConf.NightTimeMode, "Manual", StringComparison.OrdinalIgnoreCase))
+                    // 1. CHECK BOSS CONDITIONS (Moon Phase)
+                    // We check this here so even if spawn was forced (egg), it dies later if wrong moon.
+                    foreach (var bossEntry in conf.Bosses)
+                    {
+                        if (WildcardUtil.Match(bossEntry.Key, entityCodeStr))
                         {
-                            shouldBurn = true;
+                            BossSpawningConfig bossConfig = bossEntry.Value;
+                            if (bossConfig != null && bossConfig.Enabled)
+                            {
+                                bool moonValid = false;
+                                foreach (var allowed in bossConfig.AllowedMoonPhases)
+                                {
+                                    if (string.Equals(allowed, currentMoonPhase, StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        moonValid = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!moonValid) shouldDie = true;
+                            }
+                            break;
+                        }
+                    }
+
+                    // 2. CHECK DAYLIGHT (Only if not already dying)
+                    if (!shouldDie && conf.SpawnOnlyAtNight)
+                    {
+                        if (manualMode)
+                        {
+                            double hour = sapi.World.Calendar.HourOfDay;
+                            float start = conf.NightStartHour;
+                            float end = conf.NightEndHour;
+                            bool isNight = (start > end) ? (hour >= start || hour < end) : (hour >= start && hour < end);
+
+                            if (!isNight) shouldDie = true;
                         }
                         else
                         {
-                            int sunLevel = sapi.World.BlockAccessor.GetLightLevel(entity.ServerPos.AsBlockPos, EnumLightLevelType.TimeOfDaySunLight);
-                            if (sunLevel > ConfigManager.ServerConf.LightLevelThreshold)
-                            {
-                                shouldBurn = true;
-                            }
-                        }
+                            BlockPos pos = entity.ServerPos.AsBlockPos;
+                            int sunLight = sapi.World.BlockAccessor.GetLightLevel(pos, EnumLightLevelType.TimeOfDaySunLight);
+                            int blockLight = sapi.World.BlockAccessor.GetLightLevel(pos, EnumLightLevelType.OnlyBlockLight);
+                            int actualLight = Math.Max(sunLight, blockLight);
 
-                        if (shouldBurn)
-                        {
-                            entity.Die(EnumDespawnReason.Expire);
+                            if (actualLight > threshold) shouldDie = true;
                         }
+                    }
+
+                    // EXECUTE DEATH
+                    if (shouldDie)
+                    {
+                        sapi.World.SpawnParticles(10,
+                            ColorUtil.ToRgba(100, 100, 100, 100),
+                            entity.ServerPos.XYZ, entity.ServerPos.XYZ.AddCopy(0, 1, 0),
+                            new Vec3f(-0.5f, 0, -0.5f), new Vec3f(0.5f, 1, 0.5f),
+                            1.0f, 1.0f);
+
+                        entity.Die(EnumDespawnReason.Expire);
                     }
                 }
             }

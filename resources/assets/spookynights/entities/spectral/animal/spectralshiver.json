@@ -727,15 +727,15 @@
 					"*-bellhead": 1,
 					"*-deepsplit": 1
 				},
-				"maxLightLevel": 7,
-				"chance": 0.02,
+				"maxLightLevel": 14,
+				"chance": 0.3,
 				"lightLevelType": "OnlyBlockLight",
 				"groupSize": {
 					"dist": "uniform",
 					"avg": 1,
 					"var": 0
 				},
-				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:loosestones-*" ],
+				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:loosestones-*", "game:snowlayer-*", "game:flower-*" ],
 				"minYByType": {
 					"*-surface": 0.85,
 					"*-deep": 0.22,

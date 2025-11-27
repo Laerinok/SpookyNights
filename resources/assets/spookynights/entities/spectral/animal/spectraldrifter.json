@@ -623,7 +623,7 @@
 						"movespeed": 0.01,
 						"animationSpeed": 1.2,
 						"animation": "standwalk",
-						"preferredLightLevel": 15
+						"preferredLightLevel": 14
 					},
 					{
 						"code": "wander",
@@ -632,7 +632,7 @@
 						"movespeed": 0.008,
 						"animationSpeed": 1.1,
 						"animation": "standlowwalk",
-						"preferredLightLevel": 15
+						"preferredLightLevel": 14
 					},
 					{
 						"code": "getoutofwater",
@@ -652,23 +652,24 @@
 		"spawnconditions": {
 			"runtime": {
 				"group": "hostile",
+				"tryOnlySurface": false,
 				"maxQuantityByType": {
-					"*-normal": 6,
+					"*-normal": 8,
 					"*-deep": 4,
 					"*-tainted": 3,
 					"*-corrupt": 2,
 					"*-nightmare": 1,
 					"*-double-headed": 1
 				},
-				"maxLightLevel": 7,
-				"chance": 0.05,
+				"maxLightLevel": 14,
+				"chance": 0.5,
 				"lightLevelType": "OnlyBlockLight",
 				"groupSize": {
 					"dist": "invexp",
 					"avg": 1,
 					"var": 2
 				},
-				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:loosestones-*" ],
+				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:loosestones-*", "game:snowlayer-*", "game:flower-*" ],
 				"minYByType": {
 					"*-normal": 0.85,
 					"*-deep": 0.22,
@@ -677,7 +678,7 @@
 					"*-nightmare": 0
 				},
 				"maxYByType": {
-					"*-normal": 1.0,
+					"*-normal": 2.0,
 					"*-deep": 0.89,
 					"*-tainted": 0.55,
 					"*-corrupt": 0.35,

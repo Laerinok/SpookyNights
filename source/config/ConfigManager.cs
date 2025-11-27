@@ -29,12 +29,12 @@ namespace Spookynights
 
             config.SpawnMultipliers = new()
             {
-                { "spookynights:spectralwolf-*", 1.0f },
-                { "spookynights:spectralbear-brown-*", 1.0f },
+                { "spookynights:spectralwolf-*", 0.5f },
+                { "spookynights:spectralbear-brown-*", 0.5f },
                 { "spookynights:spectralbear-giant-*", 0.5f },
-                { "spookynights:spectraldrifter-*", 1.0f },
-                { "spookynights:spectralshiver-*", 1.0f },
-                { "spookynights:spectralbowtorn-*", 1.0f }
+                { "spookynights:spectraldrifter-*", 0.5f },
+                { "spookynights:spectralshiver-*", 0.5f },
+                { "spookynights:spectralbowtorn-*", 0.5f }
             };
 
             config.Bosses = new()
