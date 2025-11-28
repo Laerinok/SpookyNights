@@ -715,19 +715,15 @@
 					"*-nightmare": 1,
 					"*-gearfoot": 1
 				},
-				"maxLightLevel": 7,
-				"chance": 0.04,
+				"maxLightLevel": 14,
+				"chance": 0.3,
 				"lightLevelType": "OnlyBlockLight",
 				"groupSize": {
 					"dist": "uniform",
 					"avg": 1,
 					"var": 1
 				},
-				"insideBlockCodes": [
-					"game:air",
-					"game:tallgrass-*",
-					"game:loosestones-*"
-				],
+				"insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:loosestones-*", "game:snowlayer-*", "game:flower-*" ],
 				"minYByType": {
 					"*-surface": 0.85,
 					"*-deep": 0.22,
@@ -750,7 +746,7 @@
 	"idleSoundRange": 14,
 	"sounds": {
 		"hurt": "game:creature/bowtorn/hurt",
-		"death": "game:creature/bowtorn/death",
+		"death": "creature/death",
 		"idle": "game:creature/bowtorn/idle"
 	}
 }

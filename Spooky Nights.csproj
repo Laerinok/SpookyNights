@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ModName>Spooky Nights</ModName>
     <ModType>code</ModType>
-    <ModVersion>1.0.0</ModVersion>
+    <ModVersion>1.0.1</ModVersion>
     <ModId>spookynights</ModId>
     <Description>A small overhaul mod introducing spectral creatures that haunt the darkness. Experience the chilling presence of the unknown when the sun sets.</Description>
     <Side>universal</Side>
@@ -100,12 +100,15 @@
     <Reference Include="$(ExternalLibDir)/**/*.dll" Private="false" Condition="'$(ExternalLibDir)' != ''" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Info-doc\**" />
     <Compile Remove="Releases\**" />
     <Compile Remove="resources\assets\spookynights\entities\animal\**" />
     <Compile Remove="spookynights\**" />
+    <EmbeddedResource Remove="Info-doc\**" />
     <EmbeddedResource Remove="Releases\**" />
     <EmbeddedResource Remove="resources\assets\spookynights\entities\animal\**" />
     <EmbeddedResource Remove="spookynights\**" />
+    <None Remove="Info-doc\**" />
     <None Remove="Releases\**" />
     <None Remove="resources\assets\spookynights\entities\animal\**" />
     <None Remove="spookynights\**" />
