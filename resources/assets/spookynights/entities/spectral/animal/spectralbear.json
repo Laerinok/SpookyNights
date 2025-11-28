@@ -137,6 +137,14 @@
       "*-giant-*-male": 2.5
     },
     "behaviors": [
+      {
+        "code": "proximitywarning",
+        "range": 35,
+        "minRange": 10,
+        "sound": "spookynights:sounds/creature/bear/spectral_bear_warning",
+        "volume": 1.0,
+        "cooldownMs": 12000
+      },
       { "code": "repulseagents" },
       {
         "code": "controlledphysics",
@@ -239,9 +247,10 @@
     "behaviors": [
       {
         "code": "proximitywarning",
-        "range": 45,
-        "sound": "spookynights:sounds/creature/bear/bear-giant-growl",
-        "volume": 0.5,
+        "range": 35,
+        "minRange": 10,
+        "sound": "spookynights:sounds/creature/bear/spectral_bear_warning",
+        "volume": 1.0,
         "cooldownMs": 12000
       },
       {
@@ -379,9 +388,9 @@
     }
   },
   "sounds": {
-    "hurt": "game:creature/bear/hurt",
-    "death": "game:creature/bear/flee",
-    "idle": "game:creature/bear/growl*"
+    "hurt": "creature/bear/hurt",
+    "death": "creature/death",
+    "idle": "creature/bear/howl*"
   },
   "idleSoundChance": 0.1
 }

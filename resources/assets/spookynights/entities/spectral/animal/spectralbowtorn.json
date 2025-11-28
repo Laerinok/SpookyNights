@@ -746,7 +746,7 @@
 	"idleSoundRange": 14,
 	"sounds": {
 		"hurt": "game:creature/bowtorn/hurt",
-		"death": "game:creature/bowtorn/death",
+		"death": "creature/death",
 		"idle": "game:creature/bowtorn/idle"
 	}
 }

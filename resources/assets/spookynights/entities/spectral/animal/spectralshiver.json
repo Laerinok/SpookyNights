@@ -762,7 +762,7 @@
 	"idleSoundRange": 32,
 	"sounds": {
 		"hurt": "game:creature/shiver/hurt",
-		"death": "game:creature/shiver/death",
+		"death": "creature/death",
 		"idle": "game:creature/shiver/idle*"
 	}
 }

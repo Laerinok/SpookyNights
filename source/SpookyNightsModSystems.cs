@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using Spookynights;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
@@ -439,19 +438,24 @@ namespace SpookyNights
                     BossSpawningConfig bossConfig = bossEntry.Value;
                     if (bossConfig == null || !bossConfig.Enabled) return false;
 
-                    string currentPhase = sapi.World.Calendar.MoonPhase.ToString();
-                    bool moonValid = false;
-
-                    foreach (var allowed in bossConfig.AllowedMoonPhases)
+                    // FIX: If AllowedMoonPhases is empty, we ALLOW SPAWN (return true if no other constraints)
+                    // We only check phases if the list has entries.
+                    if (bossConfig.AllowedMoonPhases != null && bossConfig.AllowedMoonPhases.Count > 0)
                     {
-                        if (string.Equals(allowed, currentPhase, StringComparison.OrdinalIgnoreCase))
-                        {
-                            moonValid = true;
-                            break;
-                        }
-                    }
+                        string currentPhase = sapi.World.Calendar.MoonPhase.ToString();
+                        bool moonValid = false;
 
-                    if (!moonValid) return false;
+                        foreach (var allowed in bossConfig.AllowedMoonPhases)
+                        {
+                            if (string.Equals(allowed, currentPhase, StringComparison.OrdinalIgnoreCase))
+                            {
+                                moonValid = true;
+                                break;
+                            }
+                        }
+
+                        if (!moonValid) return false;
+                    }
                     break;
                 }
             }
@@ -533,17 +537,21 @@ namespace SpookyNights
                             BossSpawningConfig bossConfig = bossEntry.Value;
                             if (bossConfig != null && bossConfig.Enabled)
                             {
-                                bool moonValid = false;
-                                foreach (var allowed in bossConfig.AllowedMoonPhases)
+                                // FIX: Logic update here as well. If list empty = Allow All.
+                                if (bossConfig.AllowedMoonPhases != null && bossConfig.AllowedMoonPhases.Count > 0)
                                 {
-                                    if (string.Equals(allowed, currentMoonPhase, StringComparison.OrdinalIgnoreCase))
+                                    bool moonValid = false;
+                                    foreach (var allowed in bossConfig.AllowedMoonPhases)
                                     {
-                                        moonValid = true;
-                                        break;
+                                        if (string.Equals(allowed, currentMoonPhase, StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            moonValid = true;
+                                            break;
+                                        }
                                     }
-                                }
 
-                                if (!moonValid) shouldDie = true;
+                                    if (!moonValid) shouldDie = true;
+                                }
                             }
                             break;
                         }

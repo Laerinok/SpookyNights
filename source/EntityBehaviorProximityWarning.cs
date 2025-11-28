@@ -1,3 +1,4 @@
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
@@ -7,14 +8,14 @@ namespace SpookyNights
 {
     public class EntityBehaviorProximityWarning : EntityBehavior
     {
-        private float warningRange = 35f;
-        private string soundPath = "spookynights:sounds/creature/bear/bear-giant-growl";
+        private string soundPath = "spookynights:sounds/creature/bear/spectral_bear_warning";
         private float soundVolume = 1.0f;
         private float checkInterval = 2.0f;
         private float cooldownMs = 10000f;
 
         private float accumulator = 0f;
         private long lastSoundTime = 0;
+        private ICoreClientAPI? capi;
 
         public EntityBehaviorProximityWarning(Entity entity) : base(entity) { }
 
@@ -22,51 +23,56 @@ namespace SpookyNights
         {
             base.Initialize(properties, attributes);
 
-            warningRange = attributes["range"].AsFloat(35f);
-            soundPath = attributes["sound"].AsString("spookynights:sounds/creature/bear/bear-giant-growl");
+            capi = entity.World.Api as ICoreClientAPI;
+
+            soundPath = attributes["sound"].AsString("spookynights:sounds/creature/bear/spectral_bear_warning");
             soundVolume = attributes["volume"].AsFloat(1.0f);
             cooldownMs = attributes["cooldownMs"].AsFloat(10000f);
         }
 
         public override void OnGameTick(float deltaTime)
         {
-            // Filter: Only allow this behavior on the Giant variant
+            if (entity.World.Side != EnumAppSide.Client || capi == null) return;
+
+            if (ConfigManager.ClientConf != null && !ConfigManager.ClientConf.EnableBossWarningSound) return;
+
             if (!entity.Code.Path.Contains("giant")) return;
 
-            if (entity.World.Side != EnumAppSide.Server) return;
-
             accumulator += deltaTime;
-
             if (accumulator < checkInterval) return;
             accumulator = 0f;
 
             long currentTime = entity.World.ElapsedMilliseconds;
             if (currentTime - lastSoundTime < cooldownMs) return;
 
-            EntityPlayer? nearestPlayer = entity.World.GetNearestEntity(
-                entity.ServerPos.XYZ,
-                warningRange,
-                warningRange,
-                (e) => e is EntityPlayer && e.Alive
-            ) as EntityPlayer;
+            var playerEntity = capi.World.Player.Entity;
+            if (playerEntity == null || !playerEntity.Alive) return;
 
-            if (nearestPlayer != null)
+            double distance = entity.Pos.DistanceTo(playerEntity.Pos);
+
+            double maxRange = ConfigManager.ClientConf!.BossWarningMaxRange;
+            double minRange = ConfigManager.ClientConf.BossWarningMinRange;
+
+
+            if (distance <= maxRange && distance > minRange)
             {
-                PlayWarningSound();
+                PlayClientSound();
                 lastSoundTime = currentTime;
             }
         }
 
-        private void PlayWarningSound()
+        private void PlayClientSound()
         {
+            if (capi == null) return;
+
             entity.World.PlaySoundAt(
                 new AssetLocation(soundPath),
-                entity.ServerPos.X,
-                entity.ServerPos.Y,
-                entity.ServerPos.Z,
+                entity.Pos.X,
+                entity.Pos.Y,
+                entity.Pos.Z,
                 null,
                 false,
-                warningRange,
+                32,
                 soundVolume
             );
         }

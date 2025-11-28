@@ -491,9 +491,9 @@
 		}
 	},
 	"sounds": {
-		"hurt": "game:creature/wolf/hurt",
-		"death": "game:creature/wolf/hurt",
-		"idle": "creature/wolf/howl1"
+		"hurt": "creature/wolf/hurt",
+		"death": "creature/death",
+		"idle": "creature/wolf/howl*"
 	},
 	"idleSoundChance": 0
 }

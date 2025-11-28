@@ -690,7 +690,7 @@
 	"idleSoundRange": 14,
 	"sounds": {
 		"hurt": "game:creature/drifter-hurt",
-		"death": "game:creature/drifter-death",
+		"death": "creature/death",
 		"idle": "game:creature/drifter-idle"
 	}
 }

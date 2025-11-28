@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using Vintagestory.API.Common;
 
-namespace Spookynights
+namespace SpookyNights
 {
     public static class ConfigManager
     {
@@ -130,8 +130,6 @@ namespace Spookynights
 
                     if (loadedObject["SpawnOnlyOnLastDayOfMonth"] != null) newConfig.SpawnOnlyOnLastDayOfMonth = loadedObject["SpawnOnlyOnLastDayOfMonth"]!.ToObject<bool>();
 
-                    // We ignore SpawnOnlyOnLastDayOfWeek migration as we want to phase it out.
-
                     if (loadedObject["SpawnOnlyOnFullMoon"] != null) newConfig.SpawnOnlyOnFullMoon = loadedObject["SpawnOnlyOnFullMoon"]!.ToObject<bool>();
                     if (loadedObject["FullMoonSpawnMultiplier"] != null) newConfig.FullMoonSpawnMultiplier = loadedObject["FullMoonSpawnMultiplier"]!.ToObject<float>();
 
@@ -200,23 +198,83 @@ namespace Spookynights
             return newConfig;
         }
 
+        private static ClientConfig GetDefaultClientConfig()
+        {
+            return new ClientConfig(); // Uses default values defined in ClientConfig.cs
+        }
+
         public static void LoadClientConfig(ICoreAPI api)
         {
             try
             {
+                // 1. Try to load the config file as a JObject
                 var loadedObject = api.LoadModConfig<JObject>("spookynights-client.json");
+
                 if (loadedObject == null)
                 {
-                    ClientConf = new ClientConfig();
+                    // No config found, create defaults
+                    ClientConf = GetDefaultClientConfig();
                     api.StoreModConfig(ClientConf, "spookynights-client.json");
                     return;
                 }
-                ClientConf = loadedObject.ToObject<ClientConfig>()!;
+
+                // 2. Config found, merge with defaults to ensure all new fields are present
+                ClientConf = MergeClientConfig(api, loadedObject);
+
+                // 3. Store the merged config back (this updates the file on disk)
+                api.StoreModConfig(ClientConf, "spookynights-client.json");
             }
-            catch
+            catch (Exception ex)
             {
-                ClientConf = new ClientConfig();
+                api.Logger.Error("[SpookyNights] Error loading client config: " + ex.Message);
+                ClientConf = GetDefaultClientConfig();
             }
+        }
+
+        private static ClientConfig MergeClientConfig(ICoreAPI api, JObject loadedObject)
+        {
+            var newConfig = GetDefaultClientConfig();
+
+            // Step 1: Deserialize the old config fully. This captures ALL old settings.
+            var oldConfig = loadedObject.ToObject<ClientConfig>() ?? new ClientConfig();
+
+            // Step 2: Manually copy old settings to the new structure.
+            // Since we rely on GetDefaultClientConfig() for the new values, we only need to copy the existing ones.
+
+            // Old existing property copy (must be done explicitly since we are using newConfig structure)
+            newConfig.EnableJackOLanternParticles = oldConfig.EnableJackOLanternParticles;
+
+            // Version must be explicitly copied/checked
+            if (newConfig.Version != oldConfig.Version)
+            {
+                api.Logger.Notification($"[SpookyNights Client] Config updated from v{oldConfig.Version} to v{newConfig.Version}.");
+                // The new default config structure (newConfig) is already instantiated here, 
+                // carrying the new properties (MaxRange, MinRange, EnableSound). 
+                // We ensure old values are transferred:
+
+                // Copy ALL old values from oldConfig to newConfig
+                newConfig.EnableJackOLanternParticles = oldConfig.EnableJackOLanternParticles;
+                newConfig.EnableBossWarningSound = oldConfig.EnableBossWarningSound; // This ensures the previous user setting is kept
+                newConfig.BossWarningMaxRange = oldConfig.BossWarningMaxRange;
+                newConfig.BossWarningMinRange = oldConfig.BossWarningMinRange;
+
+                // Re-log the update, newConfig already has the new version
+            }
+            else
+            {
+                // If versions match, still ensure new settings are carried over if they were defaulted (e.g. if MaxRange was 0)
+                newConfig.EnableJackOLanternParticles = oldConfig.EnableJackOLanternParticles;
+                newConfig.EnableBossWarningSound = oldConfig.EnableBossWarningSound;
+                newConfig.BossWarningMaxRange = oldConfig.BossWarningMaxRange;
+                newConfig.BossWarningMinRange = oldConfig.BossWarningMinRange;
+            }
+
+            // Note: Since you use public properties with defaults in ClientConfig, 
+            // the new properties (EnableBossWarningSound, MaxRange, MinRange) will naturally take their default values 
+            // if they were missing from the old JSON loaded into oldConfig.
+            // If they WERE present, they will already be stored in oldConfig and copied above.
+
+            return newConfig;
         }
     }
 }
