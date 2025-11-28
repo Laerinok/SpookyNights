@@ -1,13 +1,18 @@
-v1.0.1 2025-11-25
+v1.0.1 2025-11-28 - Polishing & Fixes
 🐛 Technical Fixes
 - Day/Night Logic: Fixed a conflict where monsters would die at fixed hours (6am-10pm) even if "Auto" mode (light-based) was enabled. Despawn now correctly respects sunlight levels in Auto mode.
 - Calendar: Fixed a compilation error (CS1061) regarding retrieving the current day of the month. The calculation is now mathematically derived from total days.
+- Audio Logic: Fixed the Giant Spectral Bear's proximity warning sound not playing. The behavior is now correctly registered on the client side.
+- Spawn Logic: Fixed an issue where leaving `AllowedMoonPhases` empty caused bosses to despawn immediately. It now correctly interprets an empty list as "allow all phases".
+
 ⚙️ Configuration & Migration
-- nup: Removed the SpawnOnlyOnLastDayOfWeek option which was inconsistent with Vintage Story's calendar system.
+- Cleanup: Removed the SpawnOnlyOnLastDayOfWeek option which was inconsistent with Vintage Story's calendar system.
 - Migration: If the "Week" option was enabled in a previous config, it is automatically migrated to SpawnOnlyOnLastDayOfMonth to preserve the "rare event" preference.
-- Moon Phases: Clarified valid values for AllowedMoonPhases. The mod now strictly uses API terms (Empty, Grow1-3, Full, Shrink1-3) instead of invalid astronomical terms.
-🎮 Gameplay
-- Defaults: SpawnOnlyOnLastDayOfMonth defaults to false. Spectral creatures will now spawn every night during allowed months (October by default), unless manually changed by the player.
+- Moon Phases: Clarified valid values for AllowedMoonPhases. The mod now strictly uses API terms (Empty, Grow1-3, Full, Shrink1-3).
+
+🎮 Gameplay & Assets
+- Defaults: SpawnOnlyOnLastDayOfMonth defaults to false. Spectral creatures will now spawn every night during allowed months (October by default).
+- Audio: Updated and refined sound effects for various spectral creatures to improve the atmosphere.
 
 v1.0.0 2025-11-22 - The Spectral Weakness
 

@@ -142,7 +142,7 @@
         "range": 35,
         "minRange": 10,
         "sound": "spookynights:sounds/creature/bear/spectral_bear_warning",
-        "volume": 1.0,
+        "volume": 2.0,
         "cooldownMs": 12000
       },
       { "code": "repulseagents" },
