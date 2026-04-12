@@ -1,0 +1,36 @@
+{
+	"chanceMultiplier": 1.0,
+	"rocktypeRemapGroups": {},
+	"schematicYOffsets": {},
+	"structures": [
+		{
+			"code": "cemetery_small",
+			"group": "spookynights_trader",
+			"minGroupDistance": 100,
+			"name": "Old Cemetery",
+			"chance": 1,
+			"offsetY":-2,
+      "maxBelowSealevel": 1,
+			"minSpawnDistance": 50,
+			"schematics": [
+				"spookynights:cemetery/cemetery-small"
+			],
+      "rockTypeRemapGroup": "standard",
+      "buildProtected": true,
+			"buildProtectionName": "Trader",
+			"buildProtectionDesc": "Trader Perimenter",
+			"replacewithblocklayers": [
+				"game:soil-low-normal",
+				"game:soil-low-none"
+			],
+      "replaceWithRockType": {"game:rock-granite": "game:rock-{rock}"},
+			"postPass": true,
+			"suppressTrees": true,
+      "maxForest":0.1 ,
+      "minRain": 0.25,
+      "minTemp": 5,
+      "maxTemp": 20,
+			"placement": "surface"
+		}
+	]
+}
