@@ -114,8 +114,9 @@ namespace SpookyNights
 
             api.RegisterEntityBehaviorClass("spectralresistance", typeof(EntityBehaviorSpectralResistance));
             api.RegisterEntityBehaviorClass("spectralhandling", typeof(EntityBehaviorSpectralHandling));
+            api.RegisterEntityBehaviorClass("ghosttrader", typeof(EntityBehaviorGhostTrader));
 
-            if (api.Side.IsServer())
+      if (api.Side.IsServer())
             {
                 api.Logger.Notification("🌟 Spooky Nights (Server) is loaded!");
             }
