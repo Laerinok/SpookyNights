@@ -1,0 +1,147 @@
+{
+  "components": [
+    {
+      "code": "testhasmet",
+      "owner": "trader",
+      "type": "condition",
+      "variable": "entity.hasmet",
+      "isNotValue": "true",
+      "thenJumpTo": "firstmeet",
+      "elseJumpTo": "welcomeback"
+    },
+    {
+      "code": "firstmeet",
+      "owner": "trader",
+      "type": "talk",
+      "setVariables": { "entity.hasmet": "true" },
+      "text": [
+        { "value": "A living soul... it has been so long since warm blood graced these cold stones. Do you not fear the dark, wanderer?" }
+      ]
+    },
+    {
+      "code": "firstmeetresponse",
+      "owner": "player",
+      "type": "talk",
+      "text": [
+        { "value": "Who are you?", "jumpTo": "whoareyou" },
+        { "value": "I fear nothing.", "jumpTo": "fearnothing" },
+        { "value": "What are you doing out here?", "jumpTo": "whatdoing" }
+      ]
+    },
+    {
+      "code": "whoareyou",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "I am but an echo... A shadow bound to this soil, cursed to wander the veil between your world and the void. They call me {npcname}." }
+      ],
+      "jumpTo": "main"
+    },
+    {
+      "code": "whatdoing",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "Waiting. Trading. We collect the fragments of lost souls... Spectral Hearts, as you mortals call them. Bring them to me, and I shall share the forbidden treasures of the night." }
+      ],
+      "jumpTo": "main"
+    },
+    {
+      "code": "fearnothing",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "Bravery... or foolishness. The rustling gears of the drifters are nothing compared to the true horrors of the night. But courage is a currency of its own." }
+      ],
+      "jumpTo": "main"
+    },
+    {
+      "code": "welcomeback",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "The living returns... The shadows whispered of your approach, {playername}. What do you seek in the dark?" }
+      ]
+    },
+    {
+      "code": "main",
+      "owner": "player",
+      "type": "talk",
+      "text": [
+        { "value": "Let's trade.", "jumpTo": "opentrade" },
+        { "value": "Tell me about the spectral creatures.", "jumpTo": "spectralcreatures" },
+        { "value": "What is this strange glowing metal?", "jumpTo": "spectriumlore" },
+        { "value": "Do you have any of those strange candies?", "jumpTo": "candylore" },
+        { "value": "I heard rumors of a giant spectral bear...", "jumpTo": "colossuslore" },
+        { "value": "I must be going.", "jumpTo": "farewell" }
+      ]
+    },
+    {
+      "code": "opentrade",
+      "owner": "trader",
+      "trigger": "opentrade"
+    },
+    {
+      "code": "spectralcreatures",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "When the temporal storm wanes, the true darkness takes root. The beasts you know, wolves, bears... their souls are twisted, shining with an eerie glow. Normal steel will pass right through them. You need something attuned to the veil to strike them true." }
+      ],
+      "jumpTo": "main"
+    },
+    {
+      "code": "spectriumlore",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "Ah, the silvery gleam of Spectrium. To forge it, you must shatter the heart of a specter with your hammer. But that is merely the beginning." }
+      ],
+      "jumpTo": "spectriumlore2"
+    },
+    {
+      "code": "spectriumlore2",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "Combine it with copper to make Etherium, or blend it with bismuth and silver for the ultimate hunter's alloy... Aetherium. Only then will your weapons ignore their spectral resistance." }
+      ],
+      "jumpTo": "main"
+    },
+    {
+      "code": "candylore",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "Sweets for the living... The Shadow Cube, the Ghost Caramel... They hold power, yes. But the void always demands a price." }
+      ],
+      "jumpTo": "candylore2"
+    },
+    {
+      "code": "candylore2",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "A momentary burst of strength, a leap to the heavens, at the cost of your sanity, your health, or your temporal stability. Choose your treats wisely, living one. Do not let greed consume you." }
+      ],
+      "jumpTo": "main"
+    },
+    {
+      "code": "colossuslore",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "The Colossus... An apex predator of the veil. It hoards the greatest bounties, but its wrath is absolute. Do not seek it unless you wield the heavy scythe of war, and even then, pray to whatever gods still listen." }
+      ],
+      "jumpTo": "main"
+    },
+    {
+      "code": "farewell",
+      "owner": "trader",
+      "type": "talk",
+      "text": [
+        { "value": "May the shadows hide you from what hunts in the dark." }
+      ]
+    }
+  ]
+}
