@@ -1,8 +1,10 @@
+using System;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
-using System;
+using Vintagestory.API.Server;
 
 namespace SpookyNights
 {
@@ -10,6 +12,9 @@ namespace SpookyNights
   {
     private ServerConfig? _config;
     private long _tickListenerId;
+
+    private Cuboidf? _origHitbox;
+    private Cuboidf? _origSelection;
 
     public EntityBehaviorGhostTrader(Entity entity) : base(entity) { }
 
@@ -19,86 +24,155 @@ namespace SpookyNights
     {
       base.Initialize(properties, attributes);
 
+      _origHitbox = entity.CollisionBox.Clone();
+      _origSelection = entity.SelectionBox.Clone();
+
       if (entity.Api.Side == EnumAppSide.Server)
       {
         _config = ConfigManager.ServerConf;
 
-        // On synchronise l'état au chargement (pour masquer le cadavre si on arrive de jour)
-        SyncGhostStatus();
+        // Délai de 2 secondes au chargement du chunk pour laisser le moteur de lumière se calculer
+        entity.Api.Event.RegisterCallback((dt) => {
+          if (entity.Alive) SyncGhostStatus(true);
+        }, 2000);
 
-        _tickListenerId = entity.Api.Event.RegisterGameTickListener(_ => SyncGhostStatus(), 5000);
+        // Boucle de vérification toutes les 5 secondes
+        _tickListenerId = entity.Api.Event.RegisterGameTickListener(_ => SyncGhostStatus(false), 5000);
+      }
+      else
+      {
+        entity.WatchedAttributes.RegisterModifiedListener("isHidden", () => UpdateClientState());
+        UpdateClientState();
       }
     }
 
-    private void SyncGhostStatus()
+    private void UpdateClientState()
+    {
+      bool isHidden = entity.WatchedAttributes.GetBool("isHidden", false);
+      if (isHidden)
+      {
+        // Disparition totale des boîtes de collision (invisible et intouchable, même sous terre)
+        entity.CollisionBox.Set(0, 0, 0, 0, 0, 0);
+        entity.SelectionBox.Set(0, 0, 0, 0, 0, 0);
+      }
+      else
+      {
+        // Restauration côté client
+        if (_origHitbox != null) entity.CollisionBox.Set(_origHitbox);
+        if (_origSelection != null) entity.SelectionBox.Set(_origSelection);
+      }
+    }
+
+    private void SyncGhostStatus(bool isInit)
     {
       if (_config == null || !_config.UseTimeBasedSpawning || !_config.SpawnOnlyAtNight) return;
 
       bool isNight = IsNightTime(entity.Api, _config);
+      bool isHidden = entity.WatchedAttributes.GetBool("isHidden", false);
 
-      if (entity.Alive)
+      if (isNight && isHidden)
       {
-        if (!isNight)
-        {
-          // LE SOLEIL SE LÈVE : Disparition
-          SpawnGhostParticles(false);
+        // LA NUIT TOMBE : Réveil du marchand
+        entity.State = EnumEntityState.Active; // Rallume l'IA et le son
 
-          // On le cache avant de le tuer
-          SetGhostVisibility(false);
+        // Restaure la position de surface depuis la mémoire
+        double origX = entity.Attributes.GetDouble("origX", entity.Pos.X);
+        double origY = entity.Attributes.GetDouble("origY", entity.Pos.Y);
+        double origZ = entity.Attributes.GetDouble("origZ", entity.Pos.Z);
 
-          DamageSource despawnSource = new DamageSource()
-          {
-            Source = EnumDamageSource.Internal,
-            Type = EnumDamageType.Heal
-          };
-          entity.Die(EnumDespawnReason.Death, despawnSource);
+        // On le remonte à la surface
+        entity.TeleportTo(new Vec3d(origX, origY, origZ));
 
-          // On le descend sous terre pour être sûr (CS0618 corrigé en utilisant Pos)
-          entity.Pos.Y -= 3.0f;
-        }
-        else
-        {
-          // C'EST LA NUIT : Apparition
-          // On ne déclenche la fumée que s'il était caché (renderScale à 0)
-          if (entity.Attributes.GetFloat("renderScale") < 0.1f)
-          {
-            SpawnGhostParticles(true);
-            SetGhostVisibility(true);
-          }
-        }
+        entity.WatchedAttributes.SetBool("isHidden", false);
+        entity.WatchedAttributes.MarkPathDirty("isHidden");
+
+        if (!isInit) SpawnGhostParticles(true);
       }
-      else
+      else if (!isNight && !isHidden)
       {
-        // CADAVRE : Toujours invisible
-        SetGhostVisibility(false);
+        // LE JOUR SE LÈVE : Hibernation absolue
+        if (!isInit) SpawnGhostParticles(false);
+
+        // Sauvegarde sa position de surface pour la nuit suivante
+        entity.Attributes.SetDouble("origX", entity.Pos.X);
+        entity.Attributes.SetDouble("origY", entity.Pos.Y);
+        entity.Attributes.SetDouble("origZ", entity.Pos.Z);
+
+        // On l'enterre sous le sol (ex: 2 blocs plus bas) avec une sécurité pour ne pas traverser le bas du monde
+        double hiddenY = Math.Max(1.0, entity.Pos.Y - 2.0);
+        entity.TeleportTo(new Vec3d(entity.Pos.X, hiddenY, entity.Pos.Z));
+
+        // Stoppe l'inertie pour ne pas qu'il glisse
+        entity.Pos.Motion.Set(0, 0, 0);
+
+        entity.WatchedAttributes.SetBool("isHidden", true);
+        entity.WatchedAttributes.MarkPathDirty("isHidden");
+
+        // IMPORTANT : On attend un quart de seconde (200ms) avant de désactiver l'entité.
+        // Cela laisse le temps au client de recevoir le paquet de particules et de la nouvelle position sous terre.
+        entity.Api.Event.RegisterCallback((dt) =>
+        {
+          if (entity != null && entity.Alive && entity.WatchedAttributes.GetBool("isHidden", false))
+          {
+            // Coupe complètement l'entité : plus de mouvements, plus d'IA, plus de bruitages
+            entity.State = EnumEntityState.Inactive;
+          }
+        }, 200);
       }
     }
 
-    private void SetGhostVisibility(bool visible)
+    public override void OnInteract(EntityAgent byEntity, ItemSlot itemslot, Vec3d hitPosition, EnumInteractMode mode, ref EnumHandling handled)
     {
-      float scale = visible ? 1.0f : 0.0f;
-      // On utilise WatchedAttributes pour que le client reçoive l'info immédiatement
-      entity.Attributes.SetFloat("renderScale", scale);
-      entity.WatchedAttributes.MarkPathDirty("renderScale");
+      if (entity.WatchedAttributes.GetBool("isHidden", false))
+      {
+        handled = EnumHandling.PreventSubsequent;
+        return;
+      }
+      base.OnInteract(byEntity, itemslot, hitPosition, mode, ref handled);
     }
 
     public override void OnEntityReceiveDamage(DamageSource damageSource, ref float damage)
     {
-      if (damageSource.Type == EnumDamageType.Heal) return;
-
-      if (damageSource.SourceEntity is EntityPlayer player)
+      if (entity.WatchedAttributes.GetBool("isHidden", false))
       {
-        damage = 0; // Immortel
+        damage = 0;
+        return;
+      }
 
-        // Riposte Fatale
-        player.ReceiveDamage(new DamageSource()
+      if (damageSource.Type == EnumDamageType.Heal) return;
+      if (damageSource.SourceEntity is EntityPlayer entityPlayer)
+      {
+        IServerPlayer? serverPlayer = entityPlayer.Player as IServerPlayer;
+        damage = 0;
+
+        double currentTime = entity.Api.World.Calendar.TotalHours;
+        double lastStrikeTime = entity.Attributes.GetDouble("lastStrikeTime", 0);
+        int strikes = entity.Attributes.GetInt("strikeCount", 0);
+
+        if (currentTime - lastStrikeTime > 24.0) strikes = 0;
+        strikes++;
+        entity.Attributes.SetInt("strikeCount", strikes);
+        entity.Attributes.SetDouble("lastStrikeTime", currentTime);
+
+        if (serverPlayer != null)
         {
-          Source = EnumDamageSource.Internal,
-          Type = EnumDamageType.PiercingAttack,
-          SourceEntity = entity
-        }, 100f);
-
-        entity.Api.World.PlaySoundAt(new AssetLocation("game:sounds/effect/ghost-whisper"), entity);
+          switch (strikes)
+          {
+            case 1:
+              serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, $"<strong><font color=\"#ffcccc\">{Lang.Get("spookynights:ghosttrader-warning-1")}</font></strong>", EnumChatType.Notification);
+              entity.Api.World.PlaySoundAt(new AssetLocation("spookynights:creature/drifter/hurt1"), entity);
+              break;
+            case 2:
+              serverPlayer.SendMessage(GlobalConstants.GeneralChatGroup, $"<strong><font color=\"#ff9999\">{Lang.Get("spookynights:ghosttrader-warning-2")}</font></strong>", EnumChatType.Notification);
+              entity.Api.World.PlaySoundAt(new AssetLocation("game:sounds/creature/wolf/growl3"), entity);
+              break;
+            case 3:
+              entityPlayer.ReceiveDamage(new DamageSource() { Source = EnumDamageSource.Internal, Type = EnumDamageType.PiercingAttack, SourceEntity = entity }, 100f);
+              entity.Api.World.PlaySoundAt(new AssetLocation("spookynights:creature/trader/growl1"), entity);
+              entity.Attributes.SetInt("strikeCount", 0);
+              break;
+          }
+        }
       }
       base.OnEntityReceiveDamage(damageSource, ref damage);
     }
@@ -120,10 +194,7 @@ namespace SpookyNights
       entity.Api.World.SpawnParticles(smoke);
     }
 
-    private bool IsNightTime(ICoreAPI api, ServerConfig config)
-    {
-      return api.World.Calendar.GetDayLightStrength(entity.Pos.X, entity.Pos.Z) < 0.85f;
-    }
+    private bool IsNightTime(ICoreAPI api, ServerConfig config) => api.World.Calendar.GetDayLightStrength(entity.Pos.X, entity.Pos.Z) < 0.85f;
 
     public override void OnEntityDespawn(EntityDespawnData despawn)
     {

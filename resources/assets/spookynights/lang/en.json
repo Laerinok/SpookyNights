@@ -246,5 +246,10 @@
   "block-warscythemold-tan-fired-warscythe-long": "Tan ceramic long warscythe mold",
 
   "malus-walkspeed": "Walk Speed: {0}%",
-  "malus-hungerrate": "Hunger Rate: {0}%"
+  "malus-hungerrate": "Hunger Rate: {0}%",
+
+  "item-soul-shard-soul": "Soul shard (soul)",
+  "ghosttrader-warning-1": "Begone, mortal! Do not test my patience.",
+  "ghosttrader-warning-2": "I warned you... My memory lasts a full day. One more strike and you're dead!",
+  "ghosttrader-reap-reason": "Struck a spectral trader"
 }

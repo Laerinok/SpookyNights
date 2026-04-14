@@ -60,7 +60,7 @@
       "owner": "trader",
       "type": "talk",
       "text": [
-        { "value": "The living returns... The shadows whispered of your approach, {playername}. What do you seek in the dark?" }
+        { "value": "The living returns... The shadows whispered of your approach, {{playername}}. What do you seek in the dark?" }
       ]
     },
     {

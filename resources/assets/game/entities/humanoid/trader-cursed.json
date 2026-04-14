@@ -4,19 +4,18 @@
   "tags": [ "humanoid", "trader", "ghost", "habitat-land" ],
   "canClimb": true,
   "hitboxSize": { "x": 0.6, "y": 1.75 },
-  "deadHitboxSize": { "x": 0, "y": 0 },
   "client": {
     "renderer": "Shape",
     "shape": { "base": "game:entity/humanoid/trader-female" },
     "texture": { "base": "game:entity/humanoid/villagerbody/skin/normal*" },
     "renderAlpha": 0.6,
-    "skipRenderUntil": "alive",
     "behaviors": [
       { "code": "nametag", "showtagonlywhentargeted": true },
       { "code": "repulseagents" },
       { "code": "controlledphysics", "stepHeight": 1.01 },
       { "code": "interpolateposition" },
-      { "code": "conversable", "dialogue": "spookynights:config/dialogue/trader-cursed" }
+      { "code": "conversable", "dialogue": "spookynights:config/dialogue/trader-cursed" },
+      { "code": "ghosttrader" }
     ],
     "animations": [
       { "code": "die", "animation": "die", "animationSpeed": 1.75, "weight": 10, "blendMode": "AddAverage" },
@@ -30,7 +29,7 @@
     "outfitConfigFileName": "traderaccessories-male",
     "outfitversion": 1,
     "tradeProps": {
-      "money": { "code": "spookynights:soul-shard", "avg": 30, "var": 10 },
+      "money": { "avg": 30, "var": 10 },
       "selling": {
         "maxItems": 16,
         "list": [
@@ -60,15 +59,12 @@
       },
       { "code": "repulseagents" },
       { "code": "controlledphysics", "stepHeight": 1.01 },
-      { "code": "reviveondeath", "minHours": 1, "maxHours": 1 },
-      { "code": "deaddecay", "hoursToDecay": 99999 },
       { "code": "health", "currenthealth": 50, "maxhealth": 50 },
       { "code": "ghosttrader" },
       {
         "code": "emotionstates",
         "states": [
-          { "code": "aggressiveondamage", "duration": 6, "chance": 0.6, "slot": 0, "priority": 2, "accumType": "noaccum" },
-          { "code": "fleeondamage", "duration": 10, "chance": 0.4, "slot": 0, "priority": 1, "accumType": "max" }
+          { "code": "aggressiveondamage", "duration": 6, "chance": 0.6, "slot": 0, "priority": 2, "accumType": "noaccum" }
         ]
       },
       {
@@ -76,11 +72,13 @@
         "aitasks": [
           { "code": "meleeattack", "entityCodes": [ "player" ], "priority": 2.1, "damage": 5, "mincooldown": 2500, "maxcooldown": 3500, "attackDurationMs": 900, "damagePlayerAtMs": 300, "animation": "Attack", "animationSpeed": 2, "whenInEmotionState": "aggressiveondamage" },
           { "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 2000, "maxcooldown": 10000, "animation": "laugh" },
-          { "code": "wander", "priority": 1.0, "movespeed": 0.01, "animation": "Walk", "wanderChance": 0.005, "maxDistanceToSpawn": 4, "wanderRangeMin": 1, "wanderRangeMax": 3, "teleportWhenOutOfRange": true, "teleportInGameHours": 1 },
+          { "code": "wander", "priority": 1.0, "movespeed": 0.01, "animation": "Walk", "wanderChance": 0.01, "maxDistanceToSpawn": 3 },
           { "code": "lookaround", "priority": 0.5 }
         ]
       },
       { "code": "conversable", "dialogue": "spookynights:config/dialogue/trader-cursed" }
     ]
-  }
+  },
+  "sounds": {
+	}
 }

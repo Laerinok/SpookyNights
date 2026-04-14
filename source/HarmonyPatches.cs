@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Vintagestory.API.Common;
+using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 
 namespace SpookyNights
@@ -129,6 +130,24 @@ namespace SpookyNights
       float h = mods["hungerrate"].AsFloat(0f);
       if (s != 0) lines.Add($"<font color=\"{(s < 0 ? "#ff8080" : "#80ff80")}\">{Lang.Get("spookynights:malus-walkspeed", (s * 100).ToString("0.#"))}</font>");
       if (h != 0) lines.Add($"<font color=\"{(h > 0 ? "#ff8080" : "#80ff80")}\">{Lang.Get("spookynights:malus-hungerrate", "+" + (h * 100).ToString("0.#"))}</font>");
+    }
+  }
+  public static class GhostTraderRenderPatch
+  {
+    public static bool Prefix(object __instance)
+    {
+      // On va récupérer l'entité attachée à l'instance de rendu en cours
+      var entityField = __instance.GetType().GetField("entity", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+      if (entityField != null)
+      {
+        Entity? entity = entityField.GetValue(__instance) as Entity;
+        if (entity?.Code?.Path?.Contains("trader-cursed") == true)
+        {
+          // Si on est le jour (renderScale est 0), on retourne 'false' -> on annule tout le rendu (modèle + ombre)
+          return entity.WatchedAttributes.GetFloat("renderScale", 1.0f) > 0.1f;
+        }
+      }
+      return true; // Pour tous les autres mobs, on dessine normalement
     }
   }
 }
