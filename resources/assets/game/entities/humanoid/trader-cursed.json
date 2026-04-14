@@ -7,7 +7,7 @@
   "client": {
     "renderer": "Shape",
     "shape": { "base": "game:entity/humanoid/trader-female" },
-    "texture": { "base": "game:entity/humanoid/villagerbody/skin/normal*" },
+    "texture": { "base": "spookynights/humanoid/spectral/humanoid/skin/normal1" },
     "renderAlpha": 0.6,
     "behaviors": [
       { "code": "nametag", "showtagonlywhentargeted": true },
