@@ -28,6 +28,9 @@
   "attributes": {
     "outfitConfigFileName": "traderaccessories-male",
     "outfitversion": 1,
+    "voiceSounds": [
+			"spookynights:creature/trader/whispers"
+		],
     "tradeProps": {
       "money": { "avg": 30, "var": 10 },
       "selling": {
@@ -80,5 +83,6 @@
     ]
   },
   "sounds": {
+		"idle": "spookynights:creature/trader/whispers"
 	}
 }
