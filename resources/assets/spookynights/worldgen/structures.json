@@ -13,7 +13,7 @@
       "maxBelowSealevel": 1,
 			"minSpawnDistance": 50,
 			"schematics": [
-				"spookynights:cemetery/cemetery-small"
+				"spookynights:trader/cemetery-small"
 			],
       "rockTypeRemapGroup": "standard",
       "buildProtected": true,
@@ -30,6 +30,37 @@
       "minRain": 0.25,
       "minTemp": 5,
       "maxTemp": 20,
+			"placement": "surface"
+		},
+    {
+			"code": "whispering_well",
+			"group": "spookynights_trader",
+			"minGroupDistance": 100,
+			"name": "Whispering Well",
+			"chance": 1,
+			"offsetY":-3,
+      "maxBelowSealevel": 1,
+			"minSpawnDistance": 50,
+			"schematics": [
+				"spookynights:trader/whispering-well"
+			],
+      "rockTypeRemapGroup": "standard",
+      "buildProtected": true,
+			"buildProtectionName": "Trader",
+			"buildProtectionDesc": "Trader Perimenter",
+			"replacewithblocklayers": [
+				"game:soil-low-normal",
+				"game:soil-low-none"
+			],
+      "replaceWithRockType": {"game:rock-granite": "game:rock-{rock}"},
+			"postPass": true,
+			"suppressTrees": true,
+      "minForest": 0.2,
+      "maxForest":0.9 ,
+      "minRain": 0.10,
+      "maxRain": 0.75,
+      "minTemp": 0,
+      "maxTemp": 18,
 			"placement": "surface"
 		}
 	]
