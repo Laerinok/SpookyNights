@@ -1,8 +1,18 @@
-v1.1.0 2025-12-05 - The Spectral Expansion
-- i18n: Moved localization keys from the 'game:' domain to 'spookynights:'.
-- Candy Bags can now be placed on the ground.
-- Slightly lowered the spawn rate of Spectral creatures and refined their spawn conditions.
-- Added new sound effects (SFX) for the Spectral creatures.
+v2.1.0-pre.1 2026-04-15
+- Added cemetery structures and spectral merchants that appear only amidst the night fog.
+
+v2.0.0-rc.1 2026-04-11
+Compatibility update for Vintage Story v1.22.0
+- Engine Migration: Full migration to .NET 10 for compatibility with Vintage Story v1.22.0 (Preview/RC).
+- Game Version: Updated all JSON and C# assets to work with the new game engine.
+- Maintenance: Includes all features and compatibility patches from v1.1.1 (Combat Overhaul support).
+
+v1.1.1 2026-04-03
+- fixed: spearhead texture for the 'spear' itemtype was not correct (Combat Overhaul).
+
+v1.1.0 2026-02-30
+- Added: Full compatibility with Combat Overhaul.
+- Fixed: Potential crashes caused by the accidental inclusion of Vintagestory.dll in the mod archive
 
 v1.0.1 2025-11-28 - Polishing & Fixes
 🐛 Technical Fixes

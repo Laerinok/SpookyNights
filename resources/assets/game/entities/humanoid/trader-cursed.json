@@ -58,7 +58,7 @@
       {
         "code": "nametag",
         "showtagonlywhentargeted": true,
-        "selectFromRandomName": [ "Malakor the Gravebound", "Ossian the Dust-Walker", "Gelidus the Frost-Biter", "Murk the Rot-Monger" ]
+        "selectFromRandomName": [ "Malakor the Gravebound", "Ossian the Gravebound", "Gelidus the Gravebound", "Murk the Gravebound" ]
       },
       { "code": "repulseagents" },
       { "code": "controlledphysics", "stepHeight": 1.01 },

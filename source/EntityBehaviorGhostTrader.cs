@@ -104,17 +104,14 @@ namespace SpookyNights
 
         // Stoppe l'inertie pour ne pas qu'il glisse
         entity.Pos.Motion.Set(0, 0, 0);
-
         entity.WatchedAttributes.SetBool("isHidden", true);
         entity.WatchedAttributes.MarkPathDirty("isHidden");
 
-        // IMPORTANT : On attend un quart de seconde (200ms) avant de désactiver l'entité.
-        // Cela laisse le temps au client de recevoir le paquet de particules et de la nouvelle position sous terre.
+        // LE RETOUR DU DÉLAI DE 200ms (Crucial pour la synchronisation réseau)
         entity.Api.Event.RegisterCallback((dt) =>
         {
           if (entity != null && entity.Alive && entity.WatchedAttributes.GetBool("isHidden", false))
           {
-            // Coupe complètement l'entité : plus de mouvements, plus d'IA, plus de bruitages
             entity.State = EnumEntityState.Inactive;
           }
         }, 200);

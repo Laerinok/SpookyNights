@@ -21,8 +21,8 @@ namespace SpookyNights
       cemeteryFog = new AmbientModifier().EnsurePopulated();
 
       // --- CONFIGURATION FINALE ---
-      cemeteryFog.FogDensity.Value = 0.001f;   // Air pur au-dessus de la nappe
-      cemeteryFog.FlatFogDensity.Value = -2.2f; // Ton réglage magique (-220)
+      cemeteryFog.FogDensity.Value = 0.0f;   // Air pur au-dessus de la nappe (0)
+      cemeteryFog.FlatFogDensity.Value = -5.0f; // Ton réglage magique (-500)
 
       // Gris spectral bleuté
       cemeteryFog.FogColor.Value = new float[] { 0.65f, 0.65f, 0.75f };
@@ -95,8 +95,7 @@ namespace SpookyNights
         bool isBuried = nearestTrader.WatchedAttributes.GetBool("isHidden", false);
 
         // --- RÉGLAGE DE LA HAUTEUR (NAPPE RAMPANTE) ---
-        // Si on est à Y=120, on veut le plafond à Y=120.5 (aux genoux)
-        float yOffset = isBuried ? 3.6f : -1.4f;
+        float yOffset = isBuried ? 3.0f : 1.0f;
 
         cemeteryFog!.FlatFogYPos.Value = (float)nearestTrader.Pos.Y + yOffset;
       }

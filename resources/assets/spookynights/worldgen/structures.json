@@ -9,7 +9,7 @@
 			"minGroupDistance": 100,
 			"name": "Old Cemetery",
 			"chance": 1,
-			"offsetY":-2,
+			"offsetY":-3,
       "maxBelowSealevel": 1,
 			"minSpawnDistance": 50,
 			"schematics": [
