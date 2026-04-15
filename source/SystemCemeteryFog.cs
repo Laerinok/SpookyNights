@@ -92,17 +92,17 @@ namespace SpookyNights
         float dist = (float)Math.Sqrt(minDistSq);
         targetWeight = 1f - (dist / fogRadius);
 
-        bool isBuried = nearestTrader.WatchedAttributes.GetBool("isHidden", false);
+        // --- MAGIE DE L'ANCRE ---
+        // On lit la position de surface originale du marchand. 
+        // Peu importe s'il est à -5m ou -50m, la valeur renvoyée est TOUJOURS la surface.
+        float surfaceY = (float)nearestTrader.WatchedAttributes.GetDouble("origY", nearestTrader.Pos.Y);
 
-        // --- RÉGLAGE DE LA HAUTEUR (NAPPE RAMPANTE) ---
-        float yOffset = isBuried ? 3.0f : 1.0f;
-
-        cemeteryFog!.FlatFogYPos.Value = (float)nearestTrader.Pos.Y + yOffset;
+        // Le brouillard est toujours à +1.0 bloc au-dessus de la surface !
+        cemeteryFog!.FlatFogYPos.Value = surfaceY + 1.0f;
       }
 
       targetWeight = GameMath.Clamp(targetWeight, 0f, 1f);
 
-      // Interpolation fluide (le brouillard met 2-3 sec à apparaître totalement)
       if (currentWeight < targetWeight)
         currentWeight = Math.Min(targetWeight, currentWeight + dt * 0.5f);
       else

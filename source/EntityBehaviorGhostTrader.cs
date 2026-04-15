@@ -31,6 +31,15 @@ namespace SpookyNights
       {
         _config = ConfigManager.ServerConf;
 
+        // L'ANCRE : On enregistre la position de surface UNE SEULE FOIS à sa création.
+        // On utilise WatchedAttributes pour la partager avec le client et le brouillard.
+        if (!entity.WatchedAttributes.HasAttribute("origY"))
+        {
+          entity.WatchedAttributes.SetDouble("origX", entity.Pos.X);
+          entity.WatchedAttributes.SetDouble("origY", entity.Pos.Y);
+          entity.WatchedAttributes.SetDouble("origZ", entity.Pos.Z);
+        }
+
         // Délai de 2 secondes au chargement du chunk pour laisser le moteur de lumière se calculer
         entity.Api.Event.RegisterCallback((dt) => {
           if (entity.Alive) SyncGhostStatus(true);
@@ -73,14 +82,14 @@ namespace SpookyNights
       if (isNight && isHidden)
       {
         // LA NUIT TOMBE : Réveil du marchand
-        entity.State = EnumEntityState.Active; // Rallume l'IA et le son
+        entity.State = EnumEntityState.Active;
 
-        // Restaure la position de surface depuis la mémoire
-        double origX = entity.Attributes.GetDouble("origX", entity.Pos.X);
-        double origY = entity.Attributes.GetDouble("origY", entity.Pos.Y);
-        double origZ = entity.Attributes.GetDouble("origZ", entity.Pos.Z);
+        // On lit l'ancre fixe
+        double origX = entity.WatchedAttributes.GetDouble("origX", entity.Pos.X);
+        double origY = entity.WatchedAttributes.GetDouble("origY", entity.Pos.Y);
+        double origZ = entity.WatchedAttributes.GetDouble("origZ", entity.Pos.Z);
 
-        // On le remonte à la surface
+        // On le remonte exactement à la surface
         entity.TeleportTo(new Vec3d(origX, origY, origZ));
 
         entity.WatchedAttributes.SetBool("isHidden", false);
@@ -93,28 +102,19 @@ namespace SpookyNights
         // LE JOUR SE LÈVE : Hibernation absolue
         if (!isInit) SpawnGhostParticles(false);
 
-        // Sauvegarde sa position de surface pour la nuit suivante
-        entity.Attributes.SetDouble("origX", entity.Pos.X);
-        entity.Attributes.SetDouble("origY", entity.Pos.Y);
-        entity.Attributes.SetDouble("origZ", entity.Pos.Z);
+        // On lit l'ancre pour être certain de s'enterrer par rapport à la VRAIE surface
+        double origY = entity.WatchedAttributes.GetDouble("origY", entity.Pos.Y);
 
-        // On l'enterre sous le sol (ex: 2 blocs plus bas) avec une sécurité pour ne pas traverser le bas du monde
-        double hiddenY = Math.Max(1.0, entity.Pos.Y - 2.0);
+        // On l'enterre à -2 blocs pour que le moteur physique ne le remonte pas
+        double hiddenY = Math.Max(1.0, origY - 2.0);
         entity.TeleportTo(new Vec3d(entity.Pos.X, hiddenY, entity.Pos.Z));
 
-        // Stoppe l'inertie pour ne pas qu'il glisse
         entity.Pos.Motion.Set(0, 0, 0);
         entity.WatchedAttributes.SetBool("isHidden", true);
         entity.WatchedAttributes.MarkPathDirty("isHidden");
 
-        // LE RETOUR DU DÉLAI DE 200ms (Crucial pour la synchronisation réseau)
-        entity.Api.Event.RegisterCallback((dt) =>
-        {
-          if (entity != null && entity.Alive && entity.WatchedAttributes.GetBool("isHidden", false))
-          {
-            entity.State = EnumEntityState.Inactive;
-          }
-        }, 200);
+        // ON DÉSACTIVE TOUT DE SUITE
+        entity.State = EnumEntityState.Inactive;
       }
     }
 

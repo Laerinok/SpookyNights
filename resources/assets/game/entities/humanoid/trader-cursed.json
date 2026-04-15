@@ -4,11 +4,11 @@
   "tags": [ "humanoid", "trader", "ghost", "habitat-land" ],
   "canClimb": true,
   "hitboxSize": { "x": 0.6, "y": 1.75 },
+
   "client": {
     "renderer": "Shape",
     "shape": { "base": "game:entity/humanoid/trader-female" },
-    "texture": { "base": "spookynights/humanoid/spectral/humanoid/skin/normal1" },
-    "renderAlpha": 0.6,
+    "texture": { "base": "entity/humanoid/villagerbody/skin/normal*" },
     "behaviors": [
       { "code": "nametag", "showtagonlywhentargeted": true },
       { "code": "repulseagents" },
@@ -26,11 +26,12 @@
     ]
   },
   "attributes": {
+    "disableElements": ["breasts"],
+    "frostOverlayThreshold": -10,
+    "shouldSwivelFromMotion": false,
     "outfitConfigFileName": "traderaccessories-male",
     "outfitversion": 1,
-    "voiceSounds": [
-			"spookynights:creature/trader/whispers"
-		],
+    "spookynights": "creature/trader/whispers",
     "tradeProps": {
       "money": { "avg": 30, "var": 10 },
       "selling": {

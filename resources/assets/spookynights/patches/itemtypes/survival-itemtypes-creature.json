@@ -1,0 +1,9 @@
+﻿[
+  {
+    "op": "addmerge",
+    "path": "/variantgroups/0/states",
+    "value": ["trader-cursed"],
+    "file": "game:itemtypes/creature/creature.json",
+    "side": "Server"
+  }
+]
