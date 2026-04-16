@@ -12,6 +12,7 @@
 			"offsetY":-3,
       "maxBelowSealevel": 1,
 			"minSpawnDistance": 50,
+      "maxYDiff": 2,
 			"schematics": [
 				"spookynights:trader/cemetery-small"
 			],
@@ -26,6 +27,8 @@
       "replaceWithRockType": {"game:rock-granite": "game:rock-{rock}"},
 			"postPass": true,
 			"suppressTrees": true,
+      "skipGenerationCategories": {"trees": 16, "shrubs": 15},
+      "generateGrass": false,
       "maxForest":0.1 ,
       "minRain": 0.25,
       "minTemp": 5,
@@ -55,7 +58,8 @@
       "replaceWithRockType": {"game:rock-granite": "game:rock-{rock}"},
 			"postPass": true,
 			"suppressTrees": true,
-      "minForest": 0.2,
+      "skipGenerationCategories": {"trees": 20, "shrubs": 20},
+      "minForest": 0.3,
       "maxForest":0.9 ,
       "minRain": 0.10,
       "maxRain": 0.75,

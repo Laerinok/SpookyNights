@@ -4,6 +4,10 @@
   "tags": [ "humanoid", "trader", "ghost", "habitat-land" ],
   "canClimb": true,
   "hitboxSize": { "x": 0.6, "y": 1.75 },
+  "variantgroups": [
+		{ "code": "gender", "states": ["male"] },
+		{ "code": "biome", "states": ["temperateplain", "temperateforest"] }
+	],
 
   "client": {
     "renderer": "Shape",
@@ -59,7 +63,10 @@
       {
         "code": "nametag",
         "showtagonlywhentargeted": true,
-        "selectFromRandomName": [ "Malakor the Gravebound", "Ossian the Gravebound", "Gelidus the Gravebound", "Murk the Gravebound" ]
+        "selectFromRandomNameByType":{ 
+          "*-temperateplain": [ "Malakor the Gravebound", "Ossian the Gravebound", "Gelidus the Gravebound", "Murk the Gravebound" ],
+          "*-temperateforest": [ "Alaric the Well-Keeper", "Thalric the Well-Keeper", "Silas the Well-Keeper", "Morgath the Well-Keeper" ]
+        }
       },
       { "code": "repulseagents" },
       { "code": "controlledphysics", "stepHeight": 1.01 },

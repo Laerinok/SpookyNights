@@ -70,18 +70,49 @@ namespace SpookyNights
     {
       EntityPlayer player = capi!.World.Player.Entity;
       Entity? nearestTrader = null;
-      float fogRadius = 22f;
-      double minDistSq = fogRadius * fogRadius;
+
+      float activeRadius = 22f;
+      double minDistSq = 999999;
+
+      // 1. Couleurs par défaut (Plaine)
+      float[] targetFogColor = new float[] { 0.65f, 0.65f, 0.75f };
+      float[] targetAmbientColor = new float[] { 0.15f, 0.15f, 0.25f };
 
       foreach (var entity in capi.World.LoadedEntities.Values)
       {
         if (entity.Code != null && entity.Code.Path.Contains("trader-cursed"))
         {
+          float radiusForThisEntity = 22f;
+          float[] fogColorForThis = new float[] { 0.65f, 0.65f, 0.75f };
+          float[] ambientForThis = new float[] { 0.15f, 0.15f, 0.25f };
+
+          // --- AJOUT DES BIOMES ICI ---
+
+          // FORÊT TEMPÉRÉE (Le Puits)
+          if (entity.Code.Path.Contains("temperateforest"))
+          {
+            radiusForThisEntity = 35f; // Rayon plus grand
+            fogColorForThis = new float[] { 0.4f, 0.5f, 0.4f };    // Vert mousse sombre
+            ambientForThis = new float[] { 0.05f, 0.15f, 0.05f };  // Lueur verdâtre
+          }
+          // EXEMPLE POUR LE FUTUR (Désert)
+          /*
+          else if (entity.Code.Path.Contains("desert"))
+          {
+             radiusForThisEntity = 30f;
+             fogColorForThis = new float[] { 0.8f, 0.7f, 0.5f }; // Jaune sable
+          }
+          */
+
           double distSq = entity.Pos.XYZ.SquareDistanceTo(player.Pos.XYZ);
-          if (distSq < minDistSq)
+
+          if (distSq < (radiusForThisEntity * radiusForThisEntity) && distSq < minDistSq)
           {
             minDistSq = distSq;
             nearestTrader = entity;
+            activeRadius = radiusForThisEntity;
+            targetFogColor = fogColorForThis;
+            targetAmbientColor = ambientForThis;
           }
         }
       }
@@ -90,14 +121,13 @@ namespace SpookyNights
       if (nearestTrader != null)
       {
         float dist = (float)Math.Sqrt(minDistSq);
-        targetWeight = 1f - (dist / fogRadius);
+        targetWeight = 1f - (dist / activeRadius);
 
-        // --- MAGIE DE L'ANCRE ---
-        // On lit la position de surface originale du marchand. 
-        // Peu importe s'il est à -5m ou -50m, la valeur renvoyée est TOUJOURS la surface.
+        // Application immédiate de la couleur et de la hauteur de l'ancre
+        cemeteryFog!.FogColor.Value = targetFogColor;
+        cemeteryFog!.AmbientColor.Value = targetAmbientColor;
+
         float surfaceY = (float)nearestTrader.WatchedAttributes.GetDouble("origY", nearestTrader.Pos.Y);
-
-        // Le brouillard est toujours à +1.0 bloc au-dessus de la surface !
         cemeteryFog!.FlatFogYPos.Value = surfaceY + 1.0f;
       }
 
