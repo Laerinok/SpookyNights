@@ -2,7 +2,7 @@
   {
     "op": "addmerge",
     "path": "/variantgroups/0/states",
-    "value": ["trader-cursed-male-temperateplain", "trader-cursed-male-temperateforest"],
+    "value": ["trader-cursed-male-wanderer", "trader-cursed-male-temperateplain", "trader-cursed-male-temperateforest", "trader-cursed-male-tropicalforest", "trader-cursed-male-arid", "trader-cursed-male-arctic", "trader-cursed-male-swamp"],
     "file": "game:itemtypes/creature/creature.json",
     "side": "Server"
   }

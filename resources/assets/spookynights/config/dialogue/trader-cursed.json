@@ -33,7 +33,7 @@
       "owner": "trader",
       "type": "talk",
       "text": [
-        { "value": "I am but an echo... A shadow bound to this soil, cursed to wander the veil between your world and the void. They call me {npcname}." }
+        { "value": "I am but an echo... I cannot remember how I met my end, only that my spirit is tethered to the very ground where I fell. Cursed to linger between your world and the void. They call me {npcname}." }
       ],
       "jumpTo": "main"
     },

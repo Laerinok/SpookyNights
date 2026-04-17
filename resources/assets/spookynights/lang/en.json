@@ -60,6 +60,51 @@
   "game:item-arrowhead-etherium": "Etherium arrowhead",
   "game:item-arrowhead-spectrium": "Spectrium arrowhead",
 
+  "game:item-creature-trader-cursed-male-wanderer": "Cursed Trader (Wanderer)",
+  "game:item-creature-trader-cursed-male-temperateplain": "Cursed Trader (Temperate plain)",
+  "game:item-creature-trader-cursed-male-temperateforest": "Cursed Trader (Temperate forest)",
+  "game:item-creature-trader-cursed-male-tropicalforest": "Cursed Trader (Tropical forest)",
+  "game:item-creature-trader-cursed-male-arid": "Cursed Trader (Arid)",
+  "game:item-creature-trader-cursed-male-arctic": "Cursed Trader (Arctic)",
+  "game:item-creature-trader-cursed-male-swamp": "Cursed Trader (Swamp)",
+
+  "game:tradingwindow-trader-cursed-male-wanderer": "Spectral remnants - {0}",
+  "game:tradingwindow-trader-cursed-male-temperateplain": "Spectral offerings - {0}",
+  "game:tradingwindow-trader-cursed-male-temperateforest": "Spectral offerings - {0}",
+  "game:tradingwindow-trader-cursed-male-swamp": "Spectral offerings - {0}",
+  "game:tradingwindow-trader-cursed-male-tropicalforest": "Spectral offerings - {0}",
+  "game:tradingwindow-trader-cursed-male-arid": "Spectral offerings - {0}",
+  "game:tradingwindow-trader-cursed-male-arctic": "Spectral offerings - {0}",
+
+  "comment_01a": "///////////////////////////////////////////",
+  "comment_01b": "//   For display in meta block spawner   //",
+  "comment_01c": "///////////////////////////////////////////",
+
+  "game:item-creature-spectraldrifter-normal": "Spectral Drifter",
+  "game:item-creature-spectraldrifter-deep": "Deep Spectral Drifter",
+  "game:item-creature-spectraldrifter-tainted": "Tainted Spectral Drifter",
+  "game:item-creature-spectraldrifter-corrupt": "Corrupt Spectral Drifter",
+  "game:item-creature-spectraldrifter-nightmare": "Nightmare Spectral Drifter",
+  "game:item-creature-spectraldrifter-double-headed": "Double-headed Spectral Drifter",
+  "game:item-creature-spectralbowtorn-corrupt": "Corrupt Spectral Bowtorn",
+  "game:item-creature-spectralbowtorn-deep": "Deep Spectral Bowtorn",
+  "game:item-creature-spectralbowtorn-gearfoot": "Gearfoot Spectral Bowtorn",
+  "game:item-creature-spectralbowtorn-nightmare": "Nightmare Spectral Bowtorn",
+  "game:item-creature-spectralbowtorn-surface": "Spectral Bowtorn",
+  "game:item-creature-spectralbowtorn-tainted": "Tainted Spectral Bowtorn",
+  "game:item-creature-spectralshiver-bellhead": "Bellhead Spectral Shiver",
+  "game:item-creature-spectralshiver-corrupt": "Corrupt Spectral Shiver",
+  "game:item-creature-spectralshiver-deep": "Deep Spectral Shiver",
+  "game:item-creature-spectralshiver-deepsplit": "Deepsplit Spectral Shiver",
+  "game:item-creature-spectralshiver-nightmare": "Nightmare Spectral Shiver",
+  "game:item-creature-spectralshiver-stilt": "Stilt Spectral Shiver",
+  "game:item-creature-spectralshiver-surface": "Spectral Shiver",
+  "game:item-creature-spectralshiver-tainted": "Tainted Spectral Shiver",
+  "game:item-creature-spectralwolf-eurasian-adult-female": "Spectral Wolf (Female)",
+  "game:item-creature-spectralwolf-eurasian-adult-male": "Spectral Wolf (Male)",
+  "game:item-creature-spectralbear-brown-adult-female": "Brown Spectral Bear (Female)",
+  "game:item-creature-spectralbear-brown-adult-male": "Brown Spectral Bear (Male)",
+  "game:item-creature-spectralbear-giant-adult-male": "Giant Spectral Bear (Male)",
 
 
   "comment_2a": "//////////////////////////",
@@ -248,8 +293,13 @@
   "malus-walkspeed": "Walk Speed: {0}%",
   "malus-hungerrate": "Hunger Rate: {0}%",
 
-  "item-soul-shard-soul": "Soul shard (soul)",
+  
+  "comment_trader_a": "///////////////////////////////",
+  "comment_trader_b": "///////////-TRADERS-///////////",
+  "comment_trader_c": "///////////////////////////////",
+  
   "ghosttrader-warning-1": "Begone, mortal! Do not test my patience.",
   "ghosttrader-warning-2": "I warned you... My memory lasts a full day. One more strike and you're dead!",
   "ghosttrader-reap-reason": "Struck a spectral trader"
+
 }

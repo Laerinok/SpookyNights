@@ -5,10 +5,58 @@
   "canClimb": true,
   "hitboxSize": { "x": 0.6, "y": 1.75 },
   "variantgroups": [
-		{ "code": "gender", "states": ["male"] },
-		{ "code": "biome", "states": ["temperateplain", "temperateforest"] }
-	],
-
+    { "code": "gender", "states": ["male"] },
+    { "code": "biome", "states": ["wanderer", "temperateplain", "temperateforest", "tropicalforest", "arid", "arctic", "swamp" ] }
+  ],
+  "attributes": {
+    "disableElements": ["breasts"],
+    "frostOverlayThreshold": -10,
+    "shouldSwivelFromMotion": false,
+    "outfitConfigFileName": "traderaccessories-male",
+    "outfitversion": 1,
+    "spookynights": "creature/trader/whispers",
+    "tradePropsByType": {
+      "*-wanderer": {
+        "money": { "avg": 20, "var": 5 },
+        "selling": {
+          "maxItems": 16,
+          "list": [
+            { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 2, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 3, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 4, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 0.5 } }
+          ]
+        },
+        "buying": {
+          "maxItems": 16,
+          "list": []
+        }
+      },
+      "*": {
+        "money": { "avg": 30, "var": 10 },
+        "selling": {
+          "maxItems": 16,
+          "list": [
+            { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 2, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 3, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 4, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 0.5 } },
+            { "code": "spookynights:warscythe-long-spectrium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 10, "var": 2 } },
+            { "code": "spookynights:warscythe-long-etherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 15, "var": 2 } },
+            { "code": "spookynights:warscythe-long-aetherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 20, "var": 2 } }
+          ]
+        },
+        "buying": {
+          "maxItems": 16,
+          "list": [
+            { "code": "spookynights:warscythe-spectrium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 1 } },
+            { "code": "spookynights:warscythe-etherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 7, "var": 1 } },
+            { "code": "spookynights:warscythe-aetherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 10, "var": 1 } }
+          ]
+        }
+      }
+    }
+  },
   "client": {
     "renderer": "Shape",
     "shape": { "base": "game:entity/humanoid/trader-female" },
@@ -18,8 +66,8 @@
       { "code": "repulseagents" },
       { "code": "controlledphysics", "stepHeight": 1.01 },
       { "code": "interpolateposition" },
-      { "code": "conversable", "dialogue": "spookynights:config/dialogue/trader-cursed" },
-      { "code": "ghosttrader" }
+      { "code": "ghosttrader" },
+      { "code": "conversable", "dialogue": "spookynights:config/dialogue/trader-cursed" }
     ],
     "animations": [
       { "code": "die", "animation": "die", "animationSpeed": 1.75, "weight": 10, "blendMode": "AddAverage" },
@@ -29,32 +77,6 @@
       { "code": "lazynod", "animation": "lazynod", "blendMode": "AddAverage" }
     ]
   },
-  "attributes": {
-    "disableElements": ["breasts"],
-    "frostOverlayThreshold": -10,
-    "shouldSwivelFromMotion": false,
-    "outfitConfigFileName": "traderaccessories-male",
-    "outfitversion": 1,
-    "spookynights": "creature/trader/whispers",
-    "tradeProps": {
-      "money": { "avg": 30, "var": 10 },
-      "selling": {
-        "maxItems": 16,
-        "list": [
-          { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 2, "var": 0.5 } },
-          { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 3, "var": 0.5 } },
-          { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 4, "var": 0.5 } },
-          { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 0.5 } }
-        ]
-      },
-      "buying": {
-        "maxItems": 16,
-        "list": [
-          { "code": "game:gear-rusty", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 2, "var": 0.5 } }
-        ]
-      }
-    }
-  },
   "server": {
     "attributes": {
       "pathfinder": { "minTurnAnglePerSec": 720, "maxTurnAnglePerSec": 1440 }
@@ -63,9 +85,14 @@
       {
         "code": "nametag",
         "showtagonlywhentargeted": true,
-        "selectFromRandomNameByType":{ 
+        "selectFromRandomNameByType": { 
+          "*-wanderer": ["Kaelen the Wayward", "Vorig the Wayward", "Zale the Wayward", "Morth the Wayward"],
           "*-temperateplain": [ "Malakor the Gravebound", "Ossian the Gravebound", "Gelidus the Gravebound", "Murk the Gravebound" ],
-          "*-temperateforest": [ "Alaric the Well-Keeper", "Thalric the Well-Keeper", "Silas the Well-Keeper", "Morgath the Well-Keeper" ]
+          "*-temperateforest": [ "Alaric the Well-Keeper", "Thalric the Well-Keeper", "Silas the Well-Keeper", "Morgath the Well-Keeper" ],
+          "*-swamp": [ "Vaelen the Marsh-Harvester", "Grendel the Marsh-Harvester", "Moros the Marsh-Harvester", "Korth the Marsh-Harvester" ],
+          "*-tropicalforest": ["Xaloc the Root-Claimed", "Kethra the Root-Claimed", "Vorn the Root-Claimed", "Zylas the Root-Claimed"],
+          "*-arid": ["Sethos the Dust-Walker", "Aris the Dust-Walker", "Korath the Dust-Walker", "Nasim the Dust-Walker"],
+          "*-arctic": ["Ivaldi the Ice-Veined", "Boreas the Ice-Veined", "Thrym the Ice-Veined", "Skal the Ice-Veined"]
         }
       },
       { "code": "repulseagents" },
@@ -73,15 +100,8 @@
       { "code": "health", "currenthealth": 50, "maxhealth": 50 },
       { "code": "ghosttrader" },
       {
-        "code": "emotionstates",
-        "states": [
-          { "code": "aggressiveondamage", "duration": 6, "chance": 0.6, "slot": 0, "priority": 2, "accumType": "noaccum" }
-        ]
-      },
-      {
         "code": "taskai",
         "aitasks": [
-          { "code": "meleeattack", "entityCodes": [ "player" ], "priority": 2.1, "damage": 5, "mincooldown": 2500, "maxcooldown": 3500, "attackDurationMs": 900, "damagePlayerAtMs": 300, "animation": "Attack", "animationSpeed": 2, "whenInEmotionState": "aggressiveondamage" },
           { "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 2000, "maxcooldown": 10000, "animation": "laugh" },
           { "code": "wander", "priority": 1.0, "movespeed": 0.01, "animation": "Walk", "wanderChance": 0.01, "maxDistanceToSpawn": 3 },
           { "code": "lookaround", "priority": 0.5 }
@@ -91,6 +111,6 @@
     ]
   },
   "sounds": {
-		"idle": "spookynights:creature/trader/whispers"
-	}
+    "idle": "spookynights:creature/trader/whispers"
+  }
 }

@@ -91,10 +91,25 @@ namespace SpookyNights
           // FORÊT TEMPÉRÉE (Le Puits)
           if (entity.Code.Path.Contains("temperateforest"))
           {
-            radiusForThisEntity = 35f; // Rayon plus grand
+            radiusForThisEntity = 35f;
             fogColorForThis = new float[] { 0.4f, 0.5f, 0.4f };    // Vert mousse sombre
             ambientForThis = new float[] { 0.05f, 0.15f, 0.05f };  // Lueur verdâtre
           }
+          
+          else if (entity.Code.Path.Contains("swamp"))
+          {
+             radiusForThisEntity = 30f;
+             fogColorForThis = new float[] { 0.4f, 0.45f, 0.35f }; // vert-bleu
+             ambientForThis = new float[] { 0.05f, 0.12f, 0.08f };  // vert profond
+          }
+
+          else if (entity.Code.Path.Contains("wanderer"))
+          {
+            radiusForThisEntity = 12f; 
+            fogColorForThis = new float[] { 0.5f, 0.5f, 0.5f };
+            ambientForThis = new float[] { 0.1f, 0.1f, 0.15f };
+          }
+
           // EXEMPLE POUR LE FUTUR (Désert)
           /*
           else if (entity.Code.Path.Contains("desert"))

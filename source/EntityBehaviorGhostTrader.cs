@@ -74,6 +74,11 @@ namespace SpookyNights
 
     private void SyncGhostStatus(bool isInit)
     {
+      // --- BYPASS POUR LE MARCHAND AMBULANT ---
+      // S'il contient "wanderer", on quitte la fonction immédiatement.
+      // Il restera donc toujours à sa position de spawn (surface) et actif.
+      if (entity.Code.Path.Contains("wanderer")) return;
+
       if (_config == null || !_config.UseTimeBasedSpawning || !_config.SpawnOnlyAtNight) return;
 
       bool isNight = IsNightTime(entity.Api, _config);
@@ -164,6 +169,7 @@ namespace SpookyNights
               entity.Api.World.PlaySoundAt(new AssetLocation("game:sounds/creature/wolf/growl3"), entity);
               break;
             case 3:
+              entity.AnimManager?.StartAnimation("Attack");
               entityPlayer.ReceiveDamage(new DamageSource() { Source = EnumDamageSource.Internal, Type = EnumDamageType.PiercingAttack, SourceEntity = entity }, 100f);
               entity.Api.World.PlaySoundAt(new AssetLocation("spookynights:creature/trader/growl1"), entity);
               entity.Attributes.SetInt("strikeCount", 0);
