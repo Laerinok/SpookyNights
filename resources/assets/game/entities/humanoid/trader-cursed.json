@@ -23,13 +23,18 @@
           "list": [
             { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 2, "var": 0.5 } },
             { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 3, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 4, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 0.5 } }
+            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 7, "var": 0.5 } }
           ]
         },
         "buying": {
           "maxItems": 16,
-          "list": []
+          "list": [
+            { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 1, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 1.5, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 2.5, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg":3.5, "var": 0.5 } }
+          ]
         }
       },
       "*": {
@@ -41,17 +46,22 @@
             { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 3, "var": 0.5 } },
             { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 4, "var": 0.5 } },
             { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 0.5 } },
-            { "code": "spookynights:warscythe-long-spectrium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 10, "var": 2 } },
-            { "code": "spookynights:warscythe-long-etherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 15, "var": 2 } },
-            { "code": "spookynights:warscythe-long-aetherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 20, "var": 2 } }
+            { "code": "spookynights:warscythe-long-spectrium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 15, "var": 2 } },
+            { "code": "spookynights:warscythe-long-etherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 20, "var": 2 } },
+            { "code": "spookynights:warscythe-long-aetherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 25, "var": 2 } }
           ]
         },
         "buying": {
           "maxItems": 16,
           "list": [
+            { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 1, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 1.5, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 2.5, "var": 0.5 } },
+            { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg":3.5, "var": 0.5 } },
             { "code": "spookynights:warscythe-spectrium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 1 } },
             { "code": "spookynights:warscythe-etherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 7, "var": 1 } },
-            { "code": "spookynights:warscythe-aetherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 10, "var": 1 } }
+            { "code": "spookynights:warscythe-aetherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 9, "var": 1 } }
+            
           ]
         }
       }
