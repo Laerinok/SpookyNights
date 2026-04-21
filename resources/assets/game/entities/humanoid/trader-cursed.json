@@ -15,6 +15,18 @@
     "outfitConfigFileName": "traderaccessories-male",
     "outfitversion": 1,
     "spookynights": "creature/trader/whispers",
+    "partialRandomOutfitsByType": {
+        "trader-cursed-male-*": {
+            "bodyskin": [ { "Code": "skin1" }, { "Code": "skin2" }, { "Code": "skin3" } ],
+            "hair-base": [ { "Code": "hair1" }, { "Code": "hair2" }, { "Code": "hair3" } ],
+            "face": [ { "Code": "nothing", "Weight": 15.0 }, { "Code": "face-facemask1" }, { "Code": "face-metalmask1" }, { "Code": "face-skull" }, { "Code": "face-wolf" } ],
+            "head": [ { "Code": "nothing", "Weight": 10.0 }, { "Code": "head-beret" }, { "Code": "head-hood1" }, { "Code": "head-trapperhat" } ],
+            "shoulder": [ { "Code": "nothing", "Weight": 5.0 }, { "Code": "shoulder-apron-leather" }, { "Code": "shoulder-shortsleeve-coat1" }, { "Code": "shoulder-scarfpoor" } ],
+            "upperbody": [ { "Code": "upperbody-longsleeve-shirt1" }, { "Code": "upperbody-longsleeve-shirt6" }, { "Code": "upperbody-shortsleeve-shirt15" } ],
+            "lowerbody": [ { "Code": "lowerbody-pants1" }, { "Code": "lowerbody-pants3" }, { "Code": "lowerbody-hose2" } ],
+            "foot": [ { "Code": "foot-boots1" }, { "Code": "foot-shoes1" }, { "Code": "foot-wrap1" } ]
+        }
+    },
     "tradePropsByType": {
       "*-wanderer": {
         "money": { "avg": 20, "var": 5 },
@@ -22,8 +34,6 @@
           "maxItems": 16,
           "list": [
             { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 2, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 3, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 0.5 } },
             { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 7, "var": 0.5 } }
           ]
         },
@@ -31,8 +41,6 @@
           "maxItems": 16,
           "list": [
             { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 1, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 1.5, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 2.5, "var": 0.5 } },
             { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg":3.5, "var": 0.5 } }
           ]
         }
@@ -43,25 +51,14 @@
           "maxItems": 16,
           "list": [
             { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 2, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 3, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 4, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 0.5 } },
-            { "code": "spookynights:warscythe-long-spectrium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 15, "var": 2 } },
-            { "code": "spookynights:warscythe-long-etherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 20, "var": 2 } },
-            { "code": "spookynights:warscythe-long-aetherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 25, "var": 2 } }
+            { "code": "spookynights:warscythe-long-spectrium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 15, "var": 2 } }
           ]
         },
         "buying": {
           "maxItems": 16,
           "list": [
             { "code": "spookynights:spectralheart-poor", "type": "item", "stacksize": 5, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 1, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-medium", "type": "item", "stacksize": 3, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 1.5, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-rich", "type": "item", "stacksize": 2, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 2.5, "var": 0.5 } },
-            { "code": "spookynights:spectralheart-bountiful", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg":3.5, "var": 0.5 } },
-            { "code": "spookynights:warscythe-spectrium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 1 } },
-            { "code": "spookynights:warscythe-etherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 7, "var": 1 } },
-            { "code": "spookynights:warscythe-aetherium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 9, "var": 1 } }
-            
+            { "code": "spookynights:warscythe-spectrium", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 5, "var": 1 } }
           ]
         }
       }
@@ -70,7 +67,7 @@
   "client": {
     "renderer": "Shape",
     "shape": { "base": "game:entity/humanoid/trader-female" },
-    "texture": { "base": "entity/humanoid/villagerbody/skin/normal*" },
+    "glowLevel": 64,
     "behaviors": [
       { "code": "nametag", "showtagonlywhentargeted": true },
       { "code": "repulseagents" },
@@ -96,13 +93,7 @@
         "code": "nametag",
         "showtagonlywhentargeted": true,
         "selectFromRandomNameByType": { 
-          "*-wanderer": ["Kaelen the Wayward", "Vorig the Wayward", "Zale the Wayward", "Morth the Wayward"],
-          "*-temperateplain": [ "Malakor the Gravebound", "Ossian the Gravebound", "Gelidus the Gravebound", "Murk the Gravebound" ],
-          "*-temperateforest": [ "Alaric the Well-Keeper", "Thalric the Well-Keeper", "Silas the Well-Keeper", "Morgath the Well-Keeper" ],
-          "*-swamp": [ "Vaelen the Marsh-Harvester", "Grendel the Marsh-Harvester", "Moros the Marsh-Harvester", "Korth the Marsh-Harvester" ],
-          "*-tropicalforest": ["Xaloc the Root-Claimed", "Kethra the Root-Claimed", "Vorn the Root-Claimed", "Zylas the Root-Claimed"],
-          "*-arid": ["Sethos the Dust-Walker", "Aris the Dust-Walker", "Korath the Dust-Walker", "Nasim the Dust-Walker"],
-          "*-arctic": ["Ivaldi the Ice-Veined", "Boreas the Ice-Veined", "Thrym the Ice-Veined", "Skal the Ice-Veined"]
+          "*-wanderer": ["Kaelen the Wayward", "Vorig the Wayward"]
         }
       },
       { "code": "repulseagents" },

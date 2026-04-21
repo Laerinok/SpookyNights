@@ -31,8 +31,8 @@ namespace SpookyNights
       {
         _config = ConfigManager.ServerConf;
 
-        // L'ANCRE : On enregistre la position de surface UNE SEULE FOIS à sa création.
-        // On utilise WatchedAttributes pour la partager avec le client et le brouillard.
+        // THE ANCHOR: We record the surface position ONLY ONCE upon creation.
+        // We use WatchedAttributes to share it with the client and the fog system.
         if (!entity.WatchedAttributes.HasAttribute("origY"))
         {
           entity.WatchedAttributes.SetDouble("origX", entity.Pos.X);
@@ -40,12 +40,12 @@ namespace SpookyNights
           entity.WatchedAttributes.SetDouble("origZ", entity.Pos.Z);
         }
 
-        // Délai de 2 secondes au chargement du chunk pour laisser le moteur de lumière se calculer
+        // 2-second delay upon chunk loading to allow the light engine to calculate properly
         entity.Api.Event.RegisterCallback((dt) => {
           if (entity.Alive) SyncGhostStatus(true);
         }, 2000);
 
-        // Boucle de vérification toutes les 5 secondes
+        // Verification loop every 5 seconds
         _tickListenerId = entity.Api.Event.RegisterGameTickListener(_ => SyncGhostStatus(false), 5000);
       }
       else
@@ -60,13 +60,13 @@ namespace SpookyNights
       bool isHidden = entity.WatchedAttributes.GetBool("isHidden", false);
       if (isHidden)
       {
-        // Disparition totale des boîtes de collision (invisible et intouchable, même sous terre)
+        // Total removal of collision boxes (invisible and untouchable, even underground)
         entity.CollisionBox.Set(0, 0, 0, 0, 0, 0);
         entity.SelectionBox.Set(0, 0, 0, 0, 0, 0);
       }
       else
       {
-        // Restauration côté client
+        // Client-side restoration
         if (_origHitbox != null) entity.CollisionBox.Set(_origHitbox);
         if (_origSelection != null) entity.SelectionBox.Set(_origSelection);
       }
@@ -74,9 +74,9 @@ namespace SpookyNights
 
     private void SyncGhostStatus(bool isInit)
     {
-      // --- BYPASS POUR LE MARCHAND AMBULANT ---
-      // S'il contient "wanderer", on quitte la fonction immédiatement.
-      // Il restera donc toujours à sa position de spawn (surface) et actif.
+      // --- BYPASS FOR THE WANDERING TRADER ---
+      // If it contains "wanderer", exit the function immediately.
+      // It will therefore always stay at its spawn position (surface) and remain active.
       if (entity.Code.Path.Contains("wanderer")) return;
 
       if (_config == null || !_config.UseTimeBasedSpawning || !_config.SpawnOnlyAtNight) return;
@@ -86,15 +86,15 @@ namespace SpookyNights
 
       if (isNight && isHidden)
       {
-        // LA NUIT TOMBE : Réveil du marchand
+        // NIGHT FALLS: Awakening the trader
         entity.State = EnumEntityState.Active;
 
-        // On lit l'ancre fixe
+        // Read the fixed anchor
         double origX = entity.WatchedAttributes.GetDouble("origX", entity.Pos.X);
         double origY = entity.WatchedAttributes.GetDouble("origY", entity.Pos.Y);
         double origZ = entity.WatchedAttributes.GetDouble("origZ", entity.Pos.Z);
 
-        // On le remonte exactement à la surface
+        // Move it exactly back to the surface
         entity.TeleportTo(new Vec3d(origX, origY, origZ));
 
         entity.WatchedAttributes.SetBool("isHidden", false);
@@ -104,13 +104,13 @@ namespace SpookyNights
       }
       else if (!isNight && !isHidden)
       {
-        // LE JOUR SE LÈVE : Hibernation absolue
+        // DAY BREAKS: Absolute hibernation
         if (!isInit) SpawnGhostParticles(false);
 
-        // On lit l'ancre pour être certain de s'enterrer par rapport à la VRAIE surface
+        // Read the anchor to ensure it buries itself relative to the ACTUAL surface
         double origY = entity.WatchedAttributes.GetDouble("origY", entity.Pos.Y);
 
-        // On l'enterre à -2 blocs pour que le moteur physique ne le remonte pas
+        // Bury it at -2 blocks so the physics engine doesn't push it back up
         double hiddenY = Math.Max(1.0, origY - 2.0);
         entity.TeleportTo(new Vec3d(entity.Pos.X, hiddenY, entity.Pos.Z));
 
@@ -118,7 +118,7 @@ namespace SpookyNights
         entity.WatchedAttributes.SetBool("isHidden", true);
         entity.WatchedAttributes.MarkPathDirty("isHidden");
 
-        // ON DÉSACTIVE TOUT DE SUITE
+        // DEACTIVATE IMMEDIATELY
         entity.State = EnumEntityState.Inactive;
       }
     }
