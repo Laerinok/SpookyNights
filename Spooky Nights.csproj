@@ -10,7 +10,8 @@
     <RequiredOnClient>true</RequiredOnClient>
     <RequiredOnServer>true</RequiredOnServer>
     <Platforms>AnyCPU;x64</Platforms>
-		<Configurations>Release-Preview;Debug-Stable;Release-Stable;Debug-Preview</Configurations>
+    <!-- Grouped by version first to ensure logical alphabetical grouping in Visual Studio -->
+    <Configurations>Legacy-Debug;Legacy-Release;Stable-Debug;Stable-Release;Testing-Debug;Testing-Release</Configurations>
   </PropertyGroup>
 
   <!-- Authors -->
@@ -44,24 +45,38 @@
     <ModIconFile>$(ProjectDir)\resources\modicon.png</ModIconFile>
     <ReleasesDir>$(ProjectDir)\Releases</ReleasesDir>
     <ReleaseFile>$(ModId)_$(ModVersion)</ReleaseFile>
-    <ReleasePath>$(ReleasesDir)\$(ReleaseFile).zip</ReleasePath>
-    <ReleasePathDev>$(ReleasesDir)\$(ReleaseFile)_dev.zip</ReleasePathDev>
     <ExternalLibDir>$(ProjectDir)\external</ExternalLibDir>
   </PropertyGroup>
 
-	<!-- STABLE -->
-	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Stable' Or '$(Configuration)' == 'Release-Stable'">
-		<TargetFramework>net8.0</TargetFramework>
-		<GameDirectory>C:\Jeux\Vintage Story\v1.21</GameDirectory>
-	</PropertyGroup>
+  <!-- LEGACY (v1.21) -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Legacy-Debug' Or '$(Configuration)' == 'Legacy-Release'">
+    <TargetFramework>net8.0</TargetFramework>
+    <GameDirectory Condition="'$(GameDirectory)' == ''">C:\Jeux\Vintage Story\v1.21</GameDirectory>
+    <GameVersionDir>v1.21</GameVersionDir>
+  </PropertyGroup>
 
-	<!-- PREVIEW (RC) -->
-	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Preview' Or '$(Configuration)' == 'Release-Preview'">
-		<TargetFramework>net10.0</TargetFramework>
-		<GameDirectory>C:\Jeux\Vintage Story\v1.22</GameDirectory>
-	</PropertyGroup>
+  <!-- STABLE (v1.22) -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Stable-Debug' Or '$(Configuration)' == 'Stable-Release'">
+    <TargetFramework>net10.0</TargetFramework>
+    <GameDirectory Condition="'$(GameDirectory)' == ''">C:\Jeux\Vintage Story\v1.22</GameDirectory>
+    <GameVersionDir>v1.22</GameVersionDir>
+  </PropertyGroup>
 
-	<!-- Startup settings -->
+  <!-- TESTING (RC / Future) -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Testing-Debug' Or '$(Configuration)' == 'Testing-Release'">
+    <TargetFramework>net10.0</TargetFramework>
+    <GameDirectory Condition="'$(GameDirectory)' == ''">C:\Jeux\Vintage Story\v1.22</GameDirectory>
+    <GameVersionDir>v1.22-preview</GameVersionDir>
+  </PropertyGroup>
+
+  <!-- Paths for ZIP routing -->
+  <PropertyGroup>
+    <ReleaseFinalDir>$(ReleasesDir)\$(GameVersionDir)</ReleaseFinalDir>
+    <ReleasePath>$(ReleaseFinalDir)\$(ReleaseFile).zip</ReleasePath>
+    <ReleasePathDev>$(ReleaseFinalDir)\$(ReleaseFile)_dev.zip</ReleasePathDev>
+  </PropertyGroup>
+
+  <!-- Startup settings -->
   <PropertyGroup>
     <DataFolder>$(AppData)\$(DataFolderName)</DataFolder>
     <AditionalModsFolder>$(AppData)\$(DataFolderName)\Mods</AditionalModsFolder>
@@ -69,8 +84,6 @@
     <ModDir>$(ProjectDir)\$(OutputDir)</ModDir>
     <EnterWorldCommand Condition="'$(EnterWorldOnStartup)' == 'true'">"-o" "$(WorldName)"</EnterWorldCommand>
   </PropertyGroup>
-
-  <!-- Project item includes -->
 
   <!-- Formatting JSON files -->
   <PropertyGroup>
@@ -87,13 +100,11 @@
 
   <!-- References to libraries that are being used in project -->
   <ItemGroup>
-    <!-- ImGui for debug tools (requires ImGui mod installed if you call ImGui methods) -->
     <PackageReference Include="VSImGui" Version="0.0.6" />
     <Reference Include="Vintagestory">
-			<HintPath>$(GameDirectory)\Vintagestory.dll</HintPath>
+      <HintPath>$(GameDirectory)\Vintagestory.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <!-- Vintage Story libraries -->
     <Reference Include="VintagestoryLib" HintPath="$(GameDirectory)/VintagestoryLib.dll" Private="false" />
     <Reference Include="VintagestoryAPI" HintPath="$(GameDirectory)/VintagestoryAPI.dll" Private="false" />
     <Reference Include="VSSurvivalMod" HintPath="$(GameDirectory)/Mods/VSSurvivalMod.dll" Private="false" />
@@ -104,13 +115,13 @@
     <Reference Include="protobuf-net" HintPath="$(GameDirectory)/Lib/protobuf-net.dll" Private="false" />
     <Reference Include="cairo-sharp" HintPath="$(GameDirectory)/Lib/cairo-sharp.dll" Private="false" />
     <Reference Include="JsonDiffPatch" HintPath="$(GameDirectory)/Lib/JsonDiffPatch.dll" Private="false" />
-    <Reference Include="cairo-sharp" HintPath="$(GameDirectory)/Lib/cairo-sharp.dll" Private="false" />
     <Reference Include="Tavis.JsonPatch" HintPath="$(GameDirectory)/Lib/Tavis.JsonPatch.dll" Private="false" />
     <Reference Include="SkiaSharp" HintPath="$(GameDirectory)/Lib/SkiaSharp.dll" Private="false" />
     <Reference Include="$(GameDirectory)/Lib/OpenTK*.dll" Private="false" />
-    <!-- External libraries -->
     <Reference Include="$(ExternalLibDir)/**/*.dll" Private="false" Condition="'$(ExternalLibDir)' != ''" />
   </ItemGroup>
+
+  <!-- Project file exclusions -->
   <ItemGroup>
     <Compile Remove="Info-doc\**" />
     <Compile Remove="Releases\**" />
@@ -135,19 +146,19 @@
     <None Remove="TODO.txt" />
   </ItemGroup>
 
-  <!-- Creating local settings file -->
+  <!-- Target: Creating local settings file (Fixed: No GameDirectory generation) -->
   <Target Name="EnsureSettingsJson" BeforeTargets="ModInfo" Condition="!Exists('Properties\localSettings.props')">
     <MakeDir Directories="Properties" />
-    <WriteLinesToFile File="Properties\localSettings.props" Overwrite="true" Lines="&lt;Project&gt;&#xD;&#xA;  &lt;PropertyGroup&gt;&#xD;&#xA;    &lt;RunFormatter&gt;false&lt;/RunFormatter&gt;&#xD;&#xA;    &lt;DataFolderName&gt;VintagestoryData&lt;/DataFolderName&gt;&#xD;&#xA;    &lt;GameDirectory&gt;&lt;/GameDirectory&gt;&#xD;&#xA;    &lt;PackageDevBuild&gt;false&lt;/PackageDevBuild&gt;&#xD;&#xA;    &lt;EnterWorldOnStartup&gt;false&lt;/EnterWorldOnStartup&gt;&#xD;&#xA;    &lt;/PropertyGroup&gt;&#xD;&#xA;&lt;/Project&gt;" />
+    <WriteLinesToFile File="Properties\localSettings.props" Overwrite="true" Lines="&lt;Project&gt;&#xD;&#xA;  &lt;PropertyGroup&gt;&#xD;&#xA;    &lt;RunFormatter&gt;false&lt;/RunFormatter&gt;&#xD;&#xA;    &lt;DataFolderName&gt;VintagestoryData&lt;/DataFolderName&gt;&#xD;&#xA;    &lt;PackageDevBuild&gt;false&lt;/PackageDevBuild&gt;&#xD;&#xA;    &lt;EnterWorldOnStartup&gt;false&lt;/EnterWorldOnStartup&gt;&#xD;&#xA;    &lt;/PropertyGroup&gt;&#xD;&#xA;&lt;/Project&gt;" />
     <Error Text="Local settings file was missing, generated a new one. Run build again." />
   </Target>
 
-  <!-- Forces rebuild -->
+  <!-- Target: Forces rebuild -->
   <Target Name="ForceRebuild" BeforeTargets="BeforeBuild">
     <Touch Files="@(Compile)" AlwaysCreate="true" />
   </Target>
 
-  <!-- Creates/updates modinfo.json file in build directory -->
+  <!-- Target: Creates/updates modinfo.json -->
   <Target Name="ModInfo" BeforeTargets="CopyFilesToOutput">
     <PropertyGroup>
       <ModInfo>
@@ -156,14 +167,11 @@
   "name": "$(ModName)",
   "modid": "$(ModId)",
   "version": "$(ModVersion)",
-
   "description": "$(Description)",
   "authors": [ @(ModInfoAuthors->'"%(Identity)"', ', ') ],
-
   "dependencies": {
     @(Dependencies->'"%(Identity)": "%(Version)"', ', ')
   },
-
   "side" : "$(Side)",
   "requiredOnClient": $(RequiredOnClient),
   "requiredOnServer": $(RequiredOnServer)
@@ -175,41 +183,39 @@
     <WriteLinesToFile File="$(OutputPath)/modinfo.json" Lines="$(ModInfo)" Overwrite="true" WriteOnlyWhenDifferent="true" />
   </Target>
 
-  <!-- Formats asssets files -->
+  <!-- Target: Formats assets files -->
   <Target Name="Format" AfterTargets="ModInfo" BeforeTargets="CopyFilesToOutput">
     <Exec Condition="'$(OS)' == 'Windows_NT' and '$(RunFormatter)' == 'true'" Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(Formatter)&quot; -Path &quot;%(AssetsToFormat.Identity)&quot; -Indent $(JsonIndent) -MaxLength $(JsonMaxLineLength)" />
   </Target>
 
-  <!-- Copies modicon, assets folder and native libraries if they exist into output directory -->
+  <!-- Target: Copies modicon, assets folder and native libraries -->
   <Target Name="CopyFilesToOutput" AfterTargets="Format" BeforeTargets="BeforeBuild">
     <RemoveDir Directories="$(OutputPath)assets" />
     <Copy SourceFiles="$(ModIconFile)" DestinationFolder="$(OutputPath)" Condition="Exists('$(ModIconFile)')" />
-    <!-- Windows symlink -->
     <Exec Condition="'$(OS)' == 'Windows_NT'" Command="mklink /D &quot;$(OutputPath)assets&quot; &quot;$(ProjectDir)\resources\assets&quot;" />
-    <!-- Linux/macOS symlink -->
     <Exec Condition="'$(OS)' != 'Windows_NT'" Command="ln -s &quot;$(OutputPath)/assets&quot; &quot;$(ProjectDir)/resources/assets&quot;" />
   </Target>
 
-  <!-- Archives output directory into zip and puts it into Releases folder -->
-	<Target Name="ZipFiles" AfterTargets="Build" Condition="'$(Configuration)' == 'Release-Stable' Or '$(Configuration)' == 'Release-Preview'">
-		<Message Text="Packaging into '$(ReleaseFile)'" Importance="high" />
-		<Delete Files="$(OutputPath)\$(ModId).dll" Condition="'$(ModType)' != 'code'" />
-		<Delete Files="$(OutputPath)\$(ModId).pdb" Condition="'$(ModType)' != 'code'" />
-		<Delete Files="$(OutputPath)\$(ModId).deps.json" Condition="'$(ModType)' != 'code'" />
-		<MakeDir Directories="$(ReleasesDir)" />
-		<Delete Files="$(ReleasePath)" />
-		<ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ReleasePath)" />
-	</Target>
+  <!-- Target: Archives output directory into zip -->
+  <Target Name="ZipFiles" AfterTargets="Build" Condition="'$(Configuration.EndsWith(`Release`))'">
+    <Message Text="Packaging into '$(ReleaseFile)'" Importance="high" />
+    <Delete Files="$(OutputPath)\$(ModId).dll" Condition="'$(ModType)' != 'code'" />
+    <Delete Files="$(OutputPath)\$(ModId).pdb" Condition="'$(ModType)' != 'code'" />
+    <Delete Files="$(OutputPath)\$(ModId).deps.json" Condition="'$(ModType)' != 'code'" />
+    <MakeDir Directories="$(ReleaseFinalDir)" />
+    <Delete Files="$(ReleasePath)" />
+    <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ReleasePath)" />
+  </Target>
 
-	<Target Name="ZipFilesDev" AfterTargets="Build" Condition="('$(Configuration)' == 'Debug-Stable' Or '$(Configuration)' == 'Debug-Preview') And '$(PackageDevBuild)' == 'true'">
-		<Message Text="Packaging into '$(ReleaseFile)'" Importance="high" />
-		<Delete Files="$(OutputPath)\$(ModId).dll" Condition="'$(ModType)' != 'code'" />
-		<Delete Files="$(OutputPath)\$(ModId).pdb" Condition="'$(ModType)' != 'code'" />
-		<Delete Files="$(OutputPath)\$(ModId).deps.json" Condition="'$(ModType)' != 'code'" />
-		<MakeDir Directories="$(ReleasesDir)" />
-		<Delete Files="$(ReleasePathDev)" />
-		<ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ReleasePathDev)" />
-	</Target>
+  <Target Name="ZipFilesDev" AfterTargets="Build" Condition="'$(Configuration.EndsWith(`Debug`))' And '$(PackageDevBuild)' == 'true'">
+    <Message Text="Packaging into '$(ReleaseFile)'" Importance="high" />
+    <Delete Files="$(OutputPath)\$(ModId).dll" Condition="'$(ModType)' != 'code'" />
+    <Delete Files="$(OutputPath)\$(ModId).pdb" Condition="'$(ModType)' != 'code'" />
+    <Delete Files="$(OutputPath)\$(ModId).deps.json" Condition="'$(ModType)' != 'code'" />
+    <MakeDir Directories="$(ReleaseFinalDir)" />
+    <Delete Files="$(ReleasePathDev)" />
+    <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ReleasePathDev)" />
+  </Target>
 
-	<ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>
