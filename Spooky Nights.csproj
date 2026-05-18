@@ -3,14 +3,14 @@
   <PropertyGroup>
     <ModName>Spooky Nights</ModName>
     <ModType>code</ModType>
-    <ModVersion>2.1.0</ModVersion>
+    <ModVersion>2.1.0-pre.1</ModVersion>
     <ModId>spookynights</ModId>
     <Description>A small overhaul mod introducing spectral creatures that haunt the darkness. Experience the chilling presence of the unknown when the sun sets.</Description>
     <Side>universal</Side>
     <RequiredOnClient>true</RequiredOnClient>
     <RequiredOnServer>true</RequiredOnServer>
     <Platforms>AnyCPU;x64</Platforms>
-    <!-- Grouped by version first to ensure logical alphabetical grouping in Visual Studio -->
+    <!-- Grouped by version logic: Legacy (1.21), Stable (1.22), Testing (RC/Preview) -->
     <Configurations>Legacy-Debug;Legacy-Release;Stable-Debug;Stable-Release;Testing-Debug;Testing-Release</Configurations>
   </PropertyGroup>
 
@@ -98,13 +98,9 @@
     <AssetsToFormat Include="$(AssetsDir)\$(ModId)\config\animations" />
   </ItemGroup>
 
-  <!-- References to libraries that are being used in project -->
+  <!-- References -->
   <ItemGroup>
     <PackageReference Include="VSImGui" Version="0.0.6" />
-    <Reference Include="Vintagestory">
-      <HintPath>$(GameDirectory)\Vintagestory.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="VintagestoryLib" HintPath="$(GameDirectory)/VintagestoryLib.dll" Private="false" />
     <Reference Include="VintagestoryAPI" HintPath="$(GameDirectory)/VintagestoryAPI.dll" Private="false" />
     <Reference Include="VSSurvivalMod" HintPath="$(GameDirectory)/Mods/VSSurvivalMod.dll" Private="false" />
@@ -121,7 +117,7 @@
     <Reference Include="$(ExternalLibDir)/**/*.dll" Private="false" Condition="'$(ExternalLibDir)' != ''" />
   </ItemGroup>
 
-  <!-- Project file exclusions -->
+  <!-- Project file exclusions (Specific to Spooky Nights) -->
   <ItemGroup>
     <Compile Remove="Info-doc\**" />
     <Compile Remove="Releases\**" />
@@ -135,8 +131,6 @@
     <None Remove="Releases\**" />
     <None Remove="resources\assets\spookynights\entities\animal\**" />
     <None Remove="spookynights\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="candy_effect.txt" />
     <None Remove="file-tree-Mod.txt" />
     <None Remove="file-tree-Source.txt" />
@@ -146,10 +140,10 @@
     <None Remove="TODO.txt" />
   </ItemGroup>
 
-  <!-- Target: Creating local settings file (Fixed: No GameDirectory generation) -->
+  <!-- Target: Creating local settings file -->
   <Target Name="EnsureSettingsJson" BeforeTargets="ModInfo" Condition="!Exists('Properties\localSettings.props')">
     <MakeDir Directories="Properties" />
-    <WriteLinesToFile File="Properties\localSettings.props" Overwrite="true" Lines="&lt;Project&gt;&#xD;&#xA;  &lt;PropertyGroup&gt;&#xD;&#xA;    &lt;RunFormatter&gt;false&lt;/RunFormatter&gt;&#xD;&#xA;    &lt;DataFolderName&gt;VintagestoryData&lt;/DataFolderName&gt;&#xD;&#xA;    &lt;PackageDevBuild&gt;false&lt;/PackageDevBuild&gt;&#xD;&#xA;    &lt;EnterWorldOnStartup&gt;false&lt;/EnterWorldOnStartup&gt;&#xD;&#xA;    &lt;/PropertyGroup&gt;&#xD;&#xA;&lt;/Project&gt;" />
+    <WriteLinesToFile File="Properties\localSettings.props" Overwrite="true" Lines="&lt;Project&gt;&#xD;&#xA;  &lt;PropertyGroup&gt;&#xD;&#xA;    &lt;RunFormatter&gt;false&lt;/RunFormatter&gt;&#xD;&#xA;    &lt;DataFolderName&gt;VintagestoryData&lt;/DataFolderName&gt;&#xD;&#xA;    &lt;GameDirectory&gt;&lt;/GameDirectory&gt;&#xD;&#xA;    &lt;PackageDevBuild&gt;false&lt;/PackageDevBuild&gt;&#xD;&#xA;    &lt;EnterWorldOnStartup&gt;false&lt;/EnterWorldOnStartup&gt;&#xD;&#xA;    &lt;/PropertyGroup&gt;&#xD;&#xA;&lt;/Project&gt;" />
     <Error Text="Local settings file was missing, generated a new one. Run build again." />
   </Target>
 
@@ -188,7 +182,7 @@
     <Exec Condition="'$(OS)' == 'Windows_NT' and '$(RunFormatter)' == 'true'" Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(Formatter)&quot; -Path &quot;%(AssetsToFormat.Identity)&quot; -Indent $(JsonIndent) -MaxLength $(JsonMaxLineLength)" />
   </Target>
 
-  <!-- Target: Copies modicon, assets folder and native libraries -->
+  <!-- Target: Copies modicon, assets folder and symlinks -->
   <Target Name="CopyFilesToOutput" AfterTargets="Format" BeforeTargets="BeforeBuild">
     <RemoveDir Directories="$(OutputPath)assets" />
     <Copy SourceFiles="$(ModIconFile)" DestinationFolder="$(OutputPath)" Condition="Exists('$(ModIconFile)')" />
@@ -198,7 +192,7 @@
 
   <!-- Target: Archives output directory into zip -->
   <Target Name="ZipFiles" AfterTargets="Build" Condition="'$(Configuration.EndsWith(`Release`))'">
-    <Message Text="Packaging into '$(ReleaseFile)'" Importance="high" />
+    <Message Text="Packaging Release into '$(ReleasePath)'" Importance="high" />
     <Delete Files="$(OutputPath)\$(ModId).dll" Condition="'$(ModType)' != 'code'" />
     <Delete Files="$(OutputPath)\$(ModId).pdb" Condition="'$(ModType)' != 'code'" />
     <Delete Files="$(OutputPath)\$(ModId).deps.json" Condition="'$(ModType)' != 'code'" />
@@ -208,7 +202,7 @@
   </Target>
 
   <Target Name="ZipFilesDev" AfterTargets="Build" Condition="'$(Configuration.EndsWith(`Debug`))' And '$(PackageDevBuild)' == 'true'">
-    <Message Text="Packaging into '$(ReleaseFile)'" Importance="high" />
+    <Message Text="Packaging Debug into '$(ReleasePathDev)'" Importance="high" />
     <Delete Files="$(OutputPath)\$(ModId).dll" Condition="'$(ModType)' != 'code'" />
     <Delete Files="$(OutputPath)\$(ModId).pdb" Condition="'$(ModType)' != 'code'" />
     <Delete Files="$(OutputPath)\$(ModId).deps.json" Condition="'$(ModType)' != 'code'" />
