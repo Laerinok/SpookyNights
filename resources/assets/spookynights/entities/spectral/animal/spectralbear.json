@@ -372,7 +372,7 @@
           "avg": 1,
           "var": 1
         },
-        "insideBlockCodes": [ "air", "tallgrass-*", "snowlayer-*", "flower-*" ]
+        "insideBlockCodes": [ "game:air", "game:tallgrass-*", "game:snowlayer-*", "game:flower-*" ]
       },
       "runtime": {
         "group": "hostile",

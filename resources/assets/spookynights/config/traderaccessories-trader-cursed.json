@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "hair-00": { 
+      "base": "entity/spectral/humanoid/trader/hair-base/00", 
+      "weight": 1 
+    },
+    "hair-02": { 
+      "base": "entity/spectral/humanoid/trader/hair-base/02", 
+      "weight": 1 
+    },
+    "hair-06-long": { 
+      "base": "entity/spectral/humanoid/trader/hair-base/06-long", 
+      "weight": 1 
+    },
+    "hair-07": { 
+      "base": "entity/spectral/humanoid/trader/hair-base/07", 
+      "weight": 1 
+    },
+    "nothing": { 
+      "base": null, 
+      "weight": 1 
+    }
+  },
+  "byslot": [
+    {
+      "code": "hair-base",
+      "variants": [ "hair-00", "hair-02", "hair-06-long", "hair-07", "nothing" ]
+    }
+  ]
+}

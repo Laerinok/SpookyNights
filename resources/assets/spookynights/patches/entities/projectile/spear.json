@@ -33,6 +33,10 @@
       },
       "*-ruined": {
         "base": "game:item/tool/spear/ruined/{type}"
+      },
+      "*": {
+        "base": "game:item/tool/spear/stone",
+        "offsetX": -0.8125
       }
     }
   },

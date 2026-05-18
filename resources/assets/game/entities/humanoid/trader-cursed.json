@@ -12,19 +12,13 @@
     "disableElements": ["breasts"],
     "frostOverlayThreshold": -10,
     "shouldSwivelFromMotion": false,
-    "outfitConfigFileName": "traderaccessories-male",
+    "outfitConfigFileName": "spookynights:traderaccessories-trader-cursed",
     "outfitversion": 1,
     "spookynights": "creature/trader/whispers",
     "partialRandomOutfitsByType": {
         "trader-cursed-male-*": {
-            "bodyskin": [ { "Code": "skin1" }, { "Code": "skin2" }, { "Code": "skin3" } ],
-            "hair-base": [ { "Code": "hair1" }, { "Code": "hair2" }, { "Code": "hair3" } ],
-            "face": [ { "Code": "nothing", "Weight": 15.0 }, { "Code": "face-facemask1" }, { "Code": "face-metalmask1" }, { "Code": "face-skull" }, { "Code": "face-wolf" } ],
-            "head": [ { "Code": "nothing", "Weight": 10.0 }, { "Code": "head-beret" }, { "Code": "head-hood1" }, { "Code": "head-trapperhat" } ],
-            "shoulder": [ { "Code": "nothing", "Weight": 5.0 }, { "Code": "shoulder-apron-leather" }, { "Code": "shoulder-shortsleeve-coat1" }, { "Code": "shoulder-scarfpoor" } ],
-            "upperbody": [ { "Code": "upperbody-longsleeve-shirt1" }, { "Code": "upperbody-longsleeve-shirt6" }, { "Code": "upperbody-shortsleeve-shirt15" } ],
-            "lowerbody": [ { "Code": "lowerbody-pants1" }, { "Code": "lowerbody-pants3" }, { "Code": "lowerbody-hose2" } ],
-            "foot": [ { "Code": "foot-boots1" }, { "Code": "foot-shoes1" }, { "Code": "foot-wrap1" } ]
+            "skin-face": [ { "Code": "skin-face-normal1" } ],
+            "hair-base": [ { "Code": "hair-00" }, { "Code": "nothing" } ]
         }
     },
     "tradePropsByType": {
@@ -66,8 +60,9 @@
   },
   "client": {
     "renderer": "Shape",
-    "shape": { "base": "game:entity/humanoid/trader-female" },
-    "glowLevel": 64,
+    "shape": { "base": "spookynights:entity/spectral/humanoid/trader/trader-cursed" },
+    "texture": {"base": "spookynights:entity/spectral/humanoid/trader/normal1"},
+    "glowLevel": 200,
     "behaviors": [
       { "code": "nametag", "showtagonlywhentargeted": true },
       { "code": "repulseagents" },
@@ -79,9 +74,8 @@
     "animations": [
       { "code": "die", "animation": "die", "animationSpeed": 1.75, "weight": 10, "blendMode": "AddAverage" },
       { "code": "hurt", "animation": "hurt", "animationSpeed": 2, "blendMode": "AddAverage" },
-      { "code": "rowdywelcome", "animation": "rowdywelcome", "blendMode": "AddAverage" },
-      { "code": "lazywelcome", "animation": "lazywelcome", "blendMode": "AddAverage" },
-      { "code": "lazynod", "animation": "lazynod", "blendMode": "AddAverage" }
+      { "code": "idle", "animation": "idle", "blendMode": "AddAverage" },
+      { "code": "walk", "animation": "floating", "blendMode": "AddAverage" }
     ]
   },
   "server": {
