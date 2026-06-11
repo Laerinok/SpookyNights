@@ -6,6 +6,7 @@ using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 namespace SpookyNights
 {
@@ -191,6 +192,44 @@ namespace SpookyNights
         }
       }
       base.OnEntityReceiveDamage(damageSource, ref damage);
+    }
+
+    public override void OnEntityLoaded()
+    {
+      base.OnEntityLoaded();
+      OverrideGhostVoice();
+    }
+
+    public override void OnEntitySpawn()
+    {
+      base.OnEntitySpawn();
+      OverrideGhostVoice();
+    }
+
+    private void OverrideGhostVoice()
+    {
+      if (entity.Api.Side == EnumAppSide.Client)
+      {
+        if (entity is Vintagestory.GameContent.EntityTrader trader && trader.talkUtil != null)
+        {
+          AssetLocation customVoice = new AssetLocation("spookynights", "sounds/voice/violoncello/");
+
+          // SECURITE ANTI-CRASH : On vérifie manuellement si le moteur voit ton fichier 1.ogg
+          // (On rajoute ".ogg" car c'est ce que l'AssetManager demande pour la vérification)
+          AssetLocation testPath = customVoice.Clone().WithPathAppendix("1.ogg");
+
+          if (entity.Api.Assets.Exists(testPath))
+          {
+            // Le fichier a été trouvé, on écrase la voix vanilla en toute sécurité !
+            trader.talkUtil.soundName = customVoice;
+          }
+          else
+          {
+            // Le fichier est introuvable. On évite le crash et on affiche l'erreur en console.
+            entity.Api.Logger.Error($"[SpookyNights] CRASH EVITE : Impossible de trouver le son de voix. Le jeu cherche très exactement ce chemin : {testPath}");
+          }
+        }
+      }
     }
 
     // A large puff of smoke when transitioning (day/night)

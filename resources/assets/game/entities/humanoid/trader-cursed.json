@@ -14,13 +14,15 @@
     "shouldSwivelFromMotion": false,
     "outfitConfigFileName": "spookynights:traderaccessories-trader-cursed",
     "outfitversion": 1,
-    "spookynights": "creature/trader/whispers",
     "partialRandomOutfitsByType": {
         "trader-cursed-male-*": {
             "skin-face": [ { "Code": "skin-face-normal1" } ],
             "hair-base": [ { "Code": "hair-00" }, { "Code": "nothing" } ]
         }
     },
+    "voiceSounds": [
+			"spookynights:sounds/voice/violoncello/"
+		],
     "tradePropsByType": {
       "*-wanderer": {
         "money": { "avg": 20, "var": 5 },
